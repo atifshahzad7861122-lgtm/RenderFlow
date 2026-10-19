@@ -1,32 +1,32 @@
 {
   "manifest_version": "1.0",
-  "latest_version": "2.2.4",
+  "latest_version": "2.4.0",
   "minimum_supported_version": "2.0.0",
-  "release_notes": "RenderFlow v2.2.4 Hotfix: Production in-app auto-update system integrated with Ed25519 authentication, real-time speed/progress telemetry, atomic staging and automatic rollback; Resolved false-positive render verification failures at cut boundaries via frame-accurate discrete seeking and multi-metric visual change detection; Fixed transition verification false negatives for dissolve and wipe transitions; Hardened encoder selection and memory stability on systems with <= 8.0 GiB RAM; Preserved project and transition asset integrity.",
-  "published_at": "2026-10-16T22:03:08Z",
-  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.2.4",
-  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.2.4/RenderFlow-Patch-v2.2.4.zip",
-  "package_size_bytes": 582922,
-  "sha256": "d0c5d919668df8d7c7fd251158edf1430cef3fc02cc7d7ac37e679df0373f9de",
-  "update_type": "patch",
+  "release_notes": "RenderFlow v2.4.0 Master Upgrade: AI Semantic Image Mapping + Narration Intelligence + Production In-App Auto-Updater with Ed25519 authentication, real-time speed/progress telemetry, atomic staging and automatic rollback; 28 transitions; 60+ caption styles; 4K hardware-adaptive rendering.",
+  "published_at": "2026-10-19T08:37:29Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.4.0",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.0/RenderFlow-Patch-v2.4.0.zip",
+  "package_size_bytes": 636375,
+  "sha256": "f9a0f528a4a4d41092189dc230e9f6aee4ac4078a6565c1bcbbc2508984d479b",
+  "update_type": "minor",
   "supported_platforms": [
     "windows-x64"
   ],
   "packages": {
     "patch": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.2.4/RenderFlow-Patch-v2.2.4.zip",
-      "package_size_bytes": 582922,
-      "sha256": "d0c5d919668df8d7c7fd251158edf1430cef3fc02cc7d7ac37e679df0373f9de",
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.0/RenderFlow-Patch-v2.4.0.zip",
+      "package_size_bytes": 636375,
+      "sha256": "f9a0f528a4a4d41092189dc230e9f6aee4ac4078a6565c1bcbbc2508984d479b",
       "applies_to": [
         ">=2.0.0"
       ]
     },
     "full": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.2.4/RenderFlow-Setup-v2.2.4.exe",
-      "package_size_bytes": 1372736514,
-      "sha256": "2bd5d3a4c7b563592ed0204363efaae6923df2fff7c92958098854cfaab72473"
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.0/RenderFlow-Setup-v2.4.0.exe",
+      "package_size_bytes": 1372914277,
+      "sha256": "82cbc10c80271682edafd10175d53163e904fe732057d4cf7d6d51d2d0b01303"
     }
   },
-  "signature": "90934e35319430be3814f58495fa2040d374e8b7b06f365b38e7019a7bfc3e13f41ea422452c4516f3fd0389849436f28de1db338c079f986db2d02473a9e20c",
+  "signature": "e3e8ac1350882671283ded1c661fbaf81e76e4e65eba7cec33c397ce80c673cdfa21f2d6e5b3532a4afb8f46569a8c8e17db47552f2fbe6201b566470077e903",
   "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e"
 }
