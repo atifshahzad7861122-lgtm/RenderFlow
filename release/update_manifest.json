@@ -1,32 +1,32 @@
 {
   "manifest_version": "1.0",
-  "latest_version": "2.4.2",
+  "latest_version": "2.4.3",
   "minimum_supported_version": "2.4.0",
-  "release_notes": "RenderFlow v2.4.2: Complete Installer Software Update Architecture, RFC 8032 Ed25519 cryptographic authentication, truthful state reporting, and seamless zero-data-loss upgrades.",
-  "published_at": "2026-10-19T19:07:24Z",
-  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.4.2",
-  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.2/RenderFlow-Patch-v2.4.2.zip",
-  "package_size_bytes": 664716,
-  "sha256": "438791cb11cc411d874ff56d188606d661aafdfdd84dafd07a0c1ed7008f1afa",
+  "release_notes": "RenderFlow v2.4.3: Truthful updater state telemetry, stale green badge invalidation, direct CDN manifest retrieval, and seamless zero-data-loss upgrades.",
+  "published_at": "2026-10-20T15:15:28Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.4.3",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.3/RenderFlow-Patch-v2.4.3.zip",
+  "package_size_bytes": 665078,
+  "sha256": "471bae52bbea7c52120486481c57a1697f271adb650c87f4b3451bbae986b696",
   "update_type": "patch",
   "supported_platforms": [
     "windows-x64"
   ],
   "packages": {
     "patch": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.2/RenderFlow-Patch-v2.4.2.zip",
-      "package_size_bytes": 664716,
-      "sha256": "438791cb11cc411d874ff56d188606d661aafdfdd84dafd07a0c1ed7008f1afa",
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.3/RenderFlow-Patch-v2.4.3.zip",
+      "package_size_bytes": 665078,
+      "sha256": "471bae52bbea7c52120486481c57a1697f271adb650c87f4b3451bbae986b696",
       "applies_to": [
         ">=2.4.0"
       ]
     },
     "full": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.2/RenderFlow-Setup-v2.4.2.exe",
-      "package_size_bytes": 1373096907,
-      "sha256": "48b77c2382a142b156735d6bff90d855d88522887ed68c3d2afbf6d008c4284e"
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.3/RenderFlow-Setup-v2.4.3.exe",
+      "package_size_bytes": 1304672195,
+      "sha256": "c70adc7b0bc7d40dc3c94a436eba0d6dc82e2edb723e20f0a978aa2b1d3293c7"
     }
   },
   "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e",
-  "signature": "b3924fb0cd4dd491d899cde59bf45c4576f43e974fa8ef3ec92538fd080722b396a6bfe16a94859e4aac86371e3c95329918ae7f61e3ffa1a4dc69ec38a48103"
+  "signature": "58387ee0f83033904897d4888aa502964691200f66e7133c53c4e2db18e557b7dcf05addbafd780c85c01d0f574e51ad5934c666f114d7c08bbfd096a8b2a907"
 }
