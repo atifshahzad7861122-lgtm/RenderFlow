@@ -1,0 +1,110 @@
+{
+  "version": "2.2.0",
+  "resolutions": {
+    "1080p": {
+      "name": "1080p Full HD",
+      "description": "Standard high-definition output. Fast encoding, highly compatible.",
+      "width": 1920,
+      "height": 1080,
+      "aspect_ratio": "16:9",
+      "scale_factor": 1.0,
+      "caption_font_scale": 1.0,
+      "default_chunk_size": 35,
+      "crf_default": 20,
+      "target_bitrate": "8M",
+      "max_bitrate": "12M",
+      "bufsize": "16M",
+      "estimated_ram_mb": 150,
+      "recommended_hardware": "Any modern PC (2+ cores, 4+ GB RAM)"
+    },
+    "1440p": {
+      "name": "1440p QHD / 2K",
+      "description": "Crisp 2.5K high quality. Great for high-DPI monitors and YouTube VP9 unlock.",
+      "width": 2560,
+      "height": 1440,
+      "aspect_ratio": "16:9",
+      "scale_factor": 1.3333,
+      "caption_font_scale": 1.3333,
+      "default_chunk_size": 28,
+      "crf_default": 19,
+      "target_bitrate": "16M",
+      "max_bitrate": "24M",
+      "bufsize": "32M",
+      "estimated_ram_mb": 250,
+      "recommended_hardware": "Mid-range PC (4+ cores, 8+ GB RAM)"
+    },
+    "4k": {
+      "name": "4K UHD Maximum Quality",
+      "description": "Ultra-High Definition 3840x2160. Maximum cinematic clarity and fidelity.",
+      "width": 3840,
+      "height": 2160,
+      "aspect_ratio": "16:9",
+      "scale_factor": 2.0,
+      "caption_font_scale": 2.0,
+      "default_chunk_size": 20,
+      "crf_default": 18,
+      "target_bitrate": "35M",
+      "max_bitrate": "50M",
+      "bufsize": "70M",
+      "estimated_ram_mb": 450,
+      "recommended_hardware": "High-end PC (6+ cores, 16+ GB RAM or dedicated GPU)"
+    }
+  },
+  "performance_modes": {
+    "auto": {
+      "name": "Auto (Recommended)",
+      "description": "Automatically adapts encoder, chunk size, and thread count to host hardware."
+    },
+    "eco": {
+      "name": "Eco / Low-End",
+      "description": "Optimized for laptops, dual-core CPUs, and 8GB RAM. Bounded memory and lower thread utilization.",
+      "chunk_multiplier": 0.7,
+      "threads": 2,
+      "preset": "veryfast"
+    },
+    "balanced": {
+      "name": "Balanced",
+      "description": "Optimal balance between encoding speed and compression quality.",
+      "chunk_multiplier": 1.0,
+      "threads": 0,
+      "preset": "veryfast"
+    },
+    "performance": {
+      "name": "Performance",
+      "description": "Throughput-oriented pipeline utilizing verified hardware encoder and parallel chunking.",
+      "chunk_multiplier": 1.3,
+      "threads": 0,
+      "preset": "fast"
+    },
+    "max_quality": {
+      "name": "Max Quality",
+      "description": "Maximum visual fidelity, highest Lanczos filter precision, lower CRF compression.",
+      "chunk_multiplier": 0.9,
+      "threads": 0,
+      "preset": "medium"
+    }
+  },
+  "quality_levels": {
+    "standard": {
+      "libx264_crf": 20,
+      "nvenc_cq": 23,
+      "qsv_gq": 23,
+      "amf_qp": 23,
+      "bitrate_scale": 1.0
+    },
+    "high": {
+      "libx264_crf": 18,
+      "nvenc_cq": 19,
+      "qsv_gq": 19,
+      "amf_qp": 19,
+      "bitrate_scale": 1.25
+    },
+    "maximum": {
+      "libx264_crf": 16,
+      "nvenc_cq": 16,
+      "qsv_gq": 16,
+      "amf_qp": 16,
+      "bitrate_scale": 1.6
+    }
+  }
+}

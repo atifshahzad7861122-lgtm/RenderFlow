@@ -1,0 +1,1 @@
+[{"scene_id": "scene_1", "img": "image_1.png", "context": "normal", "transition": "transition_001", "start": 0.0, "end": 3.0, "dur": 3.0}, {"scene_id": "scene_2", "img": "image_2.png", "context": "normal", "transition": "clean_cut", "start": 3.0, "end": 6.0, "dur": 3.0}]

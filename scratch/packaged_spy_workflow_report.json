@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "runtime": "packaged_windows",
+  "executable": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\dist\\RenderingStudio\\RenderingStudio.exe",
+  "project": "pkg_spy_files_acceptance_1791541741",
+  "audio_file": "THE_SPY_FILES_FINAL.mp3",
+  "audio_duration": 214.665792,
+  "audio_format": "48kHz Stereo WAV",
+  "scenes_generated": 33,
+  "sync_quality_score": 70.6,
+  "transcription_time_sec": 79.68570685386658
+}

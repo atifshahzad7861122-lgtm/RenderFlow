@@ -1,0 +1,42 @@
+{
+ "style": "classic",
+ "total_segments": 3,
+ "total_words": 17,
+ "total_captions": 3,
+ "checks": {
+  "cue_count": "PASS",
+  "word_count": "PASS",
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.75,
+   "text": "Every transition must maintain crisp detail.",
+   "sub_region_mean": 180.25,
+   "sub_region_std": 62.92,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 2,
+   "timestamp": 5.15,
+   "text": "Eliminating blur across all rendering modes.",
+   "sub_region_mean": 131.42,
+   "sub_region_std": 61.92,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 8.35,
+   "text": "High quality cinematic rendering complete.",
+   "sub_region_mean": 63.43,
+   "sub_region_std": 51.48,
+   "status": "PASS"
+  }
+ ]
+}

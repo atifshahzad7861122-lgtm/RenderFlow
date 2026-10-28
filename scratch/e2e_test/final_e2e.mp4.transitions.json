@@ -1,0 +1,52 @@
+{
+ "n_transitions": 3,
+ "types_used": [
+  "transition_001",
+  "transition_002",
+  "transition_006"
+ ],
+ "avg_duration": 1.0,
+ "durations": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "details": [
+  {
+   "cut_s": 3.75,
+   "start_s": 3.25,
+   "end_s": 4.25,
+   "context": "normal",
+   "type": "transition_001",
+   "name": "White Orange Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 7.5,
+   "start_s": 7.0,
+   "end_s": 8.0,
+   "context": "normal",
+   "type": "transition_002",
+   "name": "Blue White Flash",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 11.25,
+   "start_s": 10.75,
+   "end_s": 11.75,
+   "context": "normal",
+   "type": "transition_006",
+   "name": "Red White Flare",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  }
+ ]
+}

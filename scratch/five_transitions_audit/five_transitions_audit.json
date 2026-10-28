@@ -1,0 +1,312 @@
+[
+  {
+    "cut_index": 1,
+    "transition_id": "cinematic_dissolve",
+    "transition_name": "Cinematic Dissolve",
+    "scene_id": "scene_0003",
+    "incoming_image": "image_3.png",
+    "source_image_path": "dist/RenderingStudio/projects/zcxf/images/image_3.png",
+    "cut_time_s": 5.16,
+    "start_s": 4.96,
+    "end_s": 5.36,
+    "samples": [
+      {
+        "label": "before_start",
+        "timestamp_s": 4.76,
+        "frame_number": 143,
+        "laplacian_var_top": 2356.8,
+        "saved_file": "cut_01_before_start_t4.760_f143.png"
+      },
+      {
+        "label": "midpoint",
+        "timestamp_s": 5.16,
+        "frame_number": 155,
+        "laplacian_var_top": 40820.8,
+        "saved_file": "cut_01_midpoint_t5.160_f155.png"
+      },
+      {
+        "label": "exact_end",
+        "timestamp_s": 5.36,
+        "frame_number": 161,
+        "laplacian_var_top": 13310.4,
+        "saved_file": "cut_01_exact_end_t5.360_f161.png"
+      },
+      {
+        "label": "plus_3f",
+        "timestamp_s": 5.46,
+        "frame_number": 164,
+        "laplacian_var_top": 13310.4,
+        "saved_file": "cut_01_plus_3f_t5.460_f164.png"
+      },
+      {
+        "label": "plus_10f",
+        "timestamp_s": 5.693,
+        "frame_number": 171,
+        "laplacian_var_top": 13310.4,
+        "saved_file": "cut_01_plus_10f_t5.693_f171.png"
+      },
+      {
+        "label": "plus_30f",
+        "timestamp_s": 6.36,
+        "frame_number": 191,
+        "laplacian_var_top": 458.4,
+        "saved_file": "cut_01_plus_30f_t6.360_f191.png"
+      },
+      {
+        "label": "plus_60f",
+        "timestamp_s": 7.36,
+        "frame_number": 221,
+        "laplacian_var_top": 417.6,
+        "saved_file": "cut_01_plus_60f_t7.360_f221.png"
+      }
+    ]
+  },
+  {
+    "cut_index": 3,
+    "transition_id": "cinematic_dissolve",
+    "transition_name": "Cinematic Dissolve",
+    "scene_id": "scene_0005",
+    "incoming_image": "image_5.png",
+    "source_image_path": "dist/RenderingStudio/projects/zcxf/images/image_5.png",
+    "cut_time_s": 10.32,
+    "start_s": 10.12,
+    "end_s": 10.52,
+    "samples": [
+      {
+        "label": "before_start",
+        "timestamp_s": 9.92,
+        "frame_number": 298,
+        "laplacian_var_top": 863.1,
+        "saved_file": "cut_03_before_start_t9.920_f298.png"
+      },
+      {
+        "label": "midpoint",
+        "timestamp_s": 10.32,
+        "frame_number": 310,
+        "laplacian_var_top": 41103.4,
+        "saved_file": "cut_03_midpoint_t10.320_f310.png"
+      },
+      {
+        "label": "exact_end",
+        "timestamp_s": 10.52,
+        "frame_number": 316,
+        "laplacian_var_top": 21022.8,
+        "saved_file": "cut_03_exact_end_t10.520_f316.png"
+      },
+      {
+        "label": "plus_3f",
+        "timestamp_s": 10.62,
+        "frame_number": 319,
+        "laplacian_var_top": 21022.8,
+        "saved_file": "cut_03_plus_3f_t10.620_f319.png"
+      },
+      {
+        "label": "plus_10f",
+        "timestamp_s": 10.853,
+        "frame_number": 326,
+        "laplacian_var_top": 21022.8,
+        "saved_file": "cut_03_plus_10f_t10.853_f326.png"
+      },
+      {
+        "label": "plus_30f",
+        "timestamp_s": 11.52,
+        "frame_number": 346,
+        "laplacian_var_top": 221.9,
+        "saved_file": "cut_03_plus_30f_t11.520_f346.png"
+      },
+      {
+        "label": "plus_60f",
+        "timestamp_s": 12.52,
+        "frame_number": 376,
+        "laplacian_var_top": 186.0,
+        "saved_file": "cut_03_plus_60f_t12.520_f376.png"
+      }
+    ]
+  },
+  {
+    "cut_index": 5,
+    "transition_id": "cinematic_dissolve",
+    "transition_name": "Cinematic Dissolve",
+    "scene_id": "scene_0007",
+    "incoming_image": "image_7.png",
+    "source_image_path": "dist/RenderingStudio/projects/zcxf/images/image_7.png",
+    "cut_time_s": 14.426,
+    "start_s": 14.226,
+    "end_s": 14.626,
+    "samples": [
+      {
+        "label": "before_start",
+        "timestamp_s": 14.026,
+        "frame_number": 421,
+        "laplacian_var_top": 501.1,
+        "saved_file": "cut_05_before_start_t14.026_f421.png"
+      },
+      {
+        "label": "midpoint",
+        "timestamp_s": 14.426,
+        "frame_number": 433,
+        "laplacian_var_top": 47327.5,
+        "saved_file": "cut_05_midpoint_t14.426_f433.png"
+      },
+      {
+        "label": "exact_end",
+        "timestamp_s": 14.626,
+        "frame_number": 439,
+        "laplacian_var_top": 14861.2,
+        "saved_file": "cut_05_exact_end_t14.626_f439.png"
+      },
+      {
+        "label": "plus_3f",
+        "timestamp_s": 14.726,
+        "frame_number": 442,
+        "laplacian_var_top": 14861.2,
+        "saved_file": "cut_05_plus_3f_t14.726_f442.png"
+      },
+      {
+        "label": "plus_10f",
+        "timestamp_s": 14.959,
+        "frame_number": 449,
+        "laplacian_var_top": 14861.2,
+        "saved_file": "cut_05_plus_10f_t14.959_f449.png"
+      },
+      {
+        "label": "plus_30f",
+        "timestamp_s": 15.626,
+        "frame_number": 469,
+        "laplacian_var_top": 776.3,
+        "saved_file": "cut_05_plus_30f_t15.626_f469.png"
+      },
+      {
+        "label": "plus_60f",
+        "timestamp_s": 16.626,
+        "frame_number": 499,
+        "laplacian_var_top": 1209.9,
+        "saved_file": "cut_05_plus_60f_t16.626_f499.png"
+      }
+    ]
+  },
+  {
+    "cut_index": 7,
+    "transition_id": "transition_008",
+    "transition_name": "Golden Light Leak",
+    "scene_id": "scene_0009",
+    "incoming_image": "image_9.png",
+    "source_image_path": "dist/RenderingStudio/projects/zcxf/images/image_9.png",
+    "cut_time_s": 19.52,
+    "start_s": 19.02,
+    "end_s": 20.02,
+    "samples": [
+      {
+        "label": "before_start",
+        "timestamp_s": 18.82,
+        "frame_number": 564,
+        "laplacian_var_top": 1225.5,
+        "saved_file": "cut_07_before_start_t18.820_f564.png"
+      },
+      {
+        "label": "midpoint",
+        "timestamp_s": 19.52,
+        "frame_number": 585,
+        "laplacian_var_top": 418.8,
+        "saved_file": "cut_07_midpoint_t19.520_f585.png"
+      },
+      {
+        "label": "exact_end",
+        "timestamp_s": 20.02,
+        "frame_number": 600,
+        "laplacian_var_top": 737.2,
+        "saved_file": "cut_07_exact_end_t20.020_f600.png"
+      },
+      {
+        "label": "plus_3f",
+        "timestamp_s": 20.12,
+        "frame_number": 603,
+        "laplacian_var_top": 690.8,
+        "saved_file": "cut_07_plus_3f_t20.120_f603.png"
+      },
+      {
+        "label": "plus_10f",
+        "timestamp_s": 20.353,
+        "frame_number": 610,
+        "laplacian_var_top": 732.9,
+        "saved_file": "cut_07_plus_10f_t20.353_f610.png"
+      },
+      {
+        "label": "plus_30f",
+        "timestamp_s": 21.02,
+        "frame_number": 630,
+        "laplacian_var_top": 1079.1,
+        "saved_file": "cut_07_plus_30f_t21.020_f630.png"
+      },
+      {
+        "label": "plus_60f",
+        "timestamp_s": 22.02,
+        "frame_number": 660,
+        "laplacian_var_top": 1119.3,
+        "saved_file": "cut_07_plus_60f_t22.020_f660.png"
+      }
+    ]
+  },
+  {
+    "cut_index": 8,
+    "transition_id": "cinematic_dissolve",
+    "transition_name": "Cinematic Dissolve",
+    "scene_id": "scene_0010",
+    "incoming_image": "image_10.png",
+    "source_image_path": "dist/RenderingStudio/projects/zcxf/images/image_10.png",
+    "cut_time_s": 22.56,
+    "start_s": 22.36,
+    "end_s": 22.76,
+    "samples": [
+      {
+        "label": "before_start",
+        "timestamp_s": 22.16,
+        "frame_number": 665,
+        "laplacian_var_top": 1119.2,
+        "saved_file": "cut_08_before_start_t22.160_f665.png"
+      },
+      {
+        "label": "midpoint",
+        "timestamp_s": 22.56,
+        "frame_number": 677,
+        "laplacian_var_top": 34923.1,
+        "saved_file": "cut_08_midpoint_t22.560_f677.png"
+      },
+      {
+        "label": "exact_end",
+        "timestamp_s": 22.76,
+        "frame_number": 683,
+        "laplacian_var_top": 18619.8,
+        "saved_file": "cut_08_exact_end_t22.760_f683.png"
+      },
+      {
+        "label": "plus_3f",
+        "timestamp_s": 22.86,
+        "frame_number": 686,
+        "laplacian_var_top": 18619.8,
+        "saved_file": "cut_08_plus_3f_t22.860_f686.png"
+      },
+      {
+        "label": "plus_10f",
+        "timestamp_s": 23.093,
+        "frame_number": 693,
+        "laplacian_var_top": 802.6,
+        "saved_file": "cut_08_plus_10f_t23.093_f693.png"
+      },
+      {
+        "label": "plus_30f",
+        "timestamp_s": 23.76,
+        "frame_number": 713,
+        "laplacian_var_top": 1181.2,
+        "saved_file": "cut_08_plus_30f_t23.760_f713.png"
+      },
+      {
+        "label": "plus_60f",
+        "timestamp_s": 24.76,
+        "frame_number": 743,
+        "laplacian_var_top": 1695.9,
+        "saved_file": "cut_08_plus_60f_t24.760_f743.png"
+      }
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "style_classic": "PASS",
+  "style_bold_viral": "PASS",
+  "style_neon": "PASS",
+  "style_minimal": "PASS",
+  "captions_burned_render": {
+    "status": "PASS",
+    "file": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\qa\\captions\\render_with_captions.mp4",
+    "duration": "6.000000",
+    "size_bytes": "5110725",
+    "resolution": "1920x1080",
+    "render_time_s": 36.04
+  }
+}

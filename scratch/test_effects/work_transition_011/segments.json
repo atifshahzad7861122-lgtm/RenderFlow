@@ -1,0 +1,16 @@
+{
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.0,
+      "text": "Scene one"
+    },
+    {
+      "id": 2,
+      "start": 2.0,
+      "end": 4.0,
+      "text": "Scene two"
+    }
+  ]
+}

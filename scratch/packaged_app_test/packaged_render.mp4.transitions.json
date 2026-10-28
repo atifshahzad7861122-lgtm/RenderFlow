@@ -1,0 +1,69 @@
+{
+ "n_transitions": 4,
+ "types_used": [
+  "dissolve",
+  "transition_008",
+  "transition_010"
+ ],
+ "avg_duration": 0.7,
+ "durations": [
+  1.0,
+  0.4,
+  1.0,
+  0.4
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.5,
+   "end_s": 3.5,
+   "context": "normal",
+   "type": "transition_008",
+   "transition_id": "transition_008",
+   "name": "Golden Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 6.0,
+   "start_s": 5.8,
+   "end_s": 6.2,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 9.0,
+   "start_s": 8.5,
+   "end_s": 9.5,
+   "context": "normal",
+   "type": "transition_010",
+   "transition_id": "transition_010",
+   "name": "Amber Bokeh Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 12.0,
+   "start_s": 11.8,
+   "end_s": 12.2,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

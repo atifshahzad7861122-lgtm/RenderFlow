@@ -1,0 +1,49 @@
+{
+  "scenes": [
+    {
+      "segment_index": 0,
+      "img": "img_1.png",
+      "start": 0.0,
+      "end": 3.0,
+      "dur": 3.0,
+      "transition": "cinematic_dissolve",
+      "user_override": true
+    },
+    {
+      "segment_index": 1,
+      "img": "img_2.png",
+      "start": 3.0,
+      "end": 6.0,
+      "dur": 3.0,
+      "transition": "transition_001",
+      "user_override": true
+    },
+    {
+      "segment_index": 2,
+      "img": "img_1.png",
+      "start": 6.0,
+      "end": 9.0,
+      "dur": 3.0,
+      "transition": "soft_wipe",
+      "user_override": true
+    },
+    {
+      "segment_index": 3,
+      "img": "img_2.png",
+      "start": 9.0,
+      "end": 12.0,
+      "dur": 3.0,
+      "transition": "transition_008",
+      "user_override": true
+    },
+    {
+      "segment_index": 4,
+      "img": "img_1.png",
+      "start": 12.0,
+      "end": 15.0,
+      "dur": 3.0,
+      "transition": "none",
+      "user_override": true
+    }
+  ]
+}

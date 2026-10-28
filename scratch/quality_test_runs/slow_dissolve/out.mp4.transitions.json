@@ -1,0 +1,25 @@
+{
+ "n_transitions": 1,
+ "types_used": [
+  "dissolve"
+ ],
+ "avg_duration": 0.5,
+ "durations": [
+  0.5
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.75,
+   "end_s": 3.25,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "slow_dissolve",
+   "name": "Slow Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.5,
+   "is_dip_black": false
+  }
+ ]
+}

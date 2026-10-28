@@ -1,0 +1,25 @@
+{
+ "n_transitions": 1,
+ "types_used": [
+  "fadeblack"
+ ],
+ "avg_duration": 0.4,
+ "durations": [
+  0.4
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.8,
+   "end_s": 3.2,
+   "context": "normal",
+   "type": "fadeblack",
+   "transition_id": "dip_to_black",
+   "name": "Dip to Black",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": true
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "n_transitions": 1,
+ "types_used": [
+  "dissolve"
+ ],
+ "avg_duration": 0.4,
+ "durations": [
+  0.4
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.8,
+   "end_s": 3.2,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

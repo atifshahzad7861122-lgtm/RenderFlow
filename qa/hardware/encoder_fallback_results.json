@@ -1,0 +1,7 @@
+{
+  "requested_encoder": "h264_nvenc",
+  "resolved_encoder": "libx264",
+  "fallback_status": "PASS",
+  "render_time_s": 25.73,
+  "output_file": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\qa\\hardware\\fallback_render.mp4"
+}

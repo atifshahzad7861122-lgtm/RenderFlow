@@ -1,0 +1,24 @@
+{
+ "n_transitions": 1,
+ "types_used": [
+  "transition_001"
+ ],
+ "avg_duration": 0.9,
+ "durations": [
+  0.9
+ ],
+ "details": [
+  {
+   "cut_s": 2.0,
+   "start_s": 1.55,
+   "end_s": 2.45,
+   "context": "normal",
+   "type": "transition_001",
+   "name": "White Orange Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 0.9,
+   "is_dip_black": false
+  }
+ ]
+}

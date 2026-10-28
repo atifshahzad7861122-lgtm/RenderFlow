@@ -1,0 +1,37 @@
+{
+ "scenes": [
+  {
+   "scene_id": "sync_0001",
+   "img": "image_7.png",
+   "dur": 1.4,
+   "frames": 42,
+   "label": "L4",
+   "motion": "push",
+   "transition_in": "hard_cut",
+   "context": "fast",
+   "start_s": 0.0
+  },
+  {
+   "scene_id": "sync_0002",
+   "img": "image_2.png",
+   "dur": 1.4,
+   "frames": 42,
+   "label": "L4",
+   "motion": "push",
+   "transition_in": "hard_cut",
+   "context": "fast",
+   "start_s": 1.4
+  },
+  {
+   "scene_id": "sync_0003",
+   "img": "image_1.png",
+   "dur": 1.2,
+   "frames": 36,
+   "label": "L4",
+   "motion": "push",
+   "transition_in": "hard_cut",
+   "context": "location_change",
+   "start_s": 2.8
+  }
+ ]
+}

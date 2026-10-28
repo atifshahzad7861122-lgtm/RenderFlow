@@ -1,0 +1,28 @@
+{
+ "timeline": {
+  "audio_duration_s": 15.004,
+  "n_images_used": 4,
+  "n_scenes": 4,
+  "first_image_start_s": 0.0,
+  "first_image_file": "image_1.png",
+  "last_image_end_s": 14.983,
+  "avg_image_duration_s": 3.746
+ },
+ "transitions": {
+  "n_transitions": 3,
+  "types_used": [
+   "transition_001",
+   "transition_002",
+   "transition_006"
+  ],
+  "avg_duration_s": 1.0
+ },
+ "asset_integrity": {
+  "images_decoded_ok": 4,
+  "images_failed": 0,
+  "placeholder_frames_generated": 0,
+  "missing_visual_frames": 0
+ },
+ "first_frame_validation": "PASS",
+ "failed_checks": []
+}

@@ -1,0 +1,54 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_0001",
+      "start": 0.0,
+      "end": 4.0,
+      "dur": 4.0,
+      "image": "scene_01_scene1_crimson.png",
+      "transition": "transition_001",
+      "user_override": true,
+      "context": "turning_point"
+    },
+    {
+      "scene_id": "scene_0002",
+      "start": 4.0,
+      "end": 8.0,
+      "dur": 4.0,
+      "image": "scene_02_scene2_azure.png",
+      "transition": "transition_003",
+      "user_override": true,
+      "context": "story_change"
+    },
+    {
+      "scene_id": "scene_0003",
+      "start": 8.0,
+      "end": 12.0,
+      "dur": 4.0,
+      "image": "scene_03_scene3_emerald.png",
+      "transition": "cinematic_dissolve",
+      "user_override": true,
+      "context": "normal"
+    },
+    {
+      "scene_id": "scene_0004",
+      "start": 12.0,
+      "end": 16.0,
+      "dur": 4.0,
+      "image": "scene_04_scene4_gold.png",
+      "transition": "soft_wipe",
+      "user_override": true,
+      "context": "location_change"
+    },
+    {
+      "scene_id": "scene_0005",
+      "start": 16.0,
+      "end": 20.0,
+      "dur": 4.0,
+      "image": "scene_01_scene1_crimson.png",
+      "transition": "none",
+      "user_override": true,
+      "context": "normal"
+    }
+  ]
+}

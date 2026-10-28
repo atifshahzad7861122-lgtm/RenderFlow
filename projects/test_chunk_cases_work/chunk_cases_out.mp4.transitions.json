@@ -1,0 +1,88 @@
+{
+ "n_transitions": 5,
+ "types_used": [
+  "dissolve",
+  "transition_001",
+  "wipeleft"
+ ],
+ "avg_duration": 0.63,
+ "durations": [
+  1.0,
+  0.35,
+  0.4,
+  1.0,
+  0.4
+ ],
+ "details": [
+  {
+   "cut_index": 0,
+   "cut_s": 3.0,
+   "start_s": 2.5,
+   "end_s": 3.5,
+   "context": "story_change",
+   "type": "transition_001",
+   "transition_id": "transition_001",
+   "name": "White Orange Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_index": 1,
+   "cut_s": 6.0,
+   "start_s": 5.825,
+   "end_s": 6.175,
+   "context": "location_change",
+   "type": "wipeleft",
+   "transition_id": "soft_wipe",
+   "name": "Soft Directional Wipe",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.35,
+   "is_dip_black": false
+  },
+  {
+   "cut_index": 2,
+   "cut_s": 8.0,
+   "start_s": 7.8,
+   "end_s": 8.2,
+   "context": "emotional",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_index": 3,
+   "cut_s": 11.0,
+   "start_s": 10.5,
+   "end_s": 11.5,
+   "context": "normal",
+   "type": "transition_001",
+   "transition_id": "transition_001",
+   "name": "White Orange Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_index": 4,
+   "cut_s": 14.0,
+   "start_s": 13.8,
+   "end_s": 14.2,
+   "context": "fast",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

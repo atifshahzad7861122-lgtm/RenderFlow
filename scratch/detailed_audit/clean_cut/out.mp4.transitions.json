@@ -1,0 +1,25 @@
+{
+ "n_transitions": 1,
+ "types_used": [
+  "clean_cut"
+ ],
+ "avg_duration": 0.04,
+ "durations": [
+  0.04
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.98,
+   "end_s": 3.02,
+   "context": "normal",
+   "type": "clean_cut",
+   "transition_id": "clean_cut",
+   "name": "Clean Cut",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.04,
+   "is_dip_black": false
+  }
+ ]
+}

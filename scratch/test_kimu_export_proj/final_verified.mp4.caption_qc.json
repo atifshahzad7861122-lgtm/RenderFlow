@@ -1,0 +1,50 @@
+{
+ "style": "classic",
+ "total_segments": 8,
+ "total_words": 36,
+ "total_captions": 8,
+ "checks": {
+  "cue_count": "PASS",
+  "word_count": "PASS",
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 0.409,
+   "text": "Berlin, 1953.",
+   "sub_region_mean": 179.63,
+   "sub_region_std": 62.82,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 3.885,
+   "text": "Operatives monitor radio communications",
+   "sub_region_mean": 131.41,
+   "sub_region_std": 61.64,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 5,
+   "timestamp": 7.11,
+   "text": "The courier leaves the drop location before",
+   "sub_region_mean": 68.63,
+   "sub_region_std": 49.52,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 8,
+   "timestamp": 11.454,
+   "text": "secured in the vault.",
+   "sub_region_mean": 159.75,
+   "sub_region_std": 55.8,
+   "status": "PASS"
+  }
+ ]
+}

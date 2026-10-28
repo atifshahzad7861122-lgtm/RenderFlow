@@ -1,0 +1,29 @@
+{
+  "segments": [
+    {
+      "start": 0.5,
+      "end": 2.8,
+      "text": "Testing built-in cinematic dissolve transition."
+    },
+    {
+      "start": 3.5,
+      "end": 5.8,
+      "text": "Testing external YouTube flare overlay transition."
+    },
+    {
+      "start": 6.5,
+      "end": 8.8,
+      "text": "Testing built-in soft directional wipe transition."
+    },
+    {
+      "start": 9.5,
+      "end": 11.8,
+      "text": "Testing external YouTube golden light leak overlay."
+    },
+    {
+      "start": 12.5,
+      "end": 14.8,
+      "text": "Verifying crisp full-resolution background detail."
+    }
+  ]
+}

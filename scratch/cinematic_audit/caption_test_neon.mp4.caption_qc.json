@@ -1,0 +1,50 @@
+{
+ "style": "neon",
+ "total_segments": 5,
+ "total_words": 19,
+ "total_captions": 5,
+ "checks": {
+  "cue_count": "PASS",
+  "word_count": "PASS",
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.25,
+   "text": "Berlin 1953, a city divided by",
+   "sub_region_mean": 137.73,
+   "sub_region_std": 109.08,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 2,
+   "timestamp": 3.942,
+   "text": "barbed wire, ideology and fear.",
+   "sub_region_mean": 137.73,
+   "sub_region_std": 109.08,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 5.913,
+   "text": "On one side,",
+   "sub_region_mean": 137.73,
+   "sub_region_std": 109.08,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 5,
+   "timestamp": 9.567,
+   "text": "streets,",
+   "sub_region_mean": 137.73,
+   "sub_region_std": 109.08,
+   "status": "PASS"
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+  "segments": [
+    {
+      "id": 0,
+      "start": 0.0,
+      "end": 2.8,
+      "dur": 2.8,
+      "text": "Welcome to the RenderFlow mapping studio."
+    },
+    {
+      "id": 2,
+      "start": 3.0,
+      "end": 6.4,
+      "dur": 3.4,
+      "text": "Here is the key intelligence analysis."
+    },
+    {
+      "id": 3,
+      "start": 6.5,
+      "end": 9.3,
+      "dur": 2.8,
+      "text": "Thank you for watching."
+    }
+  ]
+}

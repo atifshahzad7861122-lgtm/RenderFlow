@@ -1,0 +1,4 @@
+{
+  "path_traversal_protection": "PASS",
+  "zip_slip_protection": "PASS"
+}

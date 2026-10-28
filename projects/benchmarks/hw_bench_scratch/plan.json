@@ -1,0 +1,22 @@
+{
+  "scenes": [
+    {
+      "segment_index": 0,
+      "image": "scene_01.png",
+      "start": 0.0,
+      "end": 2.0,
+      "dur": 2.0,
+      "transition": "cinematic_dissolve",
+      "narration_text": "Rendering Studio verification segment one."
+    },
+    {
+      "segment_index": 1,
+      "image": "scene_02.png",
+      "start": 2.0,
+      "end": 4.0,
+      "dur": 2.0,
+      "transition": "cinematic_dissolve",
+      "narration_text": "Hardware adaptive 4K UHD master output test."
+    }
+  ]
+}

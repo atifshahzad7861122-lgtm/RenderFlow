@@ -1,0 +1,25 @@
+{
+ "n_transitions": 1,
+ "types_used": [
+  "fadewhite"
+ ],
+ "avg_duration": 0.35,
+ "durations": [
+  0.35
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.825,
+   "end_s": 3.175,
+   "context": "normal",
+   "type": "fadewhite",
+   "transition_id": "dip_to_white",
+   "name": "Dip to White",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.35,
+   "is_dip_black": false
+  }
+ ]
+}

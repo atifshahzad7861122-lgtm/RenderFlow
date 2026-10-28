@@ -1,0 +1,24 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.5,
+      "text": "He began working on his new venture from his home workspace."
+    },
+    {
+      "start": 4.5,
+      "end": 8.5,
+      "text": "Soon the technology platform gained traction across major cities."
+    },
+    {
+      "start": 8.5,
+      "end": 12.0,
+      "text": "Financial revenue charts climbed as enterprise clients subscribed."
+    },
+    {
+      "start": 12.0,
+      "end": 16.0,
+      "text": "The entire team assembled to celebrate this remarkable milestone."
+    }
+  ]
+}

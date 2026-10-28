@@ -1,0 +1,19 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.0,
+      "text": "Berlin 1953, a city divided."
+    },
+    {
+      "start": 2.0,
+      "end": 4.0,
+      "text": "American soldiers drove military vehicles."
+    },
+    {
+      "start": 4.0,
+      "end": 6.0,
+      "text": "Soviet guards on duty."
+    }
+  ]
+}

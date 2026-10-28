@@ -1,0 +1,17 @@
+{
+  "manifest_version": "1.0",
+  "latest_version": "2.2.3",
+  "minimum_supported_version": "2.0.0",
+  "release_notes": "RenderFlow v2.2.3 Production Stabilization Update: Fixed installer asset integrity for transition_pack; Resolved false-negative render verification failures across cut boundaries; Added multi-metric visual change detection and frame-accurate seeking; Enhanced hardware auto-detection with safe libx264 CPU fallback; Added sanitized system diagnostic export; Verified Ed25519 authenticated updater.",
+  "published_at": "2026-10-15T18:46:18Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.2.3",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.2.3/RenderFlow-Patch-v2.2.3.zip",
+  "package_size_bytes": 568953,
+  "sha256": "387b1477df58017300c44275c92f7919dae65131bb63af8dd5ff867754fd49c3",
+  "update_type": "patch",
+  "supported_platforms": [
+    "windows-x64"
+  ],
+  "signature": "46b29f4dcc36a79796468f76b0cb1959fae49194181fd4b2230db4ababc6d30c9f772543bcf4f5f15ba91723b5dea32a6832c01be5132eb2adf29fccfffed10f",
+  "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e"
+}

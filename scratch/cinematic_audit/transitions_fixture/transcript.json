@@ -1,0 +1,50 @@
+[
+  {
+    "start": 0.0,
+    "end": 10.32,
+    "dur": 10.32,
+    "text": "Berlin 1953, a city divided by barbed wire, ideology and fear. On one side, American soldiers drove through streets,",
+    "topic": "Location & Setting",
+    "importance": 0.7,
+    "keywords": [
+      "1953",
+      "american",
+      "barbed",
+      "berlin",
+      "by",
+      "city"
+    ]
+  },
+  {
+    "start": 10.32,
+    "end": 16.48,
+    "dur": 6.16,
+    "text": "filled with rebuilding factories, bright shop windows, and the sound of jazz, on the other.",
+    "topic": "Location & Setting",
+    "importance": 0.7,
+    "keywords": [
+      "bright",
+      "factories",
+      "filled",
+      "jazz",
+      "of",
+      "on"
+    ]
+  },
+  {
+    "start": 16.48,
+    "end": 20.0,
+    "dur": 3.52,
+    "text": "Soviet soldiers watched over a city where every conversation could carry a risk, but beneath the streets,",
+    "topic": "Location & Setting",
+    "importance": 0.7,
+    "keywords": [
+      "beneath",
+      "but",
+      "carry",
+      "city",
+      "conversation",
+      "could"
+    ]
+  }
+]

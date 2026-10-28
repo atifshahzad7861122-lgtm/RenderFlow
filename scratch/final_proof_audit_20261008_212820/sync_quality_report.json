@@ -1,0 +1,23 @@
+{
+  "total_images": 4,
+  "total_beats": 4,
+  "high_confidence": 0,
+  "medium_confidence": 2,
+  "low_confidence": 2,
+  "average_confidence": 0.5913,
+  "sync_quality_score": 47.4,
+  "profile_used": "GENERAL",
+  "sync_mode_used": "BALANCED",
+  "repeated_images": 1,
+  "semantic_conflicts": 0,
+  "unmatched_beats": 0,
+  "ai_reranking_triggered": 1,
+  "ai_reranking_successful": 0,
+  "fallback_used": 1,
+  "project_corrections_learned": 0,
+  "tracked_entities_count": 1,
+  "chapters_count": 1,
+  "duration_sec": 56.189,
+  "timestamp": "2026-10-08 21:29:39",
+  "engine_version": "AI Image Sync Engine v3 (Phase 3 Production)"
+}

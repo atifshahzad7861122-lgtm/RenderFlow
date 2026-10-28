@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "video_path": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\projects\\vjbkhbkhjnoljgv\\final_sequence_aware.mp4",
+  "render_time_sec": 1135.01,
+  "video_duration_sec": 214.678333,
+  "audio_target_sec": 214.666,
+  "duration_delta_sec": 0.0123,
+  "file_size_bytes": 238665368,
+  "streams": [
+    {
+      "codec_name": "h264",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "duration": "214.641667"
+    },
+    {
+      "codec_name": "aac",
+      "r_frame_rate": "0/0",
+      "duration": "214.678333"
+    }
+  ],
+  "sampled_scenes": [
+    {
+      "scene_index": 0,
+      "timestamp_sec": 1.298,
+      "target_frame": 38,
+      "plan_image": "image_21.png",
+      "correlation": 0.7508,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 5,
+      "timestamp_sec": 13.399,
+      "target_frame": 401,
+      "plan_image": "image_9.png",
+      "correlation": 0.8685,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 15,
+      "timestamp_sec": 39.593,
+      "target_frame": 1187,
+      "plan_image": "image_17.png",
+      "correlation": 0.8896,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 25,
+      "timestamp_sec": 62.575,
+      "target_frame": 1876,
+      "plan_image": "image_29.png",
+      "correlation": 0.7898,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 38,
+      "timestamp_sec": 94.99,
+      "target_frame": 2849,
+      "plan_image": "image_38.png",
+      "correlation": 0.8022,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 50,
+      "timestamp_sec": 124.382,
+      "target_frame": 3730,
+      "plan_image": "image_53.png",
+      "correlation": 0.929,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 65,
+      "timestamp_sec": 162.88,
+      "target_frame": 4885,
+      "plan_image": "image_36.png",
+      "correlation": 0.8692,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 75,
+      "timestamp_sec": 189.083,
+      "target_frame": 5671,
+      "plan_image": "image_61.png",
+      "correlation": 0.8774,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 80,
+      "timestamp_sec": 202.105,
+      "target_frame": 6061,
+      "plan_image": "image_70.png",
+      "correlation": 0.7714,
+      "status": "PASS"
+    },
+    {
+      "scene_index": 85,
+      "timestamp_sec": 213.628,
+      "target_frame": 6407,
+      "plan_image": "image_82.png",
+      "correlation": 0.9506,
+      "status": "PASS"
+    }
+  ]
+}

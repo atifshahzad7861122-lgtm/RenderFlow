@@ -1,0 +1,233 @@
+{
+ "scenes": [
+  {
+   "scene_id": "sync_0001",
+   "img": "image_0.png",
+   "dur": 2.37,
+   "frames": 71,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 0.0
+  },
+  {
+   "scene_id": "sync_0002",
+   "img": "image_0.png",
+   "dur": 2.38,
+   "frames": 71,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 2.37
+  },
+  {
+   "scene_id": "sync_0003",
+   "img": "image_0.png",
+   "dur": 2.37,
+   "frames": 72,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 4.75
+  },
+  {
+   "scene_id": "sync_0004",
+   "img": "image_0.png",
+   "dur": 2.37,
+   "frames": 71,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 7.12
+  },
+  {
+   "scene_id": "sync_0005",
+   "img": "image_0.png",
+   "dur": 2.37,
+   "frames": 71,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 9.49
+  },
+  {
+   "scene_id": "sync_0006",
+   "img": "image_0.png",
+   "dur": 2.38,
+   "frames": 71,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 11.86
+  },
+  {
+   "scene_id": "sync_0007",
+   "img": "image_0.png",
+   "dur": 2.37,
+   "frames": 71,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 14.24
+  },
+  {
+   "scene_id": "sync_0008",
+   "img": "image_0.png",
+   "dur": 2.37,
+   "frames": 71,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 16.61
+  },
+  {
+   "scene_id": "sync_0009",
+   "img": "image_0.png",
+   "dur": 2.09,
+   "frames": 63,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 18.98
+  },
+  {
+   "scene_id": "sync_0010",
+   "img": "image_0.png",
+   "dur": 3.933,
+   "frames": 118,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 21.07
+  }
+ ],
+ "transitions": [
+  {
+   "cut_s": 2.37,
+   "start_s": 1.87,
+   "end_s": 2.87,
+   "context": "normal",
+   "type": "transition_008",
+   "transition_id": "transition_008",
+   "name": "Golden Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 4.75,
+   "start_s": 4.55,
+   "end_s": 4.95,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 7.12,
+   "start_s": 6.62,
+   "end_s": 7.62,
+   "context": "normal",
+   "type": "transition_010",
+   "transition_id": "transition_010",
+   "name": "Amber Bokeh Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 9.49,
+   "start_s": 9.29,
+   "end_s": 9.69,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 11.86,
+   "start_s": 11.36,
+   "end_s": 12.36,
+   "context": "normal",
+   "type": "transition_007",
+   "transition_id": "transition_007",
+   "name": "Blue Haze Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 14.24,
+   "start_s": 14.04,
+   "end_s": 14.44,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 16.61,
+   "start_s": 16.11,
+   "end_s": 17.11,
+   "context": "normal",
+   "type": "transition_008",
+   "transition_id": "transition_008",
+   "name": "Golden Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 18.98,
+   "start_s": 18.78,
+   "end_s": 19.18,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 21.07,
+   "start_s": 20.599,
+   "end_s": 21.54,
+   "context": "normal",
+   "type": "transition_010",
+   "transition_id": "transition_010",
+   "name": "Amber Bokeh Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 0.941,
+   "is_dip_black": false
+  }
+ ]
+}

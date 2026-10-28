@@ -1,0 +1,55 @@
+{
+ "timeline": {
+  "audio_duration_s": 3.0,
+  "n_images_used": 2,
+  "n_scenes": 2,
+  "first_image_start_s": 0.0,
+  "first_image_file": "image_a.png",
+  "last_image_end_s": 3.0,
+  "avg_image_duration_s": 1.5
+ },
+ "transitions": {
+  "n_transitions": 0,
+  "types_used": [],
+  "avg_duration_s": null
+ },
+ "asset_integrity": {
+  "images_decoded_ok": 2,
+  "images_failed": 0,
+  "placeholder_frames_generated": 0,
+  "missing_visual_frames": 0
+ },
+ "first_frame_validation": "PASS",
+ "failed_checks": [
+  "cut@1.50s visible change"
+ ],
+ "transition_verification_details": [
+  {
+   "cut_index": 0,
+   "cut_time_s": 1.5,
+   "cut_frame_idx": 45,
+   "transition_type": "fade",
+   "duration_s": 0.4,
+   "sample_before": {
+    "timestamp_s": 1.25,
+    "frame_idx": 37,
+    "classification": "VALID_VISUAL"
+   },
+   "sample_after": {
+    "timestamp_s": 1.783,
+    "frame_idx": 53,
+    "classification": "VALID_VISUAL"
+   },
+   "metrics": {
+    "diff_mean": 0.0,
+    "diff_max": 0,
+    "diff_p95": 0.0,
+    "edge_diff": 0.0,
+    "threshold": 1.0
+   },
+   "same_image_override": false,
+   "status": "FAIL",
+   "reason": "diff_mean=0.00, max=0, p95=0.0 (frozen/identical frames)"
+  }
+ ]
+}

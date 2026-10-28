@@ -1,0 +1,8 @@
+{
+  "test_setup_project_a": "PASS",
+  "test_multi_selection_keyboard_modifiers": "PASS",
+  "test_marquee_selection_box": "PASS",
+  "test_group_move_and_bulk_delete": "PASS",
+  "test_project_isolation_and_persistence": "PASS",
+  "test_permanent_safe_deletion": "PASS"
+}

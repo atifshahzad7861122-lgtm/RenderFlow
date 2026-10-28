@@ -1,0 +1,64 @@
+{
+  "scenes": [
+    {
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 3.0,
+      "dur": 3.0,
+      "image": "scene_1.png",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "motion": "L4/push",
+      "user_override": true,
+      "confidence": 0.95,
+      "confidence_level": "HIGH",
+      "narration_text": "Berlin, 1953. Cold war tensions rise along the sector line."
+    },
+    {
+      "segment_index": 1,
+      "start": 3.0,
+      "end": 6.0,
+      "dur": 3.0,
+      "image": "scene_2.png",
+      "transition": "transition_001",
+      "context": "turning_point",
+      "motion": "L4/drift_right",
+      "user_override": true,
+      "confidence": 0.95,
+      "confidence_level": "HIGH",
+      "narration_text": "Operatives monitor radio communications under heavy surveillance."
+    },
+    {
+      "segment_index": 2,
+      "start": 6.0,
+      "end": 9.0,
+      "dur": 3.0,
+      "image": "scene_3.png",
+      "transition": "transition_003",
+      "context": "emotional",
+      "motion": "L4/pull",
+      "user_override": true,
+      "confidence": 0.95,
+      "confidence_level": "HIGH",
+      "narration_text": "The courier leaves the drop location before dawn breaks."
+    },
+    {
+      "segment_index": 3,
+      "start": 9.0,
+      "end": 12.0,
+      "dur": 3.0,
+      "image": "scene_4.png",
+      "transition": "soft_wipe",
+      "context": "fast",
+      "motion": "L4/drift_left",
+      "user_override": true,
+      "confidence": 0.95,
+      "confidence_level": "HIGH",
+      "narration_text": "A crucial microfilm file is successfully secured in the vault."
+    }
+  ],
+  "editor_timeline": {
+    "zoom_pps": 28,
+    "duration": 12.0
+  }
+}

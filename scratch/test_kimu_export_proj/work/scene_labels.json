@@ -1,0 +1,89 @@
+{
+ "scenes": [
+  {
+   "scene_id": "sync_0001",
+   "img": "scene_1.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 0.0
+  },
+  {
+   "scene_id": "sync_0002",
+   "img": "scene_2.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "turning_point",
+   "transition": "transition_001",
+   "start_s": 3.0
+  },
+  {
+   "scene_id": "sync_0003",
+   "img": "scene_3.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "emotional",
+   "transition": "transition_003",
+   "start_s": 6.0
+  },
+  {
+   "scene_id": "sync_0004",
+   "img": "scene_4.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "fast",
+   "transition": "soft_wipe",
+   "start_s": 9.0
+  }
+ ],
+ "transitions": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.5,
+   "end_s": 3.5,
+   "context": "turning_point",
+   "type": "transition_001",
+   "transition_id": "transition_001",
+   "name": "White Orange Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 6.0,
+   "start_s": 5.75,
+   "end_s": 6.25,
+   "context": "emotional",
+   "type": "dissolve",
+   "transition_id": "slow_dissolve",
+   "name": "Slow Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.5,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 9.0,
+   "start_s": 8.95,
+   "end_s": 9.05,
+   "context": "fast",
+   "type": "fadefast",
+   "transition_id": "clean_cut",
+   "name": "Clean Cut",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.1,
+   "is_dip_black": false
+  }
+ ]
+}

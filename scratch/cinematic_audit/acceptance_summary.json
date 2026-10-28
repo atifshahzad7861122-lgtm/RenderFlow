@@ -1,0 +1,319 @@
+{
+  "captions": [
+    {
+      "style": "classic",
+      "mp4": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\caption_test_classic.mp4",
+      "size_kb": 610.8,
+      "duration": 10.069,
+      "ass_exists": true,
+      "dialogue_count": 5,
+      "video_codec": "h264",
+      "resolution": "1920x1080",
+      "qc_contrast": 255,
+      "subtitles_burned": true,
+      "frames": [
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\classic\\start_1.5s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\classic\\mid_5.0s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\classic\\end_8.5s.png"
+      ]
+    },
+    {
+      "style": "karaoke",
+      "mp4": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\caption_test_karaoke.mp4",
+      "size_kb": 754.2,
+      "duration": 10.069,
+      "ass_exists": true,
+      "dialogue_count": 19,
+      "video_codec": "h264",
+      "resolution": "1920x1080",
+      "qc_contrast": 212,
+      "subtitles_burned": true,
+      "frames": [
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\karaoke\\start_1.5s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\karaoke\\mid_5.0s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\karaoke\\end_8.5s.png"
+      ]
+    },
+    {
+      "style": "kinetic_pop",
+      "mp4": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\caption_test_kinetic_pop.mp4",
+      "size_kb": 1510.7,
+      "duration": 10.069,
+      "ass_exists": true,
+      "dialogue_count": 19,
+      "video_codec": "h264",
+      "resolution": "1920x1080",
+      "qc_contrast": 255,
+      "subtitles_burned": true,
+      "frames": [
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\kinetic_pop\\start_1.5s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\kinetic_pop\\mid_5.0s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\kinetic_pop\\end_8.5s.png"
+      ]
+    },
+    {
+      "style": "neon",
+      "mp4": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\caption_test_neon.mp4",
+      "size_kb": 683.3,
+      "duration": 10.069,
+      "ass_exists": true,
+      "dialogue_count": 19,
+      "video_codec": "h264",
+      "resolution": "1920x1080",
+      "qc_contrast": 160,
+      "subtitles_burned": true,
+      "frames": [
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\neon\\start_1.5s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\neon\\mid_5.0s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\neon\\end_8.5s.png"
+      ]
+    },
+    {
+      "style": "minimal",
+      "mp4": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\caption_test_minimal.mp4",
+      "size_kb": 708.8,
+      "duration": 10.069,
+      "ass_exists": true,
+      "dialogue_count": 5,
+      "video_codec": "h264",
+      "resolution": "1920x1080",
+      "qc_contrast": 255,
+      "subtitles_burned": true,
+      "frames": [
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\minimal\\start_1.5s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\minimal\\mid_5.0s.png",
+        "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_captions\\minimal\\end_8.5s.png"
+      ]
+    }
+  ],
+  "transitions": {
+    "mp4": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\transitions_test_cinematic_mix.mp4",
+    "duration": 20.053,
+    "cuts": [
+      {
+        "name": "transition_001_flare",
+        "cut_s": 4.0,
+        "times": [
+          3.6,
+          4.0,
+          4.4
+        ],
+        "frames": {
+          "before": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\transition_001_flare_before_3.6s.png",
+          "during": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\transition_001_flare_during_4.0s.png",
+          "after": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\transition_001_flare_after_4.4s.png"
+        },
+        "composite_active": true
+      },
+      {
+        "name": "transition_003_filmburn",
+        "cut_s": 8.0,
+        "times": [
+          7.6,
+          8.0,
+          8.4
+        ],
+        "frames": {
+          "before": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\transition_003_filmburn_before_7.6s.png",
+          "during": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\transition_003_filmburn_during_8.0s.png",
+          "after": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\transition_003_filmburn_after_8.4s.png"
+        },
+        "composite_active": true
+      },
+      {
+        "name": "cinematic_dissolve",
+        "cut_s": 12.0,
+        "times": [
+          11.6,
+          12.0,
+          12.4
+        ],
+        "frames": {
+          "before": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\cinematic_dissolve_before_11.6s.png",
+          "during": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\cinematic_dissolve_during_12.0s.png",
+          "after": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\cinematic_dissolve_after_12.4s.png"
+        },
+        "composite_active": true
+      },
+      {
+        "name": "soft_wipe",
+        "cut_s": 16.0,
+        "times": [
+          15.6,
+          16.0,
+          16.4
+        ],
+        "frames": {
+          "before": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\soft_wipe_before_15.6s.png",
+          "during": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\soft_wipe_during_16.0s.png",
+          "after": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_transitions\\soft_wipe_after_16.4s.png"
+        },
+        "composite_active": true
+      }
+    ],
+    "auto_distribution": [
+      {
+        "cut_index": 0,
+        "cut_time": 4.0,
+        "start_s": 3.5,
+        "end_s": 4.5,
+        "type": "transition_001",
+        "transition_id": "transition_001",
+        "render_mode": "OVERLAY",
+        "name": "White Orange Light Leak",
+        "category": "YouTube Pack",
+        "dur": 1.0,
+        "offset": 3.5,
+        "context": "story_change",
+        "is_overlay": true,
+        "compositing_mode": "screen_blend",
+        "asset_path": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\transition_pack\\youtube_transition_pack\\transitions\\transition_001_white_orange_light_leak.mp4",
+        "has_sfx": false,
+        "is_dip_black": false
+      },
+      {
+        "cut_index": 1,
+        "cut_time": 8.0,
+        "start_s": 7.8,
+        "end_s": 8.2,
+        "type": "dissolve",
+        "transition_id": "cinematic_dissolve",
+        "render_mode": "NATIVE_XFADE",
+        "name": "Cinematic Dissolve",
+        "category": "Built-in",
+        "dur": 0.4,
+        "offset": 7.8,
+        "context": "normal",
+        "is_overlay": false,
+        "has_sfx": false,
+        "is_dip_black": false
+      },
+      {
+        "cut_index": 2,
+        "cut_time": 12.0,
+        "start_s": 11.825,
+        "end_s": 12.175,
+        "type": "wipeleft",
+        "transition_id": "soft_wipe",
+        "render_mode": "NATIVE_XFADE",
+        "name": "Soft Directional Wipe",
+        "category": "Built-in",
+        "dur": 0.35,
+        "offset": 11.825,
+        "context": "location_change",
+        "is_overlay": false,
+        "has_sfx": true,
+        "is_dip_black": false
+      },
+      {
+        "cut_index": 3,
+        "cut_time": 16.0,
+        "start_s": 15.8,
+        "end_s": 16.2,
+        "type": "dissolve",
+        "transition_id": "cinematic_dissolve",
+        "render_mode": "NATIVE_XFADE",
+        "name": "Cinematic Dissolve",
+        "category": "Built-in",
+        "dur": 0.4,
+        "offset": 15.8,
+        "context": "normal",
+        "is_overlay": false,
+        "has_sfx": false,
+        "is_dip_black": false
+      }
+    ]
+  },
+  "resolutions": [
+    {
+      "key": "1080p",
+      "target": "1920x1080",
+      "actual": "1920x1080",
+      "match": true,
+      "fps": "30/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "duration": 6.058667,
+      "elapsed_s": 0.0,
+      "size_kb": 965.1,
+      "frame": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_resolution\\1080p_frame.png"
+    },
+    {
+      "key": "1440p",
+      "target": "2560x1440",
+      "actual": "2560x1440",
+      "match": true,
+      "fps": "30/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "duration": 6.058667,
+      "elapsed_s": 0.0,
+      "size_kb": 1400.8,
+      "frame": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_resolution\\1440p_frame.png"
+    },
+    {
+      "key": "4k",
+      "target": "3840x2160",
+      "actual": "3840x2160",
+      "match": true,
+      "fps": "30/1",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "duration": 6.058667,
+      "elapsed_s": 0.0,
+      "size_kb": 2276.4,
+      "frame": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\cinematic_audit\\frames_resolution\\4k_frame.png"
+    }
+  ],
+  "sync": {
+    "old_segmentation": {
+      "beats": 3,
+      "unique_texts": 1
+    },
+    "new_segmentation": {
+      "beats": 3,
+      "unique_texts": 3,
+      "beats_detail": [
+        {
+          "segment_index": 0,
+          "beat_in_segment": 0,
+          "start": 0.0,
+          "end": 8.9,
+          "dur": 8.9,
+          "text": "Berlin was a city divided by barbed wire, fear, yet on the western side jazz clubs flourished",
+          "keywords": [],
+          "topic": "General Narration",
+          "importance": 0.5,
+          "is_silence": false
+        },
+        {
+          "segment_index": 0,
+          "beat_in_segment": 1,
+          "start": 8.9,
+          "end": 14.4,
+          "dur": 5.5,
+          "text": "the eastern sector remained frozen under Soviet decree.",
+          "keywords": [],
+          "topic": "General Narration",
+          "importance": 0.5,
+          "is_silence": false
+        },
+        {
+          "segment_index": 0,
+          "beat_in_segment": 2,
+          "start": 14.4,
+          "end": 14.5,
+          "dur": 0.1,
+          "text": "Berlin was a city divided by barbed wire and fear, yet on the western side jazz clubs flourished while the eastern sector remained frozen under Soviet decree.",
+          "keywords": [],
+          "topic": "General Narration",
+          "importance": 0.5,
+          "is_silence": false
+        }
+      ]
+    },
+    "pen_continuation": 0.0,
+    "pen_shift": 0.35
+  },
+  "total_elapsed_s": 6.44
+}

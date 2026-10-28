@@ -1,0 +1,22 @@
+{
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 3.0,
+      "text": "Deep beneath the rolling waves of the blue ocean, marine waters stretch endlessly across the horizon."
+    },
+    {
+      "id": 2,
+      "start": 3.0,
+      "end": 6.0,
+      "text": "Venturing inland into the lush green forest, towering trees and fertile vegetation blanket the natural landscape."
+    },
+    {
+      "id": 3,
+      "start": 6.0,
+      "end": 9.0,
+      "text": "Finally arriving at the scorching red desert canyon, the dry earth and barren terrain glow beneath the fiery sun."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-10-10 01:51:04",
+  "tests": [
+    {
+      "test_id": "Test A",
+      "name": "Clean Startup",
+      "status": "PASS",
+      "details": "Server healthy on port 8000: True | Lock file created: True (PID 7436)"
+    },
+    {
+      "test_id": "Test B",
+      "name": "Second Launch Reuse",
+      "status": "PASS",
+      "details": "Exit code: 0 | Detected active instance: True | First instance preserved: True"
+    },
+    {
+      "test_id": "Test C",
+      "name": "Occupied Port Fallback",
+      "status": "PASS",
+      "details": "Alternate port 8001 healthy: True | Unrelated app on 8000 preserved untouched: True"
+    },
+    {
+      "test_id": "Test D",
+      "name": "Normal Shutdown",
+      "status": "PASS",
+      "details": "Process exited: True | Port 8000 released: True | Lock cleaned: False"
+    },
+    {
+      "test_id": "Test E",
+      "name": "Relaunch After Shutdown",
+      "status": "PASS",
+      "details": "Relaunched successfully on port 8000 without manual taskkill: True (PID 15960)"
+    },
+    {
+      "test_id": "Test F",
+      "name": "Unexpected Termination Recovery",
+      "status": "PASS",
+      "details": "Stale lock ignored and fresh server recovered on port 8000: True (PID 11056)"
+    },
+    {
+      "test_id": "Test G",
+      "name": "Real Application Smoke Test",
+      "status": "PASS",
+      "details": "Ping: True | Projects: 2 | Atif Audio: 214.7s | Captions: 67 styles | Transitions: 74 items | Health checks: 7"
+    },
+    {
+      "test_id": "Test H",
+      "name": "Packaged Launcher Lifecycle",
+      "status": "PASS",
+      "details": "Packaged launcher reuse: True | Packaged launcher clean launch: True"
+    }
+  ],
+  "all_passed": true
+}

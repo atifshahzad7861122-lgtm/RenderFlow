@@ -1,0 +1,22 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_0001",
+      "start": 0.0,
+      "end": 3.0,
+      "dur": 3.0,
+      "image": "scene_01_scene1_crimson.png",
+      "transition": "transition_001",
+      "user_override": true
+    },
+    {
+      "scene_id": "scene_0002",
+      "start": 3.0,
+      "end": 6.0,
+      "dur": 3.0,
+      "image": "scene_02_scene2_azure.png",
+      "transition": "none",
+      "user_override": true
+    }
+  ]
+}

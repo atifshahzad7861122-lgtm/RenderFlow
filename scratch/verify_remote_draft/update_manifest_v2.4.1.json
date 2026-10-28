@@ -1,0 +1,32 @@
+{
+  "manifest_version": "1.0",
+  "latest_version": "2.4.1",
+  "minimum_supported_version": "2.0.0",
+  "release_notes": "RenderFlow v2.4.1 Hotfix: In-app auto-update restart reliability fix, truthful post-restart verification, package size reporting fix, and project deletion async fix.",
+  "published_at": "2026-10-19T11:51:40Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.4.1",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.1/RenderFlow-Patch-v2.4.1.zip",
+  "package_size_bytes": 638387,
+  "sha256": "cdfe4e18128ab7b035b3557078005c82fdf8b30c660e8139c2f166162b07004e",
+  "update_type": "patch",
+  "supported_platforms": [
+    "windows-x64"
+  ],
+  "packages": {
+    "patch": {
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.1/RenderFlow-Patch-v2.4.1.zip",
+      "package_size_bytes": 638387,
+      "sha256": "cdfe4e18128ab7b035b3557078005c82fdf8b30c660e8139c2f166162b07004e",
+      "applies_to": [
+        ">=2.0.0"
+      ]
+    },
+    "full": {
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.1/RenderFlow-Setup-v2.4.1.exe",
+      "package_size_bytes": 1372920626,
+      "sha256": "ed07a1a41deac6306c5c2e0a77e3dd93ff417796ae501246d3c7824dc2c4a593"
+    }
+  },
+  "signature": "ceaa5dc6a11778c1932b4f4e3c14a511a3f7204ad4eb8b95ca01bb0ac5d2eab09c24892ed17bf811807178d65b09efaa4500354648520c79e1287b533f33fb01",
+  "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e"
+}

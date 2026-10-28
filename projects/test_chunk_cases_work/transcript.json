@@ -1,0 +1,40 @@
+{
+  "segments": [
+    {
+      "id": 0,
+      "start": 0.0,
+      "end": 3.0,
+      "text": "Scene test beat #1"
+    },
+    {
+      "id": 1,
+      "start": 3.0,
+      "end": 6.0,
+      "text": "Scene test beat #2"
+    },
+    {
+      "id": 2,
+      "start": 6.0,
+      "end": 8.0,
+      "text": "Scene test beat #3"
+    },
+    {
+      "id": 3,
+      "start": 8.0,
+      "end": 11.0,
+      "text": "Scene test beat #4"
+    },
+    {
+      "id": 4,
+      "start": 11.0,
+      "end": 14.0,
+      "text": "Scene test beat #5"
+    },
+    {
+      "id": 5,
+      "start": 14.0,
+      "end": 17.0,
+      "text": "Scene test beat #6"
+    }
+  ]
+}

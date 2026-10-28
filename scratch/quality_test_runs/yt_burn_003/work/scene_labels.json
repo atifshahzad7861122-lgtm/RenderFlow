@@ -1,0 +1,41 @@
+{
+ "scenes": [
+  {
+   "scene_id": "sync_0001",
+   "img": "test_sharp_1.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 0.0
+  },
+  {
+   "scene_id": "sync_0002",
+   "img": "test_sharp_1.png",
+   "dur": 7.0,
+   "frames": 210,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "",
+   "start_s": 3.0
+  }
+ ],
+ "transitions": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.5,
+   "end_s": 3.5,
+   "context": "normal",
+   "type": "transition_003",
+   "transition_id": "transition_003",
+   "name": "Red Film Burn",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "n_transitions": 2,
+ "types_used": [
+  "dissolve",
+  "wipeleft"
+ ],
+ "avg_duration": 0.375,
+ "durations": [
+  0.4,
+  0.35
+ ],
+ "details": [
+  {
+   "cut_s": 3.183,
+   "start_s": 2.983,
+   "end_s": 3.383,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 6.365,
+   "start_s": 6.19,
+   "end_s": 6.54,
+   "context": "normal",
+   "type": "wipeleft",
+   "transition_id": "soft_wipe",
+   "name": "Soft Directional Wipe",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.35,
+   "is_dip_black": false
+  }
+ ]
+}

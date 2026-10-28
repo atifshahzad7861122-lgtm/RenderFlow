@@ -1,0 +1,25 @@
+{
+ "n_transitions": 1,
+ "types_used": [
+  "fadefast"
+ ],
+ "avg_duration": 0.1,
+ "durations": [
+  0.1
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.95,
+   "end_s": 3.05,
+   "context": "normal",
+   "type": "fadefast",
+   "transition_id": "clean_cut",
+   "name": "Clean Cut",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.1,
+   "is_dip_black": false
+  }
+ ]
+}

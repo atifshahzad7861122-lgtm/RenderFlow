@@ -1,0 +1,154 @@
+[
+  {
+    "window": "Window 1 (3.3-4.5s): Cut 0 Golden Light Leak",
+    "start_s": 3.3,
+    "end_s": 4.5,
+    "cut_time": 3.86,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_1_3_3_4_5.png",
+    "before": {
+      "peak_luma": 228.9,
+      "min_sat": 63.2,
+      "max_clipped_pct": 3.01,
+      "duplicate_frames": 5
+    },
+    "after": {
+      "peak_luma": 105.5,
+      "min_sat": 64.4,
+      "max_clipped_pct": 0.08,
+      "duplicate_frames": 16
+    }
+  },
+  {
+    "window": "Window 2 (6.0-6.8s): Cut 1 Cinematic Dissolve",
+    "start_s": 6.0,
+    "end_s": 6.8,
+    "cut_time": 6.27,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_2_6_0_6_8.png",
+    "before": {
+      "peak_luma": 99.9,
+      "min_sat": 69.0,
+      "max_clipped_pct": 0.28,
+      "duplicate_frames": 12
+    },
+    "after": {
+      "peak_luma": 58.9,
+      "min_sat": 131.9,
+      "max_clipped_pct": 0.06,
+      "duplicate_frames": 5
+    }
+  },
+  {
+    "window": "Window 3 (13.3-14.5s): Cut 5 Blue Haze Light Leak",
+    "start_s": 13.3,
+    "end_s": 14.5,
+    "cut_time": 14.02,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_3_13_3_14_5.png",
+    "before": {
+      "peak_luma": 227.8,
+      "min_sat": 16.2,
+      "max_clipped_pct": 1.2,
+      "duplicate_frames": 2
+    },
+    "after": {
+      "peak_luma": 71.8,
+      "min_sat": 88.6,
+      "max_clipped_pct": 0.12,
+      "duplicate_frames": 14
+    }
+  },
+  {
+    "window": "Window 4 (84.8-85.6s): Cut 33 Purple Cyan Light Leak",
+    "start_s": 84.8,
+    "end_s": 85.6,
+    "cut_time": 85.0,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_4_84_8_85_6.png",
+    "before": {
+      "peak_luma": 235.6,
+      "min_sat": 9.1,
+      "max_clipped_pct": 11.62,
+      "duplicate_frames": 2
+    },
+    "after": {
+      "peak_luma": 146.8,
+      "min_sat": 29.2,
+      "max_clipped_pct": 0.36,
+      "duplicate_frames": 5
+    }
+  },
+  {
+    "window": "Window 5 (131.8-133.0s): Cut 53 Purple Cyan Light Leak",
+    "start_s": 131.8,
+    "end_s": 133.0,
+    "cut_time": 132.3,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_5_131_8_133_0.png",
+    "before": {
+      "peak_luma": 236.3,
+      "min_sat": 10.2,
+      "max_clipped_pct": 6.36,
+      "duplicate_frames": 3
+    },
+    "after": {
+      "peak_luma": 139.6,
+      "min_sat": 26.0,
+      "max_clipped_pct": 0.18,
+      "duplicate_frames": 4
+    }
+  },
+  {
+    "window": "Window 6 (189.8-191.0s): Cut 75 Blue Haze Light Leak",
+    "start_s": 189.8,
+    "end_s": 191.0,
+    "cut_time": 190.5,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_6_189_8_191_0.png",
+    "before": {
+      "peak_luma": 231.9,
+      "min_sat": 14.2,
+      "max_clipped_pct": 4.61,
+      "duplicate_frames": 1
+    },
+    "after": {
+      "peak_luma": 67.3,
+      "min_sat": 105.9,
+      "max_clipped_pct": 0.01,
+      "duplicate_frames": 16
+    }
+  },
+  {
+    "window": "Window 7 (200.4-201.4s): Cut 79 Blue Haze Light Leak",
+    "start_s": 200.4,
+    "end_s": 201.4,
+    "cut_time": 200.9,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_7_200_4_201_4.png",
+    "before": {
+      "peak_luma": 234.3,
+      "min_sat": 13.2,
+      "max_clipped_pct": 9.72,
+      "duplicate_frames": 1
+    },
+    "after": {
+      "peak_luma": 81.9,
+      "min_sat": 102.6,
+      "max_clipped_pct": 0.13,
+      "duplicate_frames": 14
+    }
+  },
+  {
+    "window": "Window 8 (205.0-206.2s): Cut 81 White Orange Light Leak",
+    "start_s": 205.0,
+    "end_s": 206.2,
+    "cut_time": 205.5,
+    "contact_sheet": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\second_pass_verification\\compare_window_8_205_0_206_2.png",
+    "before": {
+      "peak_luma": 218.0,
+      "min_sat": 21.8,
+      "max_clipped_pct": 17.36,
+      "duplicate_frames": 4
+    },
+    "after": {
+      "peak_luma": 145.6,
+      "min_sat": 27.8,
+      "max_clipped_pct": 0.39,
+      "duplicate_frames": 4
+    }
+  }
+]

@@ -1,0 +1,5 @@
+[0][1]xfade=transition=fadefast:duration=0.10:offset=1.95[v1];
+[v1][2]xfade=transition=dissolve:duration=0.40:offset=3.95[v_last];
+[v_last]scale=out_range=tv,format=yuv420p[vout];
+[3:a]aresample=48000,aformat=channel_layouts=stereo[anarr];
+[anarr]anull[aout]

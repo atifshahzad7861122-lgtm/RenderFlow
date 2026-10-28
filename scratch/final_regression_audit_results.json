@@ -1,0 +1,70 @@
+[
+  {
+    "name": "Auto-Updater & Signature Verification",
+    "command": "python engine/test_updater.py",
+    "status": "PASS",
+    "exit_code": 0,
+    "elapsed_seconds": 3.45,
+    "output_tail": []
+  },
+  {
+    "name": "Timeline Continuity & Gap Prevention",
+    "command": "python engine/test_timeline_continuity.py",
+    "status": "PASS",
+    "exit_code": 0,
+    "elapsed_seconds": 0.18,
+    "output_tail": [
+      "=================================================================",
+      "ALL 12 TIMELINE CONTINUITY TESTS PASSED (100%)",
+      "================================================================="
+    ]
+  },
+  {
+    "name": "Error Handling, Checkpoints & Recovery",
+    "command": "python engine/test_error_handling.py",
+    "status": "PASS",
+    "exit_code": 0,
+    "elapsed_seconds": 2.87,
+    "output_tail": [
+      "=================================================================",
+      "ALL 9 ERROR HANDLING & RECOVERY TESTS PASSED (100% PASS)",
+      "================================================================="
+    ]
+  },
+  {
+    "name": "Security, Path Sanitization & Secret Masking",
+    "command": "python engine/test_security.py",
+    "status": "PASS",
+    "exit_code": 0,
+    "elapsed_seconds": 2.38,
+    "output_tail": [
+      "=================================================================",
+      "ALL 4 SECURITY AUDIT TESTS PASSED (100% PASS)",
+      "================================================================="
+    ]
+  },
+  {
+    "name": "Windows Production Hardening & Escaping",
+    "command": "python engine/test_windows_hardening.py",
+    "status": "PASS",
+    "exit_code": 0,
+    "elapsed_seconds": 22.25,
+    "output_tail": [
+      "=================================================================",
+      "ALL 5 WINDOWS HARDENING TESTS PASSED (100% PASS)",
+      "================================================================="
+    ]
+  },
+  {
+    "name": "Installed Candidate Full Render Verification",
+    "command": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\test_v223_install\\RenderingStudio.exe --verify --video projects/vbvxcbcx/final.mp4 --scenes projects/vbvxcbcx/scenes.json",
+    "status": "PASS",
+    "exit_code": 0,
+    "elapsed_seconds": 88.41,
+    "output_tail": [
+      "QC report: projects\\vbvxcbcx\\final.mp4.qc.json",
+      "QC: images=0 transitions=85 avg_tdur=0.684s placeholders=0",
+      "ALL CHECKS PASS"
+    ]
+  }
+]

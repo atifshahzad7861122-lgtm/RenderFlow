@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="concat-pro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RenderFlow — Cinematic Video Renderer</title>
+  <script>
+    (function() {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var t = p.get('theme') || localStorage.getItem('renderflow_theme') || 'concat-pro';
+        document.documentElement.setAttribute('data-theme', t);
+        
+        var v = p.get('view') || 'studio';
+        if (v) {
+          var targetId = v.startsWith('view-') ? v : ('view-' + v);
+          var s = document.createElement('style');
+          s.id = 'initial-view-style';
+          s.innerHTML = '.rf-view { display: none !important; } #' + targetId + ' { display: block !important; opacity: 1 !important; } .rf-nav-item.active { background: transparent !important; border-color: transparent !important; } .rf-nav-item[data-view="' + targetId + '"] { background: var(--rf-panel, #212123) !important; border-color: var(--rf-border, rgba(255,255,255,0.15)) !important; color: #fff !important; } .rf-nav-item[data-view="' + targetId + '"]::before { content: ""; position: absolute; left: 0; top: 15%; bottom: 15%; width: 3px; border-radius: 2px; background: var(--rf-accent, #cbf53f); box-shadow: 0 0 8px var(--rf-accent, #cbf53f); }';
+          document.head.appendChild(s);
+        }
+
+        if (p.get('picker') === '1' || p.get('picker') === 'open') {
+          var sPicker = document.createElement('style');
+          sPicker.id = 'initial-picker-style';
+          sPicker.innerHTML = '#themePickerPopover { display: flex !important; }';
+          document.head.appendChild(sPicker);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var b = document.getElementById('themeCurrentBadge');
+          if (b) b.textContent = t.toUpperCase();
+        });
+      } catch(e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/themes.css?v=2.5.0">
+  <link rel="stylesheet" href="/static/css/style.css?v=2.5.0">
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <link rel="alternate icon" href="/static/img/renderflow-icon.svg">
+</head>
+<body>
+
+  <!-- Branded Cinematic Splash Screen (RenderFlow by AI With Atif) -->
+  <div class="renderflow-splash" id="renderflowSplash" style="display:none" onclick="this.classList.add('hidden')">
+    <div class="splash-logo-anim">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; filter:drop-shadow(0 0 20px var(--rf-accent-glow, rgba(0,240,255,0.45)))">
+        <rect x="3" y="3" width="42" height="42" rx="10" fill="rgba(15, 23, 42, 0.95)" stroke="var(--rf-accent, #00f0ff)" stroke-width="2" />
+        <path d="M13 29 C13 19, 20 13, 28 13 C34 13, 37 16, 37 20 C37 24, 33 27, 27 27 L17 27" stroke="var(--rf-accent, #00f0ff)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M22 27 L31 37" stroke="var(--rf-accent, #00f0ff)" stroke-width="3.2" stroke-linecap="round" />
+        <polygon points="22.5,18 31,23 22.5,28" fill="#ffffff" opacity="0.95" />
+        <circle cx="13" cy="29" r="1.6" fill="#00f0ff" />
+        <circle cx="31" cy="37" r="1.6" fill="#38bdf8" />
+      </svg>
+    </div>
+    <h1 class="splash-title">RenderFlow</h1>
+    <div class="splash-subtitle">Cinematic Video Renderer</div>
+    <div class="splash-status" id="splashStatus">Initializing hardware-adaptive creative workstation...</div>
+    <div style="margin-top:1.5rem; font-size:0.72rem; color:#475569; font-family:var(--font-mono)">Click anywhere or press ESC to enter</div>
+  </div>
+
+  <!-- GOOGLE STITCH DESKTOP WORKSTATION SHELL -->
+  <div class="stitch-app-shell rf-app-shell">
+
+    <!-- Top Command Bar (Stitch Precision Workstation Title Strip) -->
+    <header class="stitch-top-bar rf-top-bar" id="stitchTopBar">
+      <!-- Left: Brand Mark + Project Ingestion Selector -->
+      <div class="stitch-top-left rf-top-left-group">
+        <div class="stitch-brand rf-top-brand" id="btnBrandHome" title="RenderFlow AI With Atif Workstation">
+          <div class="stitch-brand-logo rf-logo-mark">
+            <svg viewBox="0 0 48 48" fill="none" width="18" height="18">
+              <rect x="3" y="3" width="42" height="42" rx="8" fill="#142238" stroke="var(--stitch-lime)" stroke-width="2.5" />
+              <path d="M13 29 C13 19, 20 13, 28 13 C34 13, 37 16, 37 20 C37 24, 33 27, 27 27 L17 27" stroke="var(--stitch-lime)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M22 27 L31 37" stroke="var(--stitch-lime)" stroke-width="3.5" stroke-linecap="round" />
+              <polygon points="22.5,18 31,23 22.5,28" fill="#ffffff" />
+            </svg>
+          </div>
+          <div class="stitch-brand-title">
+            <span>RenderFlow</span>
+            <span class="stitch-brand-subtitle">AI With Atif</span>
+          </div>
+        </div>
+
+        <div class="stitch-top-divider"></div>
+
+        <div class="stitch-project-pill rf-project-selector" id="btnOpenUpload" title="Click to manage project & media">
+          <span class="stitch-project-dot rf-project-dot"></span>
+          <span class="rf-project-name" id="headerProjectBadge" style="font-weight:600">Cyberpunk_Documentary_v4</span>
+          <span class="stitch-project-status rf-project-status" id="topProjectStatus">● Saved</span>
+        </div>
+
+        <div class="stitch-format-chip rf-format-badge" id="topFormatBadge" title="Sequence Format: 4K UHD (3840×2160) · 30 FPS · 16:9">
+          <span class="format-dot">●</span>
+          <span class="format-res-label">4K UHD</span>
+          <span class="format-spec-label"> · 3840×2160 · 30 FPS · 16:9</span>
+        </div>
+      </div>
+
+      <!-- Center: Mode Navigation Tabs (Stitch Workspaces) -->
+      <nav class="stitch-nav-tabs" id="stitchNavTabs">
+        <button class="stitch-nav-tab" data-view="view-import" id="tabNavImport" title="Create Workspace: Project Ingestion & Creation">
+          <span class="material-symbols-outlined" style="font-size:16px">create_new_folder</span>
+          <span>Create</span>
+        </button>
+        <button class="stitch-nav-tab active" data-view="view-studio" id="tabNavEdit" title="Edit Workspace: Cinematic Multi-Track Editor">
+          <span class="material-symbols-outlined" style="font-size:16px">movie_edit</span>
+          <span>Edit</span>
+        </button>
+        <button class="stitch-nav-tab" data-view="view-captions" id="tabNavCaptions" title="Captions Workspace: Typography & Speech Subtitles">
+          <span class="material-symbols-outlined" style="font-size:16px">subtitles</span>
+          <span>Captions</span>
+        </button>
+        <button class="stitch-nav-tab" data-view="view-audio" id="tabNavAudio" title="Audio Workspace: Narration Authority, Waveforms & Bed">
+          <span class="material-symbols-outlined" style="font-size:16px">graphic_eq</span>
+          <span>Audio</span>
+        </button>
+        <button class="stitch-nav-tab" data-view="view-storyboard" id="tabNavStoryboard" title="Scenes & Script: AI Script Sync & Storyboard">
+          <span class="material-symbols-outlined" style="font-size:16px">auto_stories</span>
+          <span>Storyboard</span>
+        </button>
+        <button class="stitch-nav-tab" data-view="view-render" id="tabNavExport" title="Export Workspace: Hardware-Accelerated 4K Deliver Queue">
+          <span class="material-symbols-outlined" style="font-size:16px">rocket_launch</span>
+          <span>Export</span>
+        </button>
+      </nav>
+
+      <!-- Right: History, AI Co-pilot, Settings, and Signature Render 4K -->
+      <div class="stitch-top-right rf-top-right-group">
+        <div class="stitch-history-group rf-top-undo-group">
+          <button class="stitch-icon-btn rf-btn-icon-subtle" id="btnTopUndo" title="Undo Edit (Ctrl+Z)" disabled>
+            <span class="material-symbols-outlined" style="font-size:16px">undo</span>
+          </button>
+          <button class="stitch-icon-btn rf-btn-icon-subtle" id="btnTopRedo" title="Redo Edit (Ctrl+Y)" disabled>
+            <span class="material-symbols-outlined" style="font-size:16px">redo</span>
+          </button>
+        </div>
+
+        <div class="stitch-top-divider"></div>
+
+        <div class="stitch-ai-copilot-badge" id="topAiCopilotBadge" title="AI Storyboard & Scene Co-pilot: Active">
+          <span class="stitch-ai-pulse"></span>
+          <span class="stitch-ai-text">AI Co-pilot: Active</span>
+        </div>
+
+        <!-- Command Palette Trigger (Ctrl+K) -->
+        <button class="stitch-icon-btn rf-btn-cmd-compact" id="btnCmdPalette" title="Command Palette (Ctrl+K)">
+          <span class="material-symbols-outlined" style="font-size:16px">terminal</span>
+        </button>
+
+        <!-- Settings Modal Trigger -->
+        <button class="stitch-icon-btn rf-btn-icon-subtle" id="btnSettingsModal" title="Settings & Preferences">
+          <span class="material-symbols-outlined" style="font-size:16px">settings</span>
+        </button>
+
+        <!-- System Diagnostics Dropdown Menu -->
+        <div class="rf-top-more-dropdown" id="topMoreDropdown">
+          <button class="stitch-icon-btn rf-btn-icon-subtle" id="btnTopMoreMenu" title="System Tools" onclick="this.nextElementSibling.classList.toggle('open')">
+            <span class="material-symbols-outlined" style="font-size:16px">more_vert</span>
+          </button>
+          <div class="rf-top-more-menu" id="topMoreMenu">
+            <button class="rf-more-item" id="btnTopUpdateCenter"><span>🚀</span> Updates & Channels</button>
+            <button class="rf-more-item" id="btnHardwareDiag"><span>⚡</span> Hardware Telemetry</button>
+            <button class="rf-more-item" id="btnSystemHealth"><span>🩺</span> System Health Audit</button>
+            <button class="rf-more-item" id="btnHeaderCredentials"><span>🔑</span> AI Credentials Center</button>
+            <div class="rf-more-divider"></div>
+            <button class="rf-more-item danger" id="btnExitStudio"><span>🛑</span> Exit Workstation</button>
+          </div>
+        </div>
+
+        <!-- Hidden theme control preserved for JS compatibility -->
+        <button id="btnThemeSelector" style="display:none" aria-haspopup="dialog" aria-expanded="false">
+          <span id="themeIndicatorDot"></span>
+          <span id="themeCurrentBadge">CONCAT-PRO</span>
+        </button>
+
+        <!-- Signature Stitch Render 4K Button -->
+        <button class="stitch-btn-render-primary rf-btn-top-export" id="btnTopExportVideo" title="Render Master 4K Video (Ctrl+E)">
+          <span class="material-symbols-outlined" style="font-size:16px">movie_creation</span>
+          <span>Render 4K</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN VIEWPORT CONTAINER -->
+    <main class="stitch-viewport-container rf-viewport" id="rfViewport">
+
+      <!-- ===================================================================
+           WORKSPACE 1: PRIMARY EDIT NLE WORKSPACE (DEFAULT ACTIVE)
+           =================================================================== -->
+      <section class="stitch-view-pane rf-view active" id="view-studio">
+        <div class="stitch-edit-workspace rf-studio-layout">
+
+          <!-- UPPER ROW: 3-COLUMN WORK SURFACE (LEFT PANEL | CENTER MONITOR | RIGHT INSPECTOR) -->
+          <div class="stitch-edit-upper rf-studio-upper">
+
+            <!-- REGION 1: LEFT CONTEXTUAL PANEL (MEDIA, SCENES, SCRIPT, EFFECTS) -->
+            <div class="stitch-left-panel rf-studio-panel" id="rfStudioLeftPane">
+              <!-- Tab Strip Across Top -->
+              <div class="stitch-left-tab-strip rf-pane-tab-strip">
+                <button type="button" class="stitch-left-tab rf-pane-tab active" data-pane-tab="media" id="tabLeftMedia">
+                  <span class="material-symbols-outlined" style="font-size:14px">photo_library</span>
+                  <span>Media</span>
+                </button>
+                <button type="button" class="stitch-left-tab rf-pane-tab" data-pane-tab="scenes" id="tabLeftScenes">
+                  <span class="material-symbols-outlined" style="font-size:14px">view_carousel</span>
+                  <span>Scenes</span>
+                </button>
+                <button type="button" class="stitch-left-tab rf-pane-tab" data-pane-tab="script" id="tabLeftScript">
+                  <span class="material-symbols-outlined" style="font-size:14px">description</span>
+                  <span>Script</span>
+                </button>
+                <button type="button" class="stitch-left-tab rf-pane-tab" data-pane-tab="captions" id="tabLeftCaptions">
+                  <span class="material-symbols-outlined" style="font-size:14px">subtitles</span>
+                  <span>Captions</span>
+                </button>
+                <button type="button" class="stitch-left-tab rf-pane-tab" data-pane-tab="audio" id="tabLeftAudio">
+                  <span class="material-symbols-outlined" style="font-size:14px">graphic_eq</span>
+                  <span>Audio</span>
+                </button>
+                <button type="button" class="stitch-left-tab rf-pane-tab" data-pane-tab="effects" id="tabLeftEffects">
+                  <span class="material-symbols-outlined" style="font-size:14px">auto_fix_high</span>
+                  <span>Effects</span>
+                </button>
+                <button type="button" class="stitch-left-tab rf-pane-tab" data-pane-tab="ai" id="tabLeftAi">
+                  <span class="material-symbols-outlined" style="font-size:14px">psychology</span>
+                  <span>AI Assist</span>
+                </button>
+              </div>
+
+              <!-- Tab Content Area -->
+              <div class="stitch-left-content rf-panel-body">
+
+                <!-- TAB 1: MEDIA BIN -->
+                <div class="rf-pane-tab-content active" id="paneContentMedia" style="display:flex; flex-direction:column; gap:6px; flex:1; min-height:0; overflow:hidden">
+                  <!-- Search Bar & Filter Pills -->
+                  <div class="stitch-asset-search-row">
+                    <span class="material-symbols-outlined" style="font-size:14px; color:var(--stitch-outline)">search</span>
+                    <input type="text" id="mediaSearchInput" placeholder="Search assets...">
+                  </div>
+
+                  <div class="stitch-filter-pills">
+                    <button class="stitch-filter-pill active" data-filter="all">All</button>
+                    <button class="stitch-filter-pill" data-filter="images">Images</button>
+                    <button class="stitch-filter-pill" data-filter="video">Video</button>
+                    <button class="stitch-filter-pill" data-filter="audio">Audio</button>
+                  </div>
+
+                  <!-- Import Action Buttons -->
+                  <div class="stitch-import-actions-row">
+                    <button class="stitch-btn-import" id="btnBrowseImages">
+                      <span class="material-symbols-outlined" style="font-size:14px">add_photo_alternate</span>
+                      <span>Import files</span>
+                    </button>
+                    <button class="stitch-btn-import" id="btnBrowseZip" onclick="document.getElementById('imagesFileInput').click()">
+                      <span class="material-symbols-outlined" style="font-size:14px">archive</span>
+                      <span>Import ZIP</span>
+                    </button>
+                    <input type="file" id="imagesFileInput" multiple accept=".zip,.ZIP,.png,.jpg,.jpeg,.webp,.bmp,image/*" style="display:none">
+                    <input type="file" id="audioFileInput" accept=".wav,.mp3,.m4a,.aac,audio/*" style="display:none">
+                  </div>
+
+                  <!-- Upload Status Bar (Hidden until upload) -->
+                  <div class="upload-status-box" id="uploadStatusBox" style="display:none">
+                    <div style="display:flex; justify-content:space-between; font-size:0.72rem">
+                      <span id="uploadStatusFilename">file.zip</span>
+                      <span id="uploadStatusFilesize">0 MB</span>
+                    </div>
+                    <div class="upload-progress-bar-wrap">
+                      <div class="upload-progress-bar" id="uploadProgressBar"></div>
+                    </div>
+                    <div id="uploadStatusStage" style="font-size:0.7rem; color:var(--stitch-lime)">Uploading...</div>
+                    <div id="uploadStatusResult" style="font-size:0.7rem; color:var(--stitch-lime)"></div>
+                  </div>
+
+                  <!-- Asset Grid -->
+                  <div class="stitch-asset-grid rf-media-tiles-grid" id="imagesGallery">
+                    <!-- Populated dynamically with thumbnail cards & duration badges -->
+                  </div>
+
+                  <!-- Selected Asset Dock (Bottom of Media Bin) -->
+                  <div class="stitch-selected-asset-dock" id="selectedAssetDock">
+                    <div class="stitch-dock-header">
+                      <span class="stitch-dock-title">SELECTED ASSET</span>
+                      <span class="stitch-font-mono-sm" id="imageCountBadge" style="color:var(--stitch-outline)">0 items</span>
+                    </div>
+                    <div class="stitch-dock-card">
+                      <img class="stitch-dock-thumb" id="dockThumb" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 32' fill='%23111'><rect width='44' height='32' fill='%231f1f21'/></svg>" alt="Selected Asset">
+                      <div class="stitch-dock-info">
+                        <span class="stitch-dock-filename" id="dockFilename">harbor_dawn_02.jpg</span>
+                        <span class="stitch-dock-dimensions" id="dockDimensions">3840×2160 · 4K UHD</span>
+                      </div>
+                    </div>
+                    <div class="stitch-dock-actions">
+                      <button class="stitch-dock-btn" id="btnDockAddToTimeline">
+                        <span class="material-symbols-outlined" style="font-size:12px">add</span>
+                        <span>Add to timeline</span>
+                      </button>
+                      <button class="stitch-dock-btn" id="btnDockReplaceClip">
+                        <span class="material-symbols-outlined" style="font-size:12px">swap_horiz</span>
+                        <span>Replace clip</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 2: SCENES LIST -->
+                <div class="rf-pane-tab-content" id="paneContentScenes" style="display:none; flex-direction:column; gap:6px; flex:1; min-height:0; overflow-y:auto">
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 4px">
+                    <span class="stitch-font-headline-sm" style="color:#ffffff">Project Scenes</span>
+                    <span class="stitch-font-mono-sm" id="statSceneCount" style="color:var(--stitch-lime)">22 Scenes</span>
+                  </div>
+                  <div class="stitch-scenes-list" id="stitchScenesList" style="display:flex; flex-direction:column; gap:4px">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+
+                <!-- TAB 3: SCRIPT / TELEPROMPTER -->
+                <div class="rf-pane-tab-content" id="paneContentScript" style="display:none; flex-direction:column; gap:6px; flex:1; min-height:0; overflow-y:auto">
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 4px">
+                    <span class="stitch-font-headline-sm" style="color:#ffffff">Whisper Transcript</span>
+                    <span class="stitch-font-mono-sm" style="color:var(--stitch-lime)">Synced</span>
+                  </div>
+                  <div class="stitch-script-list" id="stitchScriptList" style="display:flex; flex-direction:column; gap:6px">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+
+                <!-- TAB 4: EFFECTS & TRANSITIONS -->
+                <div class="rf-pane-tab-content" id="paneContentEffects" style="display:none; flex-direction:column; gap:6px; flex:1; min-height:0; overflow-y:auto">
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 4px">
+                    <span class="stitch-font-headline-sm" style="color:#ffffff">Transitions & FX</span>
+                    <span class="stitch-font-mono-sm" style="color:var(--stitch-lime)">24 Presets</span>
+                  </div>
+                  <div class="stitch-effects-list" id="stitchEffectsList" style="display:flex; flex-direction:column; gap:4px">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+
+                <!-- TAB 5: CAPTIONS CUES -->
+                <div class="rf-pane-tab-content" id="paneContentCaptions" style="display:none; flex-direction:column; gap:6px; flex:1; min-height:0; overflow-y:auto">
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 4px">
+                    <span class="stitch-font-headline-sm" style="color:#ffffff">Speech Captions</span>
+                    <button class="stitch-pill active" onclick="window.switchView('view-captions')" style="cursor:pointer; font-size:10px">Open Workspace ➔</button>
+                  </div>
+                  <div class="stitch-captions-compact-list" id="stitchCaptionsCompactList" style="display:flex; flex-direction:column; gap:4px">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+
+                <!-- TAB 6: AUDIO AUTHORITY -->
+                <div class="rf-pane-tab-content" id="paneContentAudio" style="display:none; flex-direction:column; gap:8px; flex:1; min-height:0; overflow-y:auto">
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 4px">
+                    <span class="stitch-font-headline-sm" style="color:#ffffff">Audio Authority</span>
+                    <button class="stitch-pill active" onclick="window.switchView('view-audio')" style="cursor:pointer; font-size:10px">Open Workspace ➔</button>
+                  </div>
+                  <div class="stitch-audio-compact-card" style="background:var(--stitch-surface-high); border:1px solid var(--stitch-surface-highest); border-radius:4px; padding:8px; display:flex; flex-direction:column; gap:6px">
+                    <div style="display:flex; justify-content:space-between; align-items:center">
+                      <span style="font-weight:700; color:#fff; font-size:11px">MASTER NARRATION</span>
+                      <span style="font-size:9px; color:var(--stitch-orange); font-family:'JetBrains Mono',monospace">🔒 LOCKED</span>
+                    </div>
+                    <div style="height:36px; background:var(--stitch-surface-lowest); border-radius:3px; overflow:hidden">
+                      <canvas id="stitchAudioCompactWaveform" style="width:100%; height:100%"></canvas>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; font-size:10px">
+                      <span style="color:var(--stitch-outline)">Gain:</span>
+                      <input type="range" id="stitchAudioCompactVol" min="0" max="150" value="100" class="stitch-slider" style="flex:1">
+                      <span id="stitchAudioCompactVolVal" style="color:var(--stitch-orange); font-family:'JetBrains Mono',monospace">0 dB</span>
+                    </div>
+                  </div>
+                  <div style="font-size:10px; color:var(--stitch-outline); line-height:1.4; padding:0 4px">
+                    Narration is the absolute clock. Trimming visual clips will never alter speech sync.
+                  </div>
+                </div>
+
+                <!-- TAB 7: AI ASSIST -->
+                <div class="rf-pane-tab-content" id="paneContentAi" style="display:none; flex-direction:column; gap:8px; flex:1; min-height:0; overflow-y:auto">
+                  <div style="display:flex; justify-content:space-between; align-items:center; padding:2px 4px">
+                    <span class="stitch-font-headline-sm" style="color:#ffffff">AI Suggestions</span>
+                    <span class="stitch-pill active" style="font-size:10px; color:var(--stitch-lime); border-color:var(--stitch-lime)">Co-Pilot Active</span>
+                  </div>
+                  <div class="stitch-ai-assist-list" id="stitchAiAssistList" style="display:flex; flex-direction:column; gap:8px">
+                    <!-- Populated by JS -->
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- REGION 2: CENTER VIDEO PREVIEW MONITOR -->
+            <div class="stitch-center-viewport rf-preview-viewport-wrap">
+              <!-- Monitor Header Overlay Strip -->
+              <div class="stitch-monitor-header rf-preview-overlay-top">
+                <div class="stitch-monitor-title">
+                  <span class="material-symbols-outlined" style="font-size:14px; color:var(--stitch-lime)">videocam</span>
+                  <span>Program Monitor</span>
+                </div>
+                <div class="stitch-font-mono-sm rf-preview-badge" id="previewResBadge" style="color:var(--stitch-outline)">
+                  4K UHD · 3840×2160 · 30 FPS
+                </div>
+              </div>
+
+              <!-- Interactive Video Stage Frame (16:9 Aspect) -->
+              <div class="stitch-stage-canvas-area rf-preview-stage">
+                <div class="stitch-viewport-frame rf-preview-canvas-box" id="cinematicPreviewBox">
+                  <!-- Video & Still Image Display -->
+                  <img id="previewMainMedia" class="stitch-preview-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' fill='%23080b12'><rect width='16' height='9' fill='%230a0a0c'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2355555c' font-size='0.8' font-family='sans-serif'>RenderFlow 4K Stage</text></svg>" alt="Preview Canvas">
+
+                  <!-- Scene Badge Overlay (Top-Left) -->
+                  <div class="stitch-scene-badge-overlay" id="previewSceneBadge">
+                    <span class="stitch-scene-badge-dot"></span>
+                    <span id="previewSceneName">Scene 3</span>
+                    <span style="color:var(--stitch-outline)">·</span>
+                    <span id="previewSceneSpan" style="color:var(--stitch-lime)">0:31–0:48</span>
+                  </div>
+
+                  <!-- Motion Badge Overlay (Top-Right) -->
+                  <div class="stitch-motion-badge-overlay" id="previewMotionBadge">
+                    <span class="material-symbols-outlined" style="font-size:11px">animation</span>
+                    <span id="previewMotionName">Slow zoom in</span>
+                  </div>
+
+                  <!-- Live Subtitle Overlay Rendered directly over frame -->
+                  <div id="previewCaptionOverlay" class="stitch-subtitle-frame-overlay rf-preview-caption-overlay">
+                    "The harbor wakes before the city does."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Bottom Transport Tray -->
+              <div class="stitch-transport-tray rf-transport-bar">
+                <!-- SMPTE Timecode -->
+                <div class="stitch-transport-timecode rf-transport-time" id="canvasTimecode">
+                  00:00:38:12 <span class="stitch-timecode-total">/ <span id="statAudioDur">00:03:42:00</span></span>
+                </div>
+
+                <!-- Centered Playback Controls -->
+                <div class="stitch-transport-controls rf-transport-controls">
+                  <button class="stitch-transport-btn rf-btn-transport" id="btnPrevScene" title="Previous Scene (|◀)">
+                    <span class="material-symbols-outlined" style="font-size:16px">skip_previous</span>
+                  </button>
+                  <button class="stitch-transport-btn rf-btn-transport" id="btnStepBack" title="Step Frame Back (◀)">
+                    <span class="material-symbols-outlined" style="font-size:16px">fast_rewind</span>
+                  </button>
+                  <button class="stitch-play-btn rf-btn-transport play" id="btnCanvasPlayPause" title="Play / Pause (Space)">
+                    <span class="material-symbols-outlined" style="font-size:18px">play_arrow</span>
+                  </button>
+                  <button class="stitch-transport-btn rf-btn-transport" id="btnStepForward" title="Step Frame Forward (▶)">
+                    <span class="material-symbols-outlined" style="font-size:16px">fast_forward</span>
+                  </button>
+                  <button class="stitch-transport-btn rf-btn-transport" id="btnNextScene" title="Next Scene (▶|)">
+                    <span class="material-symbols-outlined" style="font-size:16px">skip_next</span>
+                  </button>
+                </div>
+
+                <!-- Right View & Resolution Actions -->
+                <div class="stitch-transport-right rf-transport-actions">
+                  <select class="stitch-select-compact" id="previewQualitySelect" title="Preview playback quality">
+                    <option value="1">Full res</option>
+                    <option value="0.5" selected>Half res</option>
+                    <option value="0.25">Quarter</option>
+                  </select>
+                  <button class="stitch-transport-btn rf-btn-transport" id="btnZoomFit" title="Zoom to Fit">
+                    <span class="material-symbols-outlined" style="font-size:16px">fit_screen</span>
+                  </button>
+                  <button class="stitch-transport-btn rf-btn-transport" id="btnFullscreen" title="Fullscreen Preview">
+                    <span class="material-symbols-outlined" style="font-size:16px">fullscreen</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hidden native audio element for synchronization -->
+              <audio id="audioElement" preload="auto" style="display:none"></audio>
+              <div id="audioFileName" style="display:none">narration.wav</div>
+              <div id="audioDurationLabel" style="display:none">00:00</div>
+            </div>
+
+            <!-- REGION 3: RIGHT CONTEXTUAL INSPECTOR -->
+            <div class="stitch-right-inspector rf-studio-panel inspector" id="rfStudioInspectorPane">
+              <!-- Inspector Header -->
+              <div class="stitch-inspector-header rf-panel-header">
+                <div class="stitch-insp-tag" id="inspSceneTag">
+                  <span class="stitch-scene-badge-dot"></span>
+                  <span>SELECTED · SCENE 3</span>
+                </div>
+                <div class="stitch-insp-title" id="inspSceneTitle">Harbor at dawn</div>
+                <div class="stitch-insp-sub" id="inspSceneSub">harbor_dawn_02.jpg · 0:17 duration</div>
+              </div>
+
+              <!-- Inspector Scrollable Sections -->
+              <div class="stitch-inspector-scroll rf-panel-body" id="sceneTableBody">
+                <!-- SECTION 1: MOTION & CAMERA -->
+                <div class="stitch-insp-section">
+                  <div class="stitch-insp-section-title">
+                    <span>Motion & Camera</span>
+                    <span class="material-symbols-outlined" style="font-size:14px; color:var(--stitch-lime)">videocam</span>
+                  </div>
+                  <div class="stitch-form-row">
+                    <label class="stitch-form-label">Motion Preset</label>
+                    <select class="stitch-form-select form-select-sm" id="inspMotionPreset">
+                      <option value="L4/push" selected>Slow zoom in</option>
+                      <option value="L4/pull">Slow zoom out</option>
+                      <option value="L4/drift_right">Pan left to right</option>
+                      <option value="L4/drift_left">Pan right to left</option>
+                      <option value="none">Static (No motion)</option>
+                    </select>
+                  </div>
+                  <div class="stitch-form-row">
+                    <div style="display:flex; justify-content:space-between">
+                      <label class="stitch-form-label">Zoom Range</label>
+                      <span class="stitch-range-val" id="inspZoomVal">100% → 118%</span>
+                    </div>
+                    <div class="stitch-range-row">
+                      <input type="range" class="stitch-range-slider" id="inspZoomSlider" min="100" max="140" value="118">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- SECTION 2: TRANSITION IN -->
+                <div class="stitch-insp-section">
+                  <div class="stitch-insp-section-title">
+                    <span>Transition In</span>
+                    <span class="material-symbols-outlined" style="font-size:14px; color:var(--stitch-amber)">blur_on</span>
+                  </div>
+                  <div class="stitch-form-row">
+                    <label class="stitch-form-label">Transition Type</label>
+                    <select class="stitch-form-select form-select-sm" id="inspTransitionSelect">
+                      <option value="dissolve" selected>Cross dissolve</option>
+                      <option value="wipeleft">Whip pan</option>
+                      <option value="cinematic_dissolve">Cinematic soft dissolve</option>
+                      <option value="transition_001">White orange light leak</option>
+                      <option value="none">Clean cut</option>
+                    </select>
+                  </div>
+                  <div class="stitch-form-row">
+                    <div style="display:flex; justify-content:space-between">
+                      <label class="stitch-form-label">Duration</label>
+                      <span class="stitch-font-mono-sm" id="inspTransDurVal" style="color:var(--stitch-lime)">0.8s</span>
+                    </div>
+                    <input type="range" class="stitch-range-slider" id="inspTransitionDur" min="0.2" max="2.0" step="0.1" value="0.8">
+                  </div>
+                  <div class="stitch-font-caption" style="color:var(--stitch-outline); line-height:1.3; font-style:italic">
+                    Overlaps Scene 2 tail; narration timing unchanged.
+                  </div>
+                </div>
+
+                <!-- SECTION 3: CAPTION STYLE -->
+                <div class="stitch-insp-section">
+                  <div class="stitch-insp-section-title">
+                    <span>Caption Style</span>
+                    <span class="material-symbols-outlined" style="font-size:14px; color:var(--stitch-secondary)">subtitles</span>
+                  </div>
+                  <div class="stitch-form-row">
+                    <label class="stitch-form-label">Typography Style</label>
+                    <select class="stitch-form-select form-select-sm" id="inspCaptionStyle">
+                      <option value="classic" selected>IBM Plex Sans · 600</option>
+                      <option value="cinematic">Cinematic Documentary</option>
+                      <option value="neon_glow">Neon Electric Sub</option>
+                      <option value="creator">Creator Inspired</option>
+                    </select>
+                  </div>
+                  <div class="stitch-form-row">
+                    <div style="display:flex; justify-content:space-between">
+                      <label class="stitch-form-label">Font Size</label>
+                      <span class="stitch-font-mono-sm" id="inspCaptionSizeVal" style="color:var(--stitch-lime)">20 px</span>
+                    </div>
+                    <input type="range" class="stitch-range-slider" id="inspCaptionSize" min="14" max="36" value="20">
+                  </div>
+                </div>
+
+                <!-- SECTION 4: AI SUGGESTION CARD -->
+                <div class="stitch-ai-suggestion-card" id="inspAiCard">
+                  <div class="stitch-ai-card-header">
+                    <div class="stitch-ai-card-title">
+                      <span class="material-symbols-outlined" style="font-size:14px">lightbulb</span>
+                      <span id="inspAiTitle">AI SUGGESTION (1 OF 3)</span>
+                    </div>
+                  </div>
+                  <p class="stitch-ai-card-text" id="inspAiText">
+                    Narration at 0:31 mentions the harbor opening. A closer visual match is dock_morning_05.jpg.
+                  </p>
+                  <div class="stitch-ai-card-actions">
+                    <button class="stitch-btn-ai-apply" id="btnAiApply">Apply</button>
+                    <button class="stitch-btn-ai-compare" id="btnAiCompare">Compare</button>
+                    <button class="stitch-btn-ai-dismiss" id="btnAiDismiss">Dismiss</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SECTION 5: CLIP ACTIONS STICKY STRIP -->
+              <div class="stitch-clip-actions-strip">
+                <button class="stitch-clip-action-btn" id="btnInspDuplicate" title="Duplicate Clip (Ctrl+D)">
+                  <span class="material-symbols-outlined" style="font-size:14px">content_copy</span>
+                  <span>Duplicate</span>
+                </button>
+                <button class="stitch-clip-action-btn" id="btnInspSplit" title="Split at Playhead (S)">
+                  <span class="material-symbols-outlined" style="font-size:14px">content_cut</span>
+                  <span>Split (S)</span>
+                </button>
+                <button class="stitch-clip-action-btn" id="btnInspReset" title="Reset Motion">
+                  <span class="material-symbols-outlined" style="font-size:14px">restart_alt</span>
+                  <span>Reset</span>
+                </button>
+                <button class="stitch-clip-action-btn danger" id="btnInspDelete" title="Delete Clip (Del)">
+                  <span class="material-symbols-outlined" style="font-size:14px">delete</span>
+                  <span>Delete</span>
+                </button>
+              </div>
+
+              <!-- Hidden Settings & Form fields preserved for legacy backend compatibility -->
+              <input type="checkbox" id="toggleCaptions" checked style="display:none">
+              <input type="checkbox" id="settingVerify" checked style="display:none">
+              <select id="settingResolution" style="display:none">
+                <option value="1080p">1080p</option>
+                <option value="1440p">1440p</option>
+                <option value="4k" selected>4k</option>
+              </select>
+              <select id="settingPreset" style="display:none"><option value="veryfast" selected>veryfast</option></select>
+              <select id="settingTransitionMode" style="display:none"><option value="auto" selected>auto</option></select>
+              <input type="range" id="settingDurScale" min="0.5" max="2.0" step="0.1" value="1.0" style="display:none">
+              <button id="btnSavePlan" style="display:none"></button>
+            </div>
+
+          </div>
+
+          <!-- LOWER ROW: MULTI-TRACK NON-LINEAR TIMELINE DOCK (CONCAT NLE) -->
+          <div class="stitch-timeline-dock rf-studio-lower rf-timeline-studio-root" id="rfStudioLowerTimeline">
+            <!-- Dynamically constructed and synchronized by TimelineStudio engine -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           WORKSPACE 2: IMPORT / CREATE WORKSPACE
+           =================================================================== -->
+      <section class="stitch-view-pane rf-view" id="view-import">
+        <div class="rf-home-container" style="max-width:1180px; padding:2rem 1.5rem">
+          <div class="rf-section-header" style="align-items:flex-start; margin-bottom:1.5rem">
+            <div>
+              <h2 class="rf-heading-h1" style="font-size:1.5rem; font-weight:700; letter-spacing:-0.02em; color:#fff; margin-bottom:6px">Create &amp; Media Ingestion Workstation</h2>
+              <p class="rf-desc-text" style="font-size:0.875rem; color:var(--stitch-on-surface-variant); line-height:1.45; margin:0">Ingest master narration audio, visual footage, and configure hardware-adaptive AI plan generation.</p>
+            </div>
+            <div style="display:flex; gap:8px; flex-shrink:0">
+              <button class="stitch-btn-render-primary rf-btn-open-editor" id="btnImportOpenStudio" onclick="document.getElementById('tabNavEdit').click()" title="Open Cinematic Multi-Track Editor">
+                <span class="material-symbols-outlined" style="font-size:16px">movie_edit</span>
+                <span>Open Editor</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Ingestion Cards Grid -->
+          <div class="rf-create-cards-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-top:1rem">
+            <!-- Audio Ingestion Card -->
+            <div class="rf-create-card" style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; gap:1rem; min-height:180px">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px">
+                  <span class="material-symbols-outlined" style="color:var(--stitch-lime); font-size:20px">mic</span>
+                  <span class="rf-heading-h3" style="font-size:0.95rem; font-weight:600; color:#fff">Master Narration Audio</span>
+                </div>
+                <p class="rf-desc-text" style="font-size:0.825rem; color:var(--stitch-on-surface-variant); line-height:1.45; margin:0">Master audio defines the total sequence duration. Locked by default to prevent audio-visual drift.</p>
+              </div>
+              <label class="stitch-btn-import rf-card-action-btn" style="height:36px; min-height:36px; padding:0 14px; cursor:pointer; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px; font-size:12.5px; font-weight:600">
+                <span class="material-symbols-outlined" style="font-size:16px">upload_file</span>
+                <span>Upload Narration (.wav, .mp3)</span>
+                <input type="file" id="importAudioInput" accept="audio/*" style="display:none" onchange="document.getElementById('audioFileInput').files = this.files; document.getElementById('audioFileInput').dispatchEvent(new Event('change'))">
+              </label>
+            </div>
+
+            <!-- Media Library Ingestion Card -->
+            <div class="rf-create-card" style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; gap:1rem; min-height:180px">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px">
+                  <span class="material-symbols-outlined" style="color:var(--stitch-lime); font-size:20px">collections</span>
+                  <span class="rf-heading-h3" style="font-size:0.95rem; font-weight:600; color:#fff">Visual Assets &amp; ZIP Archive</span>
+                </div>
+                <p class="rf-desc-text" style="font-size:0.825rem; color:var(--stitch-on-surface-variant); line-height:1.45; margin:0">Batch import high-resolution images or drag &amp; drop an entire asset ZIP archive.</p>
+              </div>
+              <button class="stitch-btn-import rf-card-action-btn" style="height:36px; min-height:36px; padding:0 14px; display:flex; align-items:center; justify-content:center; gap:6px; font-size:12.5px; font-weight:600" onclick="document.getElementById('imagesFileInput').click()">
+                <span class="material-symbols-outlined" style="font-size:16px">folder_zip</span>
+                <span>Browse Images or ZIP</span>
+              </button>
+            </div>
+
+            <!-- AI Auto-Map Configuration -->
+            <div class="rf-create-card" style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1.25rem; display:flex; flex-direction:column; justify-content:space-between; gap:1rem; min-height:180px">
+              <div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px">
+                  <span class="material-symbols-outlined" style="color:var(--stitch-lime); font-size:20px">auto_awesome</span>
+                  <span class="rf-heading-h3" style="font-size:0.95rem; font-weight:600; color:#fff">AI Auto-Map Engine</span>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:4px">
+                  <select id="mappingModeSelect" class="stitch-form-select" style="width:100%; height:32px; font-size:11.5px; font-weight:600; color:var(--stitch-lime); background:rgba(0,0,0,0.3)">
+                    <option value="SEMANTIC_AUTO" selected>Mode: Semantic Auto-Mapping (AI)</option>
+                    <option value="SEQUENCE_AWARE">Mode: Sequence-Aware Mapping</option>
+                    <option value="STRICT_SEQUENTIAL">Mode: Strict Sequential Mapping</option>
+                    <option value="MANUAL">Mode: Manual Overrides Only</option>
+                  </select>
+                  <div style="display:flex; gap:6px">
+                    <select id="syncProfileSelect" class="stitch-form-select" style="flex:1; height:32px; font-size:11.5px">
+                      <option value="GENERAL" selected>Profile: General</option>
+                      <option value="DOCUMENTARY">Documentary</option>
+                      <option value="CINEMATIC">Cinematic</option>
+                    </select>
+                    <select id="syncModeSelect" class="stitch-form-select" style="flex:1; height:32px; font-size:11.5px">
+                      <option value="BALANCED" selected>Balanced</option>
+                      <option value="FAST">Fast</option>
+                      <option value="HIGH_ACCURACY">High Acc</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button class="stitch-btn-render-primary rf-card-action-btn" id="btnAutoPlan" style="height:36px; min-height:36px; padding:0 14px; display:flex; align-items:center; justify-content:center; gap:6px; font-size:12.5px; font-weight:700">
+                <span class="material-symbols-outlined" style="font-size:16px">magic_button</span>
+                <span>Auto-Map Images to Audio</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Recent Projects -->
+          <div class="rf-section-header" style="margin-top:2rem">
+            <div class="rf-section-title">Recent Workstation Projects</div>
+            <button class="btn btn-secondary btn-sm" id="btnRefreshProjects">🔄 Refresh Projects</button>
+          </div>
+          <div class="rf-recent-grid" id="recentProjectsGrid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           WORKSPACE 3: STORYBOARD / AI SCRIPT SYNC WORKSPACE
+           =================================================================== -->
+      <section class="stitch-view-pane rf-view" id="view-storyboard">
+        <div class="stitch-storyboard-workspace">
+          <!-- Storyboard Header -->
+          <div class="stitch-storyboard-header">
+            <div>
+              <div class="stitch-font-headline-md" style="color:#fff">AI Script Sync &amp; Storyboard</div>
+              <div class="stitch-font-body-sm" style="color:var(--stitch-outline)">Narration-aligned scene blocks, sync confidence levels, and visual gap detection.</div>
+            </div>
+            <div style="display:flex; gap:8px">
+              <button class="stitch-btn-render-primary" onclick="document.getElementById('tabNavEdit').click()">
+                <span class="material-symbols-outlined" style="font-size:16px">movie_edit</span>
+                <span>Open in Timeline</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Segments List Container -->
+          <div class="stitch-script-segments-list" id="storyboardSegmentsList">
+            <!-- Populated by JS based on project scenes & transcript segments -->
+          </div>
+        </div>
+      </section>
+
+
+        <!-- ===================================================================
+             WORKSPACE 3: DEDICATED CAPTIONS WORKSTATION
+        =================================================================== -->
+        <section class="stitch-view-pane rf-view" id="view-captions">
+          <div class="stitch-captions-workspace" style="display:flex; width:100%; height:100%; overflow:hidden; background:var(--stitch-surface-lowest)">
+            
+            <!-- LEFT / CENTER: SUBTITLE PREVIEW & SPEECH CUES TABLE -->
+            <div style="flex:1; display:flex; flex-direction:column; min-width:0; border-right:1px solid var(--stitch-surface-highest)">
+              <!-- Top: 4K Subtitle Live Preview Frame -->
+              <div style="height:300px; background:#000; position:relative; display:flex; align-items:center; justify-content:center; border-bottom:1px solid var(--stitch-surface-highest); overflow:hidden">
+                <img id="captionPreviewMainMedia" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' fill='%23080b12'><rect width='16' height='9' fill='%230a0a0c'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2355555c' font-size='0.8' font-family='sans-serif'>RenderFlow 4K Stage</text></svg>" style="width:100%; height:100%; object-fit:contain" alt="Caption Video Stage">
+                <!-- Live Subtitle Overlay -->
+                <div id="captionStageOverlay" class="stitch-caption-overlay-text" style="position:absolute; bottom:28px; left:50%; transform:translateX(-50%); max-width:85%; text-align:center; padding:6px 16px; background:rgba(0,0,0,0.65); border-radius:4px; font-family:'Inter',sans-serif; font-size:24px; font-weight:700; color:#ffffff; text-shadow:0 2px 4px rgba(0,0,0,0.9); border:1px solid rgba(255,255,255,0.15); pointer-events:none">
+                  "Berlin 1953, a city divided by barbed wire..."
+                </div>
+                <div style="position:absolute; top:12px; left:12px; display:flex; gap:6px; align-items:center">
+                  <span class="stitch-pill active" style="font-size:10px; background:rgba(0,0,0,0.7); border:1px solid var(--stitch-teal); color:var(--stitch-teal)">4K PROGRAM PREVIEW</span>
+                  <span id="captionPreviewTimecode" style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#fff; background:rgba(0,0,0,0.7); padding:2px 8px; border-radius:3px">00:00:00.000</span>
+                </div>
+              </div>
+
+              <!-- Bottom: Interactive Speech Cues & Editable Text Table -->
+              <div style="flex:1; display:flex; flex-direction:column; min-height:0; padding:1rem 1.25rem; overflow:hidden">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-shrink:0">
+                  <div>
+                    <h3 style="font-size:14px; font-weight:700; color:#fff; margin:0">Speech Cue Segments &amp; Inline Typography Editor</h3>
+                    <div style="font-size:11px; color:var(--stitch-outline); margin-top:2px">Whisper-synchronized speech spans. Click a cue to seek, edit text directly to update narration plan.</div>
+                  </div>
+                  <div style="display:flex; gap:8px">
+                    <button class="stitch-btn-import" id="btnCaptionsRegenWhisper" title="Regenerate sub-millisecond captions from master audio with local Whisper">
+                      <span class="material-symbols-outlined" style="font-size:14px">sync</span>
+                      <span>Regen Whisper</span>
+                    </button>
+                    <button class="stitch-btn-render-primary" id="btnCaptionsSavePlan" style="background:var(--stitch-orange); color:#000; font-weight:700; border-radius:4px; padding:6px 14px">
+                      <span class="material-symbols-outlined" style="font-size:14px">save</span>
+                      <span>Save to Plan</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Cues Table -->
+                <div style="flex:1; overflow-y:auto; border:1px solid var(--stitch-surface-highest); border-radius:4px; background:var(--stitch-surface)">
+                  <table style="width:100%; border-collapse:collapse; font-size:11px; text-align:left">
+                    <thead>
+                      <tr style="background:var(--stitch-surface-high); border-bottom:1px solid var(--stitch-surface-highest); color:var(--stitch-on-surface-variant); position:sticky; top:0; z-index:2">
+                        <th style="padding:8px 12px; width:44px">#</th>
+                        <th style="padding:8px 12px; width:130px">TIMECODE SPAN</th>
+                        <th style="padding:8px 12px; width:65px">DUR</th>
+                        <th style="padding:8px 12px">SPEECH SUBTITLE TEXT (INLINE EDITABLE)</th>
+                        <th style="padding:8px 12px; width:90px; text-align:right">ACTION</th>
+                      </tr>
+                    </thead>
+                    <tbody id="captionsSegmentsTableBody">
+                      <!-- Populated dynamically by populateCaptionsView() -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT PANEL: COMPLETE TYPOGRAPHY CONTROLS & 67 PRESET STYLES -->
+            <div style="width:380px; flex-shrink:0; background:var(--stitch-surface-low); display:flex; flex-direction:column; overflow-y:auto; padding:1.25rem; gap:1.25rem">
+              <div>
+                <div class="stitch-font-headline-sm" style="color:#fff">Typography &amp; Styling Controls</div>
+                <div class="stitch-font-body-sm" style="color:var(--stitch-outline)">SubStation Alpha (ASS) rendering parameters</div>
+              </div>
+
+              <!-- Typography Form Controls -->
+              <div style="display:flex; flex-direction:column; gap:10px; background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1rem">
+                <div>
+                  <label style="font-size:11px; font-weight:600; color:var(--stitch-on-surface-variant); display:block; margin-bottom:4px">FONT FAMILY</label>
+                  <select id="captionFontSelect" class="stitch-select" style="width:100%">
+                    <option value="Inter" selected>Inter (Cinematic Clean)</option>
+                    <option value="Segoe UI">Segoe UI (Windows Native)</option>
+                    <option value="Montserrat">Montserrat (Modern Viral)</option>
+                    <option value="IBM Plex Sans">IBM Plex Sans (Documentary)</option>
+                    <option value="Poppins">Poppins (YouTube Creator)</option>
+                    <option value="Roboto">Roboto (Minimal Sans)</option>
+                    <option value="Arial">Arial (Clean Standard)</option>
+                    <option value="Impact">Impact (Heavy Punch)</option>
+                    <option value="Georgia">Georgia (Editorial Serif)</option>
+                    <option value="Bebas Neue">Bebas Neue (Bold Impact)</option>
+                    <option value="Bangers">Bangers (Comic Pop)</option>
+                    <option value="Courier New">Courier New (Typewriter)</option>
+                    <option value="Consolas">Consolas (Code Terminal)</option>
+                    <option value="Palatino">Palatino (Classic Literature)</option>
+                    <option value="Source Serif Pro">Source Serif Pro (Academic)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px">
+                    <span style="font-weight:600; color:var(--stitch-on-surface-variant)">FONT SIZE</span>
+                    <span id="captionFontSizeVal" style="color:var(--stitch-orange); font-family:'JetBrains Mono',monospace">28 px</span>
+                  </div>
+                  <input type="range" id="captionFontSizeSlider" min="16" max="72" value="28" class="stitch-slider" style="width:100%">
+                </div>
+
+                <div>
+                  <label style="font-size:11px; font-weight:600; color:var(--stitch-on-surface-variant); display:block; margin-bottom:4px">FONT WEIGHT</label>
+                  <select id="captionWeightSelect" class="stitch-select" style="width:100%">
+                    <option value="400">Regular (400)</option>
+                    <option value="600" selected>Semi-Bold (600)</option>
+                    <option value="700">Bold (700)</option>
+                    <option value="800">Extra-Bold (800)</option>
+                    <option value="900">Black / Heavy (900)</option>
+                  </select>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px">
+                  <div>
+                    <label style="font-size:10px; font-weight:600; color:var(--stitch-on-surface-variant); display:block; margin-bottom:4px">TEXT COLOR</label>
+                    <input type="color" id="captionColorPicker" value="#ffffff" style="width:100%; height:32px; border:1px solid var(--stitch-surface-highest); border-radius:4px; background:transparent; cursor:pointer">
+                  </div>
+                  <div>
+                    <label style="font-size:10px; font-weight:600; color:var(--stitch-on-surface-variant); display:block; margin-bottom:4px">STROKE / OUTLINE</label>
+                    <input type="color" id="captionStrokePicker" value="#000000" style="width:100%; height:32px; border:1px solid var(--stitch-surface-highest); border-radius:4px; background:transparent; cursor:pointer">
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px">
+                    <span style="font-weight:600; color:var(--stitch-on-surface-variant)">BOTTOM MARGIN (POS)</span>
+                    <span id="captionMarginVal" style="color:var(--stitch-teal); font-family:'JetBrains Mono',monospace">48 px</span>
+                  </div>
+                  <input type="range" id="captionMarginSlider" min="10" max="180" value="48" class="stitch-slider" style="width:100%">
+                </div>
+
+                <div>
+                  <label style="font-size:11px; font-weight:600; color:var(--stitch-on-surface-variant); display:block; margin-bottom:4px">ANIMATION / POP</label>
+                  <select id="captionAnimSelect" class="stitch-select" style="width:100%">
+                    <option value="none">Standard SubStation Alpha (None)</option>
+                    <option value="karaoke" selected>Word-by-Word Karaoke Highlight</option>
+                    <option value="kinetic_pop">Kinetic Pop Scale (1.08x)</option>
+                    <option value="pop">Pop Impact</option>
+                    <option value="fade">Subtle Dissolve Fade</option>
+                    <option value="bounce">Kinetic Bounce</option>
+                    <option value="pulse">Rhythm Pulse</option>
+                    <option value="neon_glow">Neon Electric Glow</option>
+                    <option value="glitch">Digital Cyber Glitch</option>
+                    <option value="pill">Pill Background Badge</option>
+                    <option value="typewriter">Typewriter Reveal</option>
+                    <option value="highlight_bar">Highlight Bar Swipe</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 67 Style Presets Library -->
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
+                  <span style="font-size:12px; font-weight:700; color:#fff">67 Preset Styles Library</span>
+                  <span class="stitch-pill" id="stylePresetCountBadge" style="font-size:10px">67 Libass Presets</span>
+                </div>
+                <div style="margin-bottom:8px">
+                  <input type="text" id="stylePresetSearchInput" placeholder="Filter 67 presets (e.g. Hormozi, Neon, Clean)..." class="stitch-input" style="width:100%; font-size:11px; padding:6px 10px; background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:4px; color:#fff">
+                </div>
+                <div class="rf-category-chips" id="styleCategoryChipsWorkspace" style="display:flex; gap:4px; flex-wrap:wrap; margin-bottom:8px">
+                  <button class="category-chip active" data-cat="all">All (67)</button>
+                  <button class="category-chip" data-cat="documentary">Documentary</button>
+                  <button class="category-chip" data-cat="cinematic">Cinematic</button>
+                  <button class="category-chip" data-cat="tiktok_reels">TikTok/Reels</button>
+                  <button class="category-chip" data-cat="creator_inspired">Creator</button>
+                  <button class="category-chip" data-cat="karaoke">Karaoke</button>
+                  <button class="category-chip" data-cat="minimal">Minimal</button>
+                  <button class="category-chip" data-cat="youtube">YouTube</button>
+                  <button class="category-chip" data-cat="podcast">Podcast</button>
+                </div>
+                <div id="captionStyleCardsWorkspace" style="display:flex; flex-direction:column; gap:6px; max-height:340px; overflow-y:auto; padding-right:2px">
+                  <!-- Populated dynamically with all 67 presets -->
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             WORKSPACE 4: DEDICATED AUDIO WORKSTATION & MASTER CLOCK
+        =================================================================== -->
+        <section class="stitch-view-pane rf-view" id="view-audio">
+          <div class="stitch-audio-workspace" style="display:flex; width:100%; height:100%; overflow:hidden; background:var(--stitch-surface-lowest)">
+
+            <!-- MAIN CHANNELS STACK -->
+            <div style="flex:1; display:flex; flex-direction:column; min-width:0; padding:1.5rem; gap:1.25rem; overflow-y:auto; border-right:1px solid var(--stitch-surface-highest)">
+              
+              <!-- Audio Header & Master Timing Authority Banner -->
+              <div style="display:flex; justify-content:space-between; align-items:center; background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1rem 1.25rem">
+                <div>
+                  <div style="display:flex; align-items:center; gap:8px">
+                    <span class="material-symbols-outlined" style="font-size:20px; color:var(--stitch-orange)">graphic_eq</span>
+                    <h2 style="font-size:1.15rem; font-weight:700; color:#fff; margin:0">Audio Workstation &amp; Master Clock Sync</h2>
+                  </div>
+                  <div style="font-size:0.8rem; color:var(--stitch-outline); margin-top:4px">
+                    Narration is the master timing authority. Total sequence duration is strictly locked to narration audio.
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px">
+                  <div class="stitch-pill active" style="font-family:'JetBrains Mono',monospace; color:var(--stitch-orange); border-color:var(--stitch-orange); font-size:11px">
+                    🔒 AUDIO-LOCKED MASTER
+                  </div>
+                  <button class="stitch-btn-render-primary" onclick="document.getElementById('tabNavEdit').click()" style="background:var(--stitch-orange); color:#000; font-weight:700; padding:6px 14px; border-radius:4px">
+                    <span class="material-symbols-outlined" style="font-size:16px">movie_edit</span>
+                    <span>Edit in Timeline</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- CHANNEL 1: MASTER NARRATION AUDIO -->
+              <div class="stitch-audio-channel-card" style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1.25rem; display:flex; flex-direction:column; gap:0.75rem">
+                <div style="display:flex; justify-content:space-between; align-items:center">
+                  <div style="display:flex; align-items:center; gap:8px">
+                    <span class="material-symbols-outlined" style="color:var(--stitch-orange); font-size:18px">mic</span>
+                    <span style="font-weight:700; font-size:13px; color:#fff">TRACK 1: MASTER NARRATION (AUDIO AUTHORITY)</span>
+                    <span style="font-size:10px; color:var(--stitch-teal); background:rgba(45,212,191,0.1); border:1px solid var(--stitch-teal); padding:1px 6px; border-radius:3px">0.000s DRIFT (PASS)</span>
+                  </div>
+                  <div style="display:flex; gap:6px; align-items:center">
+                    <button class="stitch-tl-tool-btn" id="btnAudioMuteNarration" style="font-size:11px; padding:3px 8px" title="Mute Narration">MUTE</button>
+                    <button class="stitch-tl-tool-btn active" id="btnAudioSoloNarration" style="font-size:11px; padding:3px 8px; color:var(--stitch-orange)" title="Solo Narration">SOLO</button>
+                    <label class="stitch-btn-import" style="padding:4px 10px; cursor:pointer; font-size:11px">
+                      <span>Replace Audio</span>
+                      <input type="file" id="audioWorkspaceReplaceInput" accept="audio/*" style="display:none" onchange="document.getElementById('audioFileInput').files = this.files; document.getElementById('audioFileInput').dispatchEvent(new Event('change'))">
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Waveform Canvas -->
+                <div style="height:64px; background:var(--stitch-surface-lowest); border:1px solid var(--stitch-surface-highest); border-radius:4px; overflow:hidden; position:relative">
+                  <canvas id="audioWorkspaceNarrationWaveform" style="width:100%; height:100%"></canvas>
+                  <div id="audioWorkspaceNarrationLabel" style="position:absolute; top:6px; left:10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#fff; background:rgba(0,0,0,0.6); padding:2px 6px; border-radius:2px">
+                    narration.wav · 44.1 kHz · Stereo · 214.67s
+                  </div>
+                </div>
+
+                <!-- Channel Controls -->
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; font-size:11px">
+                  <div style="display:flex; align-items:center; gap:10px; flex:1">
+                    <span style="font-weight:600; color:var(--stitch-on-surface-variant); width:70px">GAIN / VOL:</span>
+                    <input type="range" id="audioWorkspaceNarrationVol" min="0" max="150" value="100" class="stitch-slider" style="flex:1">
+                    <span id="audioWorkspaceNarrationVolVal" style="font-family:'JetBrains Mono',monospace; color:var(--stitch-orange); width:50px; text-align:right">0.0 dB</span>
+                  </div>
+                  <div style="color:var(--stitch-outline); font-size:11px">
+                    Loudness Target: <span style="color:#fff; font-family:'JetBrains Mono',monospace">-14.0 LUFS</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CHANNEL 2: BACKGROUND MUSIC BED -->
+              <div class="stitch-audio-channel-card" style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1.25rem; display:flex; flex-direction:column; gap:0.75rem">
+                <div style="display:flex; justify-content:space-between; align-items:center">
+                  <div style="display:flex; align-items:center; gap:8px">
+                    <span class="material-symbols-outlined" style="color:var(--stitch-teal); font-size:18px">music_note</span>
+                    <span style="font-weight:700; font-size:13px; color:#fff">TRACK 2: BACKGROUND MUSIC &amp; AMBIENT BED</span>
+                    <span style="font-size:10px; color:var(--stitch-outline)">ambient_pad.wav</span>
+                  </div>
+                  <div style="display:flex; gap:6px; align-items:center">
+                    <button class="stitch-tl-tool-btn" id="btnAudioMuteMusic" style="font-size:11px; padding:3px 8px">MUTE</button>
+                    <button class="stitch-tl-tool-btn" id="btnAudioSoloMusic" style="font-size:11px; padding:3px 8px">SOLO</button>
+                    <label style="display:flex; align-items:center; gap:4px; font-size:11px; color:var(--stitch-on-surface-variant); cursor:pointer">
+                      <input type="checkbox" id="audioWorkspaceMusicLoop" checked>
+                      <span>Loop</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Music Waveform Canvas -->
+                <div style="height:52px; background:var(--stitch-surface-lowest); border:1px solid var(--stitch-surface-highest); border-radius:4px; overflow:hidden; position:relative">
+                  <canvas id="audioWorkspaceMusicWaveform" style="width:100%; height:100%"></canvas>
+                  <div style="position:absolute; top:6px; left:10px; font-family:'JetBrains Mono',monospace; font-size:10px; color:#2dd4bf; background:rgba(0,0,0,0.6); padding:2px 6px; border-radius:2px">
+                    ambient_pad.wav · -18 dB Loop Bed
+                  </div>
+                </div>
+
+                <!-- Channel Controls & Ducking -->
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:11px">
+                  <div style="display:flex; align-items:center; gap:10px">
+                    <span style="font-weight:600; color:var(--stitch-on-surface-variant); width:70px">BGM LEVEL:</span>
+                    <input type="range" id="audioWorkspaceMusicVol" min="0" max="100" value="35" class="stitch-slider" style="flex:1">
+                    <span id="audioWorkspaceMusicVolVal" style="font-family:'JetBrains Mono',monospace; color:var(--stitch-teal); width:50px; text-align:right">-18 dB</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:10px">
+                    <span style="font-weight:600; color:var(--stitch-on-surface-variant); width:90px">AUTO-DUCKING:</span>
+                    <input type="range" id="audioWorkspaceDuckingVol" min="0" max="24" value="12" class="stitch-slider" style="flex:1">
+                    <span id="audioWorkspaceDuckingVal" style="font-family:'JetBrains Mono',monospace; color:var(--stitch-orange); width:50px; text-align:right">-12 dB</span>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:20px; font-size:11px; color:var(--stitch-outline); padding-top:4px; border-top:1px solid rgba(255,255,255,0.04)">
+                  <div>Fade In: <span style="color:#fff; font-family:'JetBrains Mono',monospace">1.0s</span></div>
+                  <div>Fade Out: <span style="color:#fff; font-family:'JetBrains Mono',monospace">2.5s</span></div>
+                  <div>Ducking Attack: <span style="color:#fff; font-family:'JetBrains Mono',monospace">120ms</span></div>
+                  <div>Ducking Release: <span style="color:#fff; font-family:'JetBrains Mono',monospace">350ms</span></div>
+                </div>
+              </div>
+
+              <!-- CHANNEL 3: SOUND EFFECTS & TRANSITIONS -->
+              <div class="stitch-audio-channel-card" style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1.25rem; display:flex; flex-direction:column; gap:0.75rem">
+                <div style="display:flex; justify-content:space-between; align-items:center">
+                  <div style="display:flex; align-items:center; gap:8px">
+                    <span class="material-symbols-outlined" style="color:var(--stitch-blue); font-size:18px">auto_awesome</span>
+                    <span style="font-weight:700; font-size:13px; color:#fff">TRACK 3: SOUND EFFECTS &amp; CINEMATIC FLARES</span>
+                    <span style="font-size:10px; color:var(--stitch-outline)">YouTube Pack Whooshes &amp; Impacts</span>
+                  </div>
+                  <div style="display:flex; gap:6px">
+                    <button class="stitch-tl-tool-btn" id="btnAudioMuteSfx" style="font-size:11px; padding:3px 8px">MUTE</button>
+                    <button class="stitch-tl-tool-btn" id="btnAudioSoloSfx" style="font-size:11px; padding:3px 8px">SOLO</button>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; font-size:11px">
+                  <span style="font-weight:600; color:var(--stitch-on-surface-variant); width:70px">SFX LEVEL:</span>
+                  <input type="range" id="audioWorkspaceSfxVol" min="0" max="100" value="65" class="stitch-slider" style="flex:1">
+                  <span id="audioWorkspaceSfxVolVal" style="font-family:'JetBrains Mono',monospace; color:var(--stitch-blue); width:50px; text-align:right">-6 dB</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT MONITORING & VU METERS DECK -->
+            <div style="width:340px; flex-shrink:0; background:var(--stitch-surface-low); display:flex; flex-direction:column; padding:1.5rem; gap:1.25rem">
+              <div>
+                <div class="stitch-font-headline-sm" style="color:#fff">Master Output &amp; Telemetry</div>
+                <div class="stitch-font-body-sm" style="color:var(--stitch-outline)">Hardware Audio Engine &amp; EBU R128 Normalization</div>
+              </div>
+
+              <!-- Dual Stereo VU Meters -->
+              <div style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1rem; display:flex; flex-direction:column; gap:8px">
+                <div style="display:flex; justify-content:space-between; font-size:11px">
+                  <span style="font-weight:700; color:#fff">PEAK STEREO VU</span>
+                  <span id="vuPeakDb" style="color:var(--stitch-teal); font-family:'JetBrains Mono',monospace">-4.2 dB</span>
+                </div>
+                <!-- Channel L -->
+                <div style="display:flex; align-items:center; gap:8px">
+                  <span style="font-size:10px; font-family:'JetBrains Mono',monospace; width:12px; color:var(--stitch-outline)">L</span>
+                  <div style="flex:1; height:12px; background:var(--stitch-surface-lowest); border-radius:2px; overflow:hidden; position:relative">
+                    <div id="vuMeterL" style="width:78%; height:100%; background:linear-gradient(90deg, #10b981 0%, #38bdf8 65%, #f59e0b 85%, #ef4444 100%); transition:width 0.1s ease"></div>
+                  </div>
+                </div>
+                <!-- Channel R -->
+                <div style="display:flex; align-items:center; gap:8px">
+                  <span style="font-size:10px; font-family:'JetBrains Mono',monospace; width:12px; color:var(--stitch-outline)">R</span>
+                  <div style="flex:1; height:12px; background:var(--stitch-surface-lowest); border-radius:2px; overflow:hidden; position:relative">
+                    <div id="vuMeterR" style="width:75%; height:100%; background:linear-gradient(90deg, #10b981 0%, #38bdf8 65%, #f59e0b 85%, #ef4444 100%); transition:width 0.1s ease"></div>
+                  </div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:9px; color:var(--stitch-outline); font-family:'JetBrains Mono',monospace">
+                  <span>-60</span><span>-30</span><span>-18</span><span>-12</span><span>-6</span><span>0 dB</span>
+                </div>
+              </div>
+
+              <!-- Transport & Timecode -->
+              <div style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1rem; display:flex; flex-direction:column; gap:10px; align-items:center">
+                <div id="audioWorkspaceTimecode" style="font-family:'JetBrains Mono',monospace; font-size:18px; font-weight:700; color:var(--stitch-orange)">
+                  00:00:00.000 / 03:34.666
+                </div>
+                <div style="display:flex; gap:10px; align-items:center">
+                  <button class="stitch-transport-btn" id="btnAudioWorkspacePrev" style="width:36px; height:36px; border-radius:50%; background:var(--stitch-surface-high); border:none; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer">
+                    <span class="material-symbols-outlined" style="font-size:18px">fast_rewind</span>
+                  </button>
+                  <button class="stitch-play-btn" id="btnAudioWorkspacePlay" style="width:48px; height:48px; border-radius:50%; background:var(--stitch-orange); border:none; color:#000; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 0 16px var(--stitch-orange-glow)">
+                    <span class="material-symbols-outlined" style="font-size:24px; font-variation-settings:'FILL' 1">play_arrow</span>
+                  </button>
+                  <button class="stitch-transport-btn" id="btnAudioWorkspaceNext" style="width:36px; height:36px; border-radius:50%; background:var(--stitch-surface-high); border:none; color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer">
+                    <span class="material-symbols-outlined" style="font-size:18px">fast_forward</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Audio Engine Facts -->
+              <div style="background:var(--stitch-surface); border:1px solid var(--stitch-surface-highest); border-radius:6px; padding:1rem; font-size:11px; display:flex; flex-direction:column; gap:6px">
+                <div style="font-weight:700; color:#fff; margin-bottom:2px">DSP SPECIFICATIONS</div>
+                <div style="display:flex; justify-content:space-between"><span style="color:var(--stitch-outline)">Engine:</span><span style="color:#fff">FFmpeg 8.1 libswresample</span></div>
+                <div style="display:flex; justify-content:space-between"><span style="color:var(--stitch-outline)">Audio Codec:</span><span style="color:#fff">AAC-LC 320 kbps 48kHz</span></div>
+                <div style="display:flex; justify-content:space-between"><span style="color:var(--stitch-outline)">Master Timing:</span><span style="color:var(--stitch-orange); font-weight:700">Audio-First Authority</span></div>
+                <div style="display:flex; justify-content:space-between"><span style="color:var(--stitch-outline)">Latency:</span><span style="color:var(--stitch-teal)">sub-millisecond</span></div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 4 & 5: VISUAL STYLE & TRANSITIONS EXPLORER
+        =================================================================== -->
+        <section class="rf-view" id="view-style">
+          <div class="rf-home-container" style="max-width:1100px">
+            <div class="rf-section-header">
+              <div>
+                <h2 style="font-size:1.5rem; font-weight:800; letter-spacing:-0.03em">Visual Style &amp; Grading Studio</h2>
+                <p style="font-size:0.85rem; color:var(--rf-muted, #94a3b8)">Color grading presets, canvas aspect ratio, and pacing curves.</p>
+              </div>
+            </div>
+
+            <div class="rf-recent-grid" style="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); margin-top:1rem">
+              <div class="rf-project-card rf-style-card active" data-style-val="cinematic_warm" style="padding:1.25rem; cursor:pointer; border-color:var(--rf-accent, #00f0ff)">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">🌅</div>
+                <div style="font-weight:700">Cinematic Warm</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #94a3b8); margin-top:4px">Golden highlights and soft contrast.</div>
+                <div class="style-active-badge" style="margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Style</div>
+              </div>
+              <div class="rf-project-card rf-style-card" data-style-val="moody_noir" style="padding:1.25rem; cursor:pointer">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">🌃</div>
+                <div style="font-weight:700">Moody Noir</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #94a3b8); margin-top:4px">Deep blacks and atmospheric shadows.</div>
+                <div class="style-active-badge" style="display:none; margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Style</div>
+              </div>
+              <div class="rf-project-card rf-style-card" data-style-val="vivid_tech" style="padding:1.25rem; cursor:pointer">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">⚡</div>
+                <div style="font-weight:700">Vivid Tech</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #94a3b8); margin-top:4px">Electric cyan saturation and high dynamic range.</div>
+                <div class="style-active-badge" style="display:none; margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Style</div>
+              </div>
+              <div class="rf-project-card rf-style-card" data-style-val="natural_doc" style="padding:1.25rem; cursor:pointer">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">🌿</div>
+                <div style="font-weight:700">Natural Documentary</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #94a3b8); margin-top:4px">Balanced organic color reproduction.</div>
+                <div class="style-active-badge" style="display:none; margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Style</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 5: TRANSITIONS PACK EXPLORER -->
+        <section class="rf-view" id="view-transitions">
+          <div class="rf-home-container" style="max-width:1200px">
+            <div class="rf-section-header">
+              <div>
+                <h2 style="font-size:1.5rem; font-weight:800; letter-spacing:-0.03em">20 Native Transition Packs</h2>
+                <p style="font-size:0.85rem; color:var(--rf-muted, #94a3b8)">Zero-drift hardware-accelerated video transitions rendered directly in FFmpeg filtergraphs.</p>
+              </div>
+              <div class="transitions-search" style="display:flex; gap:0.5rem">
+                <input type="text" id="transSearch" class="form-control form-control-sm" placeholder="Search transitions..." style="width:200px">
+              </div>
+            </div>
+
+            <!-- Transition Categories -->
+            <div class="transition-categories" id="transCategoryTabs" style="display:flex; gap:0.5rem; margin:1rem 0">
+              <button class="trans-cat-pill active" data-cat="all">All (20)</button>
+              <button class="trans-cat-pill" data-cat="dissolve">Dissolves</button>
+              <button class="trans-cat-pill" data-cat="wipe">Wipes</button>
+              <button class="trans-cat-pill" data-cat="motion">Motion &amp; Zoom</button>
+              <button class="trans-cat-pill" data-cat="stylized">Stylized</button>
+            </div>
+
+            <!-- Transitions Grid -->
+            <div class="transitions-grid" id="transGrid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 6: RENDER CONSOLE (CENTRAL 3D CORE + REAL TELEMETRY)
+        =================================================================== -->
+        <section class="rf-view" id="view-render">
+          <div class="rf-render-container">
+
+            <!-- Real-time HUD Card -->
+            <div class="rf-render-hud-card">
+              <!-- Left: Interactive 3D Render Core Viewport -->
+              <div class="rf-render-3d-box" id="renderCore3D">
+                <video id="finalVideoPlayer" controls style="display:none; width:100%; height:100%; object-fit:contain; border-radius:8px; background:#000;"></video>
+                <img id="contactSheetImg" style="display:none; max-width:100%; max-height:100%; object-fit:contain; border-radius:8px;" alt="Contact Sheet">
+                <div class="canvas-3d-fallback" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:0.85rem; color:var(--rf-muted, #94a3b8); user-select:none;">
+                  <div style="position:relative; width:72px; height:72px; display:flex; align-items:center; justify-content:center;">
+                    <svg width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--rf-accent, #00f0ff); filter:drop-shadow(0 0 16px var(--rf-accent-glow, rgba(0,240,255,0.4)));">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                      <polyline points="2 17 12 22 22 17"></polyline>
+                      <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                  </div>
+                  <div style="text-align:center">
+                    <div style="font-size:0.78rem; font-family:var(--font-mono, monospace); font-weight:700; letter-spacing:0.08em; color:var(--rf-accent, #00f0ff); text-transform:uppercase;">
+                      RENDER-CORE HUD ENGINE
+                    </div>
+                    <div style="font-size:0.68rem; color:var(--rf-muted, #64748b); font-family:var(--font-mono, monospace); margin-top:3px;">
+                      Hardware-Adaptive 4K Pipeline Ready
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Real-time Render Telemetry -->
+              <div class="rf-render-telemetry-col">
+                <div>
+                  <div class="rf-render-heading" id="renderStatusHeading">READY FOR RENDER</div>
+                  <div class="rf-render-subheading" id="renderObservableBar">
+                    <span id="renderPulseDot" class="pulse-dot"></span>
+                    <span id="renderStateChip">IDLE</span> &bull; 
+                    <span id="renderChunkTracker">Waiting for job</span>
+                  </div>
+
+                  <!-- Telemetry Grid -->
+                  <div class="rf-render-metrics-grid">
+                    <div class="rf-render-metric-item">
+                      <div class="rf-render-metric-label">Resolution</div>
+                      <select class="form-select form-select-sm" id="settingResolutionConsole" style="background:rgba(0,0,0,0.4); border:1px solid rgba(0,240,255,0.3); border-radius:4px; color:var(--rf-accent, #00f0ff); font-weight:700; font-size:0.75rem; padding:2px 4px; cursor:pointer">
+                        <option value="1080p">1080p Full HD</option>
+                        <option value="1440p">1440p 2K QHD</option>
+                        <option value="4k" selected>4K UHD Master</option>
+                      </select>
+                    </div>
+                    <div class="rf-render-metric-item">
+                      <div class="rf-render-metric-label">Framerate</div>
+                      <div class="rf-render-metric-val">30 FPS</div>
+                    </div>
+                    <div class="rf-render-metric-item">
+                      <div class="rf-render-metric-label">Encoder</div>
+                      <div class="rf-render-metric-val" id="rfRenderMetricEncoder" style="color:var(--rf-accent, #00f0ff)">Detecting...</div>
+                    </div>
+                    <div class="rf-render-metric-item">
+                      <div class="rf-render-metric-label">Pacing</div>
+                      <div class="rf-render-metric-val">Performance</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Progress Section -->
+                <div class="rf-render-progress-section">
+                  <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-family:var(--font-mono)">
+                    <span id="terminalStatusText">Engine Idle</span>
+                    <span id="renderProgressPercent" style="color:var(--rf-accent, #00f0ff); font-weight:700">0%</span>
+                  </div>
+                  <div class="rf-progress-bar-wrap">
+                    <div class="rf-progress-bar-fill" id="renderProgressBarFill"></div>
+                  </div>
+
+                  <!-- Step Chips -->
+                  <div style="display:flex; gap:0.5rem; margin-top:4px">
+                    <span class="rf-pill" id="stepChip1">1. Audio Sync</span>
+                    <span class="rf-pill" id="stepChip2">2. Chunk Encoding</span>
+                    <span class="rf-pill" id="stepChip3">3. Final Assembly</span>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="rf-render-actions-bar">
+                  <button class="rf-btn-primary-lg" id="btnStartRender">
+                    <span>⚡</span> Start Hardware-Accelerated Render
+                  </button>
+                  <button class="rf-btn-secondary-lg" id="btnCancelRender" style="display:none; color:var(--rf-danger, #ef4444)">
+                    ✕ Cancel Render
+                  </button>
+                  <a class="rf-btn-secondary-lg" id="btnDownloadVideo" style="display:none; text-decoration:none;" target="_blank" download>
+                    ⬇ Download Video
+                  </a>
+                  <button class="btn btn-secondary btn-sm" id="btnZoomSheet" style="display:none">
+                    🔍 Contact Sheet
+                  </button>
+                </div>
+
+                <!-- Caption Sidecars Export Card -->
+                <div id="captionExportsCard" style="display:none; margin-top:0.75rem; padding:0.6rem 0.85rem; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:8px;">
+                  <div style="font-size:0.72rem; color:var(--rf-muted, #94a3b8); margin-bottom:0.4rem; font-family:var(--font-mono)">EXPORTED CAPTION SIDECARS</div>
+                  <div style="display:flex; gap:0.5rem; flex-wrap:wrap">
+                    <a class="btn btn-secondary btn-sm" id="btnDownloadSrt" style="display:none; text-decoration:none;" download target="_blank">📄 Download SRT</a>
+                    <a class="btn btn-secondary btn-sm" id="btnDownloadAss" style="display:none; text-decoration:none;" download target="_blank">🎨 Download ASS</a>
+                    <a class="btn btn-secondary btn-sm" id="btnDownloadJson" style="display:none; text-decoration:none;" download target="_blank">📦 Download JSON</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-time Terminal Log Console -->
+            <div style="background:var(--rf-panel, rgba(20,29,48,0.65)); border:1px solid rgba(255,255,255,0.08); border-radius:10px; overflow:hidden">
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06); background:rgba(0,0,0,0.3)">
+                <span style="font-size:0.75rem; font-weight:700; color:var(--rf-muted, #94a3b8); font-family:var(--font-mono)">FFMPEG &amp; WORKSTATION STREAM LOG</span>
+                <div style="display:flex; gap:0.4rem">
+                  <button class="btn btn-secondary btn-sm" id="btnClearLogs" style="font-size:0.7rem">Clear</button>
+                  <button class="btn btn-secondary btn-sm" id="btnCopyLogs" style="font-size:0.7rem">Copy</button>
+                </div>
+              </div>
+              <div class="terminal-body" id="terminalBody" style="height:220px; overflow-y:auto; padding:0.75rem; font-family:var(--font-mono); font-size:0.75rem; background:#04060a">
+                <div style="color:var(--rf-muted, #64748b)">RenderFlow v2.2.3 Workstation Initialized. Ready for render job.</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 7: PERFORMANCE & 4K PROFILES
+        =================================================================== -->
+        <section class="rf-view" id="view-performance">
+          <div class="rf-home-container" style="max-width:1100px">
+            <div class="rf-section-header">
+              <div>
+                <h2 style="font-size:1.5rem; font-weight:800; letter-spacing:-0.03em">Performance &amp; 4K UHD Profiles</h2>
+                <p style="font-size:0.85rem; color:var(--rf-muted, #94a3b8)">Hardware-aware rendering profiles balancing speed, memory consumption, and final visual fidelity.</p>
+              </div>
+            </div>
+
+            <div class="rf-recent-grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); margin-top:1.5rem">
+              <!-- Eco -->
+              <div class="rf-project-card rf-perf-profile-card" data-profile-val="eco" style="padding:1.5rem; cursor:pointer">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">🌱</div>
+                <div style="font-weight:700; font-size:1.1rem">Eco Profile</div>
+                <div style="font-size:0.75rem; color:var(--rf-muted, #94a3b8); margin:0.5rem 0">Low-end PCs and laptops. Prioritizes bounded RAM (&lt;45MB), conservative chunking, and CPU safety.</div>
+                <div class="rf-pill">Low RAM Footprint</div>
+                <div class="perf-active-badge" style="display:none; margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Profile</div>
+              </div>
+
+              <!-- Balanced -->
+              <div class="rf-project-card rf-perf-profile-card active" data-profile-val="balanced" style="padding:1.5rem; cursor:pointer; border-color:var(--rf-accent, #00f0ff)">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">⚖️</div>
+                <div style="font-weight:700; font-size:1.1rem; color:var(--rf-accent, #00f0ff)">Balanced Profile (Default)</div>
+                <div style="font-size:0.75rem; color:var(--rf-muted, #94a3b8); margin:0.5rem 0">Default production path. Optimal balance between render throughput, CPU parallelism, and image quality.</div>
+                <div class="rf-pill accent">Recommended</div>
+                <div class="perf-active-badge" style="margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Profile</div>
+              </div>
+
+              <!-- Performance -->
+              <div class="rf-project-card rf-perf-profile-card" data-profile-val="performance" style="padding:1.5rem; cursor:pointer">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">🚀</div>
+                <div style="font-weight:700; font-size:1.1rem">Performance Profile</div>
+                <div style="font-size:0.75rem; color:var(--rf-muted, #94a3b8); margin:0.5rem 0">High-end PCs. Verified hardware encoders (NVENC/QSV), larger chunks, and parallel frame workers.</div>
+                <div class="rf-pill">Hardware Acceleration</div>
+                <div class="perf-active-badge" style="display:none; margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Profile</div>
+              </div>
+
+              <!-- Max Quality -->
+              <div class="rf-project-card rf-perf-profile-card" data-profile-val="max_quality" style="padding:1.5rem; cursor:pointer">
+                <div style="font-size:1.8rem; margin-bottom:0.5rem">💎</div>
+                <div style="font-weight:700; font-size:1.1rem">Max Quality Profile</div>
+                <div style="font-size:0.75rem; color:var(--rf-muted, #94a3b8); margin:0.5rem 0">Studio mastering. Highest encoder quality, 4K UHD 60 FPS, slow motion precision, and pristine filtergraphs.</div>
+                <div class="rf-pill">4K UHD Master</div>
+                <div class="perf-active-badge" style="display:none; margin-top:0.5rem; font-size:0.7rem; color:var(--rf-accent, #00f0ff); font-weight:700">✓ Active Profile</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VIEW 8: HARDWARE TELEMETRY & ACCELERATION
+        =================================================================== -->
+        <section class="rf-view" id="view-hardware">
+          <div class="rf-home-container" style="max-width:1100px">
+            <div class="rf-section-header">
+              <div>
+                <h2 style="font-size:1.5rem; font-weight:800; letter-spacing:-0.03em">System Hardware &amp; Telemetry</h2>
+                <p style="font-size:0.85rem; color:var(--rf-muted, #94a3b8)">Live hardware detection, GPU encoder status, and memory metrics.</p>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btnRefreshHwTelemetry">🔄 Refresh Diagnostics</button>
+            </div>
+
+            <!-- Hardware Telemetry Cards -->
+            <div class="rf-recent-grid" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); margin-top:1.5rem">
+              <!-- CPU Card -->
+              <div class="rf-project-card" style="padding:1.25rem">
+                <div style="font-size:1.5rem; margin-bottom:0.4rem">🧠</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #64748b); text-transform:uppercase">Processor (CPU)</div>
+                <div style="font-size:0.95rem; font-weight:700; margin:4px 0" id="hwCpuModel">Detecting CPU...</div>
+                <div style="font-size:0.75rem; color:var(--rf-muted, #94a3b8)" id="hwCpuCores">Detecting cores...</div>
+              </div>
+
+              <!-- RAM Card -->
+              <div class="rf-project-card" style="padding:1.25rem">
+                <div style="font-size:1.5rem; margin-bottom:0.4rem">💾</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #64748b); text-transform:uppercase">System Memory</div>
+                <div style="font-size:0.95rem; font-weight:700; margin:4px 0" id="hwRamUsage">Detecting RAM...</div>
+                <div style="font-size:0.75rem; color:var(--rf-success, #10b981)" id="hwRamStatus">Measuring footprint...</div>
+              </div>
+
+              <!-- GPU & Encoder Card -->
+              <div class="rf-project-card" style="padding:1.25rem">
+                <div style="font-size:1.5rem; margin-bottom:0.4rem">⚡</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #64748b); text-transform:uppercase">GPU &amp; Encoder</div>
+                <div style="font-size:0.95rem; font-weight:700; margin:4px 0" id="hwGpuModel">Detecting GPU...</div>
+                <div style="font-size:0.75rem; color:var(--rf-accent, #00f0ff)" id="hwGpuStatus">Probing hardware encoders...</div>
+              </div>
+
+              <!-- FFmpeg Engine -->
+              <div class="rf-project-card" style="padding:1.25rem">
+                <div style="font-size:1.5rem; margin-bottom:0.4rem">🛠️</div>
+                <div style="font-size:0.72rem; color:var(--rf-muted, #64748b); text-transform:uppercase">FFmpeg Runtime</div>
+                <div style="font-size:0.95rem; font-weight:700; margin:4px 0" id="sysFfmpeg">Probing FFmpeg...</div>
+                <div style="font-size:0.75rem; color:var(--rf-success, #10b981)" id="sysPack">Probing Packs...</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL DIALOGS & OVERLAYS
+  =================================================================== -->
+
+  <!-- Create New Project Modal (§11: Asks ONLY for Project Name) -->
+  <div id="uploadModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:1000; align-items:center; justify-content:center;">
+    <div class="glass-panel" style="width:480px; max-width:92vw; margin:0; border-radius:12px; border:1px solid var(--rf-border, rgba(0,240,255,0.25)); box-shadow:0 12px 40px rgba(0,0,0,0.7);">
+      <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; padding:1.2rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.08);">
+        <div class="panel-title" style="font-size:1.15rem; font-weight:700; color:#fff; display:flex; align-items:center; gap:0.5rem">
+          <span style="color:var(--rf-accent, #00f0ff)">✨</span> Create New Project
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseUpload">✕</button>
+      </div>
+      <div class="panel-body" style="padding:1.5rem;">
+        <div class="form-group" style="margin-bottom:1.5rem">
+          <label class="form-label" style="font-size:0.85rem; font-weight:600; margin-bottom:0.5rem; display:block">Project Name</label>
+          <input type="text" class="form-control" id="uploadProjectName" placeholder="e.g. My Documentary" value="" autofocus style="font-size:0.95rem; padding:0.65rem 0.85rem;">
+          <small style="font-size:0.75rem; color:var(--rf-muted, #94a3b8); margin-top:0.4rem; display:block">
+            Creates a dedicated persistent project workspace for audio, images, transcript, and render artifacts.
+          </small>
+        </div>
+        <div style="display:none">
+          <input type="file" id="uploadFileInput" multiple style="display:none">
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:0.6rem">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnCancelCreateProject">Cancel</button>
+          <button type="button" class="rf-btn-primary-lg" style="justify-content:center; padding:0.65rem 1.4rem" id="btnSubmitUpload">
+            <span>+</span> Create Project
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI & Transcription Settings Modal -->
+  <div id="aiSettingsModal" class="modal-overlay" style="display:none">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title"><span>🧠</span> AI &amp; Transcription Intelligence</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseAISettings">✕</button>
+      </div>
+      <div>
+        <div class="form-group">
+          <label class="form-label">STT Provider</label>
+          <select class="form-select" id="aiSttProvider">
+            <option value="auto" selected>Auto (Local Whisper Offline / Deepgram)</option>
+            <option value="local_whisper">Local Whisper (100% Offline)</option>
+            <option value="deepgram">Deepgram Nova-3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Deepgram Model</label>
+          <select class="form-select" id="aiDeepgramModel">
+            <option value="nova-3" selected>Nova-3 (Recommended)</option>
+            <option value="nova-2">Nova-2</option>
+          </select>
+        </div>
+        <div style="display:flex; gap:1rem; margin:1rem 0">
+          <label style="display:flex; align-items:center; gap:0.4rem">
+            <input type="checkbox" id="aiSmartFormatting" checked>
+            <span>Smart Formatting</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:0.4rem">
+            <input type="checkbox" id="aiWordTimestamps" checked>
+            <span>Word Timestamps</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:0.4rem">
+            <input type="checkbox" id="aiUtterances" checked>
+            <span>Utterances</span>
+          </label>
+          <label style="display:flex; align-items:center; gap:0.4rem">
+            <input type="checkbox" id="aiDiarization">
+            <span>Diarization</span>
+          </label>
+        </div>
+        <div style="display:none">
+          <select id="aiLlmProvider"><option value="auto">Auto</option></select>
+          <input type="text" id="aiLlmModel">
+          <select id="aiCaptionMode"><option value="clean">Clean</option></select>
+          <select id="aiQualityLevel"><option value="balanced">Balanced</option></select>
+          <input type="checkbox" id="aiCreativeRewrite">
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:1rem">
+          <button class="btn btn-secondary btn-sm" id="btnTestAIConnection">Test STT</button>
+          <span id="aiConnectionStatus" style="font-size:0.75rem; color:var(--rf-muted, #94a3b8)">Ready</span>
+          <button class="btn btn-primary btn-sm" id="btnSaveAISettings">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dedicated AI Credentials Modal -->
+  <div id="aiCredentialsModal" class="modal-overlay" style="display:none">
+    <div class="modal-content modal-wide">
+      <div class="modal-header">
+        <div class="modal-title"><span>🔑</span> AI Provider &amp; API Credentials Center</div>
+        <div style="display:flex; gap:0.5rem">
+          <button class="btn btn-secondary btn-sm" id="btnRefreshAllCredentials">🔄 Refresh</button>
+          <button class="btn btn-secondary btn-sm" id="btnCloseAICredentials">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="credentials-security-banner">
+          <div>🛡️ Server-Side Secure Storage: Keys are masked and never exposed to client-side logs.</div>
+        </div>
+        <div class="credentials-overview">
+          <div class="credentials-stat-pill">Providers: <strong id="credTotalProviders">9 Total</strong></div>
+          <div class="credentials-stat-pill">Configured: <strong id="credConfiguredCount">0</strong></div>
+          <div class="credentials-stat-pill">Connected: <strong id="credConnectedCount">0</strong></div>
+          <div class="credentials-stat-pill">STT: <strong id="credSttActive">Local Whisper Small</strong></div>
+          <div class="credentials-stat-pill">Routing: <strong id="credLlmActive">Auto Priority</strong></div>
+        </div>
+        <div class="credentials-grid" id="credentialsCardsGrid"></div>
+        <div class="fallback-steps-row" id="fallbackChainSteps"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Comparison Modal -->
+  <div id="aiComparisonModal" class="modal-overlay" style="display:none">
+    <div class="modal-content" style="max-width:850px">
+      <div class="modal-header">
+        <div class="modal-title"><span>🪄</span> Caption AI Comparison</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseAIComparison">✕</button>
+      </div>
+      <div>
+        <input type="text" class="form-control" id="aiComparisonInput" value="you do not need ten thousand followers to make good money on the internet today">
+        <button class="btn btn-primary btn-sm" id="btnRunComparison" style="margin-top:0.5rem">Run AI</button>
+        <div style="display:none">
+          <div id="aiOriginalText"></div>
+          <div id="aiCleanText"></div>
+          <div id="aiCleanEmphasis"></div>
+          <button id="btnApplyClean"></button>
+          <div id="aiViralText"></div>
+          <div id="aiViralEmphasis"></div>
+          <button id="btnApplyViral"></button>
+          <button id="btnRestoreOriginal"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Sheet Lightbox Modal -->
+  <div id="sheetModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:2000; align-items:center; justify-content:center; cursor:pointer">
+    <img id="sheetModalImg" src="" style="max-width:90vw; max-height:90vh; border-radius:8px">
+  </div>
+
+  <!-- Clear Media Modal -->
+  <div id="clearMediaModal" class="modal-overlay" style="display:none">
+    <div class="modal-content" style="max-width:440px">
+      <div class="modal-header">
+        <div class="modal-title" style="color:var(--rf-danger, #ef4444)">⚠️ Clear Current Media?</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseClearMedia">✕</button>
+      </div>
+      <div>
+        <p style="font-size:0.85rem; color:var(--rf-muted, #94a3b8)">This will reset the media bin and timeline scenes for this project.</p>
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem">
+          <button class="btn btn-secondary btn-sm" id="btnCancelClearMedia">Cancel</button>
+          <button class="btn btn-danger btn-sm" id="btnConfirmClearMedia">Clear Media</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Review Queue Modal -->
+  <div id="reviewQueueModal" class="modal-overlay" style="display:none">
+    <div class="modal-content" style="max-width:680px">
+      <div class="modal-header">
+        <div class="modal-title">🔍 Review Low-Confidence Sync Cuts</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseReviewQueue">✕</button>
+      </div>
+      <div>
+        <div id="reviewQueueContent"></div>
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1rem">
+          <button class="btn btn-secondary btn-sm" id="btnCancelReviewQueue">Cancel</button>
+          <button class="btn btn-primary btn-sm" id="btnApplyReviewQueue">Apply Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hardware Diagnostics Modal -->
+  <div id="hardwareDiagModal" class="modal-overlay" style="display:none">
+    <div class="modal-content" style="max-width:700px">
+      <div class="modal-header">
+        <div class="modal-title">⚡ RenderFlow Hardware &amp; Encoder Telemetry</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseHardwareDiag">✕</button>
+      </div>
+      <div id="hardwareDiagContent" style="padding:1rem">
+        <!-- Injected by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- System Health Modal -->
+  <div id="systemHealthModal" class="modal-overlay" style="display:none">
+    <div class="modal-content" style="max-width:750px">
+      <div class="modal-header">
+        <div class="modal-title">🩺 Workstation Health &amp; Production Readiness</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseSystemHealth">✕</button>
+      </div>
+      <div id="systemHealthContent" style="padding:1rem">
+        <!-- Injected by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- About RenderFlow Modal -->
+  <div id="aboutModal" class="modal-overlay" style="display:none">
+    <div class="modal-content" style="max-width:550px; text-align:center">
+      <div style="font-size:3rem; margin-bottom:0.5rem">🎬</div>
+      <h2 style="font-size:1.8rem; font-weight:800; letter-spacing:-0.03em">RenderFlow</h2>
+      <div style="font-size:0.95rem; font-weight:700; color:var(--rf-accent, #00f0ff); margin-bottom:0.75rem">by AI With Atif</div>
+      <p style="font-size:0.85rem; color:var(--rf-muted, #94a3b8); margin-bottom:1.5rem">
+        Professional Cinematic Desktop Rendering Workstation.<br>
+        <span id="aboutModalVersion" style="color:var(--rf-accent, #00f0ff); font-weight:700">v2.2.3</span> &bull; Hardware-Adaptive Acceleration &bull; 4K UHD
+      </p>
+      <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.85rem; text-align:left; font-size:0.78rem; font-family:var(--font-mono); margin-bottom:1.5rem">
+        <div>• FFmpeg Engine: v9.0.2 (Essentials Build)</div>
+        <div>• STT: faster-whisper (Small, Offline Cached)</div>
+        <div>• Output Canvas: 1080p / 1440p / 4K UHD</div>
+        <div>• Encoders: NVENC / QSV / AMF / CPU libx264</div>
+        <div>• Native Transitions: 20 Pack Filtergraphs</div>
+        <div>• UI Themes: Glass, Muddy, Apple, F1</div>
+      </div>
+      <div style="display:flex; gap:0.6rem; justify-content:center">
+        <button type="button" class="btn btn-secondary btn-sm" id="btnAboutCheckUpdate" style="flex:1; justify-content:center; display:inline-flex; align-items:center; gap:6px">
+          <span>🚀</span> Check for Updates
+        </button>
+        <button type="button" class="rf-btn-primary-lg" id="btnCloseAboutModal" style="flex:1; justify-content:center">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREMIUM WORKSTATION THEME PICKER POPOVER -->
+  <div id="themePickerPopover" class="rf-theme-popover-wrap" role="dialog" aria-modal="true" aria-labelledby="themePickerTitle">
+    <div class="rf-theme-popover-backdrop" id="themePickerBackdrop"></div>
+    <div class="rf-theme-popover-card">
+      <div class="rf-theme-popover-header">
+        <div>
+          <div class="rf-theme-popover-title" id="themePickerTitle">Workstation Appearance &amp; Themes</div>
+          <div class="rf-theme-popover-subtitle">Select visual identity &bull; RenderFlow by AI With Atif</div>
+        </div>
+        <button class="rf-theme-close-btn" id="btnCloseThemePicker" aria-label="Close theme picker">✕</button>
+      </div>
+
+      <div class="rf-theme-grid" id="themePickerGrid">
+        <!-- 01 GLASS -->
+        <div class="rf-theme-card active" data-theme-val="glass" tabindex="0" role="button" aria-pressed="true">
+          <div class="rf-theme-card-top">
+            <div class="rf-theme-label">
+              <span class="rf-theme-indicator-dot dot-glass"></span>
+              <strong>GLASS</strong>
+            </div>
+            <span class="rf-theme-check" id="checkBadge_glass">✓ Active</span>
+          </div>
+          <div class="rf-mini-preview preview-glass">
+            <div class="rf-mini-topbar">
+              <span class="rf-mini-brand">RF</span>
+              <span class="rf-mini-dot">●</span>
+            </div>
+            <div class="rf-mini-body">
+              <div class="rf-mini-sidebar">
+                <div class="rf-mini-nav active"></div>
+                <div class="rf-mini-nav"></div>
+                <div class="rf-mini-nav"></div>
+              </div>
+              <div class="rf-mini-viewport">
+                <div class="rf-mini-card">
+                  <div class="rf-mini-text-line short"></div>
+                  <div class="rf-mini-accent-strip"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rf-theme-desc">Frosted cinematic workstation</div>
+        </div>
+
+        <!-- 02 MUDDY -->
+        <div class="rf-theme-card" data-theme-val="muddy" tabindex="0" role="button" aria-pressed="false">
+          <div class="rf-theme-card-top">
+            <div class="rf-theme-label">
+              <span class="rf-theme-indicator-dot dot-muddy"></span>
+              <strong>MUDDY</strong>
+            </div>
+            <span class="rf-theme-check" id="checkBadge_muddy" style="display:none">✓ Active</span>
+          </div>
+          <div class="rf-mini-preview preview-muddy">
+            <div class="rf-mini-topbar">
+              <span class="rf-mini-brand">RF</span>
+              <span class="rf-mini-dot">●</span>
+            </div>
+            <div class="rf-mini-body">
+              <div class="rf-mini-sidebar">
+                <div class="rf-mini-nav active"></div>
+                <div class="rf-mini-nav"></div>
+                <div class="rf-mini-nav"></div>
+              </div>
+              <div class="rf-mini-viewport">
+                <div class="rf-mini-card">
+                  <div class="rf-mini-text-line short"></div>
+                  <div class="rf-mini-accent-strip"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rf-theme-desc">Warm editorial studio</div>
+        </div>
+
+        <!-- 03 APPLE -->
+        <div class="rf-theme-card" data-theme-val="apple" tabindex="0" role="button" aria-pressed="false">
+          <div class="rf-theme-card-top">
+            <div class="rf-theme-label">
+              <span class="rf-theme-indicator-dot dot-apple"></span>
+              <strong>APPLE</strong>
+            </div>
+            <span class="rf-theme-check" id="checkBadge_apple" style="display:none">✓ Active</span>
+          </div>
+          <div class="rf-mini-preview preview-apple">
+            <div class="rf-mini-topbar">
+              <span class="rf-mini-brand">RF</span>
+              <span class="rf-mini-dot">●</span>
+            </div>
+            <div class="rf-mini-body">
+              <div class="rf-mini-sidebar">
+                <div class="rf-mini-nav active"></div>
+                <div class="rf-mini-nav"></div>
+                <div class="rf-mini-nav"></div>
+              </div>
+              <div class="rf-mini-viewport">
+                <div class="rf-mini-card">
+                  <div class="rf-mini-text-line short"></div>
+                  <div class="rf-mini-accent-strip"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rf-theme-desc">Minimal spatial interface</div>
+        </div>
+
+        <!-- 04 F1 -->
+        <div class="rf-theme-card" data-theme-val="f1" tabindex="0" role="button" aria-pressed="false">
+          <div class="rf-theme-card-top">
+            <div class="rf-theme-label">
+              <span class="rf-theme-indicator-dot dot-f1"></span>
+              <strong>F1</strong>
+            </div>
+            <span class="rf-theme-check" id="checkBadge_f1" style="display:none">✓ Active</span>
+          </div>
+          <div class="rf-mini-preview preview-f1">
+            <div class="rf-mini-topbar">
+              <span class="rf-mini-brand">RF</span>
+              <span class="rf-mini-dot">●</span>
+            </div>
+            <div class="rf-mini-body">
+              <div class="rf-mini-sidebar">
+                <div class="rf-mini-nav active"></div>
+                <div class="rf-mini-nav"></div>
+                <div class="rf-mini-nav"></div>
+              </div>
+              <div class="rf-mini-viewport">
+                <div class="rf-mini-card">
+                  <div class="rf-mini-text-line short"></div>
+                  <div class="rf-mini-accent-strip"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rf-theme-desc">Performance telemetry</div>
+        </div>
+
+        <!-- 05 CONCAT PRO -->
+        <div class="rf-theme-card" data-theme-val="concat-pro" tabindex="0" role="button" aria-pressed="false">
+          <div class="rf-theme-card-top">
+            <div class="rf-theme-label">
+              <span class="rf-theme-indicator-dot dot-concat-pro"></span>
+              <strong>CONCAT PRO</strong>
+            </div>
+            <span class="rf-theme-check" id="checkBadge_concat_pro" style="display:none">✓ Active</span>
+          </div>
+          <div class="rf-mini-preview preview-concat-pro">
+            <div class="rf-mini-topbar">
+              <span class="rf-mini-brand">CONCAT</span>
+              <span class="rf-mini-dot">●</span>
+            </div>
+            <div class="rf-mini-body">
+              <div class="rf-mini-sidebar">
+                <div class="rf-mini-nav active"></div>
+                <div class="rf-mini-nav"></div>
+                <div class="rf-mini-nav"></div>
+              </div>
+              <div class="rf-mini-viewport">
+                <div class="rf-mini-card">
+                  <div class="rf-mini-text-line short"></div>
+                  <div class="rf-mini-accent-strip"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rf-theme-desc">Pro NLE dark slate &amp; lime</div>
+        </div>
+      </div>
+
+      <div class="rf-theme-popover-footer">
+        <div class="rf-theme-footer-status">
+          Current: <strong id="themeCurrentStatusText">GLASS ✓</strong>
+        </div>
+        <div class="rf-theme-footer-keys">
+          <span><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> Navigate &bull; <kbd>Enter</kbd> Select &bull; <kbd>Esc</kbd> Close</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL (APPEARANCE & WORKSTATION PREFERENCES) -->
+  <div id="settingsModal" class="modal-overlay" style="display:none">
+    <div class="modal-content" style="max-width:680px">
+      <div class="modal-header">
+        <div class="modal-title"><span>⚙️</span> Workstation Settings &amp; Preferences</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseSettingsModal">✕</button>
+      </div>
+      <div class="modal-body" style="padding:1.5rem">
+        <div class="rf-settings-group">
+          <h4 style="font-size:0.95rem; font-weight:700; color:var(--rf-accent, #00f0ff); margin-bottom:0.35rem">🎨 Appearance</h4>
+          <p style="font-size:0.8rem; color:var(--rf-muted, #94a3b8); margin-bottom:1.25rem">Configure visual theme identity, motion behavior, and 3D viewport engine.</p>
+          
+          <div style="display:grid; grid-template-columns: 140px 1fr; gap:1rem; align-items:center; margin-bottom:1.1rem">
+            <label style="font-size:0.84rem; font-weight:600">Theme</label>
+            <select id="settingsThemeSelect" class="form-select">
+              <option value="glass">Glass (Frosted cinematic workstation)</option>
+              <option value="muddy">Muddy (Warm editorial studio)</option>
+              <option value="apple">Apple (Minimal spatial interface)</option>
+              <option value="f1">F1 (Performance telemetry)</option>
+              <option value="concat-pro">Concat Pro (Pro NLE dark slate &amp; lime)</option>
+            </select>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 140px 1fr; gap:1rem; align-items:center; margin-bottom:1.1rem">
+            <label style="font-size:0.84rem; font-weight:600">Animation</label>
+            <select id="settingsAnimSelect" class="form-select">
+              <option value="full">Full (Fluid 60 FPS)</option>
+              <option value="reduced">Reduced (Accessible)</option>
+              <option value="minimal">Minimal (Snappy)</option>
+              <option value="off">Off (Zero Animation)</option>
+            </select>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 140px 1fr; gap:1rem; align-items:center; margin-bottom:1.1rem">
+            <label style="font-size:0.84rem; font-weight:600">3D Effects</label>
+            <select id="settings3dSelect" class="form-select">
+              <option value="auto">Auto (Hardware Probed)</option>
+              <option value="high">High (Full WebGL / Octahedron)</option>
+              <option value="medium">Medium (Standard WebGL)</option>
+              <option value="low">Low (2D High-Speed Canvas)</option>
+              <option value="disabled">Disabled (Static Blueprint)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- SOFTWARE UPDATES SECTION — COMPLETE INSTALLER ARCHITECTURE -->
+        <div class="rf-settings-group" id="updateCenterSection" style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid rgba(255,255,255,0.08)">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem">
+            <h4 style="font-size:0.95rem; font-weight:700; color:var(--rf-accent, #00f0ff); margin:0; display:flex; align-items:center; gap:6px">
+              <span>🚀</span> Update Center
+            </h4>
+            <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap">
+              <span class="badge" id="updateVersionBadge" style="background:rgba(0,240,255,0.15); color:var(--rf-accent, #00f0ff); border:1px solid rgba(0,240,255,0.3); font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:600">v2.5.0</span>
+              <span class="badge" id="updateLatestBadge" style="display:none; background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-size:0.75rem; padding:2px 8px; border-radius:12px; font-weight:600">Latest: --</span>
+              <span class="badge" id="updateChannelBadge" style="background:rgba(255,255,255,0.06); color:#94a3b8; font-size:0.7rem; padding:2px 6px; border-radius:10px">STABLE</span>
+              <a href="https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases" target="_blank" rel="noopener noreferrer" style="color:var(--rf-accent, #00f0ff); font-size:0.72rem; text-decoration:none; display:inline-flex; align-items:center; gap:3px; padding:2px 6px; border:1px solid rgba(0,240,255,0.25); border-radius:6px; background:rgba(0,240,255,0.05)">
+                <span>🌐</span> Official Releases
+              </a>
+            </div>
+          </div>
+          <p style="font-size:0.8rem; color:var(--rf-muted, #94a3b8); margin-bottom:1rem">
+            Production-grade complete installer updates. Cryptographically verified with RFC 8032 Ed25519 &amp; SHA-256. User projects, media, settings, and credentials remain 100% preserved.
+          </p>
+
+          <!-- Status / Action Row -->
+          <div style="background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:0.9rem; margin-bottom:1rem">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem">
+              <div>
+                <div style="font-size:0.84rem; font-weight:600; display:flex; align-items:center; gap:0.5rem">
+                  <span>Status:</span>
+                  <span id="updateStatusText" style="color:#94a3b8; font-weight:500">Not checked yet</span>
+                </div>
+                <div id="updateLastCheckedText" style="font-size:0.72rem; color:#64748b; margin-top:2px">Click "Check for Updates" to verify against official GitHub Releases</div>
+              </div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnViewDiagnostics" style="font-size:0.72rem; padding:3px 8px; display:inline-flex; align-items:center; gap:4px">
+                  <span>📋</span> Diagnostics
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnCheckUpdates" style="display:inline-flex; align-items:center; gap:5px">
+                  <span id="checkUpdatesIcon">🔄</span>
+                  <span id="checkUpdatesLabel">Check for Updates</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Details Card (shown when update available or downloading) -->
+            <div id="updateDetailsBox" style="display:none; margin-top:0.85rem; padding-top:0.85rem; border-top:1px solid rgba(255,255,255,0.08)">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem">
+                <div style="font-size:0.84rem; font-weight:700; color:#fff" id="updateTargetTitle">RenderFlow Update Available</div>
+                <div style="display:flex; align-items:center; gap:6px">
+                  <span id="updateTypeTag" style="font-size:0.7rem; padding:2px 6px; border-radius:4px; background:#0ea5e9; color:#fff; text-transform:uppercase; font-weight:700">COMPLETE INSTALLER</span>
+                  <span id="updateSpeedBadge" style="display:none; font-size:0.7rem; padding:2px 6px; border-radius:4px; background:rgba(0,240,255,0.15); color:var(--rf-accent, #00f0ff); font-family:var(--font-mono); font-weight:600">0 KB/s</span>
+                </div>
+              </div>
+              <div id="updateMetaRow" style="font-size:0.75rem; color:#94a3b8; display:flex; gap:1.25rem; margin-bottom:0.6rem; flex-wrap:wrap">
+                <span>📦 Size: <strong id="updatePackageSize" style="color:#cbd5e1">--</strong></span>
+                <span>🛡️ Auth: <strong style="color:#10b981">Ed25519 &amp; SHA-256 Verified</strong></span>
+                <span id="updateByteCounts" style="display:none">📥 Progress: <strong id="updateBytesText" style="color:#cbd5e1">0 / 0 MB</strong></span>
+              </div>
+              <div id="updateReleaseNotesBox" style="max-height:110px; overflow-y:auto; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.05); border-radius:6px; padding:0.6rem; font-size:0.76rem; color:#cbd5e1; line-height:1.4; margin-bottom:0.85rem; white-space:pre-line">
+              </div>
+
+              <!-- Download Progress Container -->
+              <div id="updateProgressContainer" style="display:none; margin-bottom:0.85rem">
+                <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:4px; color:#94a3b8">
+                  <span id="updateProgressMsg">Downloading installer package...</span>
+                  <span id="updateProgressPct">0%</span>
+                </div>
+                <div style="height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden">
+                  <div id="updateProgressBar" style="width:0%; height:100%; background:linear-gradient(90deg, #00f0ff, #38bdf8); transition:width 0.2s ease"></div>
+                </div>
+              </div>
+
+              <!-- Action buttons inside details box -->
+              <div style="display:flex; justify-content:flex-end; gap:0.6rem; flex-wrap:wrap" id="updateActionButtonsRow">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnCancelDownload" style="display:none; color:#fca5a5; border-color:rgba(239,68,68,0.4); background:rgba(239,68,68,0.1)">
+                  ✕ Cancel Download
+                </button>
+                <button type="button" class="rf-btn-primary btn-sm" id="btnDownloadUpdate">
+                  ⬇️ Download Latest Version
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnLaunchInstaller" style="display:none; background:#0ea5e9; border-color:#0284c7; color:#fff; font-weight:700">
+                  📦 Launch Installer &amp; Update
+                </button>
+              </div>
+            </div>
+
+            <!-- Error message banner if any with Retry and Recovery button -->
+            <div id="updateErrorBanner" style="display:none; margin-top:0.75rem; padding:0.6rem 0.85rem; border-radius:6px; background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3); color:#fca5a5; font-size:0.76rem">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; flex-wrap:wrap">
+                <span id="updateErrorText">⚠️ Error</span>
+                <div style="display:flex; gap:0.4rem">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnShowRecovery" style="font-size:0.7rem; padding:2px 8px">Recovery Guide</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnRetryUpdate" style="font-size:0.7rem; padding:2px 8px">Retry</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recovery Guide Box (shown on request or critical error) -->
+            <div id="updateRecoveryBox" style="display:none; margin-top:0.75rem; padding:0.75rem; border-radius:6px; background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.1); color:#cbd5e1; font-size:0.75rem; line-height:1.45">
+              <div style="font-weight:700; color:#38bdf8; margin-bottom:4px; display:flex; align-items:center; gap:5px">
+                <span>🛡️</span> Safe Manual Recovery Guide
+              </div>
+              <p style="margin:0 0 6px 0; color:#94a3b8">Your projects, media assets, settings, and AI credentials remain 100% safe.</p>
+              <ol style="margin:0 0 8px 18px; padding:0">
+                <li>Download the latest standalone installer directly from <a href="https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases" target="_blank" style="color:#38bdf8">GitHub Releases</a>.</li>
+                <li>Close RenderFlow, run the setup wizard, and install to your existing location.</li>
+                <li>Relaunch RenderFlow; your workspace and configurations will automatically be preserved.</li>
+              </ol>
+              <div style="font-size:0.7rem; color:#64748b" id="updateDiagnosticsPathText">Diagnostic log: .cache/updates/update_diagnostics.log</div>
+            </div>
+
+            <!-- Diagnostics Viewer Box -->
+            <div id="updateDiagnosticsBox" style="display:none; margin-top:0.75rem; padding:0.6rem; border-radius:6px; background:#0f172a; border:1px solid rgba(255,255,255,0.1); color:#94a3b8; font-size:0.7rem; font-family:var(--font-mono, monospace)">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px">
+                <strong style="color:#e2e8f0">Recent Diagnostic Events</strong>
+                <button type="button" class="btn btn-sm btn-link" id="btnCloseDiagnostics" style="color:#64748b; font-size:0.7rem; padding:0">✕ Close</button>
+              </div>
+              <div id="updateDiagnosticsContent" style="max-height:120px; overflow-y:auto; white-space:pre-wrap; color:#cbd5e1">Loading diagnostics...</div>
+            </div>
+
+            <!-- Success message banner -->
+            <div id="updateSuccessBanner" style="display:none; margin-top:0.75rem; padding:0.6rem 0.85rem; border-radius:6px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); color:#6ee7b7; font-size:0.76rem">
+              <span>🎉 <strong id="updateSuccessText">Successfully updated to the latest version of RenderFlow!</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1.5rem">
+          <button class="btn btn-secondary btn-sm" id="btnCancelSettingsModal">Close</button>
+          <button class="rf-btn-primary btn-sm" id="btnApplySettingsModal">Apply Preferences</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPACT CAPTION STYLE PICKER MODAL (ALL 67 STYLES) -->
+  <div id="captionPickerModal" class="modal-overlay">
+    <div class="modal-content" style="max-width:880px; height:85vh; display:flex; flex-direction:column; background:var(--rf-card, #0e1526); border:1px solid var(--rf-border, rgba(0,240,255,0.2))">
+      <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.08)">
+        <div class="modal-title" style="font-weight:700; font-size:1rem; color:#fff">🎨 Caption Typography Catalog (<span id="modalStyleCount">67</span> Styles)</div>
+        <button class="btn btn-secondary btn-sm" id="btnCloseCaptionPicker">✕</button>
+      </div>
+      <div style="padding:0.75rem 1rem; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; gap:0.5rem; flex-wrap:wrap">
+        <input type="text" id="stylePickerSearch" class="form-control form-control-sm" placeholder="Search 67 styles (e.g. Hormozi, Neon, Karaoke)..." style="max-width:280px">
+        <div class="rf-category-chips" id="pickerCategoryChips" style="display:flex; gap:0.3rem; overflow-x:auto">
+          <button class="category-chip active" data-cat="all">All (67)</button>
+          <button class="category-chip" data-cat="creator_inspired">Creator</button>
+          <button class="category-chip" data-cat="tiktok_reels">TikTok/Reels</button>
+          <button class="category-chip" data-cat="youtube">YouTube</button>
+          <button class="category-chip" data-cat="podcast">Podcast</button>
+          <button class="category-chip" data-cat="cinematic">Cinematic</button>
+          <button class="category-chip" data-cat="karaoke">Karaoke</button>
+          <button class="category-chip" data-cat="viral_micro">Viral</button>
+        </div>
+      </div>
+      <div style="flex:1; display:grid; grid-template-columns: 1fr 1.1fr; gap:1rem; padding:1rem; min-height:0; overflow:hidden">
+        <!-- Left: Style List -->
+        <div id="pickerStyleList" style="overflow-y:auto; border:1px solid rgba(255,255,255,0.08); border-radius:6px; background:rgba(0,0,0,0.3); padding:0.5rem; display:flex; flex-direction:column; gap:4px">
+          <!-- Populated by JS -->
+        </div>
+        <!-- Right: Live Preview Box -->
+        <div style="display:flex; flex-direction:column; gap:0.75rem">
+          <div style="font-weight:700; font-size:0.85rem; color:var(--rf-accent, #00f0ff); display:flex; justify-content:space-between; align-items:center">
+            <span id="pickerPreviewStyleName">Classic Documentary</span>
+            <span class="rf-pill accent" id="activeStyleBadge">DOCUMENTARY</span>
+          </div>
+          <div id="pickerPreviewBox" style="flex:1; background:#04060a; border:1px solid rgba(255,255,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; padding:1.5rem; text-align:center; position:relative; overflow:hidden">
+            <div id="pickerPreviewText" style="font-family:'Segoe UI', sans-serif; font-size:1.35rem; font-weight:700; color:#ffffff; text-shadow:2px 2px 4px #000000; line-height:1.3">
+              Berlin 1953, a city divided by barbed wire, ideology and fear.
+            </div>
+          </div>
+          <div id="pickerPreviewDesc" style="font-size:0.75rem; color:var(--rf-muted, #94a3b8); background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border:1px solid rgba(255,255,255,0.05)">
+            Clean crisp lower-third subtitles with black shadow box.
+          </div>
+          <button class="rf-btn-primary-lg" id="btnConfirmSelectStyle" style="width:100%; justify-content:center">
+            ✓ Apply Style to Project
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="/static/js/three_layer.js?v=2.5.0"></script>
+  <script src="/static/js/motion.js?v=2.5.0"></script>
+  <script src="/static/js/command_palette.js?v=2.5.0"></script>
+  <script src="/static/js/app.js?v=2.5.0"></script>
+  <script src="/static/js/timeline_studio.js?v=2.5.0"></script>
+</body>
+</html>

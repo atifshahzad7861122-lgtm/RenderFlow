@@ -1,0 +1,34 @@
+{
+  "job_id": "job_1791738880",
+  "stages_completed": {
+    "assets_ready": true,
+    "audio_analyzed": true,
+    "timeline_ready": true,
+    "images_preprocessed": true,
+    "video_segments_ready": true,
+    "final_render_started": true,
+    "finalized": true
+  },
+  "completed_chunks": [
+    0,
+    1
+  ],
+  "created_at": 1791738880.179799,
+  "updated_at": 1791738913.03742,
+  "meta": {
+    "master_dur": 12.0,
+    "total_scenes": 4,
+    "total_frames": 360,
+    "cached_count": 2,
+    "total_chunks": 2
+  },
+  "render_signature": {
+    "target_w": 1920,
+    "target_h": 1080,
+    "resolution": "1080p",
+    "total_chunks": 2,
+    "total_scenes": 4,
+    "master_dur": 12.0,
+    "effective_chunk_size": 2
+  }
+}

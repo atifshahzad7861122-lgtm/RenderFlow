@@ -1,0 +1,32 @@
+{
+  "manifest_version": "1.0",
+  "latest_version": "2.2.4",
+  "minimum_supported_version": "2.0.0",
+  "release_notes": "RenderFlow v2.2.4 Hotfix: Production in-app auto-update system integrated with Ed25519 authentication, real-time speed/progress telemetry, atomic staging and automatic rollback; Resolved false-positive render verification failures at cut boundaries via frame-accurate discrete seeking and multi-metric visual change detection; Fixed transition verification false negatives for dissolve and wipe transitions; Hardened encoder selection and memory stability on systems with <= 8.0 GiB RAM; Preserved project and transition asset integrity.",
+  "published_at": "2026-10-16T22:03:08Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.2.4",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.2.4/RenderFlow-Patch-v2.2.4.zip",
+  "package_size_bytes": 582922,
+  "sha256": "d0c5d919668df8d7c7fd251158edf1430cef3fc02cc7d7ac37e679df0373f9de",
+  "update_type": "patch",
+  "supported_platforms": [
+    "windows-x64"
+  ],
+  "packages": {
+    "patch": {
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.2.4/RenderFlow-Patch-v2.2.4.zip",
+      "package_size_bytes": 582922,
+      "sha256": "d0c5d919668df8d7c7fd251158edf1430cef3fc02cc7d7ac37e679df0373f9de",
+      "applies_to": [
+        ">=2.0.0"
+      ]
+    },
+    "full": {
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.2.4/RenderFlow-Setup-v2.2.4.exe",
+      "package_size_bytes": 1372736514,
+      "sha256": "2bd5d3a4c7b563592ed0204363efaae6923df2fff7c92958098854cfaab72473"
+    }
+  },
+  "signature": "90934e35319430be3814f58495fa2040d374e8b7b06f365b38e7019a7bfc3e13f41ea422452c4516f3fd0389849436f28de1db338c079f986db2d02473a9e20c",
+  "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e"
+}

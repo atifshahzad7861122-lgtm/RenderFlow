@@ -1,0 +1,15 @@
+{
+  "engine_score": 0.0,
+  "independently_calculated_score": 0.0,
+  "delta": 0.0,
+  "inputs": {
+    "total_beats": 0,
+    "high_confidence_count": 0,
+    "medium_confidence_count": 0,
+    "low_confidence_count": 0,
+    "average_confidence": 0.0,
+    "repeated_images_count": 0,
+    "corrections_count": 0
+  },
+  "formula_verified": true
+}

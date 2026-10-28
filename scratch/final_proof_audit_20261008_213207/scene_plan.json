@@ -1,0 +1,377 @@
+[
+  {
+    "scene_id": "scene_0001",
+    "segment_index": 0,
+    "start": 0,
+    "end": 3.88,
+    "dur": 3.88,
+    "image": "img_empire_vision.png",
+    "image_id": "img_001",
+    "transition": "soft_wipe",
+    "context": "location_change",
+    "confidence": 0.475,
+    "confidence_level": "LOW",
+    "match_reason": [
+      "semantic_similarity",
+      "action_match"
+    ],
+    "source": "deterministic_semantic",
+    "user_override": false,
+    "candidates": [
+      {
+        "image": "img_empire_vision.png",
+        "score": 0.475,
+        "raw_score": 0.475,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_throne_ruler.png",
+        "score": 0.3776,
+        "raw_score": 0.3776,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_warrior_march.png",
+        "score": 0.3689,
+        "raw_score": 0.3689,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "action_match"
+        ]
+      }
+    ],
+    "narration_text": "Every great empire begins with a vision. A vision of power. A vision of glory.",
+    "transition_type": "SEMANTIC_SHIFT",
+    "chapter_index": 1,
+    "decision_trace": {
+      "selected_image": "img_empire_vision.png",
+      "confidence": 0.475,
+      "confidence_level": "LOW",
+      "why": [
+        "semantic_similarity",
+        "action_match"
+      ],
+      "transition_type": "SEMANTIC_SHIFT",
+      "rejected_candidates": [
+        {
+          "filename": "img_throne_ruler.png",
+          "score": 0.3776,
+          "rejection_reasons": [
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_warrior_march.png",
+          "score": 0.3689,
+          "rejection_reasons": [
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_ancient_monument.png",
+          "score": 0.265,
+          "rejection_reasons": [
+            "lower_semantic_text"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "scene_id": "scene_0002",
+    "segment_index": 1,
+    "start": 3.88,
+    "end": 7.76,
+    "dur": 3.88,
+    "image": "img_empire_vision.png",
+    "image_id": "img_001",
+    "transition": "soft_wipe",
+    "context": "location_change",
+    "confidence": 0.54,
+    "confidence_level": "LOW",
+    "match_reason": [
+      "semantic_similarity",
+      "visual_similarity",
+      "entity_continuity_boost",
+      "action_match"
+    ],
+    "source": "deterministic_semantic",
+    "user_override": false,
+    "candidates": [
+      {
+        "image": "img_empire_vision.png",
+        "score": 0.54,
+        "raw_score": 0.59,
+        "penalty": 0.05,
+        "reasons": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_continuity_boost",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_throne_ruler.png",
+        "score": 0.475,
+        "raw_score": 0.475,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_warrior_march.png",
+        "score": 0.3776,
+        "raw_score": 0.3776,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "action_match"
+        ]
+      }
+    ],
+    "narration_text": "Every great empire begins with a vision. A vision of power. A vision of glory.",
+    "transition_type": "CONTINUATION",
+    "chapter_index": 1,
+    "decision_trace": {
+      "selected_image": "img_empire_vision.png",
+      "confidence": 0.54,
+      "confidence_level": "LOW",
+      "why": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_continuity_boost",
+        "action_match"
+      ],
+      "transition_type": "CONTINUATION",
+      "rejected_candidates": [
+        {
+          "filename": "img_throne_ruler.png",
+          "score": 0.475,
+          "rejection_reasons": [
+            "lower_entity_match",
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_warrior_march.png",
+          "score": 0.3776,
+          "rejection_reasons": [
+            "lower_entity_match",
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_ancient_monument.png",
+          "score": 0.2563,
+          "rejection_reasons": [
+            "lower_entity_match",
+            "lower_semantic_text"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "scene_id": "scene_0003",
+    "segment_index": 2,
+    "start": 7.76,
+    "end": 12.92,
+    "dur": 5.16,
+    "image": "img_throne_ruler.png",
+    "image_id": "img_100",
+    "transition": "dip_to_black",
+    "context": "time_passage",
+    "confidence": 0.675,
+    "confidence_level": "MEDIUM",
+    "match_reason": [
+      "semantic_similarity",
+      "visual_similarity",
+      "entity_match",
+      "action_match"
+    ],
+    "source": "deterministic_semantic",
+    "user_override": false,
+    "candidates": [
+      {
+        "image": "img_throne_ruler.png",
+        "score": 0.675,
+        "raw_score": 0.675,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_warrior_march.png",
+        "score": 0.57,
+        "raw_score": 0.57,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "entity_match",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_ancient_monument.png",
+        "score": 0.3425,
+        "raw_score": 0.3425,
+        "penalty": 0,
+        "reasons": [
+          "entity_match",
+          "action_match"
+        ]
+      }
+    ],
+    "narration_text": "And sometimes, a vision that one ruler can change the course of history.",
+    "transition_type": "SEMANTIC_SHIFT",
+    "chapter_index": 1,
+    "decision_trace": {
+      "selected_image": "img_throne_ruler.png",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "why": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "transition_type": "SEMANTIC_SHIFT",
+      "rejected_candidates": [
+        {
+          "filename": "img_warrior_march.png",
+          "score": 0.57,
+          "rejection_reasons": [
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_ancient_monument.png",
+          "score": 0.3425,
+          "rejection_reasons": [
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_empire_vision.png",
+          "score": 0.2,
+          "rejection_reasons": [
+            "repetition_penalty_0.35",
+            "lower_semantic_text"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "scene_id": "scene_0004",
+    "segment_index": 3,
+    "start": 12.92,
+    "end": 15,
+    "dur": 2.08,
+    "image": "img_warrior_march.png",
+    "image_id": "img_010",
+    "transition": "dip_to_black",
+    "context": "time_passage",
+    "confidence": 0.675,
+    "confidence_level": "MEDIUM",
+    "match_reason": [
+      "semantic_similarity",
+      "visual_similarity",
+      "entity_match",
+      "action_match"
+    ],
+    "source": "deterministic_semantic",
+    "user_override": false,
+    "candidates": [
+      {
+        "image": "img_warrior_march.png",
+        "score": 0.675,
+        "raw_score": 0.675,
+        "penalty": 0,
+        "reasons": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_throne_ruler.png",
+        "score": 0.5,
+        "raw_score": 0.55,
+        "penalty": 0.05,
+        "reasons": [
+          "semantic_similarity",
+          "entity_match",
+          "action_match"
+        ]
+      },
+      {
+        "image": "img_empire_vision.png",
+        "score": 0.4275,
+        "raw_score": 0.4775,
+        "penalty": 0.05,
+        "reasons": [
+          "semantic_similarity",
+          "entity_match",
+          "action_match"
+        ]
+      }
+    ],
+    "narration_text": "Centuries ago, beyond the lands of",
+    "transition_type": "CONTINUATION",
+    "chapter_index": 1,
+    "decision_trace": {
+      "selected_image": "img_warrior_march.png",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "why": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "transition_type": "CONTINUATION",
+      "rejected_candidates": [
+        {
+          "filename": "img_throne_ruler.png",
+          "score": 0.5,
+          "rejection_reasons": [
+            "repetition_penalty_0.05",
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_empire_vision.png",
+          "score": 0.4275,
+          "rejection_reasons": [
+            "repetition_penalty_0.05",
+            "lower_semantic_text"
+          ]
+        },
+        {
+          "filename": "img_ancient_monument.png",
+          "score": 0.3337,
+          "rejection_reasons": [
+            "lower_semantic_text"
+          ]
+        }
+      ]
+    }
+  }
+]

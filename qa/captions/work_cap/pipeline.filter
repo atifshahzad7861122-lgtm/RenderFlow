@@ -1,0 +1,11 @@
+[0:v]format=gbrp,setsar=1[s0];
+[1:v]format=gbrp,setsar=1[s1];
+[2:v]format=gbrp,setsar=1[s2];
+[s0][s1]xfade=transition=custom:expr='if(gte(P,0.5),B,A)':duration=0.04:offset=1.98[v1];
+[v1][s2]xfade=transition=dissolve:duration=0.40:offset=3.80[v_base];
+[3:v]fps=30,scale=1920:1080:flags=lanczos:force_original_aspect_ratio=increase,crop=1920:1080,setsar=1,fade=t=in:st=0:d=0.150,fade=t=out:st=0.750:d=0.150,format=gbrp,setpts=PTS-STARTPTS+1.550/TB[ov_0_rgb];
+[v_base][ov_0_rgb]blend=all_mode=screen:all_opacity=0.45:enable='between(t,1.550,2.450)'[v_rgb_done];
+[v_rgb_done]eq=contrast=1.06:brightness=0.01:saturation=1.12,colorbalance=rs=0.06:gs=0.02:bs=-0.05[v_graded];
+[v_graded]scale=1920:1080:out_range=tv:flags=lanczos,format=yuv420p,ass='F\:/yt tool/Rendering Engine By Ai With Atif - Copy/qa/captions/work_cap/master_captions.ass',tpad=stop_mode=clone:stop_duration=2.0[vout];
+[4:a]aresample=48000,aformat=channel_layouts=stereo[anarr];
+[anarr]anull[aout]

@@ -1,0 +1,9 @@
+{
+  "bundled_ffmpeg": "PASS",
+  "bundled_whisper": "PASS",
+  "bundled_hardware_detection": "PASS",
+  "clean_1080p_render": "PASS",
+  "clean_1440p_render": "PASS",
+  "clean_4k_render": "PASS",
+  "user_project_preservation": "PASS"
+}

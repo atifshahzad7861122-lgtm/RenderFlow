@@ -1,0 +1,48 @@
+{
+ "style": "classic",
+ "total_segments": 7,
+ "total_words": 33,
+ "total_captions": 7,
+ "checks": {
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.36,
+   "text": "Every great empire begins with a vision,",
+   "sub_region_mean": 150.84,
+   "sub_region_std": 64.12,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 6.35,
+   "text": "a vision of glory,",
+   "sub_region_mean": 180.7,
+   "sub_region_std": 55.46,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 5,
+   "timestamp": 11.42,
+   "text": "change the course of history.",
+   "sub_region_mean": 147.66,
+   "sub_region_std": 83.34,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 7,
+   "timestamp": 14.65,
+   "text": "Beyond the Land",
+   "sub_region_mean": 77.85,
+   "sub_region_std": 60.73,
+   "status": "PASS"
+  }
+ ]
+}

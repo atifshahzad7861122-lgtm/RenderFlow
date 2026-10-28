@@ -1,0 +1,38 @@
+# Rendering Studio — Git Ignore Rules
+.env
+.env.*
+!.env.example
+*.key
+*.token
+*.priv
+release_signing_key.priv
+credentials.json
+*credentials*.json
+
+# Cache and temporary data
+.cache/
+.tmp_uploads/
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+*.tmp
+
+# Project artifacts & test outputs
+/projects/*/final_captioned.mp4
+/projects/*/test_burned.mp4
+/projects/*/work/chunks/
+/projects/*/.cache/
+build/
+dist/
+release/*.exe
+release/*.zip
+models/
+*.mp4
+*.rar
+*.zip
+
+# OS artifacts
+Thumbs.db
+Desktop.ini
+.DS_Store

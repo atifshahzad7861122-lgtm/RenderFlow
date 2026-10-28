@@ -1,0 +1,34 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_01",
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 2.0,
+      "dur": 2.0,
+      "image": "img_01.jpg",
+      "transition": "clean_cut",
+      "narration_text": "Welcome to RenderFlow Workstation."
+    },
+    {
+      "scene_id": "scene_02",
+      "segment_index": 1,
+      "start": 2.0,
+      "end": 4.0,
+      "dur": 2.0,
+      "image": "img_02.jpg",
+      "transition": "cinematic_dissolve",
+      "narration_text": "Next generation AI-powered rendering."
+    },
+    {
+      "scene_id": "scene_03",
+      "segment_index": 2,
+      "start": 4.0,
+      "end": 6.0,
+      "dur": 2.0,
+      "image": "img_03.jpg",
+      "transition": "soft_wipe",
+      "narration_text": "Precision 4K timeline export."
+    }
+  ]
+}

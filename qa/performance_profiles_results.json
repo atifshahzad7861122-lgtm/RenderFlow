@@ -1,0 +1,80 @@
+{
+  "eco": {
+    "name": "Eco / Low-End",
+    "threads": 2,
+    "preset": "veryfast",
+    "chunk_size_1080p": 24,
+    "chunk_size_4k": 14,
+    "encoder_args": [
+      "-c:v",
+      "libx264",
+      "-preset",
+      "veryfast",
+      "-crf",
+      "20",
+      "-profile:v",
+      "high",
+      "-pix_fmt",
+      "yuv420p",
+      "-threads",
+      "2"
+    ]
+  },
+  "balanced": {
+    "name": "Balanced",
+    "threads": 0,
+    "preset": "veryfast",
+    "chunk_size_1080p": 35,
+    "chunk_size_4k": 20,
+    "encoder_args": [
+      "-c:v",
+      "libx264",
+      "-preset",
+      "veryfast",
+      "-crf",
+      "20",
+      "-profile:v",
+      "high",
+      "-pix_fmt",
+      "yuv420p"
+    ]
+  },
+  "performance": {
+    "name": "Performance",
+    "threads": 0,
+    "preset": "fast",
+    "chunk_size_1080p": 46,
+    "chunk_size_4k": 26,
+    "encoder_args": [
+      "-c:v",
+      "libx264",
+      "-preset",
+      "fast",
+      "-crf",
+      "20",
+      "-profile:v",
+      "high",
+      "-pix_fmt",
+      "yuv420p"
+    ]
+  },
+  "max_quality": {
+    "name": "Max Quality",
+    "threads": 0,
+    "preset": "medium",
+    "chunk_size_1080p": 32,
+    "chunk_size_4k": 18,
+    "encoder_args": [
+      "-c:v",
+      "libx264",
+      "-preset",
+      "medium",
+      "-crf",
+      "20",
+      "-profile:v",
+      "high",
+      "-pix_fmt",
+      "yuv420p"
+    ]
+  }
+}

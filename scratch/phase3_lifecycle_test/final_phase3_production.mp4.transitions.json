@@ -1,0 +1,50 @@
+{
+ "n_transitions": 3,
+ "types_used": [
+  "dissolve"
+ ],
+ "avg_duration": 0.4,
+ "durations": [
+  0.4,
+  0.4,
+  0.4
+ ],
+ "details": [
+  {
+   "cut_s": 4.0,
+   "start_s": 3.8,
+   "end_s": 4.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 8.0,
+   "start_s": 7.8,
+   "end_s": 8.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 12.0,
+   "start_s": 11.8,
+   "end_s": 12.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

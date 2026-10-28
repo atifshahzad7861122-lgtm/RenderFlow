@@ -1,0 +1,328 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "classic",
+  "stt_provider": "existing_transcript",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 8,
+  "total_duration_s": 12.0,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 0.818,
+      "text": "Berlin, 1953.",
+      "words": [
+        {
+          "text": "Berlin,",
+          "word": "Berlin,",
+          "start": 0.0,
+          "end": 0.436,
+          "confidence": 1.0
+        },
+        {
+          "text": "1953.",
+          "word": "1953.",
+          "start": 0.436,
+          "end": 0.818,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 0.818,
+      "end": 3.0,
+      "text": "Cold war tensions rise along the sector line.",
+      "words": [
+        {
+          "text": "Cold",
+          "word": "Cold",
+          "start": 0.818,
+          "end": 1.036,
+          "confidence": 1.0
+        },
+        {
+          "text": "war",
+          "word": "war",
+          "start": 1.036,
+          "end": 1.2,
+          "confidence": 1.0
+        },
+        {
+          "text": "tensions",
+          "word": "tensions",
+          "start": 1.2,
+          "end": 1.636,
+          "confidence": 1.0
+        },
+        {
+          "text": "rise",
+          "word": "rise",
+          "start": 1.636,
+          "end": 1.855,
+          "confidence": 1.0
+        },
+        {
+          "text": "along",
+          "word": "along",
+          "start": 1.855,
+          "end": 2.127,
+          "confidence": 1.0
+        },
+        {
+          "text": "the",
+          "word": "the",
+          "start": 2.127,
+          "end": 2.291,
+          "confidence": 1.0
+        },
+        {
+          "text": "sector",
+          "word": "sector",
+          "start": 2.291,
+          "end": 2.618,
+          "confidence": 1.0
+        },
+        {
+          "text": "line.",
+          "word": "line.",
+          "start": 2.618,
+          "end": 3.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 3.0,
+      "end": 4.77,
+      "text": "Operatives monitor radio communications",
+      "words": [
+        {
+          "text": "Operatives",
+          "word": "Operatives",
+          "start": 3.0,
+          "end": 3.492,
+          "confidence": 1.0
+        },
+        {
+          "text": "monitor",
+          "word": "monitor",
+          "start": 3.492,
+          "end": 3.836,
+          "confidence": 1.0
+        },
+        {
+          "text": "radio",
+          "word": "radio",
+          "start": 3.836,
+          "end": 4.082,
+          "confidence": 1.0
+        },
+        {
+          "text": "communications",
+          "word": "communications",
+          "start": 4.082,
+          "end": 4.77,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 4.77,
+      "end": 6.0,
+      "text": "under heavy surveillance.",
+      "words": [
+        {
+          "text": "under",
+          "word": "under",
+          "start": 4.77,
+          "end": 5.016,
+          "confidence": 1.0
+        },
+        {
+          "text": "heavy",
+          "word": "heavy",
+          "start": 5.016,
+          "end": 5.262,
+          "confidence": 1.0
+        },
+        {
+          "text": "surveillance.",
+          "word": "surveillance.",
+          "start": 5.262,
+          "end": 6.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 6.0,
+      "end": 8.22,
+      "text": "The courier leaves the drop location before",
+      "words": [
+        {
+          "text": "The",
+          "word": "The",
+          "start": 6.0,
+          "end": 6.18,
+          "confidence": 1.0
+        },
+        {
+          "text": "courier",
+          "word": "courier",
+          "start": 6.18,
+          "end": 6.6,
+          "confidence": 1.0
+        },
+        {
+          "text": "leaves",
+          "word": "leaves",
+          "start": 6.6,
+          "end": 6.96,
+          "confidence": 1.0
+        },
+        {
+          "text": "the",
+          "word": "the",
+          "start": 6.96,
+          "end": 7.14,
+          "confidence": 1.0
+        },
+        {
+          "text": "drop",
+          "word": "drop",
+          "start": 7.14,
+          "end": 7.38,
+          "confidence": 1.0
+        },
+        {
+          "text": "location",
+          "word": "location",
+          "start": 7.38,
+          "end": 7.86,
+          "confidence": 1.0
+        },
+        {
+          "text": "before",
+          "word": "before",
+          "start": 7.86,
+          "end": 8.22,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 8.22,
+      "end": 9.0,
+      "text": "dawn breaks.",
+      "words": [
+        {
+          "text": "dawn",
+          "word": "dawn",
+          "start": 8.22,
+          "end": 8.46,
+          "confidence": 1.0
+        },
+        {
+          "text": "breaks.",
+          "word": "breaks.",
+          "start": 8.46,
+          "end": 9.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 9.0,
+      "end": 10.909,
+      "text": "A crucial microfilm file is successfully",
+      "words": [
+        {
+          "text": "A",
+          "word": "A",
+          "start": 9.0,
+          "end": 9.055,
+          "confidence": 1.0
+        },
+        {
+          "text": "crucial",
+          "word": "crucial",
+          "start": 9.055,
+          "end": 9.436,
+          "confidence": 1.0
+        },
+        {
+          "text": "microfilm",
+          "word": "microfilm",
+          "start": 9.436,
+          "end": 9.927,
+          "confidence": 1.0
+        },
+        {
+          "text": "file",
+          "word": "file",
+          "start": 9.927,
+          "end": 10.145,
+          "confidence": 1.0
+        },
+        {
+          "text": "is",
+          "word": "is",
+          "start": 10.145,
+          "end": 10.255,
+          "confidence": 1.0
+        },
+        {
+          "text": "successfully",
+          "word": "successfully",
+          "start": 10.255,
+          "end": 10.909,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 10.909,
+      "end": 12.0,
+      "text": "secured in the vault.",
+      "words": [
+        {
+          "text": "secured",
+          "word": "secured",
+          "start": 10.909,
+          "end": 11.291,
+          "confidence": 1.0
+        },
+        {
+          "text": "in",
+          "word": "in",
+          "start": 11.291,
+          "end": 11.4,
+          "confidence": 1.0
+        },
+        {
+          "text": "the",
+          "word": "the",
+          "start": 11.4,
+          "end": 11.564,
+          "confidence": 1.0
+        },
+        {
+          "text": "vault.",
+          "word": "vault.",
+          "start": 11.564,
+          "end": 12.0,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

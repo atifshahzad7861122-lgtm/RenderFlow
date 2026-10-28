@@ -1,0 +1,1 @@
+{"scenes": [{"segment_index": 0, "image": "test_sharp_1.png", "dur": 3.0, "start": 0.0, "end": 3.0, "transition": "soft_wipe", "user_override": true}, {"segment_index": 1, "image": "test_sharp_2.png", "dur": 3.0, "start": 3.0, "end": 6.0, "transition": "none", "user_override": true}]}

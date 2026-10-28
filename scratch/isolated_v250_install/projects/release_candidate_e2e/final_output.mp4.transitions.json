@@ -1,0 +1,42 @@
+{
+ "n_transitions": 2,
+ "types_used": [
+  "dissolve",
+  "transition_008"
+ ],
+ "avg_duration": 0.614,
+ "durations": [
+  0.828,
+  0.4
+ ],
+ "details": [
+  {
+   "cut_index": 0,
+   "cut_s": 2.16,
+   "start_s": 1.746,
+   "end_s": 2.574,
+   "context": "normal",
+   "type": "transition_008",
+   "transition_id": "transition_008",
+   "name": "Golden Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 0.828,
+   "is_dip_black": false
+  },
+  {
+   "cut_index": 1,
+   "cut_s": 4.0,
+   "start_s": 3.8,
+   "end_s": 4.2,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

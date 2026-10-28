@@ -1,0 +1,19 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.0,
+      "text": "Berlin 1953, a city divided by barbed wire and fear."
+    },
+    {
+      "start": 2.0,
+      "end": 4.0,
+      "text": "American soldiers drove military vehicles through the western streets."
+    },
+    {
+      "start": 4.0,
+      "end": 6.0,
+      "text": "Soviet soldiers watched continuously over every checkpoint."
+    }
+  ]
+}

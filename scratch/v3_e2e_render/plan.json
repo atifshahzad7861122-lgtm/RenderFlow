@@ -1,0 +1,221 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_0001",
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 4.5,
+      "dur": 4.5,
+      "image": "image_1.png",
+      "image_id": "img_001",
+      "transition": "soft_wipe",
+      "context": "location_change",
+      "confidence": 0.29,
+      "confidence_level": "LOW",
+      "match_reason": [
+        "entity_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_1.png",
+          "score": 0.29,
+          "raw_score": 0.29,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match"
+          ]
+        },
+        {
+          "image": "image_2.png",
+          "score": 0.2897,
+          "raw_score": 0.2897,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match"
+          ]
+        },
+        {
+          "image": "image_3.png",
+          "score": 0.2893,
+          "raw_score": 0.2893,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match"
+          ]
+        }
+      ],
+      "narration_text": "He began working on his new venture from his home workspace."
+    },
+    {
+      "scene_id": "scene_0002",
+      "segment_index": 1,
+      "start": 4.5,
+      "end": 8.5,
+      "dur": 4.0,
+      "image": "image_7.png",
+      "image_id": "img_007",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.3616,
+      "confidence_level": "LOW",
+      "match_reason": [
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_7.png",
+          "score": 0.3616,
+          "raw_score": 0.3616,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_4.png",
+          "score": 0.3606,
+          "raw_score": 0.3606,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_26.png",
+          "score": 0.36,
+          "raw_score": 0.36,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "Soon the technology platform gained traction across major cities."
+    },
+    {
+      "scene_id": "scene_0003",
+      "segment_index": 2,
+      "start": 8.5,
+      "end": 12.0,
+      "dur": 3.5,
+      "image": "image_46.png",
+      "image_id": "img_046",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.3665,
+      "confidence_level": "LOW",
+      "match_reason": [
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_46.png",
+          "score": 0.3665,
+          "raw_score": 0.3665,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_43.png",
+          "score": 0.3655,
+          "raw_score": 0.3655,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_42.png",
+          "score": 0.3651,
+          "raw_score": 0.3651,
+          "penalty": 0.0,
+          "reasons": [
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "Financial revenue charts climbed as enterprise clients subscribed."
+    },
+    {
+      "scene_id": "scene_0004",
+      "segment_index": 3,
+      "start": 12.0,
+      "end": 16.0,
+      "dur": 4.0,
+      "image": "image_27.png",
+      "image_id": "img_027",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.2959,
+      "confidence_level": "LOW",
+      "match_reason": [
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_27.png",
+          "score": 0.2959,
+          "raw_score": 0.2959,
+          "penalty": 0.0,
+          "reasons": [
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_74.png",
+          "score": 0.288,
+          "raw_score": 0.288,
+          "penalty": 0.0,
+          "reasons": [
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_64.png",
+          "score": 0.286,
+          "raw_score": 0.286,
+          "penalty": 0.0,
+          "reasons": [
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "The entire team assembled to celebrate this remarkable milestone."
+    }
+  ],
+  "sync_report": {
+    "total_images": 100,
+    "total_beats": 4,
+    "high_confidence": 0,
+    "medium_confidence": 0,
+    "low_confidence": 4,
+    "average_confidence": 0.3285,
+    "repeated_images": 0,
+    "semantic_conflicts": 0,
+    "unmatched_beats": 0,
+    "ai_reranking_triggered": 4,
+    "ai_reranking_successful": 0,
+    "fallback_used": 1,
+    "duration_sec": 1.894,
+    "timestamp": "2026-09-30 00:46:42",
+    "engine_version": "AI Image Sync Engine v3"
+  }
+}

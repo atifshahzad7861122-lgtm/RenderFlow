@@ -1,0 +1,19 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.15,
+      "text": "Segment one narration text."
+    },
+    {
+      "start": 2.15,
+      "end": 4.8,
+      "text": "Segment two narration text."
+    },
+    {
+      "start": 4.8,
+      "end": 6.0,
+      "text": "Segment three narration text."
+    }
+  ]
+}

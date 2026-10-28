@@ -1,0 +1,284 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_0001",
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 1.4,
+      "dur": 1.4,
+      "image": "image_7.png",
+      "image_id": "img_003",
+      "transition": "transition_002",
+      "context": "fast",
+      "confidence": 0.5368,
+      "confidence_level": "LOW",
+      "match_reason": [
+        "neural_semantic_affinity",
+        "semantic_similarity",
+        "action_match"
+      ],
+      "source": "ai_semantic_auto",
+      "user_override": false,
+      "manual_review_needed": true,
+      "no_match_warning": false,
+      "motion": "L4/push",
+      "motion_mode": "push",
+      "shot_role": "narrative_inspection",
+      "easing": "smoothstep",
+      "zoom_scale": 1.015,
+      "pan_speed": 0.0,
+      "motion_rationale": "conservative_low_confidence_default",
+      "candidates": [
+        {
+          "image": "image_1.png",
+          "score": 0.5576,
+          "raw_score": 0.5576,
+          "penalty": 0.0,
+          "reasons": [
+            "neural_semantic_affinity",
+            "semantic_similarity",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_7.png",
+          "score": 0.5368,
+          "raw_score": 0.5368,
+          "penalty": 0.0,
+          "reasons": [
+            "neural_semantic_affinity",
+            "semantic_similarity",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_2.png",
+          "score": 0.528,
+          "raw_score": 0.528,
+          "penalty": 0.0,
+          "reasons": [
+            "neural_semantic_affinity",
+            "semantic_similarity",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "Berlin, 1953: an opening wide view across the divided sectors and checkpoints.",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_7.png",
+        "confidence": 0.5368,
+        "confidence_level": "LOW",
+        "why": [
+          "neural_semantic_affinity",
+          "semantic_similarity",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_1.png",
+            "score": 0.5576,
+            "rejection_reasons": [
+              "lower_overall_rank"
+            ]
+          },
+          {
+            "filename": "image_2.png",
+            "score": 0.528,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0002",
+      "segment_index": 1,
+      "start": 1.4,
+      "end": 2.8,
+      "dur": 1.4,
+      "image": "image_2.png",
+      "image_id": "img_002",
+      "transition": "transition_002",
+      "context": "fast",
+      "confidence": 0.5453,
+      "confidence_level": "LOW",
+      "match_reason": [
+        "neural_semantic_affinity",
+        "semantic_similarity",
+        "action_match"
+      ],
+      "source": "ai_semantic_auto",
+      "user_override": false,
+      "manual_review_needed": true,
+      "no_match_warning": false,
+      "motion": "L4/push",
+      "motion_mode": "push",
+      "shot_role": "narrative_inspection",
+      "easing": "smoothstep",
+      "zoom_scale": 1.015,
+      "pan_speed": 0.0,
+      "motion_rationale": "conservative_low_confidence_default",
+      "candidates": [
+        {
+          "image": "image_2.png",
+          "score": 0.5453,
+          "raw_score": 0.5453,
+          "penalty": 0.0,
+          "reasons": [
+            "neural_semantic_affinity",
+            "semantic_similarity",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_7.png",
+          "score": 0.5151,
+          "raw_score": 0.5151,
+          "penalty": 0.0,
+          "reasons": [
+            "neural_semantic_affinity",
+            "semantic_similarity",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_1.png",
+          "score": 0.4558,
+          "raw_score": 0.4558,
+          "penalty": 0.0,
+          "reasons": [
+            "neural_semantic_affinity",
+            "semantic_similarity",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "Undercover military forces uncovered covert surveillance operations and sudden betrayals.",
+      "transition_type": "CONTINUATION",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_2.png",
+        "confidence": 0.5453,
+        "confidence_level": "LOW",
+        "why": [
+          "neural_semantic_affinity",
+          "semantic_similarity",
+          "action_match"
+        ],
+        "transition_type": "CONTINUATION",
+        "rejected_candidates": [
+          {
+            "filename": "image_7.png",
+            "score": 0.5151,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_1.png",
+            "score": 0.4558,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0003",
+      "segment_index": 2,
+      "start": 2.8,
+      "end": 4.0,
+      "dur": 1.2,
+      "image": "image_1.png",
+      "image_id": "img_001",
+      "transition": "soft_wipe",
+      "context": "location_change",
+      "confidence": 0.4668,
+      "confidence_level": "LOW",
+      "match_reason": [
+        "neural_semantic_affinity",
+        "semantic_similarity",
+        "action_match"
+      ],
+      "source": "ai_semantic_auto",
+      "user_override": false,
+      "manual_review_needed": true,
+      "no_match_warning": false,
+      "motion": "L4/push",
+      "motion_mode": "push",
+      "shot_role": "narrative_inspection",
+      "easing": "smoothstep",
+      "zoom_scale": 1.015,
+      "pan_speed": 0.0,
+      "motion_rationale": "short_scene_stabilization",
+      "candidates": [
+        {
+          "image": "image_1.png",
+          "score": 0.4668,
+          "raw_score": 0.4668,
+          "penalty": 0.0,
+          "reasons": [
+            "neural_semantic_affinity",
+            "semantic_similarity",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_2.png",
+          "score": 0.4126,
+          "raw_score": 0.4126,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_7.png",
+          "score": 0.3881,
+          "raw_score": 0.3881,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "Deep beneath the city, secret tunnel networks captured every private telephone signal.",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_1.png",
+        "confidence": 0.4668,
+        "confidence_level": "LOW",
+        "why": [
+          "neural_semantic_affinity",
+          "semantic_similarity",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_2.png",
+            "score": 0.4126,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_7.png",
+            "score": 0.3881,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

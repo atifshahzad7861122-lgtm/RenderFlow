@@ -1,0 +1,52 @@
+{
+  "scenes": [
+    {
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 3.0,
+      "dur": 3.0,
+      "image": "scene_01_welcome.png",
+      "text": "Welcome to the RenderFlow mapping studio."
+    },
+    {
+      "segment_index": 1,
+      "start": 3.0,
+      "end": 6.5,
+      "dur": 3.5,
+      "image": "scene_03_analysis.png",
+      "text": "Here is the key intelligence analysis.",
+      "user_override": true
+    },
+    {
+      "segment_index": 2,
+      "start": 6.5,
+      "end": 9.5,
+      "dur": 3.0,
+      "image": "scene_04_outro.png",
+      "text": "Thank you for watching.",
+      "user_override": true
+    }
+  ],
+  "audio_edits": {
+    "original_duration": 12.0,
+    "cut_intervals": [
+      [
+        3.0,
+        5.5
+      ]
+    ],
+    "active_intervals": [
+      [
+        0.0,
+        3.0
+      ],
+      [
+        3.0,
+        9.5
+      ]
+    ],
+    "cut_duration": 2.5,
+    "effective_duration": 9.5,
+    "reason": "Remove Dead Air / Filler Scene #2"
+  }
+}

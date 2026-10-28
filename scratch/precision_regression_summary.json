@@ -1,0 +1,57 @@
+{
+  "project": "PRECISION_REGRESSION_1791480931",
+  "sync_quality_before": 47.4,
+  "sync_quality_after": 94.6,
+  "score_breakdown": {
+    "semantic_relevance": 89.0,
+    "temporal_alignment": 100.0,
+    "beat_coverage": 100.0,
+    "context_continuity": 100.0,
+    "image_confidence": 84.5,
+    "final_sync_quality": 94.6
+  },
+  "scenes_count": 4,
+  "scenes": [
+    {
+      "scene": 1,
+      "start": 0.0,
+      "end": 3.88,
+      "dur": 3.88,
+      "confidence": 0.475,
+      "image": "img_empire_vision.png",
+      "text": "Every great empire begins with a vision."
+    },
+    {
+      "scene": 2,
+      "start": 3.88,
+      "end": 7.76,
+      "dur": 3.88,
+      "confidence": 0.57,
+      "image": "img_throne_ruler.png",
+      "text": "A vision of power. A vision of glory."
+    },
+    {
+      "scene": 3,
+      "start": 7.76,
+      "end": 12.92,
+      "dur": 5.16,
+      "confidence": 0.57,
+      "image": "img_warrior_march.png",
+      "text": "And sometimes, a vision that one ruler can change the course of history."
+    },
+    {
+      "scene": 4,
+      "start": 12.92,
+      "end": 15.0,
+      "dur": 2.08,
+      "confidence": 0.605,
+      "image": "img_warrior_march.png",
+      "text": "Centuries ago, beyond the lands of"
+    }
+  ],
+  "render_duration": 180.76103496551514,
+  "video_duration": 15.0,
+  "audio_stream_duration": 15.0,
+  "drift": 0.0,
+  "file_size": 16480757
+}

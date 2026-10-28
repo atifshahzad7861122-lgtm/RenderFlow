@@ -1,0 +1,48 @@
+{
+ "style": "classic",
+ "total_segments": 8,
+ "total_words": 37,
+ "total_captions": 8,
+ "checks": {
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.255,
+   "text": "He began working on his new venture",
+   "sub_region_mean": 151.66,
+   "sub_region_std": 64.15,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 5.822,
+   "text": "Soon the technology platform gained traction",
+   "sub_region_mean": 117.97,
+   "sub_region_std": 51.93,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 5,
+   "timestamp": 9.389,
+   "text": "Financial revenue charts climbed as",
+   "sub_region_mean": 84.76,
+   "sub_region_std": 46.15,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 8,
+   "timestamp": 15.254,
+   "text": "remarkable milestone.",
+   "sub_region_mean": 141.08,
+   "sub_region_std": 47.39,
+   "status": "PASS"
+  }
+ ]
+}

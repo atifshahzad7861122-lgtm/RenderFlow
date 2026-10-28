@@ -1,0 +1,14 @@
+{
+  "warm_frame_with_captions": "frame_04.0s.png",
+  "noir_frame_without_captions": "frame_04.0s.png",
+  "pixel_difference_stats": {
+    "mse": 366.896,
+    "rmse": 19.155,
+    "avg_abs_channel_diff": [
+      22.3,
+      14.67,
+      11.47
+    ],
+    "identical": false
+  }
+}

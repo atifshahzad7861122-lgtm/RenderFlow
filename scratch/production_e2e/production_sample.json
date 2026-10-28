@@ -1,0 +1,155 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "classic",
+  "stt_provider": "existing_transcript",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 3,
+  "total_duration_s": 9.5,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.5,
+      "end": 3.0,
+      "text": "Every transition must maintain crisp detail.",
+      "words": [
+        {
+          "text": "Every",
+          "word": "Every",
+          "start": 0.5,
+          "end": 0.805,
+          "confidence": 1.0
+        },
+        {
+          "text": "transition",
+          "word": "transition",
+          "start": 0.805,
+          "end": 1.415,
+          "confidence": 1.0
+        },
+        {
+          "text": "must",
+          "word": "must",
+          "start": 1.415,
+          "end": 1.659,
+          "confidence": 1.0
+        },
+        {
+          "text": "maintain",
+          "word": "maintain",
+          "start": 1.659,
+          "end": 2.146,
+          "confidence": 1.0
+        },
+        {
+          "text": "crisp",
+          "word": "crisp",
+          "start": 2.146,
+          "end": 2.451,
+          "confidence": 1.0
+        },
+        {
+          "text": "detail.",
+          "word": "detail.",
+          "start": 2.451,
+          "end": 3.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 3.8,
+      "end": 6.5,
+      "text": "Eliminating blur across all rendering modes.",
+      "words": [
+        {
+          "text": "Eliminating",
+          "word": "Eliminating",
+          "start": 3.8,
+          "end": 4.524,
+          "confidence": 1.0
+        },
+        {
+          "text": "blur",
+          "word": "blur",
+          "start": 4.524,
+          "end": 4.788,
+          "confidence": 1.0
+        },
+        {
+          "text": "across",
+          "word": "across",
+          "start": 4.788,
+          "end": 5.183,
+          "confidence": 1.0
+        },
+        {
+          "text": "all",
+          "word": "all",
+          "start": 5.183,
+          "end": 5.38,
+          "confidence": 1.0
+        },
+        {
+          "text": "rendering",
+          "word": "rendering",
+          "start": 5.38,
+          "end": 5.973,
+          "confidence": 1.0
+        },
+        {
+          "text": "modes.",
+          "word": "modes.",
+          "start": 5.973,
+          "end": 6.5,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 7.2,
+      "end": 9.5,
+      "text": "High quality cinematic rendering complete.",
+      "words": [
+        {
+          "text": "High",
+          "word": "High",
+          "start": 7.2,
+          "end": 7.43,
+          "confidence": 1.0
+        },
+        {
+          "text": "quality",
+          "word": "quality",
+          "start": 7.43,
+          "end": 7.832,
+          "confidence": 1.0
+        },
+        {
+          "text": "cinematic",
+          "word": "cinematic",
+          "start": 7.832,
+          "end": 8.35,
+          "confidence": 1.0
+        },
+        {
+          "text": "rendering",
+          "word": "rendering",
+          "start": 8.35,
+          "end": 8.867,
+          "confidence": 1.0
+        },
+        {
+          "text": "complete.",
+          "word": "complete.",
+          "start": 8.867,
+          "end": 9.5,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 1.4,
+      "text": "Berlin, 1953: an opening wide view across the divided sectors and checkpoints."
+    },
+    {
+      "start": 1.4,
+      "end": 2.8,
+      "text": "Undercover military forces uncovered covert surveillance operations and sudden betrayals."
+    },
+    {
+      "start": 2.8,
+      "end": 4.0,
+      "text": "Deep beneath the city, secret tunnel networks captured every private telephone signal."
+    }
+  ]
+}

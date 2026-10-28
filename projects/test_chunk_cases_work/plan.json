@@ -1,0 +1,58 @@
+{
+  "scenes": [
+    {
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 3.0,
+      "dur": 3.0,
+      "image": "scene_01.png",
+      "transition": "transition_001",
+      "context": "normal"
+    },
+    {
+      "segment_index": 1,
+      "start": 3.0,
+      "end": 6.0,
+      "dur": 3.0,
+      "image": "scene_02.png",
+      "transition": "transition_003",
+      "context": "story_change"
+    },
+    {
+      "segment_index": 2,
+      "start": 6.0,
+      "end": 8.0,
+      "dur": 2.0,
+      "image": "scene_03.png",
+      "transition": "transition_004",
+      "context": "location_change"
+    },
+    {
+      "segment_index": 3,
+      "start": 8.0,
+      "end": 11.0,
+      "dur": 3.0,
+      "image": "scene_04.png",
+      "transition": "cinematic_dissolve",
+      "context": "emotional"
+    },
+    {
+      "segment_index": 4,
+      "start": 11.0,
+      "end": 14.0,
+      "dur": 3.0,
+      "image": "scene_05.png",
+      "transition": "soft_wipe",
+      "context": "normal"
+    },
+    {
+      "segment_index": 5,
+      "start": 14.0,
+      "end": 17.0,
+      "dur": 3.0,
+      "image": "scene_06.png",
+      "transition": "clean_cut",
+      "context": "fast"
+    }
+  ]
+}

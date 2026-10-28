@@ -1,0 +1,28 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_0001",
+      "start": 0.0,
+      "end": 3.183,
+      "dur": 3.183,
+      "image": "img_01.png",
+      "transition": "cinematic_dissolve"
+    },
+    {
+      "scene_id": "scene_0002",
+      "start": 3.183,
+      "end": 6.365,
+      "dur": 3.183,
+      "image": "img_02.png",
+      "transition": "soft_wipe"
+    },
+    {
+      "scene_id": "scene_0003",
+      "start": 6.365,
+      "end": 9.548,
+      "dur": 3.183,
+      "image": "img_03.png",
+      "transition": "cinematic_dissolve"
+    }
+  ]
+}

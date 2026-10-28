@@ -1,0 +1,26 @@
+[
+  {
+    "test_name": "30-Minute Video Architecture Test",
+    "target_dur_s": 1800.0,
+    "target_dur_min": 30.0,
+    "scenes_count": 300,
+    "timeline_time_s": 102.074,
+    "peak_ram_mb": 1614.6,
+    "coverage_passed": true,
+    "chunk_continuity_passed": true,
+    "total_chunks": 9,
+    "status": "PASS"
+  },
+  {
+    "test_name": "60-Minute Video Architecture Test",
+    "target_dur_s": 3600.0,
+    "target_dur_min": 60.0,
+    "scenes_count": 600,
+    "timeline_time_s": 203.521,
+    "peak_ram_mb": 2045.8,
+    "coverage_passed": true,
+    "chunk_continuity_passed": true,
+    "total_chunks": 18,
+    "status": "PASS"
+  }
+]

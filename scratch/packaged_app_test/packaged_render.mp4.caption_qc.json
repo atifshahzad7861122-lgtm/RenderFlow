@@ -1,0 +1,50 @@
+{
+ "style": "classic",
+ "total_segments": 5,
+ "total_words": 29,
+ "total_captions": 5,
+ "checks": {
+  "cue_count": "PASS",
+  "word_count": "PASS",
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.65,
+   "text": "Testing built-in cinematic dissolve transition.",
+   "sub_region_mean": 43.14,
+   "sub_region_std": 45.47,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 2,
+   "timestamp": 4.65,
+   "text": "Testing external YouTube flare overlay transition.",
+   "sub_region_mean": 42.52,
+   "sub_region_std": 46.91,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 7.65,
+   "text": "Testing built-in soft directional wipe transition.",
+   "sub_region_mean": 43.24,
+   "sub_region_std": 45.99,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 5,
+   "timestamp": 13.65,
+   "text": "Verifying crisp full-resolution background detail.",
+   "sub_region_mean": 43.64,
+   "sub_region_std": 46.8,
+   "status": "PASS"
+  }
+ ]
+}

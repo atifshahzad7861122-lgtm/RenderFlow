@@ -1,0 +1,41 @@
+{
+  "orig_probe": {
+    "file": "final.mp4",
+    "width": 1920,
+    "height": 1080,
+    "v_codec": "h264",
+    "pix_fmt": "yuv420p",
+    "fps": "30/1",
+    "v_dur": 214.633333,
+    "nb_frames": 6439,
+    "a_codec": "aac",
+    "a_sample_rate": 48000,
+    "a_channels": 2,
+    "a_dur": 214.660125,
+    "file_dur": 214.660125,
+    "size_bytes": 295998372,
+    "bitrate_kbps": 11031.3,
+    "av_drift_ms": 26.79
+  },
+  "fixed_probe": {
+    "file": "final_regression_verified.mp4",
+    "width": 1920,
+    "height": 1080,
+    "v_codec": "h264",
+    "pix_fmt": "yuv420p",
+    "fps": "30/1",
+    "v_dur": 214.6,
+    "nb_frames": 6438,
+    "a_codec": "aac",
+    "a_sample_rate": 48000,
+    "a_channels": 2,
+    "a_dur": 214.616,
+    "file_dur": 214.621354,
+    "size_bytes": 308290416,
+    "bitrate_kbps": 11491.5,
+    "av_drift_ms": 16.0
+  },
+  "magenta_corruptions_orig": 46,
+  "magenta_corruptions_fixed": 0,
+  "timestamps_evaluated": 50
+}

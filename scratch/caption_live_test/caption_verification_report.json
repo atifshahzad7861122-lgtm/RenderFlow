@@ -1,0 +1,50 @@
+{
+  "audio": "F:\\Rendering_Studio_Engine_2026-09-25_build_v4\\engine_v2_2026-09-21\\scratch\\caption_live_test\\narration.wav",
+  "duration_s": 9.533333333333333,
+  "transcript_source": "faster-whisper (local)",
+  "caption_cues": 5,
+  "ass_dialogue_events": 5,
+  "qc_status": "PASS",
+  "visual_frames": [
+    {
+      "percentage": "10%",
+      "timestamp": "0.95s",
+      "frame_idx": 28,
+      "path": "F:\\Rendering_Studio_Engine_2026-09-25_build_v4\\engine_v2_2026-09-21\\scratch\\caption_live_test\\visual_frames\\frame_10pct.png",
+      "roi_std": 44.09,
+      "edge_density": 0.1621
+    },
+    {
+      "percentage": "30%",
+      "timestamp": "2.86s",
+      "frame_idx": 85,
+      "path": "F:\\Rendering_Studio_Engine_2026-09-25_build_v4\\engine_v2_2026-09-21\\scratch\\caption_live_test\\visual_frames\\frame_30pct.png",
+      "roi_std": 40.59,
+      "edge_density": 0.1596
+    },
+    {
+      "percentage": "50%",
+      "timestamp": "4.77s",
+      "frame_idx": 143,
+      "path": "F:\\Rendering_Studio_Engine_2026-09-25_build_v4\\engine_v2_2026-09-21\\scratch\\caption_live_test\\visual_frames\\frame_50pct.png",
+      "roi_std": 32.53,
+      "edge_density": 0.0959
+    },
+    {
+      "percentage": "70%",
+      "timestamp": "6.67s",
+      "frame_idx": 200,
+      "path": "F:\\Rendering_Studio_Engine_2026-09-25_build_v4\\engine_v2_2026-09-21\\scratch\\caption_live_test\\visual_frames\\frame_70pct.png",
+      "roi_std": 45.65,
+      "edge_density": 0.1634
+    },
+    {
+      "percentage": "90%",
+      "timestamp": "8.58s",
+      "frame_idx": 257,
+      "path": "F:\\Rendering_Studio_Engine_2026-09-25_build_v4\\engine_v2_2026-09-21\\scratch\\caption_live_test\\visual_frames\\frame_90pct.png",
+      "roi_std": 38.36,
+      "edge_density": 0.1598
+    }
+  ]
+}

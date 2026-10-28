@@ -1,0 +1,41 @@
+[
+  {
+    "label": "1080p",
+    "target": "1920x1080",
+    "actual": "1920x1080",
+    "codec": "h264",
+    "pix_fmt": "yuv420p",
+    "fps": "30/1",
+    "v_dur": 10.3,
+    "file_dur": 10.3,
+    "size_bytes": 17304926,
+    "bitrate_kbps": 13440.7,
+    "file": "scratch\\res_test_1080p\\chunk_0000.mp4"
+  },
+  {
+    "label": "1440p",
+    "target": "2560x1440",
+    "actual": "2560x1440",
+    "codec": "h264",
+    "pix_fmt": "yuv420p",
+    "fps": "30/1",
+    "v_dur": 10.3,
+    "file_dur": 10.3,
+    "size_bytes": 28150101,
+    "bitrate_kbps": 21864.2,
+    "file": "scratch\\res_test_1440p\\chunk_0000.mp4"
+  },
+  {
+    "label": "4k",
+    "target": "3840x2160",
+    "actual": "3840x2160",
+    "codec": "h264",
+    "pix_fmt": "yuv420p",
+    "fps": "30/1",
+    "v_dur": 10.3,
+    "file_dur": 10.3,
+    "size_bytes": 56463019,
+    "bitrate_kbps": 43854.8,
+    "file": "scratch\\res_test_4k\\chunk_0000.mp4"
+  }
+]

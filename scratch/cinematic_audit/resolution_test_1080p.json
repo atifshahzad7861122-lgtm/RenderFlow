@@ -1,0 +1,177 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "classic",
+  "stt_provider": "existing_transcript",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 4,
+  "total_duration_s": 6.0,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.192,
+      "text": "Berlin 1953, a city divided by barbed wire,",
+      "words": [
+        {
+          "text": "Berlin",
+          "word": "Berlin",
+          "start": 0.0,
+          "end": 0.346,
+          "confidence": 1.0
+        },
+        {
+          "text": "1953,",
+          "word": "1953,",
+          "start": 0.346,
+          "end": 0.692,
+          "confidence": 1.0
+        },
+        {
+          "text": "a",
+          "word": "a",
+          "start": 0.692,
+          "end": 0.75,
+          "confidence": 1.0
+        },
+        {
+          "text": "city",
+          "word": "city",
+          "start": 0.75,
+          "end": 0.981,
+          "confidence": 1.0
+        },
+        {
+          "text": "divided",
+          "word": "divided",
+          "start": 0.981,
+          "end": 1.385,
+          "confidence": 1.0
+        },
+        {
+          "text": "by",
+          "word": "by",
+          "start": 1.385,
+          "end": 1.5,
+          "confidence": 1.0
+        },
+        {
+          "text": "barbed",
+          "word": "barbed",
+          "start": 1.5,
+          "end": 1.846,
+          "confidence": 1.0
+        },
+        {
+          "text": "wire,",
+          "word": "wire,",
+          "start": 1.846,
+          "end": 2.192,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 2.192,
+      "end": 3.231,
+      "text": "ideology and fear.",
+      "words": [
+        {
+          "text": "ideology",
+          "word": "ideology",
+          "start": 2.192,
+          "end": 2.654,
+          "confidence": 1.0
+        },
+        {
+          "text": "and",
+          "word": "and",
+          "start": 2.654,
+          "end": 2.827,
+          "confidence": 1.0
+        },
+        {
+          "text": "fear.",
+          "word": "fear.",
+          "start": 2.827,
+          "end": 3.231,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 3.231,
+      "end": 3.865,
+      "text": "On one side,",
+      "words": [
+        {
+          "text": "On",
+          "word": "On",
+          "start": 3.231,
+          "end": 3.346,
+          "confidence": 1.0
+        },
+        {
+          "text": "one",
+          "word": "one",
+          "start": 3.346,
+          "end": 3.519,
+          "confidence": 1.0
+        },
+        {
+          "text": "side,",
+          "word": "side,",
+          "start": 3.519,
+          "end": 3.865,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 3.865,
+      "end": 6.0,
+      "text": "American soldiers drove through streets,",
+      "words": [
+        {
+          "text": "American",
+          "word": "American",
+          "start": 3.865,
+          "end": 4.327,
+          "confidence": 1.0
+        },
+        {
+          "text": "soldiers",
+          "word": "soldiers",
+          "start": 4.327,
+          "end": 4.788,
+          "confidence": 1.0
+        },
+        {
+          "text": "drove",
+          "word": "drove",
+          "start": 4.788,
+          "end": 5.077,
+          "confidence": 1.0
+        },
+        {
+          "text": "through",
+          "word": "through",
+          "start": 5.077,
+          "end": 5.481,
+          "confidence": 1.0
+        },
+        {
+          "text": "streets,",
+          "word": "streets,",
+          "start": 5.481,
+          "end": 6.0,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

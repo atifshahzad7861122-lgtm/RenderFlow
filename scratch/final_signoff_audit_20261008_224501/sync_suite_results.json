@@ -1,0 +1,92 @@
+{
+  "golden": {
+    "engine_score": 100.0,
+    "breakdown": {
+      "semantic_relevance": 100.0,
+      "temporal_alignment": 100.0,
+      "beat_coverage": 100.0,
+      "context_continuity": 100.0,
+      "image_confidence": 100.0,
+      "final_sync_quality": 100.0
+    },
+    "independent_score": 100.0,
+    "diff": 0.0
+  },
+  "bad_mapping": {
+    "engine_score": 79.2,
+    "breakdown": {
+      "semantic_relevance": 63.2,
+      "temporal_alignment": 100.0,
+      "beat_coverage": 100.0,
+      "context_continuity": 50.0,
+      "image_confidence": 70.5,
+      "final_sync_quality": 79.2
+    },
+    "drop_from_golden": 20.8
+  },
+  "valid_reuse": {
+    "engine_score": 100.0,
+    "breakdown": {
+      "semantic_relevance": 100.0,
+      "temporal_alignment": 100.0,
+      "beat_coverage": 100.0,
+      "context_continuity": 100.0,
+      "image_confidence": 100.0,
+      "final_sync_quality": 100.0
+    },
+    "context_continuity": 100.0
+  },
+  "invalid_reuse": {
+    "engine_score": 81.9,
+    "breakdown": {
+      "semantic_relevance": 63.8,
+      "temporal_alignment": 100.0,
+      "beat_coverage": 100.0,
+      "context_continuity": 75.0,
+      "image_confidence": 71.2,
+      "final_sync_quality": 81.9
+    },
+    "context_continuity": 75.0,
+    "diff_from_valid_reuse": 18.1
+  },
+  "missing_image": {
+    "engine_score": 71.6,
+    "breakdown": {
+      "semantic_relevance": 57.5,
+      "temporal_alignment": 100.0,
+      "beat_coverage": 50.0,
+      "context_continuity": 100.0,
+      "image_confidence": 65.0,
+      "final_sync_quality": 71.6
+    },
+    "beat_coverage": 50.0,
+    "drop_from_golden": 28.4
+  },
+  "poor_timing": {
+    "engine_score": 85.8,
+    "breakdown": {
+      "semantic_relevance": 100.0,
+      "temporal_alignment": 43.3,
+      "beat_coverage": 100.0,
+      "context_continuity": 100.0,
+      "image_confidence": 100.0,
+      "final_sync_quality": 85.8
+    },
+    "temporal_alignment": 43.3,
+    "drop_from_golden": 14.2
+  },
+  "production_test": {
+    "reported_score": 94.6,
+    "engine_score": 94.6,
+    "breakdown": {
+      "semantic_relevance": 89.0,
+      "temporal_alignment": 100.0,
+      "beat_coverage": 100.0,
+      "context_continuity": 100.0,
+      "image_confidence": 84.5,
+      "final_sync_quality": 94.6
+    },
+    "independent_score": 94.6,
+    "diff": 0.0
+  }
+}

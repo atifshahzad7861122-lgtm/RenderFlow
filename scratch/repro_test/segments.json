@@ -1,0 +1,64 @@
+{
+  "segments": [
+    {
+      "id": 0,
+      "start": 0.0,
+      "end": 2.37,
+      "text": "Scene 0"
+    },
+    {
+      "id": 1,
+      "start": 2.37,
+      "end": 4.75,
+      "text": "Scene 1"
+    },
+    {
+      "id": 2,
+      "start": 4.75,
+      "end": 7.12,
+      "text": "Scene 2"
+    },
+    {
+      "id": 3,
+      "start": 7.12,
+      "end": 9.49,
+      "text": "Scene 3"
+    },
+    {
+      "id": 4,
+      "start": 9.49,
+      "end": 11.86,
+      "text": "Scene 4"
+    },
+    {
+      "id": 5,
+      "start": 11.86,
+      "end": 14.24,
+      "text": "Scene 5"
+    },
+    {
+      "id": 6,
+      "start": 14.24,
+      "end": 16.61,
+      "text": "Scene 6"
+    },
+    {
+      "id": 7,
+      "start": 16.61,
+      "end": 18.98,
+      "text": "Scene 7"
+    },
+    {
+      "id": 8,
+      "start": 18.98,
+      "end": 21.07,
+      "text": "Scene 8"
+    },
+    {
+      "id": 9,
+      "start": 21.07,
+      "end": 23.16,
+      "text": "Scene 9"
+    }
+  ]
+}

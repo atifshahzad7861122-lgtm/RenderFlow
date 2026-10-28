@@ -1,0 +1,55 @@
+{
+ "n_transitions": 3,
+ "types_used": [
+  "dissolve",
+  "fadefast",
+  "transition_001"
+ ],
+ "avg_duration": 0.533,
+ "durations": [
+  1.0,
+  0.5,
+  0.1
+ ],
+ "details": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.5,
+   "end_s": 3.5,
+   "context": "turning_point",
+   "type": "transition_001",
+   "transition_id": "transition_001",
+   "name": "White Orange Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 6.0,
+   "start_s": 5.75,
+   "end_s": 6.25,
+   "context": "emotional",
+   "type": "dissolve",
+   "transition_id": "slow_dissolve",
+   "name": "Slow Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.5,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 9.0,
+   "start_s": 8.95,
+   "end_s": 9.05,
+   "context": "fast",
+   "type": "fadefast",
+   "transition_id": "clean_cut",
+   "name": "Clean Cut",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.1,
+   "is_dip_black": false
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "style": "classic",
+ "total_segments": 13,
+ "total_words": 71,
+ "total_captions": 13,
+ "checks": {
+  "cue_count": "PASS",
+  "word_count": "PASS",
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.393,
+   "text": "Berlin 1953, a city divided by",
+   "sub_region_mean": 178.47,
+   "sub_region_std": 62.8,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 5,
+   "timestamp": 10.255,
+   "text": "a city Berlin divided 1953,",
+   "sub_region_mean": 83.77,
+   "sub_region_std": 72.35,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 9,
+   "timestamp": 10.691,
+   "text": "side, On American one soldiers side,",
+   "sub_region_mean": 53.47,
+   "sub_region_std": 47.44,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 13,
+   "timestamp": 14.979,
+   "text": "windows and the sound of jazz, on the other.",
+   "sub_region_mean": 138.15,
+   "sub_region_std": 61.49,
+   "status": "PASS"
+  }
+ ]
+}

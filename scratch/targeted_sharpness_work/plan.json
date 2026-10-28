@@ -1,0 +1,986 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_0001",
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 2.58,
+      "dur": 2.58,
+      "image": "image_1.png",
+      "image_id": "img_001",
+      "transition": "soft_wipe",
+      "context": "location_change",
+      "confidence": 0.655,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_1.png",
+          "score": 0.655,
+          "raw_score": 0.655,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_2.png",
+          "score": 0.6501,
+          "raw_score": 0.6501,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_3.png",
+          "score": 0.6452,
+          "raw_score": 0.6452,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "Berlin 1953, a city divided",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_1.png",
+        "confidence": 0.655,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_2.png",
+            "score": 0.6501,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_3.png",
+            "score": 0.6452,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_4.png",
+            "score": 0.6403,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0002",
+      "segment_index": 1,
+      "start": 2.58,
+      "end": 5.16,
+      "dur": 2.58,
+      "image": "image_2.png",
+      "image_id": "img_002",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_2.png",
+          "score": 0.675,
+          "raw_score": 0.675,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_3.png",
+          "score": 0.6701,
+          "raw_score": 0.6701,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_4.png",
+          "score": 0.6652,
+          "raw_score": 0.6652,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "by barbed wire, ideology and",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_2.png",
+        "confidence": 0.675,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_3.png",
+            "score": 0.6701,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_4.png",
+            "score": 0.6652,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_5.png",
+            "score": 0.6603,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0003",
+      "segment_index": 2,
+      "start": 5.16,
+      "end": 7.74,
+      "dur": 2.58,
+      "image": "image_3.png",
+      "image_id": "img_003",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match",
+        "contextual_variety"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_2.png",
+          "score": 0.6951,
+          "raw_score": 0.6951,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_3.png",
+          "score": 0.675,
+          "raw_score": 0.675,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match",
+            "contextual_variety"
+          ]
+        },
+        {
+          "image": "image_4.png",
+          "score": 0.6701,
+          "raw_score": 0.6701,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "fear. On one side,",
+      "transition_type": "CONTINUATION",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_3.png",
+        "confidence": 0.675,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match",
+          "contextual_variety"
+        ],
+        "transition_type": "CONTINUATION",
+        "rejected_candidates": [
+          {
+            "filename": "image_3.png",
+            "score": 0.675,
+            "rejection_reasons": [
+              "lower_overall_rank"
+            ]
+          },
+          {
+            "filename": "image_4.png",
+            "score": 0.6701,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_1.png",
+            "score": 0.6652,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0004",
+      "segment_index": 3,
+      "start": 7.74,
+      "end": 10.32,
+      "dur": 2.58,
+      "image": "image_4.png",
+      "image_id": "img_004",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match",
+        "contextual_variety"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_3.png",
+          "score": 0.6951,
+          "raw_score": 0.6951,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_4.png",
+          "score": 0.675,
+          "raw_score": 0.675,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match",
+            "contextual_variety"
+          ]
+        },
+        {
+          "image": "image_5.png",
+          "score": 0.6701,
+          "raw_score": 0.6701,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "American soldiers drove through streets,",
+      "transition_type": "CONTINUATION",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_4.png",
+        "confidence": 0.675,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match",
+          "contextual_variety"
+        ],
+        "transition_type": "CONTINUATION",
+        "rejected_candidates": [
+          {
+            "filename": "image_4.png",
+            "score": 0.675,
+            "rejection_reasons": [
+              "lower_overall_rank"
+            ]
+          },
+          {
+            "filename": "image_5.png",
+            "score": 0.6701,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_2.png",
+            "score": 0.6652,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0005",
+      "segment_index": 4,
+      "start": 10.32,
+      "end": 12.373,
+      "dur": 2.053,
+      "image": "image_5.png",
+      "image_id": "img_005",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match",
+        "contextual_variety"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_4.png",
+          "score": 0.6951,
+          "raw_score": 0.6951,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_5.png",
+          "score": 0.675,
+          "raw_score": 0.675,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match",
+            "contextual_variety"
+          ]
+        },
+        {
+          "image": "image_6.png",
+          "score": 0.6701,
+          "raw_score": 0.6701,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "filled with rebuilding factories, bright",
+      "transition_type": "CONTINUATION",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_5.png",
+        "confidence": 0.675,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match",
+          "contextual_variety"
+        ],
+        "transition_type": "CONTINUATION",
+        "rejected_candidates": [
+          {
+            "filename": "image_5.png",
+            "score": 0.675,
+            "rejection_reasons": [
+              "lower_overall_rank"
+            ]
+          },
+          {
+            "filename": "image_6.png",
+            "score": 0.6701,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_3.png",
+            "score": 0.6652,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0006",
+      "segment_index": 5,
+      "start": 12.373,
+      "end": 14.426,
+      "dur": 2.053,
+      "image": "image_6.png",
+      "image_id": "img_006",
+      "transition": "soft_wipe",
+      "context": "location_change",
+      "confidence": 0.655,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_6.png",
+          "score": 0.655,
+          "raw_score": 0.655,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_7.png",
+          "score": 0.6501,
+          "raw_score": 0.6501,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_8.png",
+          "score": 0.6452,
+          "raw_score": 0.6452,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "shop windows, and the sound",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_6.png",
+        "confidence": 0.655,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_7.png",
+            "score": 0.6501,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_8.png",
+            "score": 0.6452,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_9.png",
+            "score": 0.6403,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0007",
+      "segment_index": 6,
+      "start": 14.426,
+      "end": 16.48,
+      "dur": 2.054,
+      "image": "image_7.png",
+      "image_id": "img_007",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_7.png",
+          "score": 0.675,
+          "raw_score": 0.675,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_8.png",
+          "score": 0.6701,
+          "raw_score": 0.6701,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_9.png",
+          "score": 0.6652,
+          "raw_score": 0.6652,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "of jazz, on the other.",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_7.png",
+        "confidence": 0.675,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_8.png",
+            "score": 0.6701,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_9.png",
+            "score": 0.6652,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_10.png",
+            "score": 0.6603,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0008",
+      "segment_index": 7,
+      "start": 16.48,
+      "end": 19.52,
+      "dur": 3.04,
+      "image": "image_8.png",
+      "image_id": "img_008",
+      "transition": "soft_wipe",
+      "context": "location_change",
+      "confidence": 0.655,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_8.png",
+          "score": 0.655,
+          "raw_score": 0.655,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_9.png",
+          "score": 0.6501,
+          "raw_score": 0.6501,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_10.png",
+          "score": 0.6452,
+          "raw_score": 0.6452,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "Soviet soldiers watched over a city where every",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_8.png",
+        "confidence": 0.655,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_9.png",
+            "score": 0.6501,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_10.png",
+            "score": 0.6452,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_11.png",
+            "score": 0.6403,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0009",
+      "segment_index": 8,
+      "start": 19.52,
+      "end": 22.56,
+      "dur": 3.04,
+      "image": "image_9.png",
+      "image_id": "img_009",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_9.png",
+          "score": 0.675,
+          "raw_score": 0.675,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_10.png",
+          "score": 0.6701,
+          "raw_score": 0.6701,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_11.png",
+          "score": 0.6652,
+          "raw_score": 0.6652,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "conversation could carry a risk, but beneath the streets,",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "decision_trace": {
+        "selected_image": "image_9.png",
+        "confidence": 0.675,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "filename": "image_10.png",
+            "score": 0.6701,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_11.png",
+            "score": 0.6652,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_12.png",
+            "score": 0.6603,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0010",
+      "segment_index": 9,
+      "start": 22.56,
+      "end": 25.33,
+      "dur": 2.77,
+      "image": "image_10.png",
+      "image_id": "img_010",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.675,
+      "confidence_level": "MEDIUM",
+      "match_reason": [
+        "semantic_similarity",
+        "visual_similarity",
+        "entity_match",
+        "action_match",
+        "contextual_variety"
+      ],
+      "source": "deterministic_semantic",
+      "user_override": false,
+      "candidates": [
+        {
+          "image": "image_9.png",
+          "score": 0.6951,
+          "raw_score": 0.6951,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        },
+        {
+          "image": "image_10.png",
+          "score": 0.675,
+          "raw_score": 0.675,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match",
+            "contextual_variety"
+          ]
+        },
+        {
+          "image": "image_11.png",
+          "score": 0.6701,
+          "raw_score": 0.6701,
+          "penalty": 0.0,
+          "reasons": [
+            "semantic_similarity",
+            "visual_similarity",
+            "entity_match",
+            "action_match"
+          ]
+        }
+      ],
+      "narration_text": "beyond the checkpoints and guard towers,",
+      "transition_type": "CONTINUATION",
+      "chapter_index": 2,
+      "decision_trace": {
+        "selected_image": "image_10.png",
+        "confidence": 0.675,
+        "confidence_level": "MEDIUM",
+        "why": [
+          "semantic_similarity",
+          "visual_similarity",
+          "entity_match",
+          "action_match",
+          "contextual_variety"
+        ],
+        "transition_type": "CONTINUATION",
+        "rejected_candidates": [
+          {
+            "filename": "image_10.png",
+            "score": 0.675,
+            "rejection_reasons": [
+              "lower_overall_rank"
+            ]
+          },
+          {
+            "filename": "image_11.png",
+            "score": 0.6701,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          },
+          {
+            "filename": "image_8.png",
+            "score": 0.6652,
+            "rejection_reasons": [
+              "lower_semantic_text"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"scenes": [{"scene_id": "s1", "img": "image_a.png", "start_s": 0.0, "dur": 1.5}, {"scene_id": "s2", "img": "image_b.png", "start_s": 1.5, "dur": 1.5}], "transitions": [{"cut_index": 0, "cut_s": 1.5, "dur_s": 0.04, "type": "clean_cut"}]}

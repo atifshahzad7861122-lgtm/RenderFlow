@@ -1,0 +1,255 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "classic",
+  "stt_provider": "existing_transcript",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 5,
+  "total_duration_s": 14.8,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.5,
+      "end": 2.8,
+      "text": "Testing built-in cinematic dissolve transition.",
+      "words": [
+        {
+          "text": "Testing",
+          "word": "Testing",
+          "start": 0.5,
+          "end": 0.858,
+          "confidence": 1.0
+        },
+        {
+          "text": "built-in",
+          "word": "built-in",
+          "start": 0.858,
+          "end": 1.267,
+          "confidence": 1.0
+        },
+        {
+          "text": "cinematic",
+          "word": "cinematic",
+          "start": 1.267,
+          "end": 1.727,
+          "confidence": 1.0
+        },
+        {
+          "text": "dissolve",
+          "word": "dissolve",
+          "start": 1.727,
+          "end": 2.136,
+          "confidence": 1.0
+        },
+        {
+          "text": "transition.",
+          "word": "transition.",
+          "start": 2.136,
+          "end": 2.8,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 3.5,
+      "end": 5.8,
+      "text": "Testing external YouTube flare overlay transition.",
+      "words": [
+        {
+          "text": "Testing",
+          "word": "Testing",
+          "start": 3.5,
+          "end": 3.843,
+          "confidence": 1.0
+        },
+        {
+          "text": "external",
+          "word": "external",
+          "start": 3.843,
+          "end": 4.234,
+          "confidence": 1.0
+        },
+        {
+          "text": "YouTube",
+          "word": "YouTube",
+          "start": 4.234,
+          "end": 4.577,
+          "confidence": 1.0
+        },
+        {
+          "text": "flare",
+          "word": "flare",
+          "start": 4.577,
+          "end": 4.821,
+          "confidence": 1.0
+        },
+        {
+          "text": "overlay",
+          "word": "overlay",
+          "start": 4.821,
+          "end": 5.164,
+          "confidence": 1.0
+        },
+        {
+          "text": "transition.",
+          "word": "transition.",
+          "start": 5.164,
+          "end": 5.8,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 6.5,
+      "end": 8.8,
+      "text": "Testing built-in soft directional wipe transition.",
+      "words": [
+        {
+          "text": "Testing",
+          "word": "Testing",
+          "start": 6.5,
+          "end": 6.843,
+          "confidence": 1.0
+        },
+        {
+          "text": "built-in",
+          "word": "built-in",
+          "start": 6.843,
+          "end": 7.234,
+          "confidence": 1.0
+        },
+        {
+          "text": "soft",
+          "word": "soft",
+          "start": 7.234,
+          "end": 7.43,
+          "confidence": 1.0
+        },
+        {
+          "text": "directional",
+          "word": "directional",
+          "start": 7.43,
+          "end": 7.968,
+          "confidence": 1.0
+        },
+        {
+          "text": "wipe",
+          "word": "wipe",
+          "start": 7.968,
+          "end": 8.164,
+          "confidence": 1.0
+        },
+        {
+          "text": "transition.",
+          "word": "transition.",
+          "start": 8.164,
+          "end": 8.8,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 9.5,
+      "end": 11.8,
+      "text": "Testing external YouTube golden light leak overlay.",
+      "words": [
+        {
+          "text": "Testing",
+          "word": "Testing",
+          "start": 9.5,
+          "end": 9.843,
+          "confidence": 1.0
+        },
+        {
+          "text": "external",
+          "word": "external",
+          "start": 9.843,
+          "end": 10.234,
+          "confidence": 1.0
+        },
+        {
+          "text": "YouTube",
+          "word": "YouTube",
+          "start": 10.234,
+          "end": 10.577,
+          "confidence": 1.0
+        },
+        {
+          "text": "golden",
+          "word": "golden",
+          "start": 10.577,
+          "end": 10.87,
+          "confidence": 1.0
+        },
+        {
+          "text": "light",
+          "word": "light",
+          "start": 10.87,
+          "end": 11.115,
+          "confidence": 1.0
+        },
+        {
+          "text": "leak",
+          "word": "leak",
+          "start": 11.115,
+          "end": 11.311,
+          "confidence": 1.0
+        },
+        {
+          "text": "overlay.",
+          "word": "overlay.",
+          "start": 11.311,
+          "end": 11.8,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 12.5,
+      "end": 14.8,
+      "text": "Verifying crisp full-resolution background detail.",
+      "words": [
+        {
+          "text": "Verifying",
+          "word": "Verifying",
+          "start": 12.5,
+          "end": 12.931,
+          "confidence": 1.0
+        },
+        {
+          "text": "crisp",
+          "word": "crisp",
+          "start": 12.931,
+          "end": 13.171,
+          "confidence": 1.0
+        },
+        {
+          "text": "full-resolution",
+          "word": "full-resolution",
+          "start": 13.171,
+          "end": 13.89,
+          "confidence": 1.0
+        },
+        {
+          "text": "background",
+          "word": "background",
+          "start": 13.89,
+          "end": 14.369,
+          "confidence": 1.0
+        },
+        {
+          "text": "detail.",
+          "word": "detail.",
+          "start": 14.369,
+          "end": 14.8,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

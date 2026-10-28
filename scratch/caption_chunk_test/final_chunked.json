@@ -1,0 +1,199 @@
+{
+  "version": "2.1",
+  "language": "en",
+  "style": "classic",
+  "stt_provider": "local_whisper",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 5,
+  "total_duration_s": 8.5,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.3,
+      "text": "Blackshuck is one of Britain's most famous",
+      "words": [
+        {
+          "text": "Blackshuck",
+          "word": "Blackshuck",
+          "start": 0.0,
+          "end": 0.66,
+          "confidence": 0.605
+        },
+        {
+          "text": "is",
+          "word": "is",
+          "start": 0.66,
+          "end": 0.96,
+          "confidence": 0.993
+        },
+        {
+          "text": "one",
+          "word": "one",
+          "start": 0.96,
+          "end": 1.1,
+          "confidence": 0.999
+        },
+        {
+          "text": "of",
+          "word": "of",
+          "start": 1.1,
+          "end": 1.28,
+          "confidence": 1.0
+        },
+        {
+          "text": "Britain's",
+          "word": "Britain's",
+          "start": 1.28,
+          "end": 1.7,
+          "confidence": 0.957
+        },
+        {
+          "text": "most",
+          "word": "most",
+          "start": 1.7,
+          "end": 1.96,
+          "confidence": 0.997
+        },
+        {
+          "text": "famous",
+          "word": "famous",
+          "start": 1.96,
+          "end": 2.3,
+          "confidence": 0.998
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 2.3,
+      "end": 3.44,
+      "text": "black dog legends.",
+      "words": [
+        {
+          "text": "black",
+          "word": "black",
+          "start": 2.3,
+          "end": 2.74,
+          "confidence": 0.555
+        },
+        {
+          "text": "dog",
+          "word": "dog",
+          "start": 2.74,
+          "end": 2.96,
+          "confidence": 0.829
+        },
+        {
+          "text": "legends.",
+          "word": "legends.",
+          "start": 2.96,
+          "end": 3.44,
+          "confidence": 0.977
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 4.52,
+      "end": 5.18,
+      "text": "For centuries,",
+      "words": [
+        {
+          "text": "For",
+          "word": "For",
+          "start": 4.52,
+          "end": 4.72,
+          "confidence": 0.786
+        },
+        {
+          "text": "centuries,",
+          "word": "centuries,",
+          "start": 4.72,
+          "end": 5.18,
+          "confidence": 0.999
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 5.8,
+      "end": 7.84,
+      "text": "tales of this spectral hound have terrified",
+      "words": [
+        {
+          "text": "tales",
+          "word": "tales",
+          "start": 5.8,
+          "end": 6.06,
+          "confidence": 0.914
+        },
+        {
+          "text": "of",
+          "word": "of",
+          "start": 6.06,
+          "end": 6.32,
+          "confidence": 0.999
+        },
+        {
+          "text": "this",
+          "word": "this",
+          "start": 6.32,
+          "end": 6.52,
+          "confidence": 0.976
+        },
+        {
+          "text": "spectral",
+          "word": "spectral",
+          "start": 6.52,
+          "end": 6.9,
+          "confidence": 0.89
+        },
+        {
+          "text": "hound",
+          "word": "hound",
+          "start": 6.9,
+          "end": 7.22,
+          "confidence": 0.708
+        },
+        {
+          "text": "have",
+          "word": "have",
+          "start": 7.22,
+          "end": 7.46,
+          "confidence": 0.997
+        },
+        {
+          "text": "terrified",
+          "word": "terrified",
+          "start": 7.46,
+          "end": 7.84,
+          "confidence": 0.982
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 7.84,
+      "end": 8.5,
+      "text": "the countryside.",
+      "words": [
+        {
+          "text": "the",
+          "word": "the",
+          "start": 7.84,
+          "end": 8.2,
+          "confidence": 0.997
+        },
+        {
+          "text": "countryside.",
+          "word": "countryside.",
+          "start": 8.2,
+          "end": 8.5,
+          "confidence": 0.904
+        }
+      ]
+    }
+  ]
+}

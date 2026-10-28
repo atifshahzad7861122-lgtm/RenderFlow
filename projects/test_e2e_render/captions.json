@@ -1,0 +1,91 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "hormozi",
+  "stt_provider": "existing_transcript",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 2,
+  "total_duration_s": 3.8,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.2,
+      "end": 1.8,
+      "text": "RenderFlow Canonical Resolution Fix",
+      "words": [
+        {
+          "text": "RenderFlow",
+          "word": "RenderFlow",
+          "start": 0.2,
+          "end": 0.7,
+          "confidence": 1.0
+        },
+        {
+          "text": "Canonical",
+          "word": "Canonical",
+          "start": 0.7,
+          "end": 1.15,
+          "confidence": 1.0
+        },
+        {
+          "text": "Resolution",
+          "word": "Resolution",
+          "start": 1.15,
+          "end": 1.65,
+          "confidence": 1.0
+        },
+        {
+          "text": "Fix",
+          "word": "Fix",
+          "start": 1.65,
+          "end": 1.8,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 2.2,
+      "end": 3.8,
+      "text": "Hormozi Kinetic Pop Preset Test",
+      "words": [
+        {
+          "text": "Hormozi",
+          "word": "Hormozi",
+          "start": 2.2,
+          "end": 2.615,
+          "confidence": 1.0
+        },
+        {
+          "text": "Kinetic",
+          "word": "Kinetic",
+          "start": 2.615,
+          "end": 3.03,
+          "confidence": 1.0
+        },
+        {
+          "text": "Pop",
+          "word": "Pop",
+          "start": 3.03,
+          "end": 3.207,
+          "confidence": 1.0
+        },
+        {
+          "text": "Preset",
+          "word": "Preset",
+          "start": 3.207,
+          "end": 3.563,
+          "confidence": 1.0
+        },
+        {
+          "text": "Test",
+          "word": "Test",
+          "start": 3.563,
+          "end": 3.8,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

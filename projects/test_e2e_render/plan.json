@@ -1,0 +1,25 @@
+{
+  "scenes": [
+    {
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 2.0,
+      "dur": 2.0,
+      "image": "image_000.png",
+      "transition": "none",
+      "user_override": false
+    },
+    {
+      "segment_index": 1,
+      "start": 2.0,
+      "end": 4.0,
+      "dur": 2.0,
+      "image": "image_001.png",
+      "transition": "none",
+      "user_override": false
+    }
+  ],
+  "total_duration": 4.0,
+  "resolution": "1080p",
+  "caption_preset": "hormozi"
+}

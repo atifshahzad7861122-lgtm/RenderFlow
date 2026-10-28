@@ -1,0 +1,105 @@
+{
+  "language": "en",
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.0,
+      "text": "RenderFlow 🚀 4K Ultra-HD ✨ — Édition Spéciale 2026",
+      "words": [
+        {
+          "text": "RenderFlow",
+          "word": "RenderFlow",
+          "start": 0.0,
+          "end": 0.4,
+          "confidence": 1.0
+        },
+        {
+          "text": "🚀",
+          "word": "🚀",
+          "start": 0.4,
+          "end": 0.6,
+          "confidence": 1.0
+        },
+        {
+          "text": "4K",
+          "word": "4K",
+          "start": 0.6,
+          "end": 0.9,
+          "confidence": 1.0
+        },
+        {
+          "text": "Ultra-HD",
+          "word": "Ultra-HD",
+          "start": 0.9,
+          "end": 1.3,
+          "confidence": 1.0
+        },
+        {
+          "text": "✨",
+          "word": "✨",
+          "start": 1.3,
+          "end": 1.5,
+          "confidence": 1.0
+        },
+        {
+          "text": "Édition",
+          "word": "Édition",
+          "start": 1.5,
+          "end": 1.8,
+          "confidence": 1.0
+        },
+        {
+          "text": "2026",
+          "word": "2026",
+          "start": 1.8,
+          "end": 2.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 2.0,
+      "end": 4.0,
+      "text": "Professional cinematic rendering workstation with instant timeline synchronization and zero dropped frames.",
+      "words": [
+        {
+          "text": "Professional",
+          "word": "Professional",
+          "start": 2.0,
+          "end": 2.4,
+          "confidence": 1.0
+        },
+        {
+          "text": "cinematic",
+          "word": "cinematic",
+          "start": 2.4,
+          "end": 2.8,
+          "confidence": 1.0
+        },
+        {
+          "text": "rendering",
+          "word": "rendering",
+          "start": 2.8,
+          "end": 3.2,
+          "confidence": 1.0
+        },
+        {
+          "text": "workstation",
+          "word": "workstation",
+          "start": 3.2,
+          "end": 3.6,
+          "confidence": 1.0
+        },
+        {
+          "text": "timeline",
+          "word": "timeline",
+          "start": 3.6,
+          "end": 4.0,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+ "style": "classic",
+ "total_segments": 4,
+ "total_words": 19,
+ "total_captions": 4,
+ "checks": {
+  "cue_count": "PASS",
+  "word_count": "PASS",
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.096,
+   "text": "Berlin 1953, a city divided by barbed wire,",
+   "sub_region_mean": 129.82,
+   "sub_region_std": 109.74,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 2,
+   "timestamp": 2.712,
+   "text": "ideology and fear.",
+   "sub_region_mean": 203.55,
+   "sub_region_std": 66.21,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 3.548,
+   "text": "On one side,",
+   "sub_region_mean": 129.82,
+   "sub_region_std": 109.73,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 4,
+   "timestamp": 4.933,
+   "text": "American soldiers drove through streets,",
+   "sub_region_mean": 129.82,
+   "sub_region_std": 109.74,
+   "status": "PASS"
+  }
+ ]
+}

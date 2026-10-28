@@ -1,0 +1,161 @@
+{
+  "total_count": 28,
+  "categories": [
+    "Built-in",
+    "YouTube Pack"
+  ],
+  "builtin_verified": [
+    {
+      "id": "cinematic_dissolve",
+      "name": "Cinematic Dissolve",
+      "xfade": "dissolve",
+      "duration": 0.4
+    },
+    {
+      "id": "dissolve",
+      "name": "Cross Dissolve",
+      "xfade": "dissolve",
+      "duration": 0.4
+    },
+    {
+      "id": "soft_wipe",
+      "name": "Soft Directional Wipe",
+      "xfade": "wipeleft",
+      "duration": 0.35
+    },
+    {
+      "id": "dip_to_black",
+      "name": "Dip to Black",
+      "xfade": "fadeblack",
+      "duration": 0.4
+    },
+    {
+      "id": "dip_to_white",
+      "name": "Dip to White",
+      "xfade": "fadewhite",
+      "duration": 0.35
+    },
+    {
+      "id": "fade",
+      "name": "Subtle Film Fade",
+      "xfade": "fade",
+      "duration": 0.35
+    },
+    {
+      "id": "clean_cut",
+      "name": "Clean Cut",
+      "xfade": "clean_cut",
+      "duration": 0.04
+    },
+    {
+      "id": "slow_dissolve",
+      "name": "Slow Cinematic Dissolve",
+      "xfade": "dissolve",
+      "duration": 0.5
+    }
+  ],
+  "pack_verified": [
+    {
+      "id": "transition_001",
+      "name": "White Orange Light Leak",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_002",
+      "name": "Blue White Flash",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_003",
+      "name": "Red Film Burn",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_004",
+      "name": "Purple Cyan Light Leak",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_005",
+      "name": "Orange Film Burn",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_006",
+      "name": "Red White Flare",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_007",
+      "name": "Blue Haze Light Leak",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_008",
+      "name": "Golden Light Leak",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_009",
+      "name": "White Pink Flash",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_010",
+      "name": "Amber Bokeh Light Leak",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_011",
+      "name": "White Film Strip Flash",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_012",
+      "name": "Orange Film Strip",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_013",
+      "name": "White Film Strip",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_014",
+      "name": "Cyan Film Strip Flash",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_015",
+      "name": "Black Film Strip",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_016",
+      "name": "Blue Film Strip",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_017",
+      "name": "Warm Film Burn",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_018",
+      "name": "White Gold Film Burn",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_019",
+      "name": "Green Film Strip",
+      "asset_type": "overlay_effect"
+    },
+    {
+      "id": "transition_020",
+      "name": "Dark Amber Film Texture",
+      "asset_type": "overlay_effect"
+    }
+  ],
+  "spec_map_verified": 19,
+  "xfade_types_count": 23
+}

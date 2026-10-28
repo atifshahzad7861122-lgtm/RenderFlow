@@ -1,0 +1,232 @@
+[
+  {
+    "cut_idx": 1,
+    "scene_id": "scene_0003",
+    "source_image": "dist/RenderingStudio/projects/zcxf/images/image_3.png",
+    "source_lapvar": 658.693278039398,
+    "samples": [
+      {
+        "t": 6.16,
+        "offset": "+30f (1.0s)",
+        "defective_lapvar": 260.1818846383406,
+        "fixed_lapvar": 713.12250838015,
+        "defective_ssim": 0.5372005985457329,
+        "fixed_ssim": 0.7393141211969436
+      },
+      {
+        "t": 5.16,
+        "offset_s": 0.0,
+        "defective_lapvar": 39173.53244123141,
+        "fixed_lapvar": 37481.04829444274
+      },
+      {
+        "t": 5.26,
+        "offset_s": 0.1,
+        "defective_lapvar": 29769.51974295185,
+        "fixed_lapvar": 27015.191788550477
+      },
+      {
+        "t": 5.493333333333333,
+        "offset_s": 0.3333333333333333,
+        "defective_lapvar": 13002.108690373941,
+        "fixed_lapvar": 713.4189054860223
+      },
+      {
+        "t": 6.16,
+        "offset_s": 1.0,
+        "defective_lapvar": 260.1818846383406,
+        "fixed_lapvar": 713.12250838015
+      },
+      {
+        "t": 7.16,
+        "offset_s": 2.0,
+        "defective_lapvar": 633.6703161986409,
+        "fixed_lapvar": 691.220529697814
+      }
+    ]
+  },
+  {
+    "cut_idx": 3,
+    "scene_id": "scene_0005",
+    "source_image": "dist/RenderingStudio/projects/zcxf/images/image_5.png",
+    "source_lapvar": 229.75254425508476,
+    "samples": [
+      {
+        "t": 11.32,
+        "offset": "+30f (1.0s)",
+        "defective_lapvar": 209.6088522004434,
+        "fixed_lapvar": 322.18204240987137,
+        "defective_ssim": 0.6642525154912812,
+        "fixed_ssim": 0.7191078891950472
+      },
+      {
+        "t": 10.32,
+        "offset_s": 0.0,
+        "defective_lapvar": 45290.59217256042,
+        "fixed_lapvar": 43428.6565536285
+      },
+      {
+        "t": 10.42,
+        "offset_s": 0.1,
+        "defective_lapvar": 35419.082988228205,
+        "fixed_lapvar": 32120.186726841355
+      },
+      {
+        "t": 10.653333333333334,
+        "offset_s": 0.3333333333333333,
+        "defective_lapvar": 21933.29817555285,
+        "fixed_lapvar": 322.2706757165775
+      },
+      {
+        "t": 11.32,
+        "offset_s": 1.0,
+        "defective_lapvar": 209.6088522004434,
+        "fixed_lapvar": 322.18204240987137
+      },
+      {
+        "t": 12.32,
+        "offset_s": 2.0,
+        "defective_lapvar": 284.08600727945316,
+        "fixed_lapvar": 186.36136986042868
+      }
+    ]
+  },
+  {
+    "cut_idx": 5,
+    "scene_id": "scene_0007",
+    "source_image": "dist/RenderingStudio/projects/zcxf/images/image_7.png",
+    "source_lapvar": 925.8092360825183,
+    "samples": [
+      {
+        "t": 15.43,
+        "offset": "+30f (1.0s)",
+        "defective_lapvar": 728.4355206684511,
+        "fixed_lapvar": 1049.9190229228502,
+        "defective_ssim": 0.6051358868162897,
+        "fixed_ssim": 0.7583417483035232
+      },
+      {
+        "t": 14.43,
+        "offset_s": 0.0,
+        "defective_lapvar": 39484.13421894786,
+        "fixed_lapvar": 39085.046174703675
+      },
+      {
+        "t": 14.53,
+        "offset_s": 0.1,
+        "defective_lapvar": 30389.460126797654,
+        "fixed_lapvar": 27299.228128648596
+      },
+      {
+        "t": 14.763333333333334,
+        "offset_s": 0.3333333333333333,
+        "defective_lapvar": 13162.821988881513,
+        "fixed_lapvar": 1054.2248856373922
+      },
+      {
+        "t": 15.43,
+        "offset_s": 1.0,
+        "defective_lapvar": 728.4355206684511,
+        "fixed_lapvar": 1049.9190229228502
+      },
+      {
+        "t": 16.43,
+        "offset_s": 2.0,
+        "defective_lapvar": 726.0537578380862,
+        "fixed_lapvar": 723.1504829375722
+      }
+    ]
+  },
+  {
+    "cut_idx": 7,
+    "scene_id": "scene_0009",
+    "source_image": "dist/RenderingStudio/projects/zcxf/images/image_9.png",
+    "source_lapvar": 1100.9125445023203,
+    "samples": [
+      {
+        "t": 20.52,
+        "offset": "+30f (1.0s)",
+        "defective_lapvar": 960.418745842903,
+        "fixed_lapvar": 1139.412551703637,
+        "defective_ssim": 0.6615588391744038,
+        "fixed_ssim": 0.7875321023538534
+      },
+      {
+        "t": 19.52,
+        "offset_s": 0.0,
+        "defective_lapvar": 475.90637582347483,
+        "fixed_lapvar": 522.8592624663909
+      },
+      {
+        "t": 19.62,
+        "offset_s": 0.1,
+        "defective_lapvar": 471.5012881004907,
+        "fixed_lapvar": 541.4873622829182
+      },
+      {
+        "t": 19.85333333333333,
+        "offset_s": 0.3333333333333333,
+        "defective_lapvar": 651.9219108116639,
+        "fixed_lapvar": 971.3970316393292
+      },
+      {
+        "t": 20.52,
+        "offset_s": 1.0,
+        "defective_lapvar": 960.418745842903,
+        "fixed_lapvar": 1139.412551703637
+      },
+      {
+        "t": 21.52,
+        "offset_s": 2.0,
+        "defective_lapvar": 1099.0726212647712,
+        "fixed_lapvar": 1093.1921142137837
+      }
+    ]
+  },
+  {
+    "cut_idx": 8,
+    "scene_id": "scene_0010",
+    "source_image": "dist/RenderingStudio/projects/zcxf/images/image_10.png",
+    "source_lapvar": 1468.724681128297,
+    "samples": [
+      {
+        "t": 23.56,
+        "offset": "+30f (1.0s)",
+        "defective_lapvar": 1029.3323090769238,
+        "fixed_lapvar": 1591.9280924371851,
+        "defective_ssim": 0.5546349685345128,
+        "fixed_ssim": 0.6610206692542803
+      },
+      {
+        "t": 22.56,
+        "offset_s": 0.0,
+        "defective_lapvar": 29526.97023350992,
+        "fixed_lapvar": 28808.778420567483
+      },
+      {
+        "t": 22.66,
+        "offset_s": 0.1,
+        "defective_lapvar": 23387.217706398216,
+        "fixed_lapvar": 20533.287159047068
+      },
+      {
+        "t": 22.89333333333333,
+        "offset_s": 0.3333333333333333,
+        "defective_lapvar": 16302.889938616148,
+        "fixed_lapvar": 1596.6306305737628
+      },
+      {
+        "t": 23.56,
+        "offset_s": 1.0,
+        "defective_lapvar": 1029.3323090769238,
+        "fixed_lapvar": 1591.9280924371851
+      },
+      {
+        "t": 24.56,
+        "offset_s": 2.0,
+        "defective_lapvar": 1507.2365708188322,
+        "fixed_lapvar": 1591.9278445590987
+      }
+    ]
+  }
+]

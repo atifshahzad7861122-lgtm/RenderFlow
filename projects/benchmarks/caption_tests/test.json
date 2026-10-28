@@ -1,0 +1,34 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "classic",
+  "stt_provider": "local_whisper",
+  "llm_provider": "none",
+  "llm_model": "none",
+  "total_segments": 1,
+  "total_duration_s": 3.5,
+  "segments": [
+    {
+      "id": 1,
+      "start": 1.0,
+      "end": 3.5,
+      "text": "Hello World",
+      "words": [
+        {
+          "text": "Hello",
+          "word": "Hello",
+          "start": 1.0,
+          "end": 2.0,
+          "confidence": 1.0
+        },
+        {
+          "text": "World",
+          "word": "World",
+          "start": 2.0,
+          "end": 3.5,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

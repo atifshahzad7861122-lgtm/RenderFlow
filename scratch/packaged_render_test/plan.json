@@ -1,0 +1,28 @@
+{
+  "scenes": [
+    {
+      "segment_index": 0,
+      "image": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\packaged_render_test\\images\\img1.png",
+      "transition": "clean_cut",
+      "start": 0.0,
+      "end": 2.0,
+      "dur": 2.0
+    },
+    {
+      "segment_index": 1,
+      "image": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\packaged_render_test\\images\\img2.png",
+      "transition": "cinematic_dissolve",
+      "start": 2.0,
+      "end": 4.0,
+      "dur": 2.0
+    },
+    {
+      "segment_index": 2,
+      "image": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\scratch\\packaged_render_test\\images\\img3.png",
+      "transition": "clean_cut",
+      "start": 4.0,
+      "end": 6.0,
+      "dur": 2.0
+    }
+  ]
+}

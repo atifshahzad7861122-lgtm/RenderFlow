@@ -1,0 +1,11 @@
+1
+00:00:00,000 --> 00:00:01,880
+Welcome to rendering studio engine.
+
+2
+00:00:02,690 --> 00:00:04,930
+This is a local cinematic video rendering
+
+3
+00:00:04,930 --> 00:00:05,310
+test

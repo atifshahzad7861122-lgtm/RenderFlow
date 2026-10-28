@@ -1,0 +1,24 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.0,
+      "text": "Berlin, 1953. Cold war tensions rise along the sector line."
+    },
+    {
+      "start": 3.0,
+      "end": 6.0,
+      "text": "Operatives monitor radio communications under heavy surveillance."
+    },
+    {
+      "start": 6.0,
+      "end": 9.0,
+      "text": "The courier leaves the drop location before dawn breaks."
+    },
+    {
+      "start": 9.0,
+      "end": 12.0,
+      "text": "A crucial microfilm file is successfully secured in the vault."
+    }
+  ]
+}

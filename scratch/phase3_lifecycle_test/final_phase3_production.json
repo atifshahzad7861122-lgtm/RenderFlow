@@ -1,0 +1,335 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "classic",
+  "stt_provider": "existing_transcript",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 8,
+  "total_duration_s": 16.0,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.538,
+      "text": "He began working on his new venture from",
+      "words": [
+        {
+          "text": "He",
+          "word": "He",
+          "start": 0.0,
+          "end": 0.154,
+          "confidence": 1.0
+        },
+        {
+          "text": "began",
+          "word": "began",
+          "start": 0.154,
+          "end": 0.538,
+          "confidence": 1.0
+        },
+        {
+          "text": "working",
+          "word": "working",
+          "start": 0.538,
+          "end": 1.077,
+          "confidence": 1.0
+        },
+        {
+          "text": "on",
+          "word": "on",
+          "start": 1.077,
+          "end": 1.231,
+          "confidence": 1.0
+        },
+        {
+          "text": "his",
+          "word": "his",
+          "start": 1.231,
+          "end": 1.462,
+          "confidence": 1.0
+        },
+        {
+          "text": "new",
+          "word": "new",
+          "start": 1.462,
+          "end": 1.692,
+          "confidence": 1.0
+        },
+        {
+          "text": "venture",
+          "word": "venture",
+          "start": 1.692,
+          "end": 2.231,
+          "confidence": 1.0
+        },
+        {
+          "text": "from",
+          "word": "from",
+          "start": 2.231,
+          "end": 2.538,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 2.538,
+      "end": 4.0,
+      "text": "his home workspace.",
+      "words": [
+        {
+          "text": "his",
+          "word": "his",
+          "start": 2.538,
+          "end": 2.769,
+          "confidence": 1.0
+        },
+        {
+          "text": "home",
+          "word": "home",
+          "start": 2.769,
+          "end": 3.077,
+          "confidence": 1.0
+        },
+        {
+          "text": "workspace.",
+          "word": "workspace.",
+          "start": 3.077,
+          "end": 4.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 4.0,
+      "end": 6.644,
+      "text": "Soon the technology platform gained traction",
+      "words": [
+        {
+          "text": "Soon",
+          "word": "Soon",
+          "start": 4.0,
+          "end": 4.271,
+          "confidence": 1.0
+        },
+        {
+          "text": "the",
+          "word": "the",
+          "start": 4.271,
+          "end": 4.475,
+          "confidence": 1.0
+        },
+        {
+          "text": "technology",
+          "word": "technology",
+          "start": 4.475,
+          "end": 5.153,
+          "confidence": 1.0
+        },
+        {
+          "text": "platform",
+          "word": "platform",
+          "start": 5.153,
+          "end": 5.695,
+          "confidence": 1.0
+        },
+        {
+          "text": "gained",
+          "word": "gained",
+          "start": 5.695,
+          "end": 6.102,
+          "confidence": 1.0
+        },
+        {
+          "text": "traction",
+          "word": "traction",
+          "start": 6.102,
+          "end": 6.644,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 6.644,
+      "end": 8.0,
+      "text": "across major cities.",
+      "words": [
+        {
+          "text": "across",
+          "word": "across",
+          "start": 6.644,
+          "end": 7.051,
+          "confidence": 1.0
+        },
+        {
+          "text": "major",
+          "word": "major",
+          "start": 7.051,
+          "end": 7.39,
+          "confidence": 1.0
+        },
+        {
+          "text": "cities.",
+          "word": "cities.",
+          "start": 7.39,
+          "end": 8.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 8.0,
+      "end": 10.033,
+      "text": "Financial revenue charts climbed as",
+      "words": [
+        {
+          "text": "Financial",
+          "word": "Financial",
+          "start": 8.0,
+          "end": 8.59,
+          "confidence": 1.0
+        },
+        {
+          "text": "revenue",
+          "word": "revenue",
+          "start": 8.59,
+          "end": 9.049,
+          "confidence": 1.0
+        },
+        {
+          "text": "charts",
+          "word": "charts",
+          "start": 9.049,
+          "end": 9.443,
+          "confidence": 1.0
+        },
+        {
+          "text": "climbed",
+          "word": "climbed",
+          "start": 9.443,
+          "end": 9.902,
+          "confidence": 1.0
+        },
+        {
+          "text": "as",
+          "word": "as",
+          "start": 9.902,
+          "end": 10.033,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 10.033,
+      "end": 12.0,
+      "text": "enterprise clients subscribed.",
+      "words": [
+        {
+          "text": "enterprise",
+          "word": "enterprise",
+          "start": 10.033,
+          "end": 10.689,
+          "confidence": 1.0
+        },
+        {
+          "text": "clients",
+          "word": "clients",
+          "start": 10.689,
+          "end": 11.148,
+          "confidence": 1.0
+        },
+        {
+          "text": "subscribed.",
+          "word": "subscribed.",
+          "start": 11.148,
+          "end": 12.0,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 12.0,
+      "end": 14.508,
+      "text": "The entire team assembled to celebrate this",
+      "words": [
+        {
+          "text": "The",
+          "word": "The",
+          "start": 12.0,
+          "end": 12.203,
+          "confidence": 1.0
+        },
+        {
+          "text": "entire",
+          "word": "entire",
+          "start": 12.203,
+          "end": 12.61,
+          "confidence": 1.0
+        },
+        {
+          "text": "team",
+          "word": "team",
+          "start": 12.61,
+          "end": 12.881,
+          "confidence": 1.0
+        },
+        {
+          "text": "assembled",
+          "word": "assembled",
+          "start": 12.881,
+          "end": 13.492,
+          "confidence": 1.0
+        },
+        {
+          "text": "to",
+          "word": "to",
+          "start": 13.492,
+          "end": 13.627,
+          "confidence": 1.0
+        },
+        {
+          "text": "celebrate",
+          "word": "celebrate",
+          "start": 13.627,
+          "end": 14.237,
+          "confidence": 1.0
+        },
+        {
+          "text": "this",
+          "word": "this",
+          "start": 14.237,
+          "end": 14.508,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 14.508,
+      "end": 16.0,
+      "text": "remarkable milestone.",
+      "words": [
+        {
+          "text": "remarkable",
+          "word": "remarkable",
+          "start": 14.508,
+          "end": 15.186,
+          "confidence": 1.0
+        },
+        {
+          "text": "milestone.",
+          "word": "milestone.",
+          "start": 15.186,
+          "end": 16.0,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

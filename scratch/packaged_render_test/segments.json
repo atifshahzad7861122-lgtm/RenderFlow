@@ -1,0 +1,19 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.0,
+      "text": "Scene 1: Solid Red"
+    },
+    {
+      "start": 2.0,
+      "end": 4.0,
+      "text": "Scene 2: Solid Green (Dissolve from Scene 1)"
+    },
+    {
+      "start": 4.0,
+      "end": 6.0,
+      "text": "Scene 3: Solid Blue"
+    }
+  ]
+}

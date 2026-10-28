@@ -1,0 +1,174 @@
+{
+  "styles_tested": {
+    "classic": {
+      "status": "PASS",
+      "gen_time_ms": 1.026,
+      "file_size_bytes": 800
+    },
+    "minimal": {
+      "status": "PASS",
+      "gen_time_ms": 0.758,
+      "file_size_bytes": 809
+    },
+    "editorial": {
+      "status": "PASS",
+      "gen_time_ms": 0.847,
+      "file_size_bytes": 1792
+    },
+    "karaoke": {
+      "status": "PASS",
+      "gen_time_ms": 0.974,
+      "file_size_bytes": 3228
+    },
+    "kinetic_pop": {
+      "status": "PASS",
+      "gen_time_ms": 1.323,
+      "file_size_bytes": 2103
+    },
+    "pill": {
+      "status": "PASS",
+      "gen_time_ms": 1.251,
+      "file_size_bytes": 3250
+    },
+    "bounce": {
+      "status": "PASS",
+      "gen_time_ms": 1.07,
+      "file_size_bytes": 2060
+    },
+    "neon": {
+      "status": "PASS",
+      "gen_time_ms": 0.828,
+      "file_size_bytes": 1930
+    },
+    "bold_viral": {
+      "status": "PASS",
+      "gen_time_ms": 0.912,
+      "file_size_bytes": 3558
+    },
+    "one_word": {
+      "status": "PASS",
+      "gen_time_ms": 0.838,
+      "file_size_bytes": 3377
+    }
+  },
+  "languages_tested": {
+    "English": {
+      "status": "PASS",
+      "lang_code": "en",
+      "is_rtl": false,
+      "time_ms": 4.092,
+      "srt_size": 85,
+      "ass_size": 792,
+      "json_size": 1239
+    },
+    "Urdu": {
+      "status": "PASS",
+      "lang_code": "ur",
+      "is_rtl": true,
+      "time_ms": 3.69,
+      "srt_size": 130,
+      "ass_size": 837,
+      "json_size": 1695
+    },
+    "Arabic": {
+      "status": "PASS",
+      "lang_code": "ar",
+      "is_rtl": true,
+      "time_ms": 5.428,
+      "srt_size": 136,
+      "ass_size": 843,
+      "json_size": 1341
+    },
+    "Hindi": {
+      "status": "PASS",
+      "lang_code": "hi",
+      "is_rtl": false,
+      "time_ms": 3.986,
+      "srt_size": 187,
+      "ass_size": 894,
+      "json_size": 1809
+    },
+    "Spanish": {
+      "status": "PASS",
+      "lang_code": "es",
+      "is_rtl": false,
+      "time_ms": 3.896,
+      "srt_size": 93,
+      "ass_size": 800,
+      "json_size": 1499
+    }
+  },
+  "durations_tested": {
+    "30s": {
+      "status": "PASS",
+      "duration_min": 0.5,
+      "total_words": 50,
+      "total_cues": 13,
+      "n_chunks": 1,
+      "processing_time_s": 0.002
+    },
+    "120s": {
+      "status": "PASS",
+      "duration_min": 2.0,
+      "total_words": 200,
+      "total_cues": 50,
+      "n_chunks": 2,
+      "processing_time_s": 0.0065
+    },
+    "300s": {
+      "status": "PASS",
+      "duration_min": 5.0,
+      "total_words": 500,
+      "total_cues": 125,
+      "n_chunks": 4,
+      "processing_time_s": 0.0232
+    },
+    "600s": {
+      "status": "PASS",
+      "duration_min": 10.0,
+      "total_words": 1000,
+      "total_cues": 250,
+      "n_chunks": 7,
+      "processing_time_s": 0.0362
+    },
+    "1800s": {
+      "status": "PASS",
+      "duration_min": 30.0,
+      "total_words": 3000,
+      "total_cues": 750,
+      "n_chunks": 20,
+      "processing_time_s": 0.1152
+    },
+    "3600s": {
+      "status": "PASS",
+      "duration_min": 60.0,
+      "total_words": 6000,
+      "total_cues": 1500,
+      "n_chunks": 40,
+      "processing_time_s": 0.2264
+    }
+  },
+  "performance_comparison": {
+    "without_captions": {
+      "render_time_s": 382.96,
+      "output_size_mb": 243.21,
+      "ram_rss_mb": 42.3,
+      "qc_passed": true
+    },
+    "with_captions": {
+      "render_time_s": 362.21,
+      "output_size_mb": 243.3,
+      "ram_rss_mb": 45.9,
+      "caption_cues": 98,
+      "caption_qc_valid": true,
+      "sidecars_created": [
+        "final.srt",
+        "final.ass",
+        "captions.json"
+      ]
+    },
+    "overhead_seconds": -20.75,
+    "overhead_percent": -5.42
+  },
+  "benchmark_summary": {}
+}

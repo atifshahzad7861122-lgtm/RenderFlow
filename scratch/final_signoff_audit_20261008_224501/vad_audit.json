@@ -1,0 +1,7 @@
+{
+  "path": "dist\\RenderingStudio\\_internal\\faster_whisper\\assets\\silero_vad_v6.onnx",
+  "exists": true,
+  "size_bytes": 1245151,
+  "sha256": "4cbf549b8326f60f80f2536d9eefeb450a9abe83365a098031c89719f1be17d2",
+  "vad_loaded_ok": true
+}

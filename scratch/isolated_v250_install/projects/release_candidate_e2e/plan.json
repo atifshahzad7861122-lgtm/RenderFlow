@@ -1,0 +1,244 @@
+{
+  "scenes": [
+    {
+      "scene_id": "scene_0001",
+      "segment_index": 0,
+      "start": 0.0,
+      "end": 2.16,
+      "dur": 2.16,
+      "image": "image_1.png",
+      "image_id": "img_001",
+      "transition": "soft_wipe",
+      "context": "location_change",
+      "confidence": 0.1368,
+      "confidence_level": "NO_MATCH",
+      "match_reason": [
+        "no_matching_image_in_library",
+        "similarity_0.137_below_threshold_0.2",
+        "narrative_storyboard_continuity"
+      ],
+      "source": "ai_semantic_auto",
+      "user_override": false,
+      "manual_review_needed": true,
+      "no_match_warning": true,
+      "motion": "L4/push",
+      "motion_mode": "push",
+      "shot_role": "narrative_inspection",
+      "easing": "smoothstep",
+      "zoom_scale": 1.015,
+      "pan_speed": 0.0,
+      "motion_rationale": "conservative_low_confidence_default",
+      "candidates": [
+        {
+          "image": "image_1.png",
+          "similarity": 0.1368
+        },
+        {
+          "image": "image_2.png",
+          "similarity": 0.1368
+        },
+        {
+          "image": "image_22.png",
+          "similarity": 0.1368
+        }
+      ],
+      "narration_text": "Berlin 1953, a city divided by barbed wire and fear.",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "cadence_alignment": {
+        "status": "first_scene_zero_start",
+        "delta_ms": 0.0
+      },
+      "decision_trace": {
+        "selected_image": "image_1.png",
+        "confidence": 0.1368,
+        "confidence_level": "NO_MATCH",
+        "why": [
+          "no_matching_image_in_library",
+          "similarity_0.137_below_threshold_0.2",
+          "narrative_storyboard_continuity"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "image": "image_2.png",
+            "similarity": 0.1368,
+            "delta_vs_winner": 0.0
+          },
+          {
+            "image": "image_22.png",
+            "similarity": 0.1368,
+            "delta_vs_winner": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0002",
+      "segment_index": 1,
+      "start": 2.16,
+      "end": 4.0,
+      "dur": 1.84,
+      "image": "image_2.png",
+      "image_id": "img_002",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.1579,
+      "confidence_level": "NO_MATCH",
+      "match_reason": [
+        "no_matching_image_in_library",
+        "similarity_0.158_below_threshold_0.2",
+        "narrative_storyboard_continuity"
+      ],
+      "source": "ai_semantic_auto",
+      "user_override": false,
+      "manual_review_needed": true,
+      "no_match_warning": true,
+      "motion": "L4/push",
+      "motion_mode": "push",
+      "shot_role": "narrative_inspection",
+      "easing": "smoothstep",
+      "zoom_scale": 1.015,
+      "pan_speed": 0.0,
+      "motion_rationale": "conservative_low_confidence_default",
+      "candidates": [
+        {
+          "image": "image_1.png",
+          "similarity": 0.1579
+        },
+        {
+          "image": "image_2.png",
+          "similarity": 0.1579
+        },
+        {
+          "image": "image_22.png",
+          "similarity": 0.1579
+        }
+      ],
+      "narration_text": "American soldiers patrolled the western streets with military jeeps.",
+      "transition_type": "SEMANTIC_SHIFT",
+      "chapter_index": 1,
+      "cadence_alignment": {
+        "cut_index": 1,
+        "original_time": 2.0,
+        "aligned_time": 2.16,
+        "delta_ms": 160.0,
+        "adjustment_type": "speech_pause",
+        "confidence": 0.9137,
+        "reason": "snapped_to_natural_speech_pause (depth=-100.0dB, dur=0.970s)",
+        "candidate_details": {
+          "start": 1.99,
+          "end": 2.96,
+          "center": 2.475,
+          "min_energy_time": 2.16,
+          "duration": 0.97,
+          "min_db": -100.0,
+          "confidence": 0.9137,
+          "is_silence": true
+        }
+      },
+      "decision_trace": {
+        "selected_image": "image_2.png",
+        "confidence": 0.1579,
+        "confidence_level": "NO_MATCH",
+        "why": [
+          "no_matching_image_in_library",
+          "similarity_0.158_below_threshold_0.2",
+          "narrative_storyboard_continuity"
+        ],
+        "transition_type": "SEMANTIC_SHIFT",
+        "rejected_candidates": [
+          {
+            "image": "image_1.png",
+            "similarity": 0.1579,
+            "delta_vs_winner": 0.0
+          },
+          {
+            "image": "image_22.png",
+            "similarity": 0.1579,
+            "delta_vs_winner": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "scene_id": "scene_0003",
+      "segment_index": 2,
+      "start": 4.0,
+      "end": 6.0,
+      "dur": 2.0,
+      "image": "image_22.png",
+      "image_id": "img_003",
+      "transition": "cinematic_dissolve",
+      "context": "normal",
+      "confidence": 0.1579,
+      "confidence_level": "NO_MATCH",
+      "match_reason": [
+        "no_matching_image_in_library",
+        "similarity_0.158_below_threshold_0.2",
+        "narrative_storyboard_continuity"
+      ],
+      "source": "ai_semantic_auto",
+      "user_override": false,
+      "manual_review_needed": true,
+      "no_match_warning": true,
+      "motion": "L4/push",
+      "motion_mode": "push",
+      "shot_role": "narrative_inspection",
+      "easing": "smoothstep",
+      "zoom_scale": 1.015,
+      "pan_speed": 0.0,
+      "motion_rationale": "conservative_low_confidence_default",
+      "candidates": [
+        {
+          "image": "image_1.png",
+          "similarity": 0.1579
+        },
+        {
+          "image": "image_2.png",
+          "similarity": 0.1579
+        },
+        {
+          "image": "image_22.png",
+          "similarity": 0.1579
+        }
+      ],
+      "narration_text": "Checkpoint guards stood watch under constant surveillance.",
+      "transition_type": "CONTINUATION",
+      "chapter_index": 1,
+      "cadence_alignment": {
+        "cut_index": 2,
+        "original_time": 4.0,
+        "aligned_time": 4.0,
+        "delta_ms": 0.0,
+        "adjustment_type": "none",
+        "confidence": 0.5,
+        "reason": "retained_original_no_reliable_candidate_in_tolerance_window",
+        "candidate_details": null
+      },
+      "decision_trace": {
+        "selected_image": "image_22.png",
+        "confidence": 0.1579,
+        "confidence_level": "NO_MATCH",
+        "why": [
+          "no_matching_image_in_library",
+          "similarity_0.158_below_threshold_0.2",
+          "narrative_storyboard_continuity"
+        ],
+        "transition_type": "CONTINUATION",
+        "rejected_candidates": [
+          {
+            "image": "image_1.png",
+            "similarity": 0.1579,
+            "delta_vs_winner": 0.0
+          },
+          {
+            "image": "image_2.png",
+            "similarity": 0.1579,
+            "delta_vs_winner": 0.0
+          }
+        ]
+      }
+    }
+  ]
+}

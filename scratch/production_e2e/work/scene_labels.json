@@ -1,0 +1,65 @@
+{
+ "scenes": [
+  {
+   "scene_id": "sync_0001",
+   "img": "img_1.png",
+   "dur": 3.5,
+   "frames": 105,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "transition_006",
+   "start_s": 0.0
+  },
+  {
+   "scene_id": "sync_0002",
+   "img": "img_2.png",
+   "dur": 3.5,
+   "frames": 105,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "cinematic_dissolve",
+   "start_s": 3.5
+  },
+  {
+   "scene_id": "sync_0003",
+   "img": "img_3.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "",
+   "transition": "none",
+   "start_s": 7.0
+  }
+ ],
+ "transitions": [
+  {
+   "cut_s": 3.5,
+   "start_s": 3.0,
+   "end_s": 4.0,
+   "context": "normal",
+   "type": "transition_008",
+   "transition_id": "transition_008",
+   "name": "Golden Light Leak",
+   "category": "YouTube Pack",
+   "is_overlay": true,
+   "dur_s": 1.0,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 7.0,
+   "start_s": 6.8,
+   "end_s": 7.2,
+   "context": "normal",
+   "type": "dissolve",
+   "transition_id": "cinematic_dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

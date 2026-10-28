@@ -1,0 +1,118 @@
+{
+  "local_deterministic": {
+    "name": "Local Deterministic",
+    "category": "local",
+    "backend_module": "engine/sync_v3_intelligence.py",
+    "ui_integration": "Built-in Fallback Core & Reranker",
+    "requires_api_key": false,
+    "offline_capable": true,
+    "status": "VERIFIED_OFFLINE"
+  },
+  "faster_whisper": {
+    "name": "Faster-Whisper (Local STT)",
+    "category": "stt",
+    "backend_module": "engine/transcribe.py",
+    "ui_integration": "STT Model Settings & Local Fallback",
+    "requires_api_key": false,
+    "offline_capable": true,
+    "status": "VERIFIED_OFFLINE",
+    "resolved_local_path": "F:\\yt tool\\Rendering Engine By Ai With Atif - Copy\\models\\whisper\\small",
+    "is_local_on_disk": true
+  },
+  "deepgram": {
+    "name": "Deepgram",
+    "category": "stt",
+    "backend_module": "engine/stt_provider.py",
+    "ui_integration": "Settings Modal -> Deepgram Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "DEEPGRAM_API_KEY",
+    "default_model": "nova-3",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  },
+  "groq": {
+    "name": "Groq",
+    "category": "llm",
+    "backend_module": "engine/llm_provider.py",
+    "ui_integration": "Settings Modal -> Groq Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "GROQ_API_KEY",
+    "default_model": "qwen/qwen3.8-27b",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  },
+  "gemini": {
+    "name": "Google Gemini",
+    "category": "llm",
+    "backend_module": "engine/llm_provider.py",
+    "ui_integration": "Settings Modal -> Google Gemini Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "GEMINI_API_KEY",
+    "default_model": "gemini-2.0-flash",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  },
+  "openrouter": {
+    "name": "OpenRouter",
+    "category": "llm",
+    "backend_module": "engine/llm_provider.py",
+    "ui_integration": "Settings Modal -> OpenRouter Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "OPENROUTER_API_KEY",
+    "default_model": "google/gemini-2.0-flash-001",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  },
+  "claude": {
+    "name": "Anthropic Claude",
+    "category": "llm",
+    "backend_module": "engine/llm_provider.py",
+    "ui_integration": "Settings Modal -> Anthropic Claude Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "ANTHROPIC_API_KEY",
+    "default_model": "claude-3-5-haiku-20241022",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  },
+  "openai": {
+    "name": "OpenAI",
+    "category": "llm",
+    "backend_module": "engine/llm_provider.py",
+    "ui_integration": "Settings Modal -> OpenAI Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "OPENAI_API_KEY",
+    "default_model": "gpt-4o-mini",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  },
+  "kimi": {
+    "name": "Kimi (Moonshot)",
+    "category": "llm",
+    "backend_module": "engine/llm_provider.py",
+    "ui_integration": "Settings Modal -> Kimi (Moonshot) Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "MOONSHOT_API_KEY",
+    "default_model": "moonshot-v1-8k",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  },
+  "deepseek": {
+    "name": "DeepSeek",
+    "category": "llm",
+    "backend_module": "engine/llm_provider.py",
+    "ui_integration": "Settings Modal -> DeepSeek Key & Model Selector",
+    "requires_api_key": true,
+    "env_key": "DEEPSEEK_API_KEY",
+    "default_model": "deepseek-chat",
+    "offline_capable": false,
+    "fallback": "Local Deterministic (Rule-based NLP) & Faster-Whisper",
+    "status": "VERIFIED_CONFIGURABLE"
+  }
+}

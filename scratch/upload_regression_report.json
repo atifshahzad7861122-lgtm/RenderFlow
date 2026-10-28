@@ -1,0 +1,34 @@
+{
+  "Case 1: Valid MP3 Upload": {
+    "passed": true,
+    "detail": "HTTP 200, duration=214.67s, url=/media/projects/reg_test_mp3/narration.wav"
+  },
+  "Case 2: Valid WAV Upload": {
+    "passed": true,
+    "detail": "HTTP 200, duration=5.00s"
+  },
+  "Case 3: Invalid File Handling": {
+    "passed": true,
+    "detail": "HTTP 200, audio=None, uploaded_files=[]"
+  },
+  "Case 4: Large File Upload (41MB)": {
+    "passed": true,
+    "detail": "HTTP 200, size=41215910 bytes"
+  },
+  "Case 5: Missing File Validation": {
+    "passed": true,
+    "detail": "HTTP 422, detail=Field required"
+  },
+  "Case 6: Malformed Multipart Handling": {
+    "passed": true,
+    "detail": "HTTP 422, parsed JSON error response successfully"
+  },
+  "Case 7: Project Path Retrieval": {
+    "passed": true,
+    "detail": "HTTP 200, verified /api/project/data: {'name': 'narration.wav', 'path': 'F:\\\\yt tool\\\\Rendering Engine By Ai With Atif - Copy\\\\projects\\\\RenderFlow Audio Project Full Path\\\\narration.wav', 'duration': 214.665792, 'size': 41215910, 'url': '/media/projects/RenderFlow Audio Project Full Path/narration.wav'}"
+  },
+  "Case 8: Packaged Executable Upload": {
+    "passed": true,
+    "detail": "HTTP 200, duration=214.67s, url=/media/projects/pkg_test_audio/narration.wav"
+  }
+}

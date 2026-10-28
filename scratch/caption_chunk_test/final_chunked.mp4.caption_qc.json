@@ -1,0 +1,50 @@
+{
+ "style": "classic",
+ "total_segments": 5,
+ "total_words": 21,
+ "total_captions": 5,
+ "checks": {
+  "cue_count": "PASS",
+  "word_count": "PASS",
+  "model_integrity": "PASS",
+  "safe_margins": "PASS",
+  "burn_in_visuals": "PASS"
+ },
+ "failed_checks": [],
+ "overall_status": "PASS",
+ "valid": true,
+ "visual_samples": [
+  {
+   "segment_id": 1,
+   "timestamp": 1.15,
+   "text": "Blackshuck is one of Britain's most famous",
+   "sub_region_mean": 151.75,
+   "sub_region_std": 64.15,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 2,
+   "timestamp": 2.87,
+   "text": "black dog legends.",
+   "sub_region_mean": 151.74,
+   "sub_region_std": 64.15,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 3,
+   "timestamp": 4.85,
+   "text": "For centuries,",
+   "sub_region_mean": 93.16,
+   "sub_region_std": 50.95,
+   "status": "PASS"
+  },
+  {
+   "segment_id": 5,
+   "timestamp": 8.17,
+   "text": "the countryside.",
+   "sub_region_mean": 78.19,
+   "sub_region_std": 55.05,
+   "status": "PASS"
+  }
+ ]
+}

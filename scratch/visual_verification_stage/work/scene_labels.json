@@ -1,0 +1,109 @@
+{
+ "scenes": [
+  {
+   "scene_id": "sync_0001",
+   "img": "scene1_red_circle.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 0.0
+  },
+  {
+   "scene_id": "sync_0002",
+   "img": "scene2_blue_square.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 3.0
+  },
+  {
+   "scene_id": "sync_0003",
+   "img": "scene3_green_cross.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 6.0
+  },
+  {
+   "scene_id": "sync_0004",
+   "img": "scene4_yellow_star.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 9.0
+  },
+  {
+   "scene_id": "sync_0005",
+   "img": "scene5_purple_ring.png",
+   "dur": 3.0,
+   "frames": 90,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 12.0
+  }
+ ],
+ "transitions": [
+  {
+   "cut_s": 3.0,
+   "start_s": 2.8,
+   "end_s": 3.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 6.0,
+   "start_s": 5.8,
+   "end_s": 6.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 9.0,
+   "start_s": 8.8,
+   "end_s": 9.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 12.0,
+   "start_s": 11.8,
+   "end_s": 12.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+  "development_build": {
+    "status": "PASS",
+    "project_name": "FINAL_PROOF_AUDIT_20261008_213207",
+    "images_count": 4,
+    "narration_duration": 15.0,
+    "scenes_mapped": 4,
+    "engine_quality_score": 47.4,
+    "independently_calculated_score": 47.4,
+    "video_resolution": "1920x1080",
+    "video_duration": 15.0,
+    "video_size_bytes": 12673395,
+    "style_pixel_mse": 366.896
+  },
+  "packaged_build": {
+    "status": "PASS",
+    "project_name": "FINAL_PROOF_AUDIT_PACKAGED_20261008_213207",
+    "images_count": 4,
+    "narration_duration": 15.0,
+    "scenes_mapped": 7,
+    "quality_score": 21.4,
+    "video_resolution": "1920x1080",
+    "video_duration": 14.866667,
+    "video_size_bytes": 21967633
+  }
+}

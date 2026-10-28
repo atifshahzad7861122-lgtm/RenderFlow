@@ -1,0 +1,86 @@
+{
+ "scenes": [
+  {
+   "scene_id": "sync_0001",
+   "img": "image_4.png",
+   "dur": 4.0,
+   "frames": 120,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "location_change",
+   "transition": "soft_wipe",
+   "start_s": 0.0
+  },
+  {
+   "scene_id": "sync_0002",
+   "img": "image_7.png",
+   "dur": 4.0,
+   "frames": 120,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 4.0
+  },
+  {
+   "scene_id": "sync_0003",
+   "img": "image_46.png",
+   "dur": 4.0,
+   "frames": 120,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 8.0
+  },
+  {
+   "scene_id": "sync_0004",
+   "img": "image_27.png",
+   "dur": 4.0,
+   "frames": 120,
+   "label": "L4",
+   "motion": "L4/native_fast",
+   "context": "normal",
+   "transition": "cinematic_dissolve",
+   "start_s": 12.0
+  }
+ ],
+ "transitions": [
+  {
+   "cut_s": 4.0,
+   "start_s": 3.8,
+   "end_s": 4.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 8.0,
+   "start_s": 7.8,
+   "end_s": 8.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  },
+  {
+   "cut_s": 12.0,
+   "start_s": 11.8,
+   "end_s": 12.2,
+   "context": "normal",
+   "type": "dissolve",
+   "name": "Cinematic Dissolve",
+   "category": "Built-in",
+   "is_overlay": false,
+   "dur_s": 0.4,
+   "is_dip_black": false
+  }
+ ]
+}

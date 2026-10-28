@@ -1,0 +1,613 @@
+{
+  "version": "2.1",
+  "language": "auto",
+  "style": "classic",
+  "stt_provider": "existing_transcript",
+  "llm_provider": "auto",
+  "llm_model": "auto",
+  "total_segments": 13,
+  "total_duration_s": 16.48,
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 2.786,
+      "text": "Berlin 1953, a city divided by",
+      "words": [
+        {
+          "text": "Berlin",
+          "word": "Berlin",
+          "start": 0.0,
+          "end": 0.643,
+          "confidence": 1.0
+        },
+        {
+          "text": "1953,",
+          "word": "1953,",
+          "start": 0.643,
+          "end": 1.286,
+          "confidence": 1.0
+        },
+        {
+          "text": "a",
+          "word": "a",
+          "start": 1.286,
+          "end": 1.393,
+          "confidence": 1.0
+        },
+        {
+          "text": "city",
+          "word": "city",
+          "start": 1.393,
+          "end": 1.822,
+          "confidence": 1.0
+        },
+        {
+          "text": "divided",
+          "word": "divided",
+          "start": 1.822,
+          "end": 2.572,
+          "confidence": 1.0
+        },
+        {
+          "text": "by",
+          "word": "by",
+          "start": 2.572,
+          "end": 2.786,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 2.786,
+      "end": 5.434,
+      "text": "barbed wire ideology, fear.",
+      "words": [
+        {
+          "text": "barbed",
+          "word": "barbed",
+          "start": 2.786,
+          "end": 3.429,
+          "confidence": 1.0
+        },
+        {
+          "text": "wire",
+          "word": "wire",
+          "start": 3.429,
+          "end": 3.858,
+          "confidence": 1.0
+        },
+        {
+          "text": "ideology,",
+          "word": "ideology,",
+          "start": 3.858,
+          "end": 4.785,
+          "confidence": 1.0
+        },
+        {
+          "text": "fear.",
+          "word": "fear.",
+          "start": 4.785,
+          "end": 5.434,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "start": 5.434,
+      "end": 7.937,
+      "text": "On one side American soldiers",
+      "words": [
+        {
+          "text": "On",
+          "word": "On",
+          "start": 5.434,
+          "end": 5.62,
+          "confidence": 1.0
+        },
+        {
+          "text": "one",
+          "word": "one",
+          "start": 5.62,
+          "end": 5.898,
+          "confidence": 1.0
+        },
+        {
+          "text": "side",
+          "word": "side",
+          "start": 5.898,
+          "end": 6.269,
+          "confidence": 1.0
+        },
+        {
+          "text": "American",
+          "word": "American",
+          "start": 6.269,
+          "end": 7.103,
+          "confidence": 1.0
+        },
+        {
+          "text": "soldiers",
+          "word": "soldiers",
+          "start": 7.103,
+          "end": 7.937,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 7.937,
+      "end": 10.207,
+      "text": "drove through streets, Berlin 1953,",
+      "words": [
+        {
+          "text": "drove",
+          "word": "drove",
+          "start": 7.937,
+          "end": 8.459,
+          "confidence": 1.0
+        },
+        {
+          "text": "through",
+          "word": "through",
+          "start": 8.459,
+          "end": 9.189,
+          "confidence": 1.0
+        },
+        {
+          "text": "streets,",
+          "word": "streets,",
+          "start": 9.189,
+          "end": 10.127,
+          "confidence": 1.0
+        },
+        {
+          "text": "Berlin",
+          "word": "Berlin",
+          "start": 10.127,
+          "end": 10.167,
+          "confidence": 1.0
+        },
+        {
+          "text": "1953,",
+          "word": "1953,",
+          "start": 10.167,
+          "end": 10.207,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "start": 10.207,
+      "end": 10.303,
+      "text": "a city Berlin divided 1953,",
+      "words": [
+        {
+          "text": "a",
+          "word": "a",
+          "start": 10.207,
+          "end": 10.247,
+          "confidence": 1.0
+        },
+        {
+          "text": "city",
+          "word": "city",
+          "start": 10.223,
+          "end": 10.263,
+          "confidence": 1.0
+        },
+        {
+          "text": "Berlin",
+          "word": "Berlin",
+          "start": 10.223,
+          "end": 10.263,
+          "confidence": 1.0
+        },
+        {
+          "text": "divided",
+          "word": "divided",
+          "start": 10.263,
+          "end": 10.303,
+          "confidence": 1.0
+        },
+        {
+          "text": "1953,",
+          "word": "1953,",
+          "start": 10.263,
+          "end": 10.303,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 10.303,
+      "end": 10.782,
+      "text": "a by city filled barbed divided wire,",
+      "words": [
+        {
+          "text": "a",
+          "word": "a",
+          "start": 10.303,
+          "end": 10.343,
+          "confidence": 1.0
+        },
+        {
+          "text": "by",
+          "word": "by",
+          "start": 10.303,
+          "end": 10.343,
+          "confidence": 1.0
+        },
+        {
+          "text": "city",
+          "word": "city",
+          "start": 10.32,
+          "end": 10.36,
+          "confidence": 1.0
+        },
+        {
+          "text": "filled",
+          "word": "filled",
+          "start": 10.32,
+          "end": 10.782,
+          "confidence": 1.0
+        },
+        {
+          "text": "barbed",
+          "word": "barbed",
+          "start": 10.343,
+          "end": 10.383,
+          "confidence": 1.0
+        },
+        {
+          "text": "divided",
+          "word": "divided",
+          "start": 10.36,
+          "end": 10.4,
+          "confidence": 1.0
+        },
+        {
+          "text": "wire,",
+          "word": "wire,",
+          "start": 10.383,
+          "end": 10.423,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "start": 10.4,
+      "end": 10.543,
+      "text": "by ideology barbed and wire, fear.",
+      "words": [
+        {
+          "text": "by",
+          "word": "by",
+          "start": 10.4,
+          "end": 10.44,
+          "confidence": 1.0
+        },
+        {
+          "text": "ideology",
+          "word": "ideology",
+          "start": 10.423,
+          "end": 10.463,
+          "confidence": 1.0
+        },
+        {
+          "text": "barbed",
+          "word": "barbed",
+          "start": 10.44,
+          "end": 10.48,
+          "confidence": 1.0
+        },
+        {
+          "text": "and",
+          "word": "and",
+          "start": 10.463,
+          "end": 10.503,
+          "confidence": 1.0
+        },
+        {
+          "text": "wire,",
+          "word": "wire,",
+          "start": 10.48,
+          "end": 10.52,
+          "confidence": 1.0
+        },
+        {
+          "text": "fear.",
+          "word": "fear.",
+          "start": 10.503,
+          "end": 10.543,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "start": 10.52,
+      "end": 10.64,
+      "text": "ideology On and one fear.",
+      "words": [
+        {
+          "text": "ideology",
+          "word": "ideology",
+          "start": 10.52,
+          "end": 10.56,
+          "confidence": 1.0
+        },
+        {
+          "text": "On",
+          "word": "On",
+          "start": 10.543,
+          "end": 10.583,
+          "confidence": 1.0
+        },
+        {
+          "text": "and",
+          "word": "and",
+          "start": 10.56,
+          "end": 10.6,
+          "confidence": 1.0
+        },
+        {
+          "text": "one",
+          "word": "one",
+          "start": 10.583,
+          "end": 10.623,
+          "confidence": 1.0
+        },
+        {
+          "text": "fear.",
+          "word": "fear.",
+          "start": 10.6,
+          "end": 10.64,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "start": 10.623,
+      "end": 10.76,
+      "text": "side, On American one soldiers side,",
+      "words": [
+        {
+          "text": "side,",
+          "word": "side,",
+          "start": 10.623,
+          "end": 10.663,
+          "confidence": 1.0
+        },
+        {
+          "text": "On",
+          "word": "On",
+          "start": 10.64,
+          "end": 10.68,
+          "confidence": 1.0
+        },
+        {
+          "text": "American",
+          "word": "American",
+          "start": 10.663,
+          "end": 10.703,
+          "confidence": 1.0
+        },
+        {
+          "text": "one",
+          "word": "one",
+          "start": 10.68,
+          "end": 10.72,
+          "confidence": 1.0
+        },
+        {
+          "text": "soldiers",
+          "word": "soldiers",
+          "start": 10.703,
+          "end": 10.743,
+          "confidence": 1.0
+        },
+        {
+          "text": "side,",
+          "word": "side,",
+          "start": 10.72,
+          "end": 10.76,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "start": 10.743,
+      "end": 11.09,
+      "text": "drove American with through soldiers",
+      "words": [
+        {
+          "text": "drove",
+          "word": "drove",
+          "start": 10.743,
+          "end": 10.783,
+          "confidence": 1.0
+        },
+        {
+          "text": "American",
+          "word": "American",
+          "start": 10.76,
+          "end": 10.8,
+          "confidence": 1.0
+        },
+        {
+          "text": "with",
+          "word": "with",
+          "start": 10.782,
+          "end": 11.09,
+          "confidence": 1.0
+        },
+        {
+          "text": "through",
+          "word": "through",
+          "start": 10.783,
+          "end": 10.823,
+          "confidence": 1.0
+        },
+        {
+          "text": "soldiers",
+          "word": "soldiers",
+          "start": 10.8,
+          "end": 10.84,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 10.823,
+      "end": 10.96,
+      "text": "streets, drove through streets,",
+      "words": [
+        {
+          "text": "streets,",
+          "word": "streets,",
+          "start": 10.823,
+          "end": 10.863,
+          "confidence": 1.0
+        },
+        {
+          "text": "drove",
+          "word": "drove",
+          "start": 10.84,
+          "end": 10.88,
+          "confidence": 1.0
+        },
+        {
+          "text": "through",
+          "word": "through",
+          "start": 10.88,
+          "end": 10.92,
+          "confidence": 1.0
+        },
+        {
+          "text": "streets,",
+          "word": "streets,",
+          "start": 10.92,
+          "end": 10.96,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 11.09,
+      "end": 13.477,
+      "text": "rebuilding factories, bright shop",
+      "words": [
+        {
+          "text": "rebuilding",
+          "word": "rebuilding",
+          "start": 11.09,
+          "end": 11.86,
+          "confidence": 1.0
+        },
+        {
+          "text": "factories,",
+          "word": "factories,",
+          "start": 11.86,
+          "end": 12.707,
+          "confidence": 1.0
+        },
+        {
+          "text": "bright",
+          "word": "bright",
+          "start": 12.707,
+          "end": 13.169,
+          "confidence": 1.0
+        },
+        {
+          "text": "shop",
+          "word": "shop",
+          "start": 13.169,
+          "end": 13.477,
+          "confidence": 1.0
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "start": 13.477,
+      "end": 16.48,
+      "text": "windows and the sound of jazz, on the other.",
+      "words": [
+        {
+          "text": "windows",
+          "word": "windows",
+          "start": 13.477,
+          "end": 14.016,
+          "confidence": 1.0
+        },
+        {
+          "text": "and",
+          "word": "and",
+          "start": 14.016,
+          "end": 14.247,
+          "confidence": 1.0
+        },
+        {
+          "text": "the",
+          "word": "the",
+          "start": 14.247,
+          "end": 14.478,
+          "confidence": 1.0
+        },
+        {
+          "text": "sound",
+          "word": "sound",
+          "start": 14.478,
+          "end": 14.863,
+          "confidence": 1.0
+        },
+        {
+          "text": "of",
+          "word": "of",
+          "start": 14.863,
+          "end": 15.017,
+          "confidence": 1.0
+        },
+        {
+          "text": "jazz,",
+          "word": "jazz,",
+          "start": 15.017,
+          "end": 15.479,
+          "confidence": 1.0
+        },
+        {
+          "text": "on",
+          "word": "on",
+          "start": 15.479,
+          "end": 15.633,
+          "confidence": 1.0
+        },
+        {
+          "text": "the",
+          "word": "the",
+          "start": 15.633,
+          "end": 15.864,
+          "confidence": 1.0
+        },
+        {
+          "text": "other.",
+          "word": "other.",
+          "start": 15.864,
+          "end": 16.48,
+          "confidence": 1.0
+        }
+      ]
+    }
+  ]
+}

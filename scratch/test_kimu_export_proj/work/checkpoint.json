@@ -1,0 +1,20 @@
+{
+  "job_id": "job_1791584504",
+  "stages_completed": {
+    "assets_ready": true,
+    "audio_analyzed": true,
+    "timeline_ready": true,
+    "images_preprocessed": true,
+    "final_render_started": true,
+    "finalized": true
+  },
+  "completed_chunks": [],
+  "created_at": 1791584504.2969728,
+  "updated_at": 1791614165.2307713,
+  "meta": {
+    "master_dur": 12.0,
+    "total_scenes": 4,
+    "total_frames": 360,
+    "cached_count": 4
+  }
+}

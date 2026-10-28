@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "project_name": "RenderFlow Packaged Final Test",
+  "scenes_count": 4,
+  "sync_quality_score": 87.4,
+  "score_breakdown": {
+    "semantic_relevance": 73.6,
+    "temporal_alignment": 100.0,
+    "beat_coverage": 100.0,
+    "context_continuity": 100.0,
+    "image_confidence": 66.6,
+    "final_sync_quality": 87.4
+  },
+  "container_duration": 15.0,
+  "video_duration": 15.0,
+  "audio_duration": 15.0,
+  "video_frames": 450,
+  "audio_frames": 705,
+  "drift": 0.0,
+  "file_size": 14810811,
+  "resolution": "1920x1080",
+  "v_codec": "h264",
+  "a_codec": "aac"
+}
