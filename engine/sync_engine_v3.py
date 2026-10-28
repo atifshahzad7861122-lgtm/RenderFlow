@@ -1694,12 +1694,38 @@ class AIImageSyncEngineV3:
                 sequence_continuity_lambda=seq_lambda,
                 allow_consecutive_holds=allow_holds
             )
+            from engine.openmontage_adapter import openmontage_adapter
             for res in opt_assignments:
                 assigned_optimizer_results[res.beat_index] = res
-                if res.image_filename:
+                beat_obj = semantic_beats[res.beat_index]
+                if res.image_filename and res.confidence_level != "NO_MATCH":
                     globally_assigned_images[res.beat_index] = res.image_filename
                 else:
-                    globally_assigned_images[res.beat_index] = indexed_images[res.beat_index % n_imgs].filename
+                    # Attempt OpenMontage Visual Discovery for unresolved scene
+                    discovered_fn = None
+                    try:
+                        queries = beat_obj.visual_req.visual_concepts[:3] or [beat_obj.text[:30]]
+                        search_q = " ".join(queries).strip()
+                        cands = openmontage_adapter.discover_candidates_for_query(search_q, max_candidates=2)
+                        if cands:
+                            dl_p = openmontage_adapter.download_asset(cands[0], destination_dir=images_dir)
+                            if dl_p and dl_p.exists():
+                                discovered_fn = dl_p.name
+                                new_intel = self.indexer.index_image(dl_p, sequence_index=len(indexed_images))
+                                indexed_images.append(new_intel)
+                                image_map[discovered_fn] = new_intel
+                                res.confidence_level = "MEDIUM"
+                                res.confidence = 0.78
+                                res.evidence_reasons = [f"openmontage_discovered_{cands[0].source}"]
+                    except Exception as disc_err:
+                        logger.debug(f"OpenMontage candidate discovery notice for beat {res.beat_index}: {disc_err}")
+
+                    if discovered_fn:
+                        globally_assigned_images[res.beat_index] = discovered_fn
+                    elif res.image_filename:
+                        globally_assigned_images[res.beat_index] = res.image_filename
+                    else:
+                        globally_assigned_images[res.beat_index] = indexed_images[res.beat_index % n_imgs].filename
 
         from engine.motion_intelligence import MotionIntelligenceEngine
 
@@ -1904,6 +1930,7 @@ class AIImageSyncEngineV3:
                 "image": selected_fn,
                 "image_id": selected_intel.image_id,
                 "transition": trans_label,
+                "transition_dur": self.config.context_transitions.get(ctx, {}).get("dur", 0.40),
                 "context": ctx,
                 "confidence": conf,
                 "confidence_level": conf_level,
@@ -1912,6 +1939,16 @@ class AIImageSyncEngineV3:
                 "user_override": is_override,
                 "manual_review_needed": (conf_level in ("NO_MATCH", "LOW")),
                 "no_match_warning": (conf_level == "NO_MATCH"),
+                "validation_state": "NEEDS_REVIEW" if conf_level in ("NO_MATCH", "LOW") else "VALID",
+                "transcript_text": beat.text,
+                "visual_intent": f"Visual focus on {', '.join(beat.visual_req.visual_concepts[:4])} in {beat.visual_req.environment or 'studio'}",
+                "main_subjects": beat.visual_req.entities,
+                "required_objects": [c for c in beat.visual_req.visual_concepts if c not in beat.visual_req.entities],
+                "actions": beat.visual_req.actions or ["display", "illustrate"],
+                "setting": getattr(beat.visual_req, 'environment', 'general') or "general",
+                "mood": getattr(beat.visual_req, 'mood', 'neutral') or "neutral",
+                "suggested_shot_type": "medium_shot" if beat.dur > 3.0 else "close_up",
+                "search_queries": [f"{' '.join(beat.visual_req.visual_concepts[:3])}", beat.text[:40]],
                 "motion": motion_plan.renderer_motion_label,
                 "motion_mode": motion_plan.motion_type,
                 "shot_role": motion_plan.shot_role,

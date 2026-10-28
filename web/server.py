@@ -2757,6 +2757,167 @@ async def get_provider_models(provider: str):
     }
 
 
+# --- v2.5.1 Multi-Provider AI Gateway Endpoints ---
+
+@app.get("/api/ai/gateway/status")
+async def get_ai_gateway_status():
+    """Retrieve full AI Gateway status, task routing, model capabilities, and DPAPI vault state."""
+    from engine.ai_gateway import gateway
+    return gateway.get_status_overview()
+
+
+@app.post("/api/ai/gateway/route")
+async def update_ai_gateway_route(request: Request):
+    """Update task-to-provider routing configuration."""
+    body = await request.json()
+    task = body.get("task")
+    primary = body.get("primary")
+    fallback = body.get("fallback")
+    if not task or not primary:
+        raise HTTPException(status_code=400, detail="Missing task or primary provider.")
+
+    from engine.ai_gateway import gateway
+    gateway.task_routing[task] = {"primary": primary, "fallback": fallback or "local_deterministic"}
+    return {"status": "updated", "task": task, "route": gateway.task_routing[task]}
+
+
+@app.post("/api/ai/gateway/credentials")
+async def save_gateway_credentials(request: Request):
+    """Save provider credentials into DPAPI vault and running registry."""
+    body = await request.json()
+    provider = body.get("provider", "").lower()
+    api_key = body.get("api_key", "").strip()
+    model = body.get("model")
+    if not provider:
+        raise HTTPException(status_code=400, detail="Missing provider ID.")
+
+    from engine.ai_gateway import gateway
+    gateway.set_provider_credential(provider, api_key, model)
+    return {"status": "saved", "provider": provider}
+
+
+@app.post("/api/ai/gateway/test")
+async def test_gateway_execution(request: Request):
+    """Execute test prompt through AI Gateway with automatic capability-check and fallback."""
+    body = await request.json()
+    task = body.get("task", "semantic_scene_planning")
+    prompt = body.get("prompt", "Analyze scene requirements for cinematic video.")
+    sys_prompt = body.get("system_prompt", "You are an AI video production planner.")
+    json_mode = bool(body.get("json_mode", True))
+
+    from engine.ai_gateway import gateway
+    resp, metric = gateway.execute_task(
+        task=task,
+        system_prompt=sys_prompt,
+        user_prompt=prompt,
+        json_mode=json_mode
+    )
+    return {
+        "response": resp,
+        "metric": metric.to_dict()
+    }
+
+
+# --- v2.5.1 OpenMontage Visual Discovery Endpoints ---
+
+@app.get("/api/visual_discovery/sources")
+async def get_visual_discovery_sources():
+    """List available OpenMontage discovery sources and their availability."""
+    from engine.openmontage_adapter import openmontage_adapter
+    return {
+        "sources": openmontage_adapter.get_available_sources(),
+        "enabled": openmontage_adapter.enable_discovery,
+        "openmontage_installed": openmontage_adapter.is_present
+    }
+
+
+@app.post("/api/visual_discovery/search")
+async def search_visual_discovery(request: Request):
+    """Search OpenMontage stock sources (Wikimedia, NASA, LOC, Archive.org, Pexels, etc.)."""
+    body = await request.json()
+    query = body.get("query", "").strip()
+    media_type = body.get("media_type", "image")
+    limit = int(body.get("limit", 6))
+    if not query:
+        raise HTTPException(status_code=400, detail="Query cannot be empty.")
+
+    from engine.openmontage_adapter import openmontage_adapter
+    candidates = openmontage_adapter.discover_candidates_for_query(query=query, media_type=media_type, max_candidates=limit)
+    return {
+        "query": query,
+        "count": len(candidates),
+        "candidates": [c.to_dict() for c in candidates]
+    }
+
+
+@app.post("/api/visual_discovery/download")
+async def download_visual_discovery_asset(request: Request):
+    """Download discovered asset safely into project images directory."""
+    body = await request.json()
+    project_path = body.get("project_path")
+    candidate_dict = body.get("candidate")
+    if not project_path or not candidate_dict:
+        raise HTTPException(status_code=400, detail="Missing project_path or candidate data.")
+
+    target_dir = Path(project_path) / "images"
+    if not target_dir.exists():
+        target_dir.mkdir(parents=True, exist_ok=True)
+
+    from engine.openmontage_adapter import openmontage_adapter, DiscoveredAsset
+    cand = DiscoveredAsset(**candidate_dict)
+    dl_path = openmontage_adapter.download_asset(cand, destination_dir=target_dir)
+    if not dl_path or not dl_path.exists():
+        raise HTTPException(status_code=500, detail="Asset download or validation failed.")
+
+    return {
+        "status": "downloaded",
+        "filename": dl_path.name,
+        "path": str(dl_path),
+        "asset_id": cand.asset_id,
+        "source": cand.source
+    }
+
+
+# --- v2.5.1 Deterministic Timeline Validation Endpoint ---
+
+@app.post("/api/timeline/validate")
+async def validate_project_timeline(request: Request):
+    """Run deterministic TimelineValidator on project plan."""
+    body = await request.json()
+    project_path = body.get("project_path")
+    if not project_path:
+        raise HTTPException(status_code=400, detail="Missing project_path.")
+
+    p = Path(project_path).resolve()
+    plan_file = p / "plan.json"
+    if not plan_file.exists():
+        raise HTTPException(status_code=404, detail="plan.json not found in project.")
+
+    with open(plan_file, "r", encoding="utf-8") as f:
+        plan_data = json.load(f)
+
+    audio_dur = None
+    for cand in ["narration.wav", "narration.mp3", "narration.m4a"]:
+        cand_p = p / cand
+        if cand_p.exists():
+            from engine.semantic_sync import probe_audio_duration
+            try:
+                audio_dur = probe_audio_duration(cand_p)
+            except Exception:
+                pass
+            break
+
+    from engine.timeline_validator import TimelineValidator
+    validator = TimelineValidator()
+    result = validator.validate_plan(
+        plan=plan_data,
+        master_audio_dur=audio_dur,
+        images_dir=p / "images",
+        check_files=True
+    )
+    return result.to_dict()
+
+
 @app.get("/api/ai/status")
 async def get_ai_status(primary: Optional[str] = None):
     """Retrieve comprehensive AI system status, fallback chain, and active provider."""

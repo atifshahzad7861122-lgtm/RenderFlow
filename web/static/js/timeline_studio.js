@@ -117,11 +117,13 @@
         body: document.querySelector('.rf-timeline-body'),
         audioElement: document.getElementById('audioElement'),
         previewMedia: document.getElementById('previewMainMedia'),
+        previewTransitionCanvas: document.getElementById('previewTransitionCanvas'),
         timecodeDisplay: document.getElementById('canvasTimecode'),
         inspectorBody: document.getElementById('sceneTableBody'),
         inspectorSaveBtn: document.getElementById('btnSavePlan'),
         mediaGallery: document.getElementById('imagesGallery')
       };
+      this.imageCache = this.imageCache || new Map();
     },
 
     /** Time formatting utilities */
@@ -1817,49 +1819,380 @@
       }
     },
 
-    /** Instant live frame sync: updates preview image, scene badges, and caption overlay to match current scene */
+    /** Retrieve authoritative transition duration in seconds (1:1 with fast_pipeline.py) */
+    getTransitionDuration(transType) {
+      if (!transType) return 0.40;
+      const clean = String(transType).toLowerCase().trim();
+      const specMap = {
+        'cinematic_dissolve': 0.40,
+        'dissolve': 0.35,
+        'cross_dissolve': 0.35,
+        'soft_dissolve': 0.35,
+        'soft_wipe': 0.35,
+        'soft_directional': 0.35,
+        'wipeleft': 0.35,
+        'wiperight': 0.35,
+        'dip_to_black': 0.40,
+        'fadeblack': 0.40,
+        'dip_to_white': 0.35,
+        'fadewhite': 0.35,
+        'fade': 0.30,
+        'clean_cut': 0.0,
+        'none': 0.0,
+        'slow_dissolve': 0.75
+      };
+      if (specMap[clean] !== undefined) return specMap[clean];
+      if (clean.startsWith('transition_') || clean.startsWith('pack_')) {
+        const found = this.youtubeTransitions.find(t => t.id === clean);
+        if (found) {
+          const m = found.label.match(/\(([0-9\.]+)s\)/);
+          if (m) return parseFloat(m[1]);
+        }
+        return 1.0;
+      }
+      return 0.40;
+    },
+
+    /** Retrieve clean user-facing transition label */
+    getTransitionLabel(transType) {
+      if (!transType) return 'Cinematic Dissolve';
+      const clean = String(transType).trim();
+      const yt = this.youtubeTransitions.find(t => t.id === clean);
+      if (yt) return yt.label.split('(')[0].trim();
+      const built = this.builtinTransitions.find(t => t.id === clean);
+      if (built) return built.label;
+      return clean.replace(/_/g, ' ');
+    },
+
+    /** In-memory image loader & cache for smooth sub-millisecond preview compositing */
+    getPreloadedImage(url) {
+      if (!url) return null;
+      if (!this.imageCache) this.imageCache = new Map();
+      if (this.imageCache.has(url)) {
+        const item = this.imageCache.get(url);
+        if (item.complete && item.naturalWidth > 0) return item;
+        return item;
+      }
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = url;
+      img.onload = () => {
+        if (this.isTransitionActiveAtCurrentTime()) {
+          this.syncPreviewFrame();
+        }
+      };
+      this.imageCache.set(url, img);
+      return img;
+    },
+
+    /** Helper: True if current playhead is inside any transition window */
+    isTransitionActiveAtCurrentTime() {
+      const t = this.currentTime;
+      for (let i = 0; i < this.scenes.length - 1; i++) {
+        const scA = this.scenes[i];
+        const transType = scA.transition || 'cinematic_dissolve';
+        if (transType === 'clean_cut' || transType === 'none') continue;
+        const tdur = scA.transition_dur || this.getTransitionDuration(transType);
+        const halfDur = tdur / 2.0;
+        if (t >= (scA.end - halfDur) && t <= (scA.end + halfDur)) return true;
+      }
+      return false;
+    },
+
+    /** Draw an image fitted into target canvas maintaining aspect ratio (object-fit: contain/cover) */
+    drawFittedImage(ctx, img, cw, ch, mode = 'contain') {
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+      const nw = img.naturalWidth;
+      const nh = img.naturalHeight;
+      const imgAspect = nw / nh;
+      const canvasAspect = cw / ch;
+
+      let drawW, drawH, dx, dy;
+      if (mode === 'cover') {
+        if (imgAspect > canvasAspect) {
+          drawH = ch;
+          drawW = ch * imgAspect;
+          dx = (cw - drawW) / 2;
+          dy = 0;
+        } else {
+          drawW = cw;
+          drawH = cw / imgAspect;
+          dx = 0;
+          dy = (ch - drawH) / 2;
+        }
+      } else {
+        if (imgAspect > canvasAspect) {
+          drawW = cw;
+          drawH = cw / imgAspect;
+          dx = 0;
+          dy = (ch - drawH) / 2;
+        } else {
+          drawH = ch;
+          drawW = ch * imgAspect;
+          dx = (cw - drawW) / 2;
+          dy = 0;
+        }
+      }
+      ctx.drawImage(img, dx, dy, drawW, drawH);
+    },
+
+    /** Live Transition Frame Compositor (Guarantees Built-in Preview / Final Export Parity) */
+    renderTransitionFrame(canvas, trans) {
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const cw = (canvas.width = canvas.clientWidth || 1280);
+      const ch = (canvas.height = canvas.clientHeight || 720);
+
+      const p = trans.progress;
+      const imgA = this.getPreloadedImage(trans.sceneA.imageUrl);
+      const imgB = this.getPreloadedImage(trans.sceneB.imageUrl);
+
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.fillStyle = '#08080a';
+      ctx.fillRect(0, 0, cw, ch);
+
+      const tType = (trans.transType || 'cinematic_dissolve').toLowerCase();
+
+      // Effect 1: Cross Dissolve / Cinematic Dissolve / Fade / Soft Dissolve
+      if (['cinematic_dissolve', 'dissolve', 'cross_dissolve', 'soft_dissolve', 'fade', 'slow_dissolve'].includes(tType)) {
+        if (imgA && imgA.complete && imgA.naturalWidth > 0) {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0.0, Math.min(1.0, 1.0 - p));
+          this.drawFittedImage(ctx, imgA, cw, ch, 'contain');
+          ctx.restore();
+        }
+        if (imgB && imgB.complete && imgB.naturalWidth > 0) {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0.0, Math.min(1.0, p));
+          this.drawFittedImage(ctx, imgB, cw, ch, 'contain');
+          ctx.restore();
+        }
+      }
+      // Effect 2: Soft Directional Wipe / Wipe Left
+      else if (['soft_wipe', 'soft_directional', 'wipeleft'].includes(tType)) {
+        if (imgA && imgA.complete) {
+          ctx.save();
+          this.drawFittedImage(ctx, imgA, cw, ch, 'contain');
+          ctx.restore();
+        }
+        if (imgB && imgB.complete) {
+          ctx.save();
+          const splitX = Math.round(cw * (1.0 - p));
+          ctx.beginPath();
+          ctx.rect(splitX, 0, cw - splitX, ch);
+          ctx.clip();
+          this.drawFittedImage(ctx, imgB, cw, ch, 'contain');
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(splitX, 0);
+          ctx.lineTo(splitX, ch);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+      // Effect 3: Wipe Right
+      else if (tType === 'wiperight') {
+        if (imgA && imgA.complete) {
+          ctx.save();
+          this.drawFittedImage(ctx, imgA, cw, ch, 'contain');
+          ctx.restore();
+        }
+        if (imgB && imgB.complete) {
+          ctx.save();
+          const splitX = Math.round(cw * p);
+          ctx.beginPath();
+          ctx.rect(0, 0, splitX, ch);
+          ctx.clip();
+          this.drawFittedImage(ctx, imgB, cw, ch, 'contain');
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(splitX, 0);
+          ctx.lineTo(splitX, ch);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+      // Effect 4: Dip to Black / Fade Black
+      else if (['dip_to_black', 'fadeblack'].includes(tType)) {
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(0, 0, cw, ch);
+        if (p < 0.5) {
+          const alphaA = Math.max(0.0, Math.min(1.0, 1.0 - (p / 0.5)));
+          if (imgA && imgA.complete) {
+            ctx.save();
+            ctx.globalAlpha = alphaA;
+            this.drawFittedImage(ctx, imgA, cw, ch, 'contain');
+            ctx.restore();
+          }
+        } else {
+          const alphaB = Math.max(0.0, Math.min(1.0, (p - 0.5) / 0.5));
+          if (imgB && imgB.complete) {
+            ctx.save();
+            ctx.globalAlpha = alphaB;
+            this.drawFittedImage(ctx, imgB, cw, ch, 'contain');
+            ctx.restore();
+          }
+        }
+      }
+      // Effect 5: Dip to White / Fade White
+      else if (['dip_to_white', 'fadewhite'].includes(tType)) {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, cw, ch);
+        if (p < 0.5) {
+          const alphaA = Math.max(0.0, Math.min(1.0, 1.0 - (p / 0.5)));
+          if (imgA && imgA.complete) {
+            ctx.save();
+            ctx.globalAlpha = alphaA;
+            this.drawFittedImage(ctx, imgA, cw, ch, 'contain');
+            ctx.restore();
+          }
+        } else {
+          const alphaB = Math.max(0.0, Math.min(1.0, (p - 0.5) / 0.5));
+          if (imgB && imgB.complete) {
+            ctx.save();
+            ctx.globalAlpha = alphaB;
+            this.drawFittedImage(ctx, imgB, cw, ch, 'contain');
+            ctx.restore();
+          }
+        }
+      }
+      // Effect 6: YouTube Pack Overlay / Film Burn / Light Leak
+      else {
+        if (imgA && imgA.complete) {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0.0, Math.min(1.0, 1.0 - p));
+          this.drawFittedImage(ctx, imgA, cw, ch, 'contain');
+          ctx.restore();
+        }
+        if (imgB && imgB.complete) {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0.0, Math.min(1.0, p));
+          this.drawFittedImage(ctx, imgB, cw, ch, 'contain');
+          ctx.restore();
+        }
+        const flashIntensity = Math.sin(p * Math.PI);
+        if (flashIntensity > 0.05) {
+          ctx.save();
+          ctx.globalCompositeOperation = 'screen';
+          const grad = ctx.createRadialGradient(cw * 0.45, ch * 0.5, 20, cw * 0.5, ch * 0.5, cw * 0.7);
+          const isWarm = tType.includes('orange') || tType.includes('burn') || tType.includes('gold') || tType.includes('amber') || tType.includes('001') || tType.includes('003') || tType.includes('005');
+          if (isWarm) {
+            grad.addColorStop(0, `rgba(255, 215, 120, ${flashIntensity * 0.85})`);
+            grad.addColorStop(0.4, `rgba(255, 120, 40, ${flashIntensity * 0.65})`);
+            grad.addColorStop(1, `rgba(180, 20, 10, 0)`);
+          } else {
+            grad.addColorStop(0, `rgba(220, 240, 255, ${flashIntensity * 0.85})`);
+            grad.addColorStop(0.4, `rgba(60, 160, 255, ${flashIntensity * 0.65})`);
+            grad.addColorStop(1, `rgba(10, 40, 180, 0)`);
+          }
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, cw, ch);
+          ctx.restore();
+        }
+      }
+    },
+
+    /** Instant live frame sync: composites transitions and updates badges & caption overlay */
     syncPreviewFrame() {
       if (!this.scenes.length || !this.dom.previewMedia) return;
 
-      // Find the scene active at this exact timestamp
-      const activeIdx = this.scenes.findIndex(s => this.currentTime >= s.start && this.currentTime < s.end);
-      const activeScene = activeIdx !== -1 
-        ? this.scenes[activeIdx] 
-        : (this.currentTime >= this.duration ? this.scenes[this.scenes.length - 1] : this.scenes[0]);
-      const currentIdx = activeIdx !== -1 ? activeIdx : (this.currentTime >= this.duration ? this.scenes.length - 1 : 0);
+      const t = this.currentTime;
+      const transCanvas = this.dom.previewTransitionCanvas;
+      const imgEl = this.dom.previewMedia;
 
-      if (activeScene && activeScene.imageUrl) {
-        if (this.dom.previewMedia.src !== activeScene.imageUrl) {
-          this.dom.previewMedia.src = activeScene.imageUrl;
+      // 1. Detect Active Transition Window (Cut boundary interval [cut - dur/2, cut + dur/2])
+      let activeTrans = null;
+      for (let i = 0; i < this.scenes.length - 1; i++) {
+        const scA = this.scenes[i];
+        const scB = this.scenes[i + 1];
+        const cutTime = scA.end;
+        const transType = scA.transition || 'cinematic_dissolve';
+        if (transType === 'clean_cut' || transType === 'none') continue;
+
+        const tdur = scA.transition_dur || this.getTransitionDuration(transType);
+        const halfDur = tdur / 2.0;
+        const tStart = cutTime - halfDur;
+        const tEnd = cutTime + halfDur;
+
+        if (t >= tStart && t <= tEnd) {
+          const progress = Math.max(0.0, Math.min(1.0, (t - tStart) / Math.max(0.001, tdur)));
+          activeTrans = {
+            cutIndex: i,
+            sceneA: scA,
+            sceneB: scB,
+            transType: transType,
+            progress: progress,
+            duration: tdur,
+            tStart: tStart,
+            tEnd: tEnd,
+            cutTime: cutTime
+          };
+          break;
         }
       }
 
-      // Update Center Monitor Stitch Overlays
-      const sceneBadgeName = document.getElementById('previewSceneName');
-      const sceneBadgeSpan = document.getElementById('previewSceneSpan');
-      const motionBadgeName = document.getElementById('previewMotionName');
-      if (sceneBadgeName) sceneBadgeName.textContent = `Scene ${currentIdx + 1}`;
-      if (sceneBadgeSpan && activeScene) {
-        sceneBadgeSpan.textContent = `${this.formatTimecode(activeScene.start)}–${this.formatTimecode(activeScene.end)}`;
-      }
-      if (motionBadgeName && activeScene) {
-        const m = activeScene.motion;
-        motionBadgeName.textContent = m === 'L4/push' ? 'Slow zoom in' : (m === 'L4/pull' ? 'Slow zoom out' : (m || 'Static'));
+      // 2. Active Scene Index Determination
+      const activeIdx = this.scenes.findIndex(s => t >= s.start && t < s.end);
+      const activeScene = activeIdx !== -1 
+        ? this.scenes[activeIdx] 
+        : (t >= this.duration ? this.scenes[this.scenes.length - 1] : this.scenes[0]);
+      const currentIdx = activeIdx !== -1 ? activeIdx : (t >= this.duration ? this.scenes.length - 1 : 0);
+
+      // 3. Render Center Video Monitor
+      if (activeTrans && transCanvas) {
+        this.renderTransitionFrame(transCanvas, activeTrans);
+        transCanvas.style.display = 'block';
+        imgEl.style.display = 'none';
+
+        // Monitor Badges: show active transition progress
+        const sceneBadgeName = document.getElementById('previewSceneName');
+        const sceneBadgeSpan = document.getElementById('previewSceneSpan');
+        const motionBadgeName = document.getElementById('previewMotionName');
+        if (sceneBadgeName) sceneBadgeName.textContent = `Cut ${activeTrans.cutIndex + 1} ➔ ${activeTrans.cutIndex + 2}`;
+        if (sceneBadgeSpan) sceneBadgeSpan.textContent = `${this.formatTimecode(activeTrans.tStart)}–${this.formatTimecode(activeTrans.tEnd)}`;
+        if (motionBadgeName) {
+          const pct = Math.round(activeTrans.progress * 100);
+          motionBadgeName.textContent = `FX: ${this.getTransitionLabel(activeTrans.transType)} (${pct}%)`;
+        }
+      } else {
+        if (transCanvas) transCanvas.style.display = 'none';
+        imgEl.style.display = 'block';
+        if (activeScene && activeScene.imageUrl) {
+          if (imgEl.src !== activeScene.imageUrl) {
+            imgEl.src = activeScene.imageUrl;
+          }
+        }
+
+        const sceneBadgeName = document.getElementById('previewSceneName');
+        const sceneBadgeSpan = document.getElementById('previewSceneSpan');
+        const motionBadgeName = document.getElementById('previewMotionName');
+        if (sceneBadgeName) sceneBadgeName.textContent = `Scene ${currentIdx + 1}`;
+        if (sceneBadgeSpan && activeScene) {
+          sceneBadgeSpan.textContent = `${this.formatTimecode(activeScene.start)}–${this.formatTimecode(activeScene.end)}`;
+        }
+        if (motionBadgeName && activeScene) {
+          const m = activeScene.motion;
+          motionBadgeName.textContent = m === 'L4/push' ? 'Slow zoom in' : (m === 'L4/pull' ? 'Slow zoom out' : (m || 'Static'));
+        }
       }
 
-      // Sync live preview caption overlay
+      // 4. Sync live preview caption overlay
       const overlay = document.getElementById('previewCaptionOverlay');
       if (overlay) {
         const segs = (this.transcriptSegments && this.transcriptSegments.length) ? this.transcriptSegments : this.scenes;
         let activeCap = null;
         if (this.selectedCaptionIndex !== null && this.transcriptSegments && this.transcriptSegments[this.selectedCaptionIndex]) {
           const sel = this.transcriptSegments[this.selectedCaptionIndex];
-          if (this.currentTime >= sel.start && this.currentTime < sel.end) {
+          if (t >= sel.start && t < sel.end) {
             activeCap = sel;
           }
         }
         if (!activeCap) {
-          const matches = segs.filter(s => this.currentTime >= s.start && this.currentTime < s.end);
+          const matches = segs.filter(s => t >= s.start && t < s.end);
           if (matches.length > 0) {
             activeCap = matches.reduce((best, cur) => cur.start >= best.start ? cur : best, matches[0]);
           }
@@ -2896,6 +3229,7 @@
           this.markUnsaved();
           this.renderTransitionsTrack();
           this.renderInspectorCard();
+          this.syncPreviewFrame();
           popover.remove();
           window.showToast?.(`Applied transition: ${item.textContent}`, 'info');
         });

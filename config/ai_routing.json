@@ -1,0 +1,11 @@
+{
+  "transcript_normalization": { "primary": "groq", "fallback": "local_deterministic" },
+  "scene_segmentation": { "primary": "gemini", "fallback": "local_deterministic" },
+  "semantic_scene_planning": { "primary": "gemini", "fallback": "openai" },
+  "search_query_generation": { "primary": "groq", "fallback": "gemini" },
+  "image_video_semantic_analysis": { "primary": "gemini", "fallback": "openai" },
+  "caption_refinement": { "primary": "groq", "fallback": "gemini" },
+  "scene_continuity_evaluation": { "primary": "gemini", "fallback": "local_deterministic" },
+  "ambiguous_asset_review": { "primary": "gemini", "fallback": "openai" },
+  "scene_plan_validation_assistance": { "primary": "gemini", "fallback": "local_deterministic" }
+}
