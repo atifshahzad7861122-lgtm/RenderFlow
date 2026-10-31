@@ -1,32 +1,24 @@
 {
   "manifest_version": "1.0",
-  "latest_version": "2.4.3",
-  "minimum_supported_version": "2.4.0",
-  "release_notes": "RenderFlow v2.4.3: Truthful updater state telemetry, stale green badge invalidation, direct CDN manifest retrieval, and seamless zero-data-loss upgrades.",
-  "published_at": "2026-10-20T15:15:28Z",
-  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.4.3",
-  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.3/RenderFlow-Patch-v2.4.3.zip",
-  "package_size_bytes": 665078,
-  "sha256": "471bae52bbea7c52120486481c57a1697f271adb650c87f4b3451bbae986b696",
-  "update_type": "patch",
+  "latest_version": "2.5.1",
+  "minimum_supported_version": "2.0.0",
+  "release_notes": "RenderFlow v2.5.1 \u2014 AI Synchronization, Visual Intelligence & Preview Rendering Fix\n\u2022 Audio-to-Visual Semantic Synchronization & Unmatched Scene Rejection\n\u2022 Multi-Provider AI Gateway (Groq, Gemini, OpenAI, Claude, Local Rule Engine)\n\u2022 OpenMontage Stock Visual Discovery & Licensing Metadata Tracking\n\u2022 Built-In Preview Transition Shader Compositor with Real-Time Scrub & Seek\n\u2022 High-Fidelity Export Parity across 9 Cinematic Transitions\n\u2022 RFC 8032 Ed25519 Cryptographic Manifest Authentication",
+  "published_at": "2026-10-30T10:45:00Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.5.1",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.5.1/RenderFlow-Setup-v2.5.1.exe",
+  "package_size_bytes": 1500062583,
+  "sha256": "469c89bb4d887998869d74520f896452f476cd6026151c60cc5b8e945c031775",
+  "update_type": "minor",
   "supported_platforms": [
     "windows-x64"
   ],
   "packages": {
-    "patch": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.3/RenderFlow-Patch-v2.4.3.zip",
-      "package_size_bytes": 665078,
-      "sha256": "471bae52bbea7c52120486481c57a1697f271adb650c87f4b3451bbae986b696",
-      "applies_to": [
-        ">=2.4.0"
-      ]
-    },
     "full": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.4.3/RenderFlow-Setup-v2.4.3.exe",
-      "package_size_bytes": 1304672195,
-      "sha256": "c70adc7b0bc7d40dc3c94a436eba0d6dc82e2edb723e20f0a978aa2b1d3293c7"
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.5.1/RenderFlow-Setup-v2.5.1.exe",
+      "package_size_bytes": 1500062583,
+      "sha256": "469c89bb4d887998869d74520f896452f476cd6026151c60cc5b8e945c031775"
     }
   },
   "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e",
-  "signature": "58387ee0f83033904897d4888aa502964691200f66e7133c53c4e2db18e557b7dcf05addbafd780c85c01d0f574e51ad5934c666f114d7c08bbfd096a8b2a907"
+  "signature": "01b80e2d54d30ac3d0d0dbc02f4557576dc822f1dabc4108bb59277e9a7fa939d5574b7191e250812ee733aa058edbbb3f392f071d0bc44fde526ba3ffe76d0a"
 }
