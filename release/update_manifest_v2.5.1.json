@@ -1,0 +1,24 @@
+{
+  "manifest_version": "1.0",
+  "latest_version": "2.5.1",
+  "minimum_supported_version": "2.0.0",
+  "release_notes": "RenderFlow v2.5.1 \u2014 AI Synchronization, Visual Intelligence & Preview Rendering Fix\n\u2022 Audio-to-Visual Semantic Synchronization & Unmatched Scene Rejection\n\u2022 Multi-Provider AI Gateway (Groq, Gemini, OpenAI, Claude, Local Rule Engine)\n\u2022 OpenMontage Stock Visual Discovery & Licensing Metadata Tracking\n\u2022 Built-In Preview Transition Shader Compositor with Real-Time Scrub & Seek\n\u2022 High-Fidelity Export Parity across 9 Cinematic Transitions\n\u2022 RFC 8032 Ed25519 Cryptographic Manifest Authentication",
+  "published_at": "2026-10-30T10:45:00Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.5.1",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.5.1/RenderFlow-Setup-v2.5.1.exe",
+  "package_size_bytes": 1500062583,
+  "sha256": "469c89bb4d887998869d74520f896452f476cd6026151c60cc5b8e945c031775",
+  "update_type": "minor",
+  "supported_platforms": [
+    "windows-x64"
+  ],
+  "packages": {
+    "full": {
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.5.1/RenderFlow-Setup-v2.5.1.exe",
+      "package_size_bytes": 1500062583,
+      "sha256": "469c89bb4d887998869d74520f896452f476cd6026151c60cc5b8e945c031775"
+    }
+  },
+  "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e",
+  "signature": "01b80e2d54d30ac3d0d0dbc02f4557576dc822f1dabc4108bb59277e9a7fa939d5574b7191e250812ee733aa058edbbb3f392f071d0bc44fde526ba3ffe76d0a"
+}
