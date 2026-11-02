@@ -82,6 +82,18 @@ class EnrichedVisualRequirement:
     visual_concepts: List[str] = field(default_factory=list)
     prompt_ensemble: List[str] = field(default_factory=list)
 
+    @property
+    def locations(self) -> List[str]:
+        return [self.location] if self.location else []
+
+    @property
+    def abstract_concepts(self) -> List[str]:
+        return self.abstract_themes
+
+    @property
+    def expanded_prompts(self) -> List[str]:
+        return self.prompt_ensemble
+
 class SemanticSceneAnalyzer:
     """
     Extracts high-fidelity semantic visual requirements from voiceover text.

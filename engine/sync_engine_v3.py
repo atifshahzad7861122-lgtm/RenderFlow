@@ -46,7 +46,7 @@ import logging
 import subprocess
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any, Set
+from typing import Dict, List, Optional, Tuple, Any, Set, Union
 
 from PIL import Image
 import numpy as np
@@ -75,6 +75,14 @@ except (ModuleNotFoundError, ImportError):
         from visual_analyzer import VisualContentAnalyzer, VisualAnalysisResult
     except (ModuleNotFoundError, ImportError):
         from .visual_analyzer import VisualContentAnalyzer, VisualAnalysisResult
+
+try:
+    from engine.context_analyzer import ContextAnalyzer, StructuredSceneRepresentation
+except (ModuleNotFoundError, ImportError):
+    try:
+        from context_analyzer import ContextAnalyzer, StructuredSceneRepresentation
+    except (ModuleNotFoundError, ImportError):
+        from .context_analyzer import ContextAnalyzer, StructuredSceneRepresentation
 
 # Phase 3 Intelligence Imports (§4-§28)
 try:
@@ -129,7 +137,23 @@ INDEX_CACHE_FILE = CACHE_ROOT / "intel_index_cache.json"
 @dataclass
 class SyncConfig:
     """Centralized configurable weights, thresholds, profiles, and boundaries."""
-    # Multi-Signal Weights (Must sum to 1.0)
+    # Runtime Feature Flag for Rollback (§12)
+    use_legacy_sync_scoring: bool = False
+
+    # Modern Hybrid Context Scoring Weights (Sum = 1.0) (§3.4)
+    w_clip_visual: float = 0.35        # OpenCLIP ONNX FP32 cosine affinity
+    w_context_semantic: float = 0.20   # Context & domain semantic alignment
+    w_hybrid_entity: float = 0.18      # Syntactic entity/subject match
+    w_hybrid_action: float = 0.12      # Syntactic action/verb match
+    w_hybrid_location: float = 0.08    # Scene/location environment match
+    w_hybrid_temporal: float = 0.07    # Temporal continuity
+    contradiction_penalty: float = 0.25 # Contradiction penalty deduction
+
+    # Confidence Decision Thresholds (MATCH >= 0.70, REVIEW 0.50-0.69, NO_MATCH < 0.50)
+    match_threshold: float = 0.70
+    review_threshold: float = 0.50
+
+    # Legacy Multi-Signal Weights (Active when use_legacy_sync_scoring=True)
     w_semantic_text: float = 0.30       # Text & visual concept semantic match
     w_visual_embedding: float = 0.20    # Vector space cosine similarity
     w_entity_match: float = 0.15        # Subject / named entity / object overlap
@@ -188,6 +212,8 @@ class SyncConfig:
 
     def __post_init__(self):
         """Apply content-aware profile weights if profile_name is recognized (§4)."""
+        if os.getenv("RENDERFLOW_LEGACY_SCORING", "0").lower() in ("1", "true", "yes"):
+            self.use_legacy_sync_scoring = True
         if self.profile_name and self.profile_name.upper() in PROFILE_WEIGHTS:
             pw = PROFILE_WEIGHTS[self.profile_name.upper()]
             self.w_semantic_text = pw["w_semantic_text"]
@@ -283,6 +309,7 @@ class VisualRequirement:
     ocr_hints: List[str] = field(default_factory=list)
     abstract_concepts: List[str] = field(default_factory=list)
     expanded_prompts: List[str] = field(default_factory=list)
+    structured_scene: Optional[Any] = None
 
 
 @dataclass
@@ -404,6 +431,9 @@ class SyncQualityReport:
     broll_shots_indexed: int = 0
     broll_catalog: Optional[Dict[str, Any]] = None
     score_breakdown: Optional[Dict[str, float]] = None
+    neural_semantic_available: bool = True
+    neural_provider: str = "onnx"
+    neural_fail_reason: str = ""
 
 
 # ==============================================================================
@@ -428,12 +458,15 @@ class DeterministicSemanticEmbedding:
         try:
             from engine.semantic_vision import SemanticVisionModel
             model = SemanticVisionModel()
-            if isinstance(text_or_tokens, (list, tuple, set)):
-                text = " ".join(str(t) for t in text_or_tokens)
+            if model.is_available:
+                if isinstance(text_or_tokens, (list, tuple, set)):
+                    text = " ".join(str(t) for t in text_or_tokens)
+                else:
+                    text = str(text_or_tokens)
+                emb = model.encode_text(text)
+                return [round(float(x), 6) for x in emb.tolist()]
             else:
-                text = str(text_or_tokens)
-            emb = model.encode_text(text)
-            return [round(float(x), 6) for x in emb.tolist()]
+                return cls._fallback_encode(text_or_tokens)
         except Exception as e:
             logger.debug(f"Neural text encoding fallback: {e}")
             return cls._fallback_encode(text_or_tokens)
@@ -775,9 +808,10 @@ class SemanticBeatEngine:
         actions = [w for w in clean_words if w in ACTION_KEYWORDS]
         locations = [w for w in clean_words if w in LOCATION_KEYWORDS]
 
-        # Extract deep semantic intelligence from SemanticSceneAnalyzer
+        # Extract deep semantic intelligence from SemanticSceneAnalyzer and ContextAnalyzer
         abstract_concepts = []
         expanded_prompts = []
+        structured_scene = None
         try:
             from engine.semantic_scene_analyzer import SemanticSceneAnalyzer
             scene_intel = SemanticSceneAnalyzer.analyze_script_segment(text)
@@ -788,6 +822,17 @@ class SemanticBeatEngine:
             expanded_prompts = scene_intel.expanded_prompts
         except Exception as e:
             logger.debug(f"SemanticSceneAnalyzer integration fallback: {e}")
+
+        try:
+            from engine.context_analyzer import ContextAnalyzer
+            structured_scene = ContextAnalyzer.analyze_narration(text)
+            entities = list(dict.fromkeys(entities + structured_scene.entities))
+            actions = list(dict.fromkeys(actions + structured_scene.actions))
+            if structured_scene.location:
+                locations = list(dict.fromkeys(locations + [structured_scene.location]))
+            expanded_prompts = list(dict.fromkeys(expanded_prompts + structured_scene.prompt_ensemble))
+        except Exception as e:
+            logger.debug(f"ContextAnalyzer integration fallback: {e}")
 
         # Topic inference
         topic = "General Narration"
@@ -817,7 +862,8 @@ class SemanticBeatEngine:
             visual_concepts=visual_concepts,
             ocr_hints=[w for w in clean_words if len(w) >= 4],
             abstract_concepts=abstract_concepts,
-            expanded_prompts=expanded_prompts
+            expanded_prompts=expanded_prompts,
+            structured_scene=structured_scene
         )
 
     def infer_context(self, text: str, dur: float, is_silence: bool = False, silence_dur: float = 0.0) -> str:
@@ -944,6 +990,249 @@ class MultiSignalRankingEngine:
         mapping_mode: MappingMode = MappingMode.SEMANTIC_AUTO
     ) -> CandidateScore:
         """Calculate multi-signal affinity score for an image on a specific beat."""
+        if getattr(self.config, 'use_legacy_sync_scoring', False):
+            return self._legacy_score_image_for_beat(
+                image, beat, total_beats, total_images, recent_history,
+                recent_scenes, active_entity, entity_preferred_image,
+                transition_type, project_memory, memory_window, mapping_mode
+            )
+        return self._modern_hybrid_score_image_for_beat(
+            image, beat, total_beats, total_images, recent_history,
+            recent_scenes, active_entity, entity_preferred_image,
+            transition_type, project_memory, memory_window, mapping_mode
+        )
+
+    def _modern_hybrid_score_image_for_beat(
+        self,
+        image: ImageIntelligence,
+        beat: SemanticBeat,
+        total_beats: int,
+        total_images: int,
+        recent_history: List[str],
+        recent_scenes: Optional[List[str]] = None,
+        active_entity: Optional[str] = None,
+        entity_preferred_image: Optional[str] = None,
+        transition_type: TransitionType = TransitionType.CONTINUATION,
+        project_memory: Optional[ProjectCorrectionMemory] = None,
+        memory_window: Optional[Dict[str, Any]] = None,
+        mapping_mode: MappingMode = MappingMode.SEMANTIC_AUTO
+    ) -> CandidateScore:
+        """Modern Hybrid Context-Aware Scoring (RenderFlow v2.6)."""
+        signals: Dict[str, float] = {}
+        reasons: List[str] = []
+        cfg = self.config
+        v_req = beat.visual_req
+        st_scene = getattr(v_req, 'structured_scene', None)
+        if st_scene is None:
+            try:
+                from engine.context_analyzer import ContextAnalyzer
+                st_scene = ContextAnalyzer.analyze_narration(beat.text)
+                setattr(v_req, 'structured_scene', st_scene)
+            except Exception:
+                st_scene = None
+
+        beat_text_words = set(re.findall(r'[\w]{2,}', beat.text.lower(), re.UNICODE))
+
+        # 1. OpenCLIP Visual Embedding Cosine Similarity (35% weight)
+        beat_embedding = getattr(beat, '_cached_embedding', None)
+        if beat_embedding is None:
+            prompt_text = beat.text.strip() or " ".join(v_req.visual_concepts)
+            beat_embedding = DeterministicSemanticEmbedding.encode(prompt_text)
+            setattr(beat, '_cached_embedding', beat_embedding)
+
+        raw_emb_sim = DeterministicSemanticEmbedding.cosine_similarity(beat_embedding, image.embedding)
+        neural_affinity = max(0.0, min(1.0, (raw_emb_sim - 0.10) / 0.20))
+        signals['visual_embedding'] = round(neural_affinity, 4)
+        if raw_emb_sim >= 0.27:
+            reasons.append("strong_neural_semantic_match")
+        elif raw_emb_sim >= 0.22:
+            reasons.append("neural_semantic_affinity")
+        elif raw_emb_sim < 0.16:
+            reasons.append("low_visual_evidence")
+
+        # 2. Context Semantic Similarity & Domain Relevance (20% weight)
+        cand_label = f"{image.filename} {' '.join(image.filename_tokens)} {image.caption} {image.ocr_text} {image.scene} {image.environment}".lower()
+        cand_concepts = list(dict.fromkeys(image.visual_concepts + list(image.ocr_tokens) + image.filename_tokens))
+        cand_entities = list(dict.fromkeys(image.entities + list(image.ocr_tokens)))
+
+        context_boost = 0.0
+        context_reasons = []
+        if st_scene:
+            try:
+                from engine.context_analyzer import ContextAnalyzer
+                context_boost, context_reasons = ContextAnalyzer.evaluate_context_relevance(
+                    candidate_label=cand_label,
+                    candidate_concepts=cand_concepts,
+                    scene=st_scene
+                )
+            except Exception:
+                pass
+
+        target_kws = st_scene.relevant_visual_concepts if st_scene else v_req.visual_concepts
+        concept_overlap = set(image.visual_concepts) & set(target_kws)
+        narration_overlap = set(image.visual_concepts) & beat_text_words
+
+        base_ctx = 0.0
+        if target_kws and concept_overlap:
+            base_ctx = len(concept_overlap) / float(len(target_kws))
+        elif narration_overlap:
+            base_ctx = min(1.0, len(narration_overlap) * 0.30)
+
+        if image.caption:
+            cap_words = set(re.findall(r'[\w]{2,}', image.caption.lower(), re.UNICODE)) - STOPWORDS
+            cap_overlap = cap_words & beat_text_words
+            if cap_overlap:
+                base_ctx = max(base_ctx, min(1.0, len(cap_overlap) * 0.30))
+                reasons.append("caption_narrative_match")
+
+        s_context = max(0.0, min(1.0, base_ctx + context_boost * 2.5))
+        signals['context_semantic'] = round(s_context, 4)
+        signals['semantic_text'] = round(s_context, 4)
+        reasons.extend(context_reasons)
+        if s_context > 0.4:
+            reasons.append("semantic_context_affinity")
+
+        # 3. Syntactic Entity Match (18% weight)
+        target_entities = st_scene.entities if (st_scene and st_scene.entities) else v_req.entities
+        image_entities = set(image.entities) | set(image.ocr_tokens)
+        entity_matches = set(target_entities) & image_entities
+        if target_entities:
+            entity_score = len(entity_matches) / float(len(target_entities))
+        elif not target_entities and not image.entities:
+            entity_score = 0.5
+        else:
+            entity_score = 0.3
+
+        if active_entity and (active_entity in image.entities or image.filename == entity_preferred_image):
+            entity_score = min(1.0, entity_score + 0.20)
+            reasons.append("entity_continuity_boost")
+
+        signals['entity_match'] = round(min(1.0, entity_score), 4)
+        if entity_score >= 0.5:
+            reasons.append("entity_match")
+
+        # 4. Syntactic Action Match (12% weight)
+        target_actions = st_scene.actions if (st_scene and st_scene.actions) else v_req.actions
+        action_matches = set(target_actions) & set(image.actions)
+        if target_actions:
+            action_score = len(action_matches) / float(len(target_actions))
+        elif not target_actions:
+            action_score = 0.5
+        else:
+            action_score = 0.3
+
+        signals['action_match'] = round(min(1.0, action_score), 4)
+        if action_score >= 0.5:
+            reasons.append("action_match")
+
+        # 5. Scene / Location Match (8% weight)
+        target_loc = st_scene.location if (st_scene and st_scene.location) else (v_req.location or v_req.environment)
+        scene_score = 0.4
+        if target_loc and image.scene:
+            if target_loc == image.scene:
+                scene_score = 1.0
+            elif target_loc in image.scene or image.scene in target_loc:
+                scene_score = 0.8
+            else:
+                scene_score = 0.2
+        elif st_scene and st_scene.is_subterranean and ("catacombs" in image.scene or "underground" in image.scene):
+            scene_score = 1.0
+        elif v_req.environment == image.environment:
+            scene_score = 0.8
+
+        signals['scene_location'] = round(min(1.0, scene_score), 4)
+        if scene_score >= 0.7:
+            reasons.append("scene_match")
+
+        # 6. Temporal Continuity (7% weight)
+        prev_image = recent_history[-1] if recent_history else None
+        temporal_score = 0.6
+        if prev_image == image.filename:
+            if transition_type == TransitionType.CONTINUATION:
+                temporal_score = 0.85
+            else:
+                temporal_score = 0.30
+        signals['temporal_context'] = round(temporal_score, 4)
+
+        signals['sequence_metadata'] = 0.0
+
+        raw_score = (
+            cfg.w_clip_visual * signals['visual_embedding'] +
+            cfg.w_context_semantic * signals['context_semantic'] +
+            cfg.w_hybrid_entity * signals['entity_match'] +
+            cfg.w_hybrid_action * signals['action_match'] +
+            cfg.w_hybrid_location * signals['scene_location'] +
+            cfg.w_hybrid_temporal * signals['temporal_context']
+        )
+
+        if project_memory and cfg.enable_project_learning:
+            learn_bias, learn_reasons = project_memory.get_learning_bias(
+                image_filename=image.filename,
+                entities=target_entities,
+                concepts=target_kws,
+                semantic_text_sim=signals['context_semantic']
+            )
+            raw_score += learn_bias
+            reasons.extend(learn_reasons)
+
+        # Contradiction Penalty (Syntactic & Polarity Negative Constraints)
+        contra_penalty = 0.0
+        if st_scene:
+            try:
+                from engine.context_analyzer import ContextAnalyzer
+                contra_penalty, contra_reasons = ContextAnalyzer.evaluate_candidate_contradiction(
+                    candidate_label=cand_label,
+                    candidate_concepts=cand_concepts,
+                    candidate_entities=cand_entities,
+                    scene=st_scene,
+                    penalty_amount=cfg.contradiction_penalty
+                )
+                if contra_penalty > 0:
+                    reasons.extend(contra_reasons)
+            except Exception:
+                pass
+
+        # Repetition / Smart Reuse Penalty
+        reuse_penalty = 0.0
+        if recent_history:
+            recent_scenes_list = recent_scenes or []
+            reuse_penalty = VisualDiversityEngine.calculate_smart_reuse_penalty(
+                image_filename=image.filename,
+                image_scene=image.scene,
+                recent_history=recent_history,
+                recent_scenes=recent_scenes_list,
+                transition_type=transition_type
+            )
+
+        total_penalty = round(contra_penalty + reuse_penalty, 4)
+        net_score = max(0.0, raw_score - total_penalty)
+
+        return CandidateScore(
+            image_id=image.image_id,
+            filename=image.filename,
+            total_score=round(net_score, 4),
+            raw_score=round(raw_score, 4),
+            penalty=total_penalty,
+            signals=signals,
+            reasons=reasons
+        )
+
+    def _legacy_score_image_for_beat(
+        self,
+        image: ImageIntelligence,
+        beat: SemanticBeat,
+        total_beats: int,
+        total_images: int,
+        recent_history: List[str],
+        recent_scenes: Optional[List[str]] = None,
+        active_entity: Optional[str] = None,
+        entity_preferred_image: Optional[str] = None,
+        transition_type: TransitionType = TransitionType.CONTINUATION,
+        project_memory: Optional[ProjectCorrectionMemory] = None,
+        memory_window: Optional[Dict[str, Any]] = None,
+        mapping_mode: MappingMode = MappingMode.SEMANTIC_AUTO
+    ) -> CandidateScore:
+        """Calculate legacy multi-signal affinity score for an image on a specific beat."""
         signals: Dict[str, float] = {}
         reasons: List[str] = []
 
@@ -1423,11 +1712,13 @@ class AIImageSyncEngineV3:
         }
 
     def evaluate_confidence(self, score: float) -> Tuple[str, float]:
-        """Determine confidence level using calibrated thresholds (§28)."""
+        """Determine confidence level using calibrated thresholds (§28, §3.4)."""
         norm_score = max(0.0, min(1.0, score))
-        if norm_score >= self.config.high_confidence_thresh:
+        match_th = getattr(self.config, 'match_threshold', 0.70)
+        rev_th = getattr(self.config, 'review_threshold', 0.50)
+        if norm_score >= match_th:
             level = "HIGH"
-        elif norm_score >= self.config.medium_confidence_thresh:
+        elif norm_score >= rev_th:
             level = "MEDIUM"
         else:
             level = "LOW"
@@ -1618,18 +1909,28 @@ class AIImageSyncEngineV3:
         # Batch pre-encode all beat embeddings for instant vectorized scoring
         beat_prompts = []
         for beat in semantic_beats:
-            abstract_kws = getattr(beat.visual_req, 'abstract_concepts', [])
-            p_text = f"{beat.text} {' '.join(beat.visual_req.visual_concepts)} {' '.join(beat.visual_req.entities)} {' '.join(abstract_kws)}"
+            p_text = beat.text.strip() or " ".join(beat.visual_req.visual_concepts)
             beat_prompts.append(p_text)
 
+        neural_available = True
+        neural_provider_name = "none"
+        neural_fail_reason = ""
         try:
             from engine.semantic_vision import SemanticVisionModel
             svm = SemanticVisionModel()
-            batch_embs = svm.batch_encode_texts(beat_prompts)
-            for b_i, beat in enumerate(semantic_beats):
-                setattr(beat, '_cached_embedding', [round(float(x), 6) for x in batch_embs[b_i].tolist()])
+            neural_available = svm.is_available
+            neural_provider_name = svm.active_provider
+            neural_fail_reason = getattr(svm, '_fail_reason', '')
+            if svm.is_available:
+                batch_embs = svm.batch_encode_texts(beat_prompts)
+                for b_i, beat in enumerate(semantic_beats):
+                    setattr(beat, '_cached_embedding', [round(float(x), 6) for x in batch_embs[b_i].tolist()])
+            else:
+                logger.warning(f"Neural semantic vision model is unavailable: {neural_fail_reason}")
         except Exception as e:
-            logger.debug(f"Batch beat pre-encoding fallback: {e}")
+            neural_available = False
+            neural_fail_reason = str(e)
+            logger.warning(f"Batch beat pre-encoding fallback: {e}")
 
         if active_mapping_mode in (MappingMode.SEMANTIC_AUTO, MappingMode.SEQUENCE_AWARE):
             benefit_matrix = []
@@ -1722,6 +2023,11 @@ class AIImageSyncEngineV3:
 
                     if discovered_fn:
                         globally_assigned_images[res.beat_index] = discovered_fn
+                    elif res.image_filename and res.confidence >= 0.50:
+                        globally_assigned_images[res.beat_index] = res.image_filename
+                    elif res.beat_index > 0 and (res.beat_index - 1) in globally_assigned_images:
+                        # Hold previous image to preserve visual continuity across ungrounded beat
+                        globally_assigned_images[res.beat_index] = globally_assigned_images[res.beat_index - 1]
                     elif res.image_filename:
                         globally_assigned_images[res.beat_index] = res.image_filename
                     else:
@@ -1855,7 +2161,9 @@ class AIImageSyncEngineV3:
                     top_candidates_dump = []
                     rejected_info = []
 
-                source_label = "ai_semantic_auto" if active_mapping_mode == MappingMode.SEMANTIC_AUTO else "sequence_aware_mapping"
+                source_label = ("ai_semantic_auto" if neural_available else "heuristic_fallback") if active_mapping_mode == MappingMode.SEMANTIC_AUTO else "sequence_aware_mapping"
+                if not neural_available and "neural_engine_offline" not in match_reason:
+                    match_reason.append("neural_engine_offline")
                 decision_trace = {
                     "selected_image": selected_fn,
                     "confidence": conf,
@@ -1934,12 +2242,13 @@ class AIImageSyncEngineV3:
                 "context": ctx,
                 "confidence": conf,
                 "confidence_level": conf_level,
+                "decision_state": "MATCH" if conf >= 0.70 and conf_level != "NO_MATCH" else ("REVIEW" if conf >= 0.50 and conf_level != "NO_MATCH" else "NO_MATCH"),
                 "match_reason": match_reason,
                 "source": source_label,
                 "user_override": is_override,
-                "manual_review_needed": (conf_level in ("NO_MATCH", "LOW")),
-                "no_match_warning": (conf_level == "NO_MATCH"),
-                "validation_state": "NEEDS_REVIEW" if conf_level in ("NO_MATCH", "LOW") else "VALID",
+                "manual_review_needed": (conf_level in ("NO_MATCH", "LOW") or conf < 0.70),
+                "no_match_warning": (conf_level == "NO_MATCH" or conf < 0.50),
+                "validation_state": "VALID" if (conf >= 0.70 and conf_level != "NO_MATCH") else "NEEDS_REVIEW",
                 "transcript_text": beat.text,
                 "visual_intent": f"Visual focus on {', '.join(beat.visual_req.visual_concepts[:4])} in {beat.visual_req.environment or 'studio'}",
                 "main_subjects": beat.visual_req.entities,
@@ -1984,7 +2293,12 @@ class AIImageSyncEngineV3:
             final_segments[-1]["end"] = round(master_dur, 3)
 
         transcript_obj = {"segments": final_segments}
-        plan_obj = {"scenes": scenes}
+        plan_obj = {
+            "scenes": scenes,
+            "neural_semantic_available": neural_available,
+            "neural_provider": neural_provider_name,
+            "neural_fail_reason": neural_fail_reason
+        }
         if broll_catalog_dict:
             plan_obj["broll_index"] = broll_catalog_dict
 
@@ -2016,6 +2330,9 @@ class AIImageSyncEngineV3:
         report = SyncQualityReport(
             total_images=n_imgs,
             total_beats=total_beats_count,
+            neural_semantic_available=neural_available,
+            neural_provider=neural_provider_name,
+            neural_fail_reason=neural_fail_reason,
             high_confidence=high_count,
             medium_confidence=med_count,
             low_confidence=low_count,

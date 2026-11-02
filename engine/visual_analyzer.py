@@ -29,35 +29,35 @@ from PIL import Image
 
 logger = logging.getLogger("renderflow.visual_analyzer")
 
-ANALYZER_VERSION = "3.0.0-neural-clip"
+ANALYZER_VERSION = "3.1.0-clean-neural"
 CACHE_ROOT = Path(__file__).resolve().parent.parent / ".cache" / "image_sync_v3"
 CACHE_ROOT.mkdir(parents=True, exist_ok=True)
 VISUAL_CACHE_FILE = CACHE_ROOT / "visual_pixel_cache.json"
 
-# Semantic keywords mapping from visual cues
+# Pure visual palette and lighting tone attributes (no fabricated literal nouns)
 MOOD_KEYWORDS = {
-    "ocean_blue": ["ocean", "sea", "water", "marine", "blue", "sky", "underwater", "coast", "lake", "river"],
-    "nature_green": ["forest", "trees", "nature", "grass", "green", "jungle", "garden", "foliage", "plants", "field"],
-    "golden_sunset": ["sunset", "sunrise", "golden", "dusk", "dawn", "sun", "warm", "horizon", "evening", "amber"],
-    "earth_warm": ["desert", "sand", "soil", "canyon", "earth", "rock", "mountain", "ancient", "ruins", "stone", "warm"],
-    "fire_conflict": ["fire", "flames", "war", "battle", "explosion", "red", "smoke", "conflict", "climax", "danger", "intense"],
-    "dark_night": ["night", "space", "stars", "dark", "cosmos", "midnight", "shadow", "mystery", "black", "galaxy"],
-    "urban_architecture": ["city", "building", "architecture", "street", "urban", "skyline", "modern", "concrete", "tower"],
-    "interior_workspace": ["interior", "office", "room", "desk", "indoor", "workspace", "inside", "hall", "palace"],
-    "historical_archive": ["historical", "ancient", "sepia", "vintage", "old", "monument", "archive", "statue", "heritage"],
-    "portrait_human": ["portrait", "person", "human", "face", "character", "leader", "figure", "individual", "look"]
+    "ocean_blue": ["blue_palette", "cyan", "cool_tone", "marine_tone", "ambient_blue"],
+    "nature_green": ["green_palette", "verdant", "organic_tone", "emerald", "foliage_tone"],
+    "golden_sunset": ["golden_palette", "warm_amber", "dusk_tone", "sunset_glow"],
+    "earth_warm": ["earth_tone", "terracotta", "sand_palette", "warm_neutral"],
+    "fire_conflict": ["red_palette", "crimson", "intense_warmth", "flame_tone"],
+    "dark_night": ["dark_palette", "deep_shadow", "low_key_lighting", "monochrome_dark"],
+    "urban_architecture": ["neutral_gray", "slate", "urban_palette", "structured_lighting"],
+    "interior_workspace": ["ambient_interior", "diffuse_lighting", "workspace_tone"],
+    "historical_archive": ["sepia_tone", "vintage_monochrome", "aged_palette"],
+    "portrait_human": ["portrait_lighting", "warm_flesh_tone", "subject_focus"]
 }
 
 SCENE_TAXONOMY = {
-    "nature": ["forest", "mountain", "valley", "trees", "foliage", "landscape", "wildlife", "greenery"],
-    "water": ["ocean", "sea", "river", "beach", "coast", "water", "harbor", "island"],
-    "sky_space": ["sky", "clouds", "space", "stars", "cosmos", "atmosphere", "astronomy"],
-    "desert_earth": ["desert", "dune", "canyon", "arid", "sand", "wasteland", "plains"],
-    "urban": ["city", "streets", "skyline", "buildings", "architecture", "capital", "metropolis"],
-    "historical": ["ruins", "ancient", "castle", "monument", "palace", "temple", "empire", "statue"],
-    "conflict": ["battle", "war", "combat", "soldiers", "fire", "smoke", "strike", "crisis"],
-    "workspace": ["office", "desk", "computer", "documents", "technology", "indoor", "studio"],
-    "portrait": ["person", "portrait", "face", "leader", "hero", "figure", "man", "woman"]
+    "nature": ["verdant_environment", "outdoor_scenery"],
+    "water": ["aquatic_palette", "water_tones"],
+    "sky_space": ["atmospheric_palette", "celestial_tones"],
+    "desert_earth": ["arid_palette", "earth_tones"],
+    "urban": ["architectural_structure", "geometric_composition"],
+    "historical": ["sepia_aesthetic", "vintage_composition"],
+    "conflict": ["high_contrast_warm", "dramatic_lighting"],
+    "workspace": ["interior_composition", "ambient_workspace"],
+    "portrait": ["portrait_composition", "human_presence"]
 }
 
 
@@ -378,24 +378,13 @@ class VisualContentAnalyzer:
 
         clean_concepts = sorted(list(concepts))
 
-        entities = [c for c in clean_concepts if c in [
-            "person", "human", "leader", "hero", "character", "city", "ocean", "forest",
-            "mountain", "palace", "castle", "temple", "space", "stars", "ship", "water",
-            "building", "ruins", "monument", "statue", "desk", "computer"
-        ]]
+        # Real evidence-based entity and action derivation (no color fabrication)
+        entities = []
+        if has_skin_presence and skin_area_pct >= 8.0:
+            entities.append("person")
 
-        actions = [c for c in clean_concepts if c in [
-            "battle", "war", "conflict", "climax", "sunset", "sunrise", "flames", "smoke", "strike"
-        ]]
-        if not actions:
-            if scene_category in ["nature", "water"]:
-                actions = ["explore", "flow", "expand"]
-            elif scene_category == "portrait":
-                actions = ["look", "speak", "lead"]
-            elif scene_category == "conflict":
-                actions = ["fight", "attack", "defend"]
-            else:
-                actions = ["view", "discover", "display"]
+        # Do not fabricate imaginary actions from raw pixel colors
+        actions = []
 
         # 6. Synthesize Descriptive Visual Caption
         caption_parts = [

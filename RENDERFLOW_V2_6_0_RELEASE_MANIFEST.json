@@ -1,0 +1,74 @@
+{
+  "manifest_version": "1.0",
+  "application": "RenderFlow",
+  "version": "2.6.0",
+  "release_tag": "v2.6.0",
+  "release_name": "RenderFlow v2.6.0 \u2014 CPU-First Rendering Optimization & Performance Release",
+  "release_date_utc": "2026-11-02T21:40:10.244939+00:00",
+  "target_platform": "windows-x64",
+  "target_hardware_class": "Intel Core i5-3320M, 8GB DDR3 RAM, Intel HD 4000 (Pure CPU libx264 software rendering)",
+  "artifacts": {
+    "patch_package": {
+      "file": "release/RenderFlow-Patch-v2.6.0.zip",
+      "size_bytes": 763809,
+      "sha256": "e311e5591b14a1959ac14679b75eb107301c5c38a3a85775161e90b1510b8c52"
+    },
+    "update_manifest": {
+      "file": "release/update_manifest.json",
+      "size_bytes": 1213,
+      "sha256": "5994c84215ac48907fdaf7cd589b38e724ed53886d8bf2f235f1682e6a585eac",
+      "signature_ed25519": "27f21675c67c2516a46172a2e2327ac60e201f760675aee42389dcc74f6fcfb285e100708dbd23322641e59ac02854ecf0436d2d99b941cdaa3ccf327d69550f",
+      "public_key_ed25519": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e"
+    },
+    "candidate_v3_standalone_bundle": {
+      "directory": "dist/RenderingStudio_v2.6.0_candidate_v3",
+      "manifest": "dist/RenderingStudio_v2.6.0_candidate_v3/bundle_manifest.json",
+      "total_files": 452,
+      "total_bytes": 2474309612,
+      "core_executable": {
+        "file": "RenderingStudio.exe",
+        "size_bytes": 53442834,
+        "sha256": "ed5f7482d75630fceefe3735274cb13de083a662e3918bea0dedbbd78db450ca"
+      },
+      "models": {
+        "silero_vad_onnx": {
+          "file": "models/vad/silero_vad_v6.onnx",
+          "size_bytes": 1245151,
+          "sha256": "4cbf549b8326f60f80f2536d9eefeb450a9abe83365a098031c89719f1be17d2"
+        },
+        "clip_visual_onnx": {
+          "file": "models/clip/visual_fp32.onnx",
+          "size_bytes": 351823765,
+          "sha256": "d899d95e9ec6554215ba0e1ab749cf6eba9b9fce8ae9cfa14f361554ab3e05b7"
+        },
+        "clip_text_onnx": {
+          "file": "models/clip/text_fp32.onnx",
+          "size_bytes": 254380568,
+          "sha256": "0083b146b4ab0c0a6f9a67bd5f1b543ac02d6ba88481582543b89e8beab0ba0f"
+        },
+        "clip_pytorch_fallback": {
+          "file": "models/clip/ViT-B-32-state-dict.pt",
+          "size_bytes": 353536723,
+          "sha256": "ba9a6a6b08bd1fda45f364205e3b062f7a3e2102cf12311d3e6c22a05ee00b0b"
+        }
+      }
+    }
+  },
+  "performance_summary": {
+    "encoding_speedup": "2.66x faster (6.82 FPS -> 18.13 FPS on 1080p)",
+    "encoding_time_reduction": "62.4%",
+    "psnr_average_db": 45.29,
+    "ssim_all": 0.9862,
+    "peak_ram_mb": 46.3,
+    "av_drift_ms": 0.0
+  },
+  "qa_summary": {
+    "total_evaluated_items": 81,
+    "passed": 76,
+    "skipped": 5,
+    "failed": 0,
+    "pass_rate_percent": 100.0,
+    "semantic_gates_verified": "10/10 (100%)",
+    "vad_verification_tests": "12/12 (100%)"
+  }
+}

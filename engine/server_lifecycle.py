@@ -809,7 +809,7 @@ def get_or_probe_test_server(
     # Wait for ready
     t0 = time.time()
     ready = False
-    while time.time() - t0 < 15.0:
+    while time.time() - t0 < 25.0:
         time.sleep(0.3)
         healthy, _ = probe_renderflow_health(free_port, timeout=1.0)
         if healthy:

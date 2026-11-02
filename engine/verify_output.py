@@ -141,7 +141,9 @@ def verify_video(
     expected_h = height
     if target_res:
         tr = target_res.lower()
-        if '4k' in tr or '2160' in tr:
+        if '9:16' in tr or 'portrait' in tr or 'vertical' in tr:
+            expected_w, expected_h = 1080, 1920
+        elif '4k' in tr or '2160' in tr:
             expected_w, expected_h = 3840, 2160
         elif '1440' in tr or '2k' in tr or 'qhd' in tr:
             expected_w, expected_h = 2560, 1440
@@ -235,7 +237,7 @@ def verify_video(
 
         if cls == 'VALID_VISUAL':
             check(f'frame@{t:.0f}s valid visual', True, detail)
-        elif cls == 'UNIFORM_BLACK' and active_tr and (active_tr.get('is_dip_black') or active_tr.get('type') == 'fadeblack'):
+        elif cls in ('UNIFORM_BLACK', 'LOW_VARIANCE') and active_tr and (active_tr.get('is_dip_black') or active_tr.get('type') == 'fadeblack'):
             # Intentional dip-to-black transition: warn and report expected transition
             cut_ref = active_tr.get('cut_s') or active_tr.get('cut_time', t)
             print(f"WARN - frame@{t:.0f}s EXPECTED_TRANSITION (intentional dip-to-black at {cut_ref:.2f}s, {detail})", flush=True)

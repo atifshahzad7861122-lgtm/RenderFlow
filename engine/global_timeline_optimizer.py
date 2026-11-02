@@ -70,7 +70,7 @@ class GlobalTimelineOptimizer:
             available_cols = set(range(n_cols))
             
             # Sort rows by hardest-to-match first (highest minimal cost)
-            row_order = np.argsort([cost_matrix[r].min() for r in range(n_rows)])[::-1]
+            row_order = np.argsort([cost_matrix[r].min() for r in range(n_rows)])
             
             for r in row_order:
                 best_c = None
@@ -171,14 +171,30 @@ class GlobalTimelineOptimizer:
             else:
                 break
 
+        # Hard Inviolability Guarantee for Manual Scene Locks (§20, §29)
+        for b_idx, target_fn in user_overrides.items():
+            if 0 <= b_idx < num_beats and target_fn in image_filenames:
+                col_target = image_filenames.index(target_fn)
+                if (col_ind[b_idx] % num_images) != col_target:
+                    # Find unconstrained row that was assigned col_target and swap
+                    for other_r in range(num_beats):
+                        if other_r != b_idx and (col_ind[other_r] % num_images) == col_target and other_r not in user_overrides:
+                            col_ind[other_r] = col_ind[b_idx]
+                            break
+                    col_ind[b_idx] = col_target
+
         assignments: List[OptimizedAssignment] = []
         recent_assigned: List[str] = []
 
         for r in range(num_beats):
-            c = col_ind[r] % num_images
-            assigned_fn = image_filenames[c]
-            raw_sim = float(similarity_matrix[r, c])
             is_override = (r in user_overrides)
+            if is_override and user_overrides[r] in image_filenames:
+                assigned_fn = user_overrides[r]
+                c = image_filenames.index(assigned_fn)
+            else:
+                c = col_ind[r] % num_images
+                assigned_fn = image_filenames[c]
+            raw_sim = float(similarity_matrix[r, c])
 
             # Evaluate candidate ranking for this beat
             candidates_ranked = []

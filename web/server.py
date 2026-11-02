@@ -2935,6 +2935,62 @@ async def get_ai_status(primary: Optional[str] = None):
     }
 
 
+@app.get("/api/semantic_vision/status")
+async def get_semantic_vision_status():
+    """Diagnostic status of local cross-modal neural semantic vision and active provider."""
+    from engine.semantic_vision import SemanticVisionModel
+    svm = SemanticVisionModel()
+    return {
+        "active_provider": svm.active_provider,
+        "execution_provider": svm.execution_provider,
+        "is_available": svm.is_available,
+        "load_failed": svm._load_failed,
+        "fail_reason": svm._fail_reason,
+        "torch_loaded": "torch" in sys.modules,
+        "torchvision_loaded": "torchvision" in sys.modules,
+        "visual_model_path": str(svm.visual_model_path),
+        "text_model_path": str(svm.text_model_path),
+        "weights_path": str(svm.weights_path),
+    }
+
+
+@app.post("/api/semantic_vision/reset")
+async def reset_semantic_vision_provider(request: Request = None):
+    """Reset semantic vision singleton to re-evaluate available models."""
+    from engine.semantic_vision import SemanticVisionModel, SemanticProviderMode
+    from pathlib import Path
+    body = {}
+    if request:
+        try:
+            body = await request.json()
+        except Exception:
+            pass
+    mode = body.get("provider_mode")
+    simulate_failure = bool(body.get("simulate_failure", False))
+
+    SemanticVisionModel.reset_instance()
+    if simulate_failure:
+        svm = SemanticVisionModel(
+            visual_model_path=Path("non_existent_visual.onnx"),
+            weights_path=Path("non_existent_weights.pt")
+        )
+    elif mode:
+        svm = SemanticVisionModel(provider_mode=mode)
+    else:
+        svm = SemanticVisionModel()
+
+    return {
+        "status": "reset",
+        "active_provider": svm.active_provider,
+        "execution_provider": svm.execution_provider,
+        "is_available": svm.is_available,
+        "load_failed": svm._load_failed,
+        "fail_reason": svm._fail_reason,
+        "torch_loaded": "torch" in sys.modules,
+        "torchvision_loaded": "torchvision" in sys.modules
+    }
+
+
 @app.post("/api/ai/test-connection")
 async def test_ai_connection(request: Request):
     """Legacy test-connection endpoint forwarding to secure credential test."""
@@ -3047,13 +3103,15 @@ async def start_render(request: Request):
         if not val:
             return "1080p"
         s = str(val).strip().lower()
+        if s in ("9:16", "vertical", "portrait", "1080x1920", "shorts", "reels", "tiktok"):
+            return "9:16"
         if s in ("1080p", "1080", "1080p full hd", "fhd", "full hd"):
             return "1080p"
         if s in ("1440p", "1440", "1440p 2k qhd", "qhd", "2k"):
             return "1440p"
         if s in ("4k", "4k uhd", "4k uhd master", "uhd", "2160p", "2160"):
             return "4k"
-        if s in ("1080p", "1440p", "4k"):
+        if s in ("1080p", "1440p", "4k", "9:16"):
             return s
         return "1080p"
 

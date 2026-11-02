@@ -25,7 +25,7 @@ RESOLUTION_PROFILES: Dict[str, Dict[str, Any]] = {
         "aspect_ratio": "16:9",
         "scale_factor": 1.0,
         "caption_font_scale": 1.0,
-        "default_chunk_size": 35,
+        "default_chunk_size": 16,
         "crf_default": 20,
         "target_bitrate": "8M",
         "max_bitrate": "12M",
@@ -33,7 +33,23 @@ RESOLUTION_PROFILES: Dict[str, Dict[str, Any]] = {
         "estimated_ram_mb": 150,
         "recommended_hardware": "Any modern PC (2+ cores, 4+ GB RAM)"
     },
-    "1440p": {
+        "9:16": {
+        "name": "9:16 Vertical Full HD",
+        "description": "Vertical portrait output (1080x1920) for Shorts, Reels, and TikTok.",
+        "width": 1080,
+        "height": 1920,
+        "aspect_ratio": "9:16",
+        "scale_factor": 1.0,
+        "caption_font_scale": 1.0,
+        "default_chunk_size": 16,
+        "crf_default": 20,
+        "target_bitrate": "8M",
+        "max_bitrate": "12M",
+        "bufsize": "16M",
+        "estimated_ram_mb": 150,
+        "recommended_hardware": "Any modern PC (2+ cores, 4+ GB RAM)"
+    },
+"1440p": {
         "name": "1440p QHD / 2K",
         "description": "Crisp 2.5K high quality. Great for high-DPI monitors and YouTube VP9 unlock.",
         "width": 2560,
@@ -41,7 +57,7 @@ RESOLUTION_PROFILES: Dict[str, Dict[str, Any]] = {
         "aspect_ratio": "16:9",
         "scale_factor": 1.3333,
         "caption_font_scale": 1.3333,
-        "default_chunk_size": 28,
+        "default_chunk_size": 14,
         "crf_default": 19,
         "target_bitrate": "16M",
         "max_bitrate": "24M",
@@ -57,7 +73,7 @@ RESOLUTION_PROFILES: Dict[str, Dict[str, Any]] = {
         "aspect_ratio": "16:9",
         "scale_factor": 2.0,
         "caption_font_scale": 2.0,
-        "default_chunk_size": 20,
+        "default_chunk_size": 12,
         "crf_default": 18,
         "target_bitrate": "35M",
         "max_bitrate": "50M",
@@ -69,6 +85,11 @@ RESOLUTION_PROFILES: Dict[str, Dict[str, Any]] = {
 
 # Aliases
 RESOLUTION_ALIASES = {
+    "9:16": "9:16",
+    "vertical": "9:16",
+    "portrait": "9:16",
+    "1080x1920": "9:16",
+    "shorts": "9:16",
     "1920x1080": "1080p",
     "fhd": "1080p",
     "2560x1440": "1440p",
@@ -151,6 +172,8 @@ def normalize_resolution_key(res: str) -> str:
     if clean in RESOLUTION_ALIASES:
         return RESOLUTION_ALIASES[clean]
     # Check for direct dimensions like 3840x2160
+    if "9:16" in clean or "portrait" in clean or "vertical" in clean or "1080x1920" in clean:
+        return "9:16"
     if "3840" in clean or "2160" in clean or "4k" in clean:
         return "4k"
     if "2560" in clean or "1440" in clean or "2k" in clean:

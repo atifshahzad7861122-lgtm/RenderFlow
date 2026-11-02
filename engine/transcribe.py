@@ -220,6 +220,52 @@ def list_local_whisper_models() -> List[Dict[str, Any]]:
     return results
 
 
+def ensure_vad_model_available() -> Optional[Path]:
+    """
+    Ensure the Silero VAD model (silero_vad_v6.onnx) is present in faster_whisper's
+    expected assets directory. If missing in the frozen executable or dev environment,
+    locates it from bundled fallback paths and copies it into place.
+    """
+    try:
+        from faster_whisper.utils import get_assets_path
+        assets_dir = Path(get_assets_path())
+        target_model = assets_dir / "silero_vad_v6.onnx"
+        if target_model.exists() and target_model.stat().st_size > 0:
+            return target_model
+
+        # Search candidate locations
+        app_root = Path(__file__).resolve().parent.parent
+        exe_dir = Path(sys.executable).parent
+        candidates = [
+            app_root / "models" / "vad" / "silero_vad_v6.onnx",
+            app_root / "dist" / "RenderingStudio" / "models" / "vad" / "silero_vad_v6.onnx",
+            app_root / "dist" / "RenderingStudio_v2.6.0_candidate_v3" / "models" / "vad" / "silero_vad_v6.onnx",
+            app_root / "dist" / "RenderingStudio_v2.6.0_candidate_v2" / "models" / "vad" / "silero_vad_v6.onnx",
+            app_root / "_internal" / "faster_whisper" / "assets" / "silero_vad_v6.onnx",
+            exe_dir / "_internal" / "faster_whisper" / "assets" / "silero_vad_v6.onnx",
+            exe_dir / "models" / "vad" / "silero_vad_v6.onnx",
+        ]
+        if hasattr(sys, "_MEIPASS"):
+            candidates.insert(0, Path(sys._MEIPASS) / "faster_whisper" / "assets" / "silero_vad_v6.onnx")
+            candidates.insert(1, Path(sys._MEIPASS) / "models" / "vad" / "silero_vad_v6.onnx")
+
+        for cand in candidates:
+            if cand.exists() and cand.stat().st_size > 0:
+                assets_dir.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(cand, target_model)
+                logger.info(f"[FASTER-WHISPER] Successfully staged Silero VAD model to {target_model} from {cand}")
+                return target_model
+
+        logger.warning(
+            f"[FASTER-WHISPER] Silero VAD model 'silero_vad_v6.onnx' not found in assets path ({assets_dir}) "
+            f"or candidate search paths. Direct transcription fallback will be used if VAD fails."
+        )
+        return None
+    except Exception as e:
+        logger.warning(f"[FASTER-WHISPER] Note during VAD model resolution: {e}")
+        return None
+
+
 def transcribe_or_load_captions(
     audio_path: Path,
     transcript_path: Optional[Path] = None,
@@ -273,6 +319,9 @@ def transcribe_or_load_captions(
         device, compute_type = get_whisper_device_and_compute_type(device, compute_type)
         logger.info(f"[FASTER-WHISPER] Loading model from '{resolved_model_path}' (device={device}, compute_type={compute_type}, offline={is_local})...")
         model = WhisperModel(resolved_model_path, device=device, compute_type=compute_type)
+
+        # Verify / stage Silero VAD model in faster_whisper assets path
+        vad_model_path = ensure_vad_model_available()
 
         transcribe_kwargs = {
             "word_timestamps": True,

@@ -1,32 +1,17 @@
 {
   "manifest_version": "1.0",
-  "latest_version": "2.5.0",
+  "latest_version": "2.6.0",
   "minimum_supported_version": "2.0.0",
-  "release_notes": "RenderFlow v2.5.0 \u2014 Neural Semantic Intelligence & Sequence Optimizer Release Candidate\n\u2022 Semantic Scene Analyzer & Neural Cross-Modal Vision Engine\n\u2022 Hungarian Global Sequence Optimizer for Temporal Invariance\n\u2022 Audio Rhythm Alignment & Waveform-Informed Transition Triggers\n\u2022 Transcript Ripple Real-Time Shift Compensation\n\u2022 Motion Intelligence & Dynamic Cinematic Easing Profiles\n\u2022 Production auto-update system with RFC 8032 Ed25519 authentication.",
-  "published_at": "2026-10-26T10:26:38Z",
-  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.5.0",
-  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.5.0/RenderFlow-Patch-v2.5.0.zip",
-  "package_size_bytes": 719414,
-  "sha256": "a9da81e788beadc9fb6615a43435a74c9b699d45b47f4d67716105b449141ae1",
+  "release_notes": "RenderFlow v2.6.0 \u2014 CPU-First Rendering Optimization & Performance Release\\n\u2022 Precalculated 17-point Curves LUT Color Grading (2.66x faster encoding)\\n\u2022 Native YUV420P composition and bicubic overlay scaling\\n\u2022 Silero VAD offline model bundling and packaging fix\\n\u2022 Intentional dip-to-black verification fix\\n\u2022 Adaptive memory-aware chunk sizing",
+  "published_at": "2026-11-02T21:38:55Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.6.0",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.6.0/RenderFlow-Patch-v2.6.0.zip",
+  "package_size_bytes": 763809,
+  "sha256": "e311e5591b14a1959ac14679b75eb107301c5c38a3a85775161e90b1510b8c52",
   "update_type": "minor",
   "supported_platforms": [
     "windows-x64"
   ],
-  "packages": {
-    "patch": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.5.0/RenderFlow-Patch-v2.5.0.zip",
-      "package_size_bytes": 719414,
-      "sha256": "a9da81e788beadc9fb6615a43435a74c9b699d45b47f4d67716105b449141ae1",
-      "applies_to": [
-        ">=2.0.0"
-      ]
-    },
-    "full": {
-      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.5.0/RenderFlow-Setup-v2.5.0.exe",
-      "package_size_bytes": 1430492355,
-      "sha256": "4f65d9a3a0600cd3a0a16d96866f8274ef031a674a0e9453656b032df20063d7"
-    }
-  },
-  "signature": "ffa5aa9ef4ad34865aae36bafadd3445cb5f537065b2d1707719b36254e92c91553bcda32d209094e9b2e144b0a9539769f9fb26fb29d1258f78cca28da4f70e",
+  "signature": "27f21675c67c2516a46172a2e2327ac60e201f760675aee42389dcc74f6fcfb285e100708dbd23322641e59ac02854ecf0436d2d99b941cdaa3ccf327d69550f",
   "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e"
 }

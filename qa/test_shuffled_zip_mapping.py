@@ -164,5 +164,9 @@ def main():
     print("=" * 70)
 
 
+def test_shuffled_zip_mapping():
+    main()
+
+
 if __name__ == "__main__":
     main()
