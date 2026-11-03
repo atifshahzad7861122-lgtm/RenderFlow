@@ -11,7 +11,7 @@
 
 RenderFlow v2.6.1 is an essential reliability, workflow, and updater release. It resolves critical defects in the In-App Auto Updater and Media Ingestion/Timeline subsystems while maintaining 100% visual and ergonomic fidelity with the existing user interface.
 
-This release establishes a deterministic **Dual-Package Architecture** for updates (lightweight ~770 KB incremental ZIP patches vs. full ~2.15 GB standalone installers), completely decouples media ingestion from timeline generation, introduces manifest-aware and natural alphanumeric ZIP ordering, provides an explicit Auto-Timeline workflow with overwrite conflict guards, and expands the Manual Timeline with clip splitting, drag-and-drop sequencing, and a 50-step undo/redo stack.
+This release establishes a deterministic **Dual-Package Architecture** for updates (lightweight ~770 KB incremental ZIP patches vs. full ~2.06 GB / 1.92 GiB standalone installers), completely decouples media ingestion from timeline generation, introduces manifest-aware and natural alphanumeric ZIP ordering, provides an explicit Auto-Timeline workflow with overwrite conflict guards, and expands the Manual Timeline with clip splitting, drag-and-drop sequencing, and a 50-step undo/redo stack.
 
 ---
 
@@ -67,7 +67,7 @@ This release establishes a deterministic **Dual-Package Architecture** for updat
 ## Installation & Upgrade Instructions
 
 ### A. Fresh Installation (Standalone Setup)
-1. Download `RenderFlow-Setup-v2.6.1.exe` (2,157,613,970 bytes).
+1. Download `RenderFlow-Setup-v2.6.1.exe` (2,065,367,886 bytes / 1.92 GiB).
 2. Run the installer and choose an installation directory.
 3. Launch `RenderFlow` from the desktop shortcut or Start Menu.
 4. All AI models (Faster-Whisper, Silero VAD, CLIP) are pre-bundled and ready for instant offline operation.
@@ -83,3 +83,4 @@ If you need to revert to the previous version after an update:
 1. Open **Settings -> Update Center**.
 2. If a prior backup exists, the **Rollback to Previous Version** button will be active.
 3. Click **Rollback**. The application restores previous directories from `backups/` and restarts.
+
