@@ -326,6 +326,11 @@ async def check_for_updates(custom_manifest_url: Optional[str] = None):
         "latest_version": result.get("latest_version"),
         "current_version": result.get("current_version", APP_VERSION),
         "check_status": check_status,
+        "package_type": result.get("package_type", "none"),
+        "can_patch": bool(result.get("can_patch", False)),
+        "can_install_full": bool(result.get("can_install_full", False)),
+        "package_size": result.get("package_size", "--"),
+        "package_size_bytes": result.get("package_size_bytes", 0),
         "is_verified": bool(result.get("is_verified", False)),
         "message": result.get("error_message") if not is_ok else (
             f"Update v{result.get('latest_version')} is available!" if has_update else f"RenderFlow is up to date (v{result.get('current_version')})"
@@ -391,19 +396,33 @@ async def get_update_diagnostics():
 
 @app.post("/api/update/apply")
 async def apply_update():
-    """Backward compatibility hook for applying verified update."""
-    status = update_service.get_status()
-    if status.get("state") == NewUpdateState.READY_TO_INSTALL.value or status.get("installer_ready"):
-        if render_mgr.state == "running":
-            return JSONResponse(status_code=409, content={"ok": False, "success": False, "message": "Cannot apply update while a render is actively running."})
-        res = update_service.launch_installer(silent=False)
-        return {"ok": True, "success": True, "message": "Installer launched.", "status": res}
+    """Applies verified update: extracts patch or launches installer depending on package type."""
+    if render_mgr.state == "running":
+        return JSONResponse(status_code=409, content={"ok": False, "success": False, "message": "Cannot apply update while a render is actively running."})
 
-    # Fallback to legacy patch application if patch is staged in update_manager
+    status = update_service.get_status()
+    pkg_type = status.get("package_type", "none")
+
+    if pkg_type == "patch" or status.get("patch_ready"):
+        result = await asyncio.to_thread(update_service.apply_patch)
+        if result.get("ok") or result.get("success"):
+            return {
+                "ok": True,
+                "success": True,
+                "package_type": "patch",
+                "message": result.get("message") or "Patch applied successfully. Restart required.",
+                "status": result.get("status", update_service.get_status())
+            }
+        else:
+            err = result.get("message") or "Failed to apply patch update."
+            return JSONResponse(status_code=500, content={"ok": False, "success": False, "message": err, "status": result.get("status")})
+
+    if pkg_type == "full" or status.get("installer_ready"):
+        res = update_service.launch_installer(silent=False)
+        return {"ok": True, "success": True, "package_type": "full", "message": "Installer launched.", "status": res}
+
     legacy_st = update_manager.get_status()
     if legacy_st.get("state") == UpdateState.DOWNLOADED:
-        if render_mgr.state == "running":
-            return JSONResponse(status_code=409, content={"ok": False, "success": False, "message": "Cannot apply update while a render is actively running."})
         result = await asyncio.to_thread(update_manager.apply_patch)
         is_success = (result.get("state") == UpdateState.READY_TO_RESTART) or bool(result.get("ok")) or bool(result.get("success"))
         return {
@@ -421,7 +440,9 @@ async def restart_after_update():
     if render_mgr.state == "running":
         return JSONResponse(status_code=409, content={"ok": False, "success": False, "message": "Cannot restart while a render is in progress."})
     
-    success = update_manager.restart_app()
+    success = update_service.restart_app()
+    if not success:
+        success = update_manager.restart_app()
     if success:
         def _delayed_exit():
             time.sleep(1.0)
@@ -1660,7 +1681,7 @@ async def save_plan(request: Request):
                 elif "visual_style" in body:
                     existing_plan["visual_style"] = body["visual_style"]
 
-                for key in ["caption_style", "caption_preset", "resolution"]:
+                for key in ["caption_style", "caption_preset", "resolution", "timeline_mode"]:
                     if key in plan_data:
                         existing_plan[key] = plan_data[key]
                     elif key in body:
@@ -2310,7 +2331,7 @@ async def upload_project_files(
             # 1. ZIP Archive Handling (Option A: ZIP containing all images)
             if ext in [".zip"]:
                 diag_logs.append(f"[ZIP] Processing ZIP archive: {fname}")
-                z_res = process_zip_archive(temp_file, images_dir, target_dir / "work")
+                z_res = process_zip_archive(temp_file, images_dir, target_dir / "work", replace_existing=replace_mode)
                 diag_logs.extend(z_res.get("diagnostics", []))
                 
                 if z_res["success"]:
@@ -2322,7 +2343,10 @@ async def upload_project_files(
                         "status": "success",
                         "images_found": count,
                         "registered_count": count,
-                        "files": z_res.get("files", [])
+                        "files": z_res.get("files", []),
+                        "ordering_source": z_res.get("ordering_source", "natural_sort"),
+                        "ordering_ambiguous": z_res.get("ordering_ambiguous", False),
+                        "ordering_message": z_res.get("ordering_message", "")
                     })
                 else:
                     err_msg = z_res.get("error", "ZIP processing failed")
@@ -2432,44 +2456,17 @@ async def upload_project_files(
         valid_raw.sort(key=natural_sort_key)
         valid_img_names = [f.name for f in valid_raw]
 
+        # Invariant (v2.6.1): Media ingestion strictly registers assets into Media Library.
+        # Timeline generation occurs exclusively via explicit user actions (Auto-Map or Manual placement).
         generated_plan = None
         generated_transcript = None
         plan_file = target_dir / "plan.json"
-        has_existing_plan = plan_file.exists() and plan_file.stat().st_size > 10
-
-        if audio_cand and len(valid_img_names) > 0 and (replace_mode or not has_existing_plan):
+        if plan_file.exists() and plan_file.stat().st_size > 10:
             try:
-                diag_logs.append(f"[AUTO_PLAN] Auto-generating semantic timeline for {len(valid_img_names)} images with master audio {audio_cand.name}...")
-                transcript_file = target_dir / "transcript.json"
-                gen_transcript, gen_plan = build_semantic_timeline(
-                    audio_path=audio_cand,
-                    images=valid_img_names,
-                    transcript_path=transcript_file if transcript_file.exists() else None,
-                    all_images_mode=True,
-                    project_dir=target_dir
-                )
-                with open(plan_file, "w", encoding="utf-8") as pf:
-                    json.dump(gen_plan, pf, indent=2)
-                generated_plan = gen_plan
-
-                from engine.stt_provider import is_valid_speech_transcript
-                should_save_t = True
-                if transcript_file.exists():
-                    try:
-                        with open(transcript_file, "r", encoding="utf-8") as tf:
-                            ex_d = json.load(tf)
-                        ex_segs = ex_d.get("segments", []) if isinstance(ex_d, dict) else ex_d
-                        if is_valid_speech_transcript(ex_segs) and not is_valid_speech_transcript(gen_transcript.get("segments", [])):
-                            should_save_t = False
-                    except Exception:
-                        should_save_t = True
-                if should_save_t and gen_transcript:
-                    with open(transcript_file, "w", encoding="utf-8") as tf:
-                        json.dump(gen_transcript, tf, indent=2)
-                generated_transcript = gen_transcript
-                diag_logs.append(f"[AUTO_PLAN] Successfully generated {len(gen_plan.get('scenes', []))} scenes covering {audio_cand.name}")
-            except Exception as plan_err:
-                diag_logs.append(f"[AUTO_PLAN] Automatic timeline generation notice: {plan_err}")
+                with open(plan_file, "r", encoding="utf-8") as pf:
+                    generated_plan = json.load(pf)
+            except Exception:
+                generated_plan = None
 
         return {
             "ok": True,

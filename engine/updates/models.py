@@ -1,7 +1,8 @@
 """
-engine/updates/models.py — Data Models & State Enums for Complete-Installer Update System
-========================================================================================
+engine/updates/models.py — Data Models & State Enums for Complete-Installer and Incremental Update System
+========================================================================================================
 Authoritative type definitions, enumerations, and immutable data classes.
+Supports full installer executables, incremental ZIP patches, and dual-package releases.
 """
 
 import time
@@ -27,15 +28,24 @@ class UpdateState(str, Enum):
     INSTALLING = "installing"
     INSTALL_FAILED = "install_failed"
 
+    READY_TO_RESTART = "ready_to_restart"
+    ROLLBACK_COMPLETED = "rollback_completed"
+
     VERIFYING_INSTALL = "verifying_install"
     VERIFY_FAILED = "verify_failed"
     SUCCESS = "success"
 
-    # Compatibility alias
+    # Compatibility aliases
     AVAILABLE = "update_available"
     ERROR = "check_failed"
     DOWNLOADED = "ready_to_install"
-    READY_TO_RESTART = "ready_to_install"
+
+
+class PackageType(str, Enum):
+    FULL = "full"
+    PATCH = "patch"
+    DUAL = "dual"
+    NONE = "none"
 
 
 @dataclass
@@ -49,6 +59,18 @@ class InstallerAsset:
 
 
 @dataclass
+class PatchAsset:
+    name: str
+    url: str
+    size_bytes: int
+    sha256: str
+    from_version: Optional[str] = None
+    to_version: Optional[str] = None
+    platform: str = "windows-x64"
+    browser_download_url: Optional[str] = None
+
+
+@dataclass
 class ReleaseInfo:
     version: str
     release_title: str
@@ -56,6 +78,9 @@ class ReleaseInfo:
     published_at: str
     release_url: str
     installer: Optional[InstallerAsset] = None
+    patch: Optional[PatchAsset] = None
+    package_type: PackageType = PackageType.NONE
+    selected_package_type: Optional[PackageType] = None
     signature_ed25519: Optional[str] = None
     public_key: Optional[str] = None
     is_prerelease: bool = False
@@ -108,6 +133,9 @@ class UpdateStatus:
     current_version: str = "0.0.0"
     latest_version: Optional[str] = None
     update_available: bool = False
+    package_type: str = "none"  # "patch", "full", or "dual"
+    can_patch: bool = False
+    can_install_full: bool = False
     error_message: Optional[str] = None
     error_details: Optional[str] = None
     last_checked_timestamp: float = 0.0
@@ -117,6 +145,7 @@ class UpdateStatus:
     package_size_bytes: int = 0
     download_progress: DownloadProgress = field(default_factory=DownloadProgress)
     installer_path: Optional[str] = None
+    patch_path: Optional[str] = None
     is_verified: bool = False
     diagnostics_log_path: Optional[str] = None
     recovery_guidance: Optional[str] = None
@@ -130,6 +159,14 @@ class UpdateStatus:
         if self.is_verified:
             return "update_available" if self.update_available else "verified_latest"
         return "idle"
+
+    @property
+    def installer_ready(self) -> bool:
+        return self.state in (UpdateState.READY_TO_INSTALL, UpdateState.READY_TO_RESTART) and bool(self.installer_path)
+
+    @property
+    def patch_ready(self) -> bool:
+        return self.state in (UpdateState.READY_TO_INSTALL, UpdateState.READY_TO_RESTART) and bool(self.patch_path)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -145,6 +182,9 @@ class UpdateStatus:
             "current_version": self.current_version,
             "latest_version": self.latest_version if (self.is_verified and self.latest_version) else None,
             "update_available": self.update_available,
+            "package_type": self.package_type,
+            "can_patch": self.can_patch,
+            "can_install_full": self.can_install_full,
             "error_message": self.error_message,
             "error_details": self.error_details,
             "last_checked": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(self.last_checked_timestamp)) if self.last_checked_timestamp > 0 else "Never",
@@ -155,7 +195,10 @@ class UpdateStatus:
             "package_size_bytes": self.package_size_bytes,
             "package_size": DownloadProgress.format_bytes(self.package_size_bytes),
             "download_progress": self.download_progress.to_dict(),
-            "installer_ready": self.state == UpdateState.READY_TO_INSTALL,
+            "installer_ready": self.installer_ready,
+            "patch_ready": self.patch_ready,
+            "installer_path": self.installer_path,
+            "patch_path": self.patch_path,
             "is_verified": self.is_verified,
             "diagnostics_log_path": self.diagnostics_log_path,
             "recovery_guidance": self.recovery_guidance,

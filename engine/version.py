@@ -4,7 +4,7 @@ RenderFlow — Application Version & Metadata
 Single source of truth for RenderFlow workstation release versions.
 """
 
-__version__ = "2.6.0"
+__version__ = "2.6.1"
 APP_NAME = "RenderFlow"
 APP_PUBLISHER = "AI With Atif"
 BUILD_TARGET = "windows-x64"

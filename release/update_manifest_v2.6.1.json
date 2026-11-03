@@ -1,0 +1,32 @@
+{
+  "manifest_version": "1.0",
+  "latest_version": "2.6.1",
+  "minimum_supported_version": "2.0.0",
+  "release_notes": "RenderFlow v2.6.1 - Repaired In-App Auto-Updater (Dual-Package & Detached Helper), Decoupled Media Library & Explicit Auto-Timeline, Deterministic ZIP Sequencing with Embedded Manifest, Visual Ambiguity Warning, Non-Destructive Ingestion, and Full Undo History.",
+  "published_at": "2026-11-03T07:03:21Z",
+  "release_page_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/tag/v2.6.1",
+  "update_package_url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.6.1/RenderFlow-Patch-v2.6.1.zip",
+  "package_size_bytes": 772999,
+  "sha256": "f661c33f204a0af8de48c214ad179699500846ac4e2e2a5a9c4e9dd15597b1d1",
+  "update_type": "dual",
+  "supported_platforms": [
+    "windows-x64"
+  ],
+  "packages": {
+    "patch": {
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.6.1/RenderFlow-Patch-v2.6.1.zip",
+      "package_size_bytes": 772999,
+      "sha256": "f661c33f204a0af8de48c214ad179699500846ac4e2e2a5a9c4e9dd15597b1d1",
+      "applies_to": [
+        ">=2.0.0"
+      ]
+    },
+    "full": {
+      "url": "https://github.com/atifshahzad7861122-lgtm/RenderFlow/releases/download/v2.6.1/RenderFlow-Setup-v2.6.1.exe",
+      "package_size_bytes": 2157613970,
+      "sha256": "cd11153458ef4fb9d94687415f63785ce36cc35622ca4d97a87f3d1848f00cbc"
+    }
+  },
+  "signature": "3df7af35a6ed66e1d07321e234f673118daaf1ae19cbaeb0ddf70ac276650e78d344931fa686c7798018ec51f7bdf6a2705f06416abc4d1b8c234bab11de480f",
+  "public_key": "661a024a191bfeb43cc9cc8412676dd8064fd1686ca3bdf9cb604ef71b24830e"
+}

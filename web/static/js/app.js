@@ -813,12 +813,21 @@ function initRenderFlowModernization() {
 
     // State 4: UPDATE_AVAILABLE
     if (rawState === 'UPDATE_AVAILABLE' || rawState === 'AVAILABLE') {
+      const isPatch = (status.package_type === 'patch') || Boolean(status.can_patch && !status.can_install_full);
       if (updateStatusText) {
         updateStatusText.innerHTML = `<span style="color:var(--rf-accent, #00f0ff); font-weight:700">★ Update v${status.latest_version || 'New'} available</span>`;
       }
       if (updateDetailsBox) updateDetailsBox.style.display = 'block';
       if (updateTargetTitle) updateTargetTitle.textContent = `RenderFlow v${status.latest_version} Available`;
-      if (updateTypeTag) updateTypeTag.textContent = 'COMPLETE INSTALLER';
+      if (updateTypeTag) {
+        if (isPatch) {
+          updateTypeTag.textContent = 'INCREMENTAL PATCH';
+          updateTypeTag.style.background = '#8b5cf6';
+        } else {
+          updateTypeTag.textContent = 'COMPLETE INSTALLER';
+          updateTypeTag.style.background = '#0ea5e9';
+        }
+      }
       if (updateSpeedBadge) updateSpeedBadge.style.display = 'none';
       if (updatePackageSize) updatePackageSize.textContent = status.package_size || formatBytes(status.package_size_bytes || 0);
       if (updateByteCounts) updateByteCounts.style.display = 'none';
@@ -830,7 +839,7 @@ function initRenderFlowModernization() {
       if (btnDownloadUpdate) {
         btnDownloadUpdate.style.display = 'inline-flex';
         btnDownloadUpdate.disabled = false;
-        btnDownloadUpdate.textContent = '⬇️ Download Latest Version';
+        btnDownloadUpdate.textContent = isPatch ? '⬇️ Download Patch' : '⬇️ Download Latest Version';
       }
       if (btnApplyUpdate) btnApplyUpdate.style.display = 'none';
       if (btnLaunchInstaller) btnLaunchInstaller.style.display = 'none';
@@ -886,10 +895,13 @@ function initRenderFlowModernization() {
       return;
     }
 
-    // State 7: READY_TO_INSTALL (VERIFIED INSTALLER DOWNLOADED)
+    // State 7: READY_TO_INSTALL (VERIFIED PACKAGE DOWNLOADED)
     if (rawState === 'READY_TO_INSTALL' || rawState === 'INSTALLER_READY' || rawState === 'DOWNLOADED') {
+      const isPatch = (status.package_type === 'patch') || Boolean(status.patch_ready);
       if (updateStatusText) {
-        updateStatusText.innerHTML = '<span style="color:#10b981; font-weight:700">✓ Complete installer verified &amp; ready to install</span>';
+        updateStatusText.innerHTML = isPatch
+          ? '<span style="color:#10b981; font-weight:700">✓ Incremental patch verified &amp; ready to install</span>'
+          : '<span style="color:#10b981; font-weight:700">✓ Complete installer verified &amp; ready to install</span>';
       }
       if (updateDetailsBox) updateDetailsBox.style.display = 'block';
       if (updateProgressContainer) updateProgressContainer.style.display = 'block';
@@ -899,12 +911,21 @@ function initRenderFlowModernization() {
       if (updateSpeedBadge) updateSpeedBadge.style.display = 'none';
       if (btnCancelDownload) btnCancelDownload.style.display = 'none';
       if (btnDownloadUpdate) btnDownloadUpdate.style.display = 'none';
-      if (btnApplyUpdate) btnApplyUpdate.style.display = 'none';
 
-      if (btnLaunchInstaller) {
-        btnLaunchInstaller.style.display = 'inline-flex';
-        btnLaunchInstaller.disabled = false;
-        btnLaunchInstaller.textContent = '📦 Launch Installer & Update';
+      if (isPatch) {
+        if (btnApplyUpdate) {
+          btnApplyUpdate.style.display = 'inline-flex';
+          btnApplyUpdate.disabled = false;
+          btnApplyUpdate.textContent = '⚡ Install & Restart Now';
+        }
+        if (btnLaunchInstaller) btnLaunchInstaller.style.display = 'none';
+      } else {
+        if (btnLaunchInstaller) {
+          btnLaunchInstaller.style.display = 'inline-flex';
+          btnLaunchInstaller.disabled = false;
+          btnLaunchInstaller.textContent = '📦 Launch Installer & Update';
+        }
+        if (btnApplyUpdate) btnApplyUpdate.style.display = 'none';
       }
 
       if (updatePollInterval) { clearInterval(updatePollInterval); updatePollInterval = null; }
@@ -3316,12 +3337,7 @@ async function uploadSingleAudioFile(file) {
       setTimeout(() => window.RenderFlowMotion.refreshWaveform(), 60);
     }
 
-    // Auto-plan if images already exist in project and plan is not yet populated
-    const hasImages = (state.currentProject?.images && state.currentProject.images.length > 0) || (data.images_count > 0);
-    const hasPlanScenes = state.currentProject?.plan?.scenes && state.currentProject.plan.scenes.length > 0;
-    if (hasImages && !hasPlanScenes) {
-      await autoPlanProject({ resetOverrides: false, silent: false });
-    }
+    // v2.6.1 Invariant: Uploading audio registers audio in project. Timeline is NOT auto-generated without explicit user action.
   } catch (err) {
     showToast(`Audio upload error: ${err.message}`, 'error');
   }
@@ -4116,13 +4132,11 @@ function handleFilesUpload(files, optProjectName = null) {
         // Reload project data (which naturally sorts all extracted images)
         await loadProjectData(data.project_path);
 
-        // Auto-run Auto-Map so timeline is immediately ready if audio is present and scenes are empty
-        const hasAudio = state.currentProject?.audio && state.currentProject.audio.duration > 0;
-        const hasPlanScenes = state.currentProject?.plan?.scenes && state.currentProject.plan.scenes.length > 0;
-        if (hasAudio && !hasPlanScenes) {
-          setTimeout(async () => {
-            await autoPlanProject({ resetOverrides: false, silent: false });
-          }, 300);
+        // v2.6.1 Invariant: Images ingested into Media Library only.
+        // Check for ambiguous ordering in uploaded archives
+        const ambiguousZip = data.zip_results?.find(z => z.ordering_ambiguous);
+        if (ambiguousZip) {
+          showToast(ambiguousZip.ordering_message || 'Original image order could not be determined from filenames. Please review import order in Media Library.', 'warning');
         }
 
       } catch (err) {

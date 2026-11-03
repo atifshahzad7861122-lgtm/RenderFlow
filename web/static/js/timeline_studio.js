@@ -39,6 +39,9 @@
     selectedCaptionIndex: null,
     isMarqueeActive: false,
     
+    // Timeline Mode: 'auto' | 'manual'
+    timelineMode: 'auto',
+
     // Data Models
     scenes: [],
     transcriptSegments: [],
@@ -158,6 +161,12 @@
         this._currentAudioPath = this.audio?.path || this.audio?.name || '';
         this.waveformData = null;
       }
+      if (plan && plan.timeline_mode) {
+        this.timelineMode = plan.timeline_mode;
+      } else if (plan && plan.scenes && plan.scenes.some(s => s.user_override || s.locked)) {
+        this.timelineMode = 'manual';
+      }
+
       this.transcriptSegments = (plan && plan.transcript_segments && plan.transcript_segments.length)
         ? plan.transcript_segments
         : (transcript?.segments || []);
@@ -302,6 +311,15 @@
             <span class="stitch-project-status rf-tl-save-status ${this.hasUnsavedChanges ? 'unsaved' : 'saved'}" id="tlSaveStatusBadge">
               ${this.hasUnsavedChanges ? '● Unsaved Edits' : '✓ Saved'}
             </span>
+            <div class="rf-tl-mode-group" style="display:inline-flex; align-items:center; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.12); border-radius:6px; padding:2px; gap:2px">
+              <button type="button" class="rf-tl-mode-btn ${this.timelineMode === 'auto' ? 'active' : ''}" id="btnTlModeAuto" title="Auto Mode: AI dynamically syncs images to audio beats" style="padding:2px 8px; font-size:10px; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:${this.timelineMode === 'auto' ? 'linear-gradient(135deg, #00f0ff, #0284c7)' : 'transparent'}; color:${this.timelineMode === 'auto' ? '#000' : '#94a3b8'}">
+                🪄 Auto
+              </button>
+              <button type="button" class="rf-tl-mode-btn ${this.timelineMode === 'manual' ? 'active' : ''}" id="btnTlModeManual" title="Manual Mode: Full manual control over clip placement & timing" style="padding:2px 8px; font-size:10px; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:${this.timelineMode === 'manual' ? 'linear-gradient(135deg, #a3e635, #65a30d)' : 'transparent'}; color:${this.timelineMode === 'manual' ? '#000' : '#94a3b8'}">
+                🖐️ Manual
+              </button>
+            </div>
+            <div class="stitch-top-divider rf-tl-divider"></div>
             <button class="stitch-btn-render-primary rf-tl-btn" id="btnTlAutoMap" title="Auto-Map Images to Audio Beats (AI Semantic Sync & Hungarian Optimizer)" style="padding:3px 10px; font-size:11px; background:linear-gradient(135deg, var(--stitch-lime), #84cc16); color:#000; font-weight:700">
               <span class="material-symbols-outlined" style="font-size:14px">magic_button</span>
               <span>Auto-Map to Audio</span>
@@ -493,10 +511,33 @@
         btnZoomFit.addEventListener('click', () => this.zoomToFit());
       }
 
+      const btnModeAuto = document.getElementById('btnTlModeAuto');
+      if (btnModeAuto) {
+        btnModeAuto.addEventListener('click', () => this.setTimelineMode('auto'));
+      }
+      const btnModeManual = document.getElementById('btnTlModeManual');
+      if (btnModeManual) {
+        btnModeManual.addEventListener('click', () => this.setTimelineMode('manual'));
+      }
+
       const btnAutoMap = document.getElementById('btnTlAutoMap');
       if (btnAutoMap) {
-        btnAutoMap.addEventListener('click', () => {
-          if (window.autoPlanProject) window.autoPlanProject({ resetOverrides: false, silent: false });
+        btnAutoMap.addEventListener('click', async () => {
+          const hasManualEdits = this.scenes && this.scenes.some(s => s.user_override || s.locked);
+          if (this.timelineMode === 'manual' || hasManualEdits) {
+            const confirmed = confirm(
+              '⚠️ Timeline Conflict Detection\n\n' +
+              'Your timeline currently contains manual clip edits or locks.\n\n' +
+              'Auto-Mapping will re-assign unlocked scenes while preserving your locked clips.\n' +
+              'A complete undo snapshot will be saved so you can revert anytime with Ctrl+Z.\n\n' +
+              'Proceed with Auto-Mapping?'
+            );
+            if (!confirmed) return;
+          }
+          this.pushHistorySnapshot();
+          if (window.autoPlanProject) {
+            await window.autoPlanProject({ resetOverrides: false, silent: false });
+          }
         });
       }
 
@@ -3504,6 +3545,25 @@
       }
     },
 
+    /** Switch between Auto and Manual timeline workflows */
+    setTimelineMode(mode) {
+      if (this.timelineMode === mode) return;
+      this.timelineMode = mode;
+      const btnAuto = document.getElementById('btnTlModeAuto');
+      const btnManual = document.getElementById('btnTlModeManual');
+      if (btnAuto && btnManual) {
+        btnAuto.style.background = mode === 'auto' ? 'linear-gradient(135deg, #00f0ff, #0284c7)' : 'transparent';
+        btnAuto.style.color = mode === 'auto' ? '#000' : '#94a3b8';
+        btnManual.style.background = mode === 'manual' ? 'linear-gradient(135deg, #a3e635, #65a30d)' : 'transparent';
+        btnManual.style.color = mode === 'manual' ? '#000' : '#94a3b8';
+      }
+      if (mode === 'manual') {
+        window.showToast?.('🖐️ Manual Timeline active: Full manual control over clip trimming, placement, and replacement.', 'info');
+      } else {
+        window.showToast?.('🪄 Auto Timeline active: AI dynamically synchronizes images to narration context.', 'info');
+      }
+    },
+
     /** Save Timeline Plan to plan.json via backend endpoint */
     async savePlan() {
       const projectPath = window.state?.projectPath;
@@ -3516,6 +3576,7 @@
         const payload = {
           project_path: projectPath,
           plan: {
+            timeline_mode: this.timelineMode,
             scenes: this.scenes.map(s => ({
               segment_index: s.segment_index,
               start: s.start,

@@ -1,5 +1,11 @@
-[0][1]xfade=transition=fadefast:duration=0.10:offset=1.95[v1];
-[v1][2]xfade=transition=dissolve:duration=0.40:offset=3.95[v_last];
-[v_last]scale=out_range=tv,format=yuv420p[vout];
-[3:a]aresample=48000,aformat=channel_layouts=stereo[anarr];
+[0:v]format=yuv420p,setsar=1[s0];
+[1:v]format=yuv420p,setsar=1[s1];
+[2:v]format=yuv420p,setsar=1[s2];
+[s0][s1]xfade=transition=custom:expr='if(gte(P,0.5),B,A)':duration=0.04:offset=1.98[v1];
+[v1][s2]xfade=transition=dissolve:duration=0.40:offset=3.80[v_base];
+[3:v]fps=30,scale=1920:1080:flags=bicubic:force_original_aspect_ratio=increase,crop=1920:1080,setsar=1,fade=t=in:st=0:d=0.150,fade=t=out:st=0.750:d=0.150,format=yuv420p,setpts=PTS-STARTPTS+1.550/TB[ov_0_rgb];
+[v_base][ov_0_rgb]blend=all_mode=screen:all_opacity=0.45:enable='between(t,1.550,2.450)'[v_rgb_done];
+[v_rgb_done]curves=r='0.000/0.043 0.063/0.071 0.125/0.133 0.188/0.180 0.251/0.227 0.314/0.294 0.376/0.353 0.439/0.424 0.502/0.490 0.565/0.561 0.627/0.624 0.690/0.686 0.753/0.757 0.816/0.824 0.878/0.890 0.941/0.957 1.000/1.000':g='0.000/0.016 0.063/0.051 0.125/0.118 0.188/0.176 0.251/0.239 0.314/0.306 0.376/0.365 0.439/0.435 0.502/0.502 0.565/0.573 0.627/0.635 0.690/0.698 0.753/0.769 0.816/0.835 0.878/0.898 0.941/0.969 1.000/1.000':b='0.000/0.000 0.063/0.000 0.125/0.051 0.188/0.137 0.251/0.224 0.314/0.294 0.376/0.353 0.439/0.420 0.502/0.490 0.565/0.557 0.627/0.624 0.690/0.686 0.753/0.753 0.816/0.824 0.878/0.886 0.941/0.957 1.000/1.000'[v_graded];
+[v_graded]format=yuv420p,tpad=stop_mode=clone:stop_duration=2.0[vout];
+[4:a]aresample=48000,aformat=channel_layouts=stereo[anarr];
 [anarr]anull[aout]

@@ -3,8 +3,8 @@
     "name": "Eco / Low-End",
     "threads": 2,
     "preset": "veryfast",
-    "chunk_size_1080p": 24,
-    "chunk_size_4k": 14,
+    "chunk_size_1080p": 11,
+    "chunk_size_4k": 10,
     "encoder_args": [
       "-c:v",
       "libx264",
@@ -24,8 +24,8 @@
     "name": "Balanced",
     "threads": 0,
     "preset": "veryfast",
-    "chunk_size_1080p": 35,
-    "chunk_size_4k": 20,
+    "chunk_size_1080p": 16,
+    "chunk_size_4k": 12,
     "encoder_args": [
       "-c:v",
       "libx264",
@@ -43,8 +43,8 @@
     "name": "Performance",
     "threads": 0,
     "preset": "fast",
-    "chunk_size_1080p": 46,
-    "chunk_size_4k": 26,
+    "chunk_size_1080p": 21,
+    "chunk_size_4k": 16,
     "encoder_args": [
       "-c:v",
       "libx264",
@@ -62,8 +62,8 @@
     "name": "Max Quality",
     "threads": 0,
     "preset": "medium",
-    "chunk_size_1080p": 32,
-    "chunk_size_4k": 18,
+    "chunk_size_1080p": 14,
+    "chunk_size_4k": 11,
     "encoder_args": [
       "-c:v",
       "libx264",

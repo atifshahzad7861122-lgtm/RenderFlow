@@ -1,8 +1,8 @@
 """
 engine/updates/download_service.py — Resilient Chunked Streaming Downloader
 ==========================================================================
-Downloads approved installer executables with progress tracking, timeouts,
-cancellation support, speed calculation, and atomic file finalization.
+Downloads approved installer executables and patch archives with progress tracking,
+timeouts, cancellation support, speed calculation, and atomic file finalization.
 """
 
 import os
@@ -13,15 +13,15 @@ import threading
 import urllib.request
 import urllib.error
 from pathlib import Path
-from typing import Optional, Callable, Dict, Any, Tuple
+from typing import Optional, Callable, Dict, Any, Tuple, Union
 
-from engine.updates.models import InstallerAsset, DownloadProgress
+from engine.updates.models import InstallerAsset, PatchAsset, DownloadProgress
 
 logger = logging.getLogger("renderflow.updates.downloader")
 
 
 class SecureDownloadService:
-    """Manages background streaming downloads of verified installer packages."""
+    """Manages background streaming downloads of verified installer and patch packages."""
 
     def __init__(self, download_dir: Path, timeout_seconds: float = 30.0, chunk_size: int = 65536):
         self.download_dir = Path(download_dir).resolve()
@@ -44,8 +44,17 @@ class SecureDownloadService:
         progress_callback: Optional[Callable[[DownloadProgress], None]] = None,
         max_retries: int = 3
     ) -> Tuple[Optional[Path], Optional[str]]:
+        """Compatibility wrapper for downloading installer assets."""
+        return self.download_package(installer, progress_callback=progress_callback, max_retries=max_retries)
+
+    def download_package(
+        self,
+        asset: Union[InstallerAsset, PatchAsset],
+        progress_callback: Optional[Callable[[DownloadProgress], None]] = None,
+        max_retries: int = 3
+    ) -> Tuple[Optional[Path], Optional[str]]:
         """
-        Streams the installer asset to a temporary .part file in download_dir.
+        Streams an asset (installer .exe or patch .zip) to a temporary .part file in download_dir.
         Returns: (final_path: Path, None) on success, or (None, error_message) on failure.
         """
         if self.cancel_event.is_set():
@@ -53,14 +62,14 @@ class SecureDownloadService:
         self.cancel_event.clear()
         self._progress_callback = progress_callback
 
-        safe_filename = Path(installer.name).name
+        safe_filename = Path(asset.name).name
         target_path = self.download_dir / safe_filename
         part_path = self.download_dir / f"{safe_filename}.part"
 
-        # If target file already exists and matches expected size & sha256, reuse it
-        if target_path.exists() and installer.size_bytes > 0:
-            if target_path.stat().st_size == installer.size_bytes:
-                logger.info("Found pre-existing downloaded installer matching expected size: %s", target_path)
+        # If target file already exists and matches expected size, reuse it
+        if target_path.exists() and asset.size_bytes > 0:
+            if target_path.stat().st_size == asset.size_bytes:
+                logger.info("Found pre-existing downloaded package matching expected size: %s", target_path)
                 return target_path, None
 
         # Clean any stale partial files
@@ -75,20 +84,20 @@ class SecureDownloadService:
 
         while attempt < max_retries and not self.cancel_event.is_set():
             attempt += 1
-            logger.info("Starting installer download attempt %d/%d from %s", attempt, max_retries, installer.url)
+            logger.info("Starting package download attempt %d/%d from %s", attempt, max_retries, asset.url)
 
-            success, err = self._stream_file(installer.url, part_path, installer.size_bytes)
+            success, err = self._stream_file(asset.url, part_path, asset.size_bytes)
             if success:
                 # Atomically promote .part to final destination
                 try:
                     if target_path.exists():
                         target_path.unlink()
                     shutil.move(str(part_path), str(target_path))
-                    logger.info("Installer download completed successfully: %s", target_path)
+                    logger.info("Package download completed successfully: %s", target_path)
                     return target_path, None
                 except Exception as e:
-                    logger.error("Failed to finalize installer file: %s", e)
-                    return None, f"Failed to finalize downloaded installer file: {e}"
+                    logger.error("Failed to finalize package file: %s", e)
+                    return None, f"Failed to finalize downloaded package file: {e}"
 
             last_error = err
             if self.cancel_event.is_set():
@@ -108,7 +117,7 @@ class SecureDownloadService:
         req = urllib.request.Request(
             url,
             headers={
-                "User-Agent": "RenderFlow-Installer-Downloader/2.4.x",
+                "User-Agent": "RenderFlow-Package-Downloader/2.6.x",
                 "Accept": "*/*",
             }
         )

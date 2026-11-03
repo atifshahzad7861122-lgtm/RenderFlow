@@ -28,7 +28,8 @@ from pathlib import Path
 
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent
 PYTHON_EXE = sys.executable
-PKG_EXE = WORKSPACE_DIR / "dist" / "RenderingStudio" / "RenderingStudio.exe"
+PKG_CANDIDATE = WORKSPACE_DIR / "dist" / "RenderingStudio_v2.6.1_candidate_v3" / "RenderingStudio.exe"
+PKG_EXE = Path(os.environ.get("RENDERFLOW_PKG_EXE", str(PKG_CANDIDATE if PKG_CANDIDATE.exists() else (WORKSPACE_DIR / "dist" / "RenderingStudio" / "RenderingStudio.exe"))))
 TEST_PORT = int(os.environ.get("RENDERFLOW_TEST_PORT", "8990"))
 ALT_PORT = TEST_PORT + 1
 

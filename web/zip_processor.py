@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """
 Rendering Studio Engine v2 — ZIP & Image Asset Processor
-Handles safe ZIP validation, secure extraction, recursive image discovery,
-image decoding integrity validation, natural sorting, and scene asset registration.
+=========================================================
+Handles safe ZIP validation, secure extraction, manifest.json discovery,
+deterministic image ordering, ambiguity detection for third-party archives,
+image decoding integrity validation, and non-destructive Media Library registration.
 """
 
 import os
 import sys
 import re
+import json
 import shutil
 import zipfile
 import uuid
 import time
+import hashlib
 from pathlib import Path
 from typing import List, Tuple, Dict, Any, Optional, Union
 import PIL.Image
@@ -32,10 +36,43 @@ def natural_sort_key(item: Union[str, Path]) -> list:
     return [tokens, path_tokens]
 
 
+def detect_filename_sequence_ambiguity(filenames: List[str]) -> Tuple[bool, str]:
+    """
+    Analyzes a list of image filenames to detect whether they follow a clear
+    sequential numbering scheme or if ordering is ambiguous (e.g. random hashes or UUIDs).
+    Returns (is_ambiguous: bool, reason: str).
+    """
+    if len(filenames) <= 1:
+        return False, "Single or zero images"
+
+    numbers_found = []
+    hash_like_count = 0
+
+    for name in filenames:
+        stem = Path(name).stem
+        # Check if filename is hexadecimal hash (e.g., 16, 32, 40, or 64 hex characters)
+        if re.fullmatch(r'[0-9a-fA-F]{12,64}', stem):
+            hash_like_count += 1
+
+        digits = re.findall(r'\d+', stem)
+        if digits:
+            numbers_found.append(int(digits[-1]))
+
+    # If majority of files look like random hashes
+    if hash_like_count >= len(filenames) * 0.5:
+        return True, "Filenames appear to be hashes without sequence information."
+
+    # If less than half the files have numeric tokens
+    if len(numbers_found) < len(filenames) * 0.5:
+        return True, "Filenames lack sequence numbering. Alphabetical order applied."
+
+    return False, "Monotonic or numeric sequence detected."
+
+
 def validate_image_file(path: Path) -> Tuple[bool, str]:
     """
     Validates that an image exists, is non-empty, and can actually be decoded.
-    Ensures no placeholder/corrupted graphics enter the rendering engine.
+    Ensures no placeholder or corrupted graphics enter the rendering engine.
     """
     try:
         if not path.is_file():
@@ -59,16 +96,89 @@ def validate_image_file(path: Path) -> Tuple[bool, str]:
         return False, str(e)
 
 
+def create_ordered_image_zip(
+    image_entries: List[Dict[str, Any]],
+    output_zip_path: Path,
+    job_id: Optional[str] = None
+) -> Path:
+    """
+    Generates a deterministic ZIP archive with an authoritative top-level manifest.json.
+    Guarantees that archive entry order and manifest order match the original result index.
+    
+    image_entries is a list of dicts with:
+    - 'file_path': Path to source image file
+    - 'query': Optional search query
+    - 'source_url': Optional original source URL
+    - 'original_index': Optional search result index
+    """
+    output_zip_path = Path(output_zip_path).resolve()
+    output_zip_path.parent.mkdir(parents=True, exist_ok=True)
+
+    manifest_images = []
+    job = job_id or f"rf_job_{uuid.uuid4().hex[:8]}"
+
+    with zipfile.ZipFile(output_zip_path, 'w', compression=zipfile.ZIP_DEFLATED) as zf:
+        for idx, entry in enumerate(image_entries):
+            src_p = Path(entry['file_path'])
+            if not src_p.is_file():
+                continue
+
+            seq_idx = idx + 1
+            orig_idx = entry.get('original_index', idx)
+            ext = src_p.suffix.lower()
+            archive_name = f"images/img_{seq_idx:04d}{ext}"
+
+            # Compute sha256
+            hasher = hashlib.sha256()
+            with open(src_p, 'rb') as f_in:
+                while chunk := f_in.read(65536):
+                    hasher.update(chunk)
+            sha256_hash = hasher.hexdigest()
+
+            manifest_images.append({
+                "image_id": f"img_{seq_idx:04d}",
+                "original_result_index": orig_idx,
+                "sequence_index": seq_idx,
+                "source_url": entry.get("source_url", ""),
+                "source_filename": src_p.name,
+                "archive_filename": archive_name,
+                "query": entry.get("query", ""),
+                "download_status": "success",
+                "sha256": sha256_hash,
+                "attribution": entry.get("attribution", None)
+            })
+
+            zf.write(src_p, arcname=archive_name)
+
+        manifest_data = {
+            "manifest_schema_version": "1.0",
+            "generator": "RenderFlow Studio v2.6.1",
+            "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "job_id": job,
+            "total_images": len(manifest_images),
+            "images": manifest_images
+        }
+
+        zf.writestr("manifest.json", json.dumps(manifest_data, indent=2))
+
+    return output_zip_path
+
+
 def process_zip_archive(
     zip_path: Path,
     target_images_dir: Path,
     temp_work_dir: Path,
-    replace_existing: bool = True
+    replace_existing: bool = False
 ) -> Dict[str, Any]:
     """
-    Safely validates, extracts, recursively discovers, validates, naturally sorts,
-    and registers image assets from a ZIP archive.
-    DEFAULT IS REPLACE MODE (replace_existing=True): cleans existing media before registering new images.
+    Safely validates, extracts, orders, validates, and registers image assets from a ZIP archive.
+    
+    Ordering Hierarchy:
+    1. manifest.json: If archive contains manifest.json, images are strictly ordered by manifest['images'].
+    2. Natural Sort: If no manifest, sequential numbers are detected and natural sorting is applied.
+    3. Ambiguity Detection: If filenames are non-sequential or random hashes, ordering_ambiguous is flagged.
+    
+    DEFAULT IS NON-DESTRUCTIVE (replace_existing=False): preserves existing Media Library images.
     """
     diag_logs: List[str] = []
     file_size_mb = round(zip_path.stat().st_size / (1024 * 1024), 2)
@@ -111,42 +221,49 @@ def process_zip_archive(
 
     diag_logs.append("[ZIP] validation=PASS")
 
-    # 2. Dedicated temporary extraction sandbox
+    # 2. Extraction sandbox
     extract_id = f"extract_{uuid.uuid4().hex[:8]}_{int(time.time())}"
     extract_root = (temp_work_dir / extract_id).resolve()
     extract_root.mkdir(parents=True, exist_ok=True)
 
     extracted_candidates: List[Path] = []
-    total_raw_entries = 0
-    ignored_meta_entries = 0
+    manifest_data: Optional[Dict[str, Any]] = None
 
     try:
         with zipfile.ZipFile(zip_path, 'r') as zf:
             infolist = zf.infolist()
-            total_raw_entries = len(infolist)
 
+            # First: Look for manifest.json
+            for info in infolist:
+                norm_name = os.path.normpath(info.filename).lstrip(r'\/')
+                if Path(norm_name).name.lower() == 'manifest.json':
+                    try:
+                        with zf.open(info) as mf:
+                            manifest_data = json.loads(mf.read().decode('utf-8'))
+                        diag_logs.append("[ZIP] manifest.json=FOUND (deterministic ordering enabled)")
+                        break
+                    except Exception as me:
+                        diag_logs.append(f"[ZIP] manifest.json=MALFORMED ({me})")
+
+            # Extract image files safely
             for info in infolist:
                 if info.is_dir():
                     continue
 
                 raw_name = info.filename
-                # Filter macOS and hidden metadata
+                # Filter macOS and metadata
                 if raw_name.startswith('__MACOSX/') or '/__MACOSX/' in raw_name or '\\__MACOSX\\' in raw_name:
-                    ignored_meta_entries += 1
                     continue
                 basename = Path(raw_name).name
                 if basename.startswith('._') or basename.startswith('.DS_Store') or basename.lower() == 'thumbs.db':
-                    ignored_meta_entries += 1
                     continue
 
-                # Filter image extension
                 ext = Path(raw_name).suffix.lower()
                 if ext not in SUPPORTED_IMAGE_EXTS:
                     continue
 
-                # Path Traversal Protection
+                # Path traversal defense
                 norm_rel = os.path.normpath(raw_name).lstrip(r'\/')
-                # Disallow drive letters or parent directory jumps
                 if ':' in norm_rel or norm_rel.startswith('..') or ('..' + os.sep) in norm_rel:
                     diag_logs.append(f"[SECURITY] Blocked path traversal attempt in zip entry: {raw_name}")
                     continue
@@ -182,8 +299,6 @@ def process_zip_archive(
             "registered_count": 0
         }
 
-    diag_logs.append(f"[ZIP] extraction=PASS (candidates={len(extracted_candidates)})")
-
     if not extracted_candidates:
         shutil.rmtree(extract_root, ignore_errors=True)
         diag_logs.append("[ZIP] images_found=0")
@@ -207,7 +322,7 @@ def process_zip_archive(
             corrupted_images.append({"file": img_path.name, "reason": reason})
             diag_logs.append(f"[IMAGE_VALIDATION] FAIL: {img_path.name} -> {reason}")
 
-    diag_logs.append(f"[ZIP] images_found={len(valid_images)}")
+    diag_logs.append(f"[ZIP] valid_images={len(valid_images)}")
 
     if not valid_images:
         shutil.rmtree(extract_root, ignore_errors=True)
@@ -220,10 +335,53 @@ def process_zip_archive(
             "registered_count": 0
         }
 
-    # 4. Natural Sorting
-    valid_images.sort(key=natural_sort_key)
+    # 4. Deterministic Ordering
+    ordering_source = "natural_sort"
+    ordering_ambiguous = False
+    ordering_message = ""
 
-    # 5. Register into project's images directory (Default: REPLACE MODE)
+    if manifest_data and isinstance(manifest_data.get("images"), list):
+        # Strict manifest sequence
+        manifest_order = {}
+        for idx, item in enumerate(manifest_data["images"]):
+            seq = item.get("sequence_index", idx)
+            # Map archive_filename, downloaded_filename, source_filename, and stem
+            for k in ("archive_filename", "downloaded_filename", "source_filename", "image_id"):
+                v = item.get(k)
+                if v:
+                    manifest_order[Path(v).name.lower()] = seq
+                    manifest_order[Path(v).stem.lower()] = seq
+
+        def manifest_sort_key(p: Path):
+            name_key = p.name.lower()
+            stem_key = p.stem.lower()
+            if name_key in manifest_order:
+                return (0, manifest_order[name_key])
+            if stem_key in manifest_order:
+                return (0, manifest_order[stem_key])
+            return (1, natural_sort_key(p))
+
+        valid_images.sort(key=manifest_sort_key)
+        ordering_source = "manifest"
+        diag_logs.append("[ZIP] Ordered strictly via manifest.json")
+    else:
+        # Check for sequence ambiguity in third-party filenames
+        candidate_names = [p.name for p in valid_images]
+        is_ambiguous, reason = detect_filename_sequence_ambiguity(candidate_names)
+        valid_images.sort(key=natural_sort_key)
+        if is_ambiguous:
+            ordering_ambiguous = True
+            ordering_source = "natural_sort_ambiguous"
+            ordering_message = (
+                "Original image order could not be determined automatically from filenames. "
+                "Please review the import order in your Media Library."
+            )
+            diag_logs.append(f"[ZIP_ORDERING] AMBIGUOUS: {reason}")
+        else:
+            ordering_source = "natural_sort"
+            diag_logs.append("[ZIP_ORDERING] Sequential numbering verified with natural sort")
+
+    # 5. Register into project's images directory
     target_images_dir.mkdir(parents=True, exist_ok=True)
     if replace_existing:
         removed_count = 0
@@ -240,7 +398,6 @@ def process_zip_archive(
     registered_files: List[str] = []
 
     for idx, src_p in enumerate(valid_images):
-        # Flatten nested paths gracefully (e.g., scene_01/img_01.png -> scene_01_img_01.png)
         rel_to_extract = src_p.relative_to(extract_root)
         parts = rel_to_extract.parts
         if len(parts) > 1:
@@ -248,7 +405,6 @@ def process_zip_archive(
         else:
             clean_name = src_p.name
 
-        # Ensure no collision in target_images_dir
         dest_target = target_images_dir / clean_name
         if dest_target.exists():
             stem = dest_target.stem
@@ -264,8 +420,6 @@ def process_zip_archive(
     # Clean up extraction workspace
     shutil.rmtree(extract_root, ignore_errors=True)
 
-    # Final natural sort of registered files
-    registered_files.sort(key=natural_sort_key)
     diag_logs.append(f"[ASSETS] registered={len(registered_files)}")
 
     return {
@@ -273,6 +427,9 @@ def process_zip_archive(
         "images_found": len(registered_files),
         "registered_count": len(registered_files),
         "files": registered_files,
+        "ordering_source": ordering_source,
+        "ordering_ambiguous": ordering_ambiguous,
+        "ordering_message": ordering_message,
         "corrupted_images": corrupted_images,
         "diagnostics": diag_logs
     }

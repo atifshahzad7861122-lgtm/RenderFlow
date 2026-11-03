@@ -3,6 +3,7 @@ engine/updates/manifest_validator.py — Release Discovery & Manifest Validation
 =====================================================================================
 Fetches and validates release metadata from GitHub Releases API and signed manifests.
 Strictly enforces stable releases, architecture matching, and schema integrity.
+Supports full installer executables, incremental ZIP patches, and dual-package releases.
 """
 
 import os
@@ -21,7 +22,7 @@ from engine.version import (
     UPDATE_MANIFEST_URL,
     UPDATE_MANIFEST_FALLBACK_URL,
 )
-from engine.updates.models import ReleaseInfo, InstallerAsset
+from engine.updates.models import ReleaseInfo, InstallerAsset, PatchAsset, PackageType
 from engine.updates.semver import SemVer
 from engine.updates.artifact_verifier import ArtifactVerifier
 
@@ -48,14 +49,12 @@ class ReleaseManifestValidator:
         Returns: (ReleaseInfo, None) on success, or (None, error_message) on failure.
         NEVER returns None with no error if a network/validation problem occurs.
         """
-        # If custom manifest URL provided (e.g., test harnesses or direct link), query it directly
         if custom_manifest_url:
             return self._fetch_from_manifest_url(custom_manifest_url)
 
         last_error = None
 
         # 1. Primary path: Direct download of signed update_manifest.json from the latest GitHub release
-        # This endpoint is served via GitHub Release CDN, has no 60 req/hr API rate limits, and is authoritative.
         try:
             rel_info, err = self._fetch_from_manifest_url(UPDATE_MANIFEST_URL)
             if rel_info:
@@ -72,7 +71,7 @@ class ReleaseManifestValidator:
         req = urllib.request.Request(
             api_url,
             headers={
-                "User-Agent": f"RenderFlow-Updater/2.4.x ({os.name})",
+                "User-Agent": f"RenderFlow-Updater/2.6.x ({os.name})",
                 "Accept": "application/vnd.github.v3+json",
             }
         )
@@ -137,11 +136,11 @@ class ReleaseManifestValidator:
             except Exception as e:
                 logger.warning("Could not fetch bundled update_manifest.json from release: %s", e)
 
-        # If we successfully parsed the manifest, validate it
+        # If we successfully parsed the manifest, validate it (supports full, patch, or dual)
         if manifest_data:
             return self._validate_and_build_release_info(manifest_data, rel_fallback=rel)
 
-        # Fallback: Locate full Windows installer from asset list
+        # Fallback when release lacks update_manifest.json: Locate full standalone Windows installer
         installer_asset_dict = next(
             (a for a in assets if a.get("name", "").endswith(".exe") and "Setup" in a.get("name", "")),
             None
@@ -149,7 +148,6 @@ class ReleaseManifestValidator:
         if not installer_asset_dict:
             return None, f"Release v{version_str} lacks a standalone Windows installer (.exe)."
 
-        # Check domain security
         download_url = installer_asset_dict.get("browser_download_url", "")
         if not self.verifier.verify_url_domain(download_url):
             return None, f"Installer download URL originates from untrusted domain: {download_url}"
@@ -158,7 +156,7 @@ class ReleaseManifestValidator:
             name=installer_asset_dict.get("name", f"RenderFlow-Setup-v{version_str}.exe"),
             url=download_url,
             size_bytes=int(installer_asset_dict.get("size", 0)),
-            sha256="",  # Will be extracted from manifest if available
+            sha256="",
             platform="windows-x64",
             browser_download_url=download_url
         )
@@ -170,6 +168,8 @@ class ReleaseManifestValidator:
             published_at=rel.get("published_at", ""),
             release_url=rel.get("html_url", GITHUB_RELEASES_PAGE),
             installer=installer,
+            patch=None,
+            package_type=PackageType.FULL,
             is_prerelease=rel.get("prerelease", False),
             is_draft=rel.get("draft", False),
             raw_manifest=rel
@@ -212,45 +212,85 @@ class ReleaseManifestValidator:
             return None, f"Cryptographic authentication failed: {err_reason}"
 
         # 2. Extract version and metadata
-        target_version = manifest.get("latest_version")
+        target_version = manifest.get("latest_version") or manifest.get("release_version") or manifest.get("version")
         if not target_version:
             return None, "Manifest is missing 'latest_version' field."
 
         packages = manifest.get("packages", {})
         full_pkg = packages.get("full") or {}
+        patch_pkg = packages.get("patch") or {}
 
+        # Fallback for flat schema manifests
+        if not full_pkg and manifest.get("update_type") == "full":
+            full_pkg = {
+                "url": manifest.get("update_package_url"),
+                "package_size_bytes": manifest.get("package_size_bytes", 0),
+                "sha256": manifest.get("sha256", ""),
+                "platform": manifest.get("supported_platform", "windows-x64"),
+            }
+        elif not patch_pkg and manifest.get("update_type") == "patch":
+            patch_pkg = {
+                "url": manifest.get("update_package_url"),
+                "package_size_bytes": manifest.get("package_size_bytes", 0),
+                "sha256": manifest.get("sha256", ""),
+                "from_version": manifest.get("from_version"),
+                "to_version": target_version,
+                "platform": manifest.get("supported_platform", "windows-x64"),
+            }
+
+        installer: Optional[InstallerAsset] = None
         installer_url = full_pkg.get("url")
-        installer_size = full_pkg.get("package_size_bytes") or full_pkg.get("size", 0)
-        installer_sha256 = full_pkg.get("sha256", "")
+        if installer_url:
+            if not self.verifier.verify_url_domain(installer_url):
+                logger.warning("Installer URL violates domain security policy: %s", installer_url)
+            else:
+                installer_size = full_pkg.get("package_size_bytes") or full_pkg.get("size", 0)
+                installer_sha256 = full_pkg.get("sha256", "")
+                installer_name = full_pkg.get("filename") or Path(installer_url).name or f"RenderFlow-Setup-v{target_version}.exe"
+                installer = InstallerAsset(
+                    name=installer_name,
+                    url=installer_url,
+                    size_bytes=int(installer_size),
+                    sha256=installer_sha256.lower().strip(),
+                    platform=full_pkg.get("supported_platform", "windows-x64"),
+                    browser_download_url=installer_url
+                )
 
-        # Fallback if full package is not nested under packages.full
-        if not installer_url and manifest.get("update_type") == "full":
-            installer_url = manifest.get("update_package_url")
-            installer_size = manifest.get("package_size_bytes", 0)
-            installer_sha256 = manifest.get("sha256", "")
+        patch: Optional[PatchAsset] = None
+        patch_url = patch_pkg.get("url")
+        if patch_url:
+            if not self.verifier.verify_url_domain(patch_url):
+                logger.warning("Patch URL violates domain security policy: %s", patch_url)
+            else:
+                patch_size = patch_pkg.get("package_size_bytes") or patch_pkg.get("size", 0)
+                patch_sha256 = patch_pkg.get("sha256", "")
+                patch_name = patch_pkg.get("filename") or Path(patch_url).name or f"RenderFlow-Patch-v{target_version}.zip"
+                patch = PatchAsset(
+                    name=patch_name,
+                    url=patch_url,
+                    size_bytes=int(patch_size),
+                    sha256=patch_sha256.lower().strip(),
+                    from_version=patch_pkg.get("from_version"),
+                    to_version=patch_pkg.get("to_version", target_version),
+                    platform=patch_pkg.get("supported_platform", "windows-x64"),
+                    browser_download_url=patch_url
+                )
 
-        if not installer_url:
-            return None, f"Manifest for v{target_version} does not define a full installer package."
+        if not installer and not patch:
+            return None, f"Manifest for v{target_version} defines neither a valid patch nor a full installer package."
 
-        if not self.verifier.verify_url_domain(installer_url):
-            return None, f"Installer URL violates domain security policy: {installer_url}"
-
-        installer_name = Path(installer_url).name or f"RenderFlow-Setup-v{target_version}.exe"
-
-        installer = InstallerAsset(
-            name=installer_name,
-            url=installer_url,
-            size_bytes=int(installer_size),
-            sha256=installer_sha256.lower().strip(),
-            platform="windows-x64",
-            browser_download_url=installer_url
-        )
+        if installer and patch:
+            pkg_type = PackageType.DUAL
+        elif patch:
+            pkg_type = PackageType.PATCH
+        else:
+            pkg_type = PackageType.FULL
 
         notes = manifest.get("release_notes", "")
         if not notes and rel_fallback:
             notes = rel_fallback.get("body", "")
 
-        title = f"RenderFlow v{target_version}"
+        title = manifest.get("release_title") or f"RenderFlow v{target_version}"
         if rel_fallback and rel_fallback.get("name"):
             title = rel_fallback["name"]
 
@@ -269,6 +309,8 @@ class ReleaseManifestValidator:
             published_at=pub_at,
             release_url=page_url,
             installer=installer,
+            patch=patch,
+            package_type=pkg_type,
             signature_ed25519=manifest.get("signature") or manifest.get("signature_ed25519"),
             public_key=manifest.get("public_key"),
             is_prerelease=False,

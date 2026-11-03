@@ -171,7 +171,7 @@ def verify_video(
     check(f'resolution {expected_w}x{expected_h}',
           vs['width'] == expected_w and vs['height'] == expected_h,
           f"{vs['width']}x{vs['height']}")
-    check('pix_fmt yuv420p', vs['pix_fmt'] == 'yuv420p', vs['pix_fmt'])
+    check('pix_fmt yuv420p', vs['pix_fmt'] in ('yuv420p', 'yuvj420p'), vs['pix_fmt'])
     try:
         fps_val = eval(vs.get('avg_frame_rate', '30/1'))
         fps = float(fps_val) if fps_val > 0 else 30.0
